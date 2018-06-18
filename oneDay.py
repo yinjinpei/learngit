@@ -1,6 +1,7 @@
 #!user/bin/env python
 #_*_ coding:utf-8 _*_
 
+
 name = input('Plesase input your name:')
 while True:
     try:
@@ -20,3 +21,4 @@ Personal information of %s:
      Salary:  %s
 --------------------------      
 ''' % (name,name,age,job,salary))
+
