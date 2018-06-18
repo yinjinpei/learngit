@@ -18,7 +18,7 @@ for i in range(10):
         print('一共可猜10次，已积累猜答次数：%s' % (i + 1), '你没有机会了！！！')
         break
     elif age == 40 and i < 9:
-        print('真聪明，恭喜你，猜对了！！！')
+        print('\033[1;32;41m 真聪明，恭喜你，猜对了！！！\033[0m')
         break
     elif age < 40 and i < 9:
         print('你输入的数字比正确的要小！！')
