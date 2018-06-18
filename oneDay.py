@@ -2,6 +2,7 @@
 #_*_ coding:utf-8 _*_
 
 
+
 name = input('Plesase input your name:')
 while True:
     try:
