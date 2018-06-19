@@ -18,6 +18,7 @@ while count < 1000000:
             print('YYYYYY')
         else:
             print('放弃！！！')
+            print('YYYYYY')
     else:
         count += 1
         print(count)
