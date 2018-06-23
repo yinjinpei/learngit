@@ -4,6 +4,7 @@
 
 f = open('write_passwdFile.txt','r')
 for i in f.readlines():
+    print(i)
 f.close()
 
 f = open("write_file.txt",'w')
