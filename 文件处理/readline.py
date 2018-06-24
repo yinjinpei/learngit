@@ -11,6 +11,7 @@ while True:
 
         #内容一 ，与readlines使用
         data = line[1]
+        print(data.strip())
         print(data.split(':')[0])
         print(data.split(':')[1].strip())   #split() 设置分割符    ;strip() 去空行
         print(data.strip('\n').split(':'))  #strip('\n') 去除换行符

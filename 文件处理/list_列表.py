@@ -83,18 +83,32 @@ print('-------------实例 如下----------')
 char = ['jinpei','xiaoming','peter','1','2','3','4','5']
 print(char[char.index('peter'):char.index('peter')+4])
 
-print('-------------找出数组中‘peter’的所有索引位置，如下----------')
-name  = ['jinpei','xiaoming','peter','1','2','3','peter','4','5','peter','ddd','peter','hhh','peter']
-char = 'peter'                          #定义要找的元素名称：peter
-first_pos = 0
-for i in range(name.count(char)):
-        new_list = name[first_pos:]
-        next_pos = new_list.index(char) + 1
-        print('找到了：',new_list.index(char) + first_pos)
-        first_pos += next_pos
-
 
 print('-------------自定义隔几个数取值，如下----------')
 name  = ['jinpei','xiaoming','peter1','1','2','3','peter2','4','5','peter3','ddd','peter','hhh','peter']
 print(name[1::2])      #隔1个取值，左边的1表示：从索引1位置开始，右边的2表示隔2个元素取值
 print(name[2::4])      #隔2个取值，左边的2表示：从索引2位置开始，右边的4表示隔4个元素取值
+
+
+print('-------------找出数组中‘peter’的所在索引位置，方法一，如下----------')
+#方法一:原始方法
+listName  = ['jinpei','xiaoming','peter','1','2','3','peter','4','5','peter','ddd','peter','hhh','peter']
+name = 'peter'                          #定义要找的元素名称：peter
+first_pos = 0 
+for i in range(listName.count(name)):
+        new_list = listName[first_pos:]
+        next_pos = new_list.index(name) + 1
+        print('列表中peter索引的位置为：',new_list.index(name) + first_pos)
+        first_pos += next_pos
+
+print('-------------找出数组中‘peter’的所在索引位置，方法二，如下----------')
+#方法二：a.index(value,start,stop)
+listName  = ['jinpei','xiaoming','peter','1','2','3','peter','4','5','peter','ddd','peter','hhh','peter']
+nameNum   = 0
+name      = 'peter'
+number    = 1
+for i in range(listName.count(name)):
+        first_pos = listName.index(name,nameNum)      #第一个peter索引位置
+        print('%s的第%s次索引位置是：%s' % (name,number,first_pos))
+        nameNum = first_pos + 1
+        number += 1
