@@ -12,4 +12,7 @@ b = {3,4,5,6}
 print( a & b )      #交集
 print( a | b )      #并集
 print( a - b )      #差值，结果为1，2
-print( a ^ b )      #反差值
+print( a ^ b )      #对称差值，结果为1，2，5，6
+
+print(a.issubset(b))    #a是b的子集
+print(a.issuperset(b))  #a是否包含b
