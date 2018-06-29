@@ -4,3 +4,4 @@ from file import demo
 
 demo.Foo()
 
+print('index',__name__)
