@@ -23,7 +23,7 @@ print(msg.lower())      #将所有字母都转成小写
 print(msg.swapcase())   #大小写互换
 
 print(msg.split(','))   #字符串变成列表
-print('|'.join(msg.split(',')))     #把列表中的元素以'|'连接起来,与split相反
+print('|'.join(msg.split(',')))     #把列表中的元素以
 #实用例子
 char = ['p','e','t','e','r']
 char_2 = ['is','good','boy!']
