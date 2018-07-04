@@ -81,3 +81,4 @@ name_info_2 = {'job':'kill','friend':'no_friend','age':18 }
 name_info.update(name_info_2)       #把name_info_2合并到name_info，把新的替换旧的
 print(name_info)
 
+
