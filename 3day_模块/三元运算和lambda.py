@@ -27,3 +27,8 @@ print(temp(6))
 
 temp = lambda x,y,z:x+y*z
 print(temp(1,2,3))
+
+list=[x*2 for x in range(10)]
+print(list)
+
+map(lambda x:x*2,range(10))
