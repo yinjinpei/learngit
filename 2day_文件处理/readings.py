@@ -4,4 +4,4 @@
 f = open('readline_file.txt','r')
 
 for line in f.readlines():
-    print(line.strip().split(''))
+    print(line.strip().split(':'))

@@ -10,6 +10,7 @@ print(set_list)             #查看集合
 
 for i in set_list:          #查看集合,方法二
     print(i)
+     
 
 a = {1,2,3,4}
 b = {3,4,5,6}

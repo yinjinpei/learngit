@@ -23,11 +23,12 @@ print(msg.lower())      #将所有字母都转成小写
 print(msg.swapcase())   #大小写互换
 
 print(msg.split(','))   #字符串变成列表
-print('|'.join(msg.split(',')))     #把列表中的元素以
+print('|'.join(msg.split(',')))     #把列表中的元素组合起来
 #实用例子
 char = ['p','e','t','e','r']
 char_2 = ['is','good','boy!']
 print(''.join(char) + ' ' + ' '.join(char_2))
+
 
 x = 'Abc'
 print(x.startswith('Ac'))   #判断以‘A’开头匹配，正确返true, 否则返false
