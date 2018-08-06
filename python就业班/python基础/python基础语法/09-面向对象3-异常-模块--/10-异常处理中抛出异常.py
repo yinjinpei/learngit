@@ -1,3 +1,4 @@
+
 class Test(object):
     def __init__(self,switch):
         self.switch = switch    #捕获异常开关
