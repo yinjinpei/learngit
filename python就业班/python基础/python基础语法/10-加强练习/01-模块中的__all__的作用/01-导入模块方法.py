@@ -12,5 +12,12 @@ test1()
 
 #####################  02-模块中的__all__的作用  #####################
 from msgnew_two import *
-msgnew_two.test1()
-#msgnew_two.test2()
+test1()
+
+a = test2()
+print(a)
+
+test3 = Test3()
+test3.test_print()
+
+print(number)
