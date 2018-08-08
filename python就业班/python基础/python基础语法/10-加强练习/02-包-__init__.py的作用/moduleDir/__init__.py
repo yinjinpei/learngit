@@ -1,4 +1,6 @@
-#__all__ = ["sendmsg"]  #情况二
+#情况二
+#__all__ = ["sendmsg"]
 
-__all__ = ["sendmsg","recvmsg"] #情况三
-from moduleDir import *         #情况三
+#情况三
+__all__ = ["sendmsg","recvmsg"]
+from moduleDir import *
