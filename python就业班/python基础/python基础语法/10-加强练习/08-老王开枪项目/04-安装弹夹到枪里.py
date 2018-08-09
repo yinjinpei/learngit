@@ -9,11 +9,22 @@ class Person(object):
         #弹夹.保存子弹(子弹)
         danjia_temp.baocun_zidan(zidan_temp)
 
+    def anzhuang_danjia(self,gun_temp,danjia_temp):
+        """把弹夹安装到枪中"""
+
+        #枪.保存弹夹(弹夹)
+        gun_temp.baocun_danjia(danjia_temp)
+
 
 class Gun(object):
     """枪的类"""
     def __init__(self,name):
-        self.name = name
+        self.name = name    #用来记录枪的类型
+        self.danjia = None  #用来记录弹夹的引用
+
+    def baocun_danjia(self,danjia_temp):
+        self.danjia = danjia_temp
+
 
 class Danjia(object):
     """弹夹的类"""
@@ -55,6 +66,8 @@ def main():
     laowang.anzhuang_zidan(dan_jia,zi_dan)
 
     #6, 老王把弹夹安装到枪中
+    #老王.安装弹夹到枪里(枪，弹夹)
+    laowang.anzhuang_danjia(ak47,dan_jia)
 
     #7，老王拿枪
 
