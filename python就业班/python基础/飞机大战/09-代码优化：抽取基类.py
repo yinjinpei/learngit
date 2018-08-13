@@ -4,7 +4,7 @@ from pygame.locals import *
 import time
 import random
 
-
+#飞机基类
 class BasePlane(object):
     def __init__(self,screen_temp,x,y,image_name):
         self.screen = screen_temp
@@ -21,18 +21,7 @@ class BasePlane(object):
             if bullet.judge():  #判断子弹是否越界
                 self.bullet_list.remove(bullet)
 
-
-class BaseBullet(object):
-    def __init__(self, screen_temp, image_name):
-        self.screen = screen_temp
-        self.image = pygame.image.load(image_name)
-
-    def display(self):
-        self.screen.blit(self.image, (self.x, self.y))
-
-
-
-
+#创建飞机
 class HeroPlane(BasePlane):
 
     def __init__(self,screen_temp):
@@ -54,7 +43,6 @@ class EnemyPlane(BasePlane):
         self.direction = "right"    #用来存储敌人飞机默认的移动方向
 
 
-
     def move(self):
         if self.direction == "right":
             self.x += 5
@@ -72,12 +60,22 @@ class EnemyPlane(BasePlane):
             self.bullet_list.append(EnemyBullet(self.screen,self.x,self.y))
 
 
+#子弹基类
+class BaseBullet(object):
+    def __init__(self, screen_temp,x,y,image_name):
+        self.screen = screen_temp
+        self.x = x
+        self.y = y
+        self.image = pygame.image.load(image_name)
+
+    def display(self):
+        self.screen.blit(self.image, (self.x, self.y))
+
+
 #创建子弹
 class Bullet(BaseBullet):
     def __init__(self,screen_temp,x,y):
-        super().__init__(screen_temp,"./feiji/bullet.png")
-        self.x = x+40
-        self.y = y-20
+        super().__init__(screen_temp,x+30,y-20,"./feiji/bullet.png")
 
     def move(self):
         self.y -= 15
@@ -92,9 +90,8 @@ class Bullet(BaseBullet):
 #创建敌人飞机子弹
 class EnemyBullet(BaseBullet):
     def __init__(self,screen_temp,x,y):
-        super().__init__(screen_temp, "./feiji/bullet1.png")
-        self.x = x+22
-        self.y = y+30
+        super().__init__(screen_temp,x+25,y+30,"./feiji/bullet1.png")
+
 
     def move(self):
         self.y += 5
