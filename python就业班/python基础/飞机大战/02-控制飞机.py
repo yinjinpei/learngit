@@ -3,8 +3,7 @@ import pygame
 from pygame.locals import *
 import time
 
-k_x = 210
-k_y = 700
+
 
 def main():
     '''控制程序流程'''
@@ -18,12 +17,15 @@ def main():
     #3,创建一架飞机图片
     hero = pygame.image.load("./feiji/hero1.png")
 
+    x = 210
+    y = 700
+
     while True:
         #把背景图片显示到主窗口中
         screen.blit(background,(0,0))
 
         #把飞机图片显示到主窗口中
-        screen.blit(hero,(k_x,k_y))
+        screen.blit(hero,(x,y))
 
         #显示画面
         pygame.display.update()
@@ -40,17 +42,17 @@ def main():
             elif event.type == KEYDOWN:
 
                 #判断是否是点击了a或者left
-                if event.type == K_a or event.type == K_LEFT:
-                    k_x = k_x + 1
+                if event.key == K_a or event.key == K_LEFT:
+                    x -= 5
                     print(("left"))
 
                 # 判断是否是点击了d或者right
-                if event.type == K_d or event.type == K_RIGHT:
-                    k_x = k_x - 1
+                if event.key == K_d or event.key == K_RIGHT:
+                    x += 5
                     print(("right"))
 
                 # 判断是否是点击了空格键
-                if event.type == K_SPACE:
+                if event.key == K_SPACE:
                     print("space")
 
 
