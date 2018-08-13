@@ -87,6 +87,7 @@ class Bullet(BaseBullet):
         else:
             return False
 
+
 #创建敌人飞机子弹
 class EnemyBullet(BaseBullet):
     def __init__(self,screen_temp,x,y):
