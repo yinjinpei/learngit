@@ -68,9 +68,6 @@ class EnemyPlane(BasePlane):
 
 #子弹基类
 class BaseBullet(Base):
-    def __init__(self, screen_temp,x,y,image_name):
-        super().__init__(screen_temp,x,y,image_name)
-
     def display(self):
         self.screen.blit(self.image, (self.x, self.y))
 
