@@ -2,7 +2,7 @@
 import pygame
 from pygame.locals import *
 import time
-
+import random
 
 class HeroPlane(object):
 
@@ -37,10 +37,15 @@ class EnemyPlane(object):
         self.y = 0
         self.screen = screen_temp
         self.direction = "right"    #用来存储敌人飞机默认的移动方向
+        self.bullet_list = []
 
     def display(self):
         self.screen.blit(self.image, (self.x, self.y))
-        self.move()
+        #self.move()    #敌人飞机移动也可以在这里移动  for test
+
+        for bullet in self.bullet_list:
+            bullet.display()
+            bullet.move()
 
 
     def move(self):
@@ -53,6 +58,12 @@ class EnemyPlane(object):
             self.direction = "left"
         elif self.x <=0:
             self.direction = "right"
+
+    def fire(self):
+        random_num = random.randint(1,60)
+        if random_num == 1 or random_num == 50:
+            self.bullet_list.append(EnemyBullet(self.screen,self.x,self.y))
+
 
 #创建子弹
 class Bullet(object):
@@ -78,19 +89,18 @@ class Bullet(object):
 #创建敌人飞机子弹
 class EnemyBullet(object):
     def __init__(self,screen_temp,x,y):
-        self.image = pygame.image.load("./feiji/bullet3.png")
-        self.x = x
-        self.y = y
+        self.image = pygame.image.load("./feiji/bullet1.png")
+        self.x = x+22
+        self.y = y+30
         self.screen = screen_temp
 
     def display(self):
         self.screen.blit(self.image, (self.x, self.y))
 
     def move(self):
-        self.y -= 15
+        self.y += 5
 
     def judge(self):
-        #if self.y < 200:   for test #子弹越界位置
         if self.y < 0:
             return True
         else:
@@ -146,6 +156,8 @@ def main():
         screen.blit(background,(0,0))   #把背景图片显示到主窗口中
         hero.display()          #把飞机图片显示到主窗口中
         enemy.display()         #把敌人飞机图片显示到主窗口中
+        enemy.move()
+        enemy.fire()            #敌人飞机开火
         pygame.display.update() #显示画面
         key_control(hero)       #添加按键功能
         time.sleep(0.01)        #睡眠，主要降低CPU使用率
