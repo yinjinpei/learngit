@@ -34,7 +34,7 @@ class EnemyPlane(object):
         self.x = 0
         self.y = 0
         self.screen = screen_temp
-        self.move_flage = None
+        self.direction = "right"    #用来存储敌人飞机默认的移动方向
 
     def display(self):
         self.screen.blit(self.image, (self.x, self.y))
@@ -42,17 +42,15 @@ class EnemyPlane(object):
 
 
     def move(self):
-        if self.x >= 430:
-            self.move_flage = "left_move"
-        elif self.x <= 0:
-            self.move_flage = "right_move"
-
-        if self.move_flage == "left_move":
-            self.x -= 5
-        elif self.move_flage == "right_move":
+        if self.direction == "right":
             self.x += 5
+        elif self.direction == "left":
+            self.x -= 5
 
-
+        if self.x >=430:
+            self.direction = "left"
+        elif self.x <=0:
+            self.direction = "right"
 
 #创建子弹
 class Bullet(object):
