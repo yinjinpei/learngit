@@ -75,6 +75,27 @@ class Bullet(object):
         else:
             return False
 
+#创建敌人飞机子弹
+class EnemyBullet(object):
+    def __init__(self,screen_temp,x,y):
+        self.image = pygame.image.load("./feiji/bullet3.png")
+        self.x = x
+        self.y = y
+        self.screen = screen_temp
+
+    def display(self):
+        self.screen.blit(self.image, (self.x, self.y))
+
+    def move(self):
+        self.y -= 15
+
+    def judge(self):
+        #if self.y < 200:   for test #子弹越界位置
+        if self.y < 0:
+            return True
+        else:
+            return False
+
 
 ############ 添加按键功能 #########
 def key_control(hero_temp):
