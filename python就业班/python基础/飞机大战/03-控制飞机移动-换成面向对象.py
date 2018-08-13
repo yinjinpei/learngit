@@ -21,6 +21,33 @@ class HeroPlane(object):
     def move_right(self):
         self.x += 5
 
+############ 添加按键功能 #########
+def key_control(hero_temp):
+    for event in pygame.event.get():
+
+        # 判断是否是点击了退出按键
+        if event.type == QUIT:
+            print("exit")
+            exit()
+
+        # 判断是否是按下了按键
+        elif event.type == KEYDOWN:
+
+            # 判断是否是点击了a或者left
+            if event.key == K_a or event.key == K_LEFT:
+                hero_temp.move_left()
+                print(("left"))
+
+            # 判断是否是点击了d或者right
+            if event.key == K_d or event.key == K_RIGHT:
+                hero_temp.move_right()
+                print(("right"))
+
+            # 判断是否是点击了空格键
+            if event.key == K_SPACE:
+                print("space")
+
+
 
 def main():
     '''控制程序流程'''
@@ -44,35 +71,11 @@ def main():
         #显示画面
         pygame.display.update()
 
-        ############ 添加按键功能 #########
-        for event in pygame.event.get():
-
-            #判断是否是点击了退出按键
-            if event.type == QUIT:
-                print("exit")
-                exit()
-
-            #判断是否是按下了按键
-            elif event.type == KEYDOWN:
-
-                #判断是否是点击了a或者left
-                if event.key == K_a or event.key == K_LEFT:
-                    hero.move_left()
-                    print(("left"))
-
-                # 判断是否是点击了d或者right
-                if event.key == K_d or event.key == K_RIGHT:
-                    hero.move_right()
-                    print(("right"))
-
-                # 判断是否是点击了空格键
-                if event.key == K_SPACE:
-                    print("space")
-
+        # 添加按键功能
+        key_control(hero)
 
         #睡眠，主要降低CPU使用率
         time.sleep(0.01)
-
 
 
 if __name__ == "__main__":
