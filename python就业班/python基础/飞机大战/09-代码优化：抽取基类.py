@@ -86,7 +86,7 @@ class Bullet(BaseBullet):
             return True
         else:
             return False
-
+        
 
 #创建敌人飞机子弹
 class EnemyBullet(BaseBullet):
