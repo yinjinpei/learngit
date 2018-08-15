@@ -51,9 +51,9 @@ class Hero(object):
         # 不管玩家飞机是否被击中,都要显示发射出去的子弹
         for bullet in self.bullet_list:
             bullet.display()
-            bullet.m
+            bullet.move()
 
-            def move_left(self):
+    def move_left(self):
         self.x -= 8
 
     def move_right(self):
