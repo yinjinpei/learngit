@@ -157,12 +157,11 @@ def main():
         enemy.display()         #把敌人飞机图片显示到主窗口中
         enemy.move()
         enemy.fire()            #敌人飞机开火
-
-        if hero.bullet_list.pop().x+30 > enemy.x and hero.bullet_list.pop().x+30 < enemy.x+50 and hero.bullet_list.pop().y-20 > enemy.y and hero.bullet_list.pop().y-20 < enemy.y:
-            pass
         pygame.display.update() #显示画面
         key_control(hero)       #添加按键功能
-
+        pop = hero.bullet_list.pop()
+        if pop.x + 30 > enemy.x and pop.x + 30 < enemy.x + 50 and pop.y - 20 > enemy.y and pop.y - 20 < enemy.y:
+            pass
         time.sleep(0.01)        #睡眠，主要降低CPU使用率
 
 
