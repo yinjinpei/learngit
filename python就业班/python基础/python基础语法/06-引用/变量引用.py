@@ -13,7 +13,7 @@ def test(num):
     print(num)
     return num
 test(a)
-print(a``print("-"*30+"该死的分割线"+"-"*30)
+print("-"*30+"该死的分割线"+"-"*30)
 
 a=[100]
 def test(num):
