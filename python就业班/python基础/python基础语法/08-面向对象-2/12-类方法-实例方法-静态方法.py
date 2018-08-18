@@ -36,8 +36,8 @@ Game.print_game_name("王者荣耀")
 Game.print_game()
 print("")
 #第2种调用方法
-Game.print_game_name("英雄联盟")
-Game.print_game()
+game.print_game_name("英雄联盟")
+game.print_game()
 
 
 
