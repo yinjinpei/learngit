@@ -4,3 +4,5 @@ b = a.pop()
 print(b)
 
 print(a)
+
+print(b)
