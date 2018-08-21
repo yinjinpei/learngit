@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 import copy
 
 a = [11,22,33]

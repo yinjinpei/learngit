@@ -1,4 +1,4 @@
-
+#-*- coding:utf-8 -*-
 import sys
 from imp import *   #重加载模块reload所用的模块
 import test
