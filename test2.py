@@ -1,8 +1,10 @@
-a = [11,22,33,44,55,66]
+def test(num):
+    print("-"*30)
+    def test2():
+        print("test2")
+    test2()
+    print(num)
 
-b = a.pop()
-print(b)
+test(20)
 
-print(a)
 
-print(b)
