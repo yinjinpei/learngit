@@ -22,9 +22,43 @@ def test2(number_2):
     print("-----test2-------")
 
     def test2_in():
-        print("-------- test_in----------")
+        print("----- test_in ------")
         return number_2 + 100
     return test2_in
 
 b = test2(20)
 print(b())
+
+
+
+print("-"*50)
+############### 应用 ###################
+#原先方法：
+def createNum(a,b,x):
+    print(a*x+b)
+
+a = 1
+b = 1
+x = 0
+createNum(a,b,x) #缺点：每次都要传三个参数
+
+#使用闭包函数
+def createNum2(a,b):
+    def createNum_in(x):
+        print(a*x+b)
+    return createNum_in
+
+#闭包优点：不需要每次都传三个实参
+num = createNum2(1,1)
+num(0)
+num(2)
+
+num2 = createNum2(2,2)
+num(0)
+num(10)
+
+
+
+
+
+
