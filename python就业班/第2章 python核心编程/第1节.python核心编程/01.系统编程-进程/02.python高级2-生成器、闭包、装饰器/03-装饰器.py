@@ -26,6 +26,7 @@
 import random
 #新增功能,新增验证,方法二(使用了闭包)：
 def w2(func):
+    print("--- 正在装饰 ---")
     def inner():
         print("----正在验证--------")
         if random.randint(1,10) == 1:    #设置条件
@@ -36,7 +37,7 @@ def w2(func):
     return inner
 
 #原有功能：
-# @w2相当 f1 = w2(f1)
+# @w2相当 f1 = w2(f1)，只要执行到@w2这里，那么就会自动进行装饰，而不是等到调用时才装饰
 @w2
 def f1():
     print("------- f1 -------")
