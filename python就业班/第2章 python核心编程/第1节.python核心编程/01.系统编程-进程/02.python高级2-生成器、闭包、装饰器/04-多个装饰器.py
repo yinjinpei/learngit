@@ -5,6 +5,7 @@
 
 #定义函数，完成包裹数据，功能是字体加粗
 def makeBold(fn):
+    print("--- 正在装饰1 -----")
     def wrapped():
         print("----- 1 ------")
         return "<b>" + fn() + "</b>"
@@ -12,6 +13,7 @@ def makeBold(fn):
 
 #功能是字体加大
 def makeItalic(fn):
+    print("--- 正在装饰2 -----")
     def wrapped():
         print("----- 2 ------")
         return "<i>" + fn() + "</i>"
