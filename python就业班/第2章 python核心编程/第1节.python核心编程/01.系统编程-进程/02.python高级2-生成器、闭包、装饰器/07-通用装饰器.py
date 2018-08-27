@@ -19,7 +19,9 @@ def test(a,b,c,d):
 def test2(a,b):
     print("----- test2 ----- ")
 
-
+@func
+def test3():
+    print("----- test3 ----- ")
 
 
 ret = list(test("asd3",6,2343456,3))
@@ -29,3 +31,6 @@ print(ret)
 
 a = test2(11,22)
 print(a)
+
+b = test3()
+print(b)
