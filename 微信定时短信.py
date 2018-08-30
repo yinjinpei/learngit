@@ -6,6 +6,12 @@ from threading import Timer
 from wxpy import  *
 import requests
 
+
+'''
+fangyueyan啦啦啦
+TonyMr
+向春晓
+'''
 #生成登录二维码
 bot=Bot()
 
