@@ -14,9 +14,9 @@ def send_news():
     try:
         #用来储存接收人的昵称
         friends = []
-        #添加需要接收消息的人，注意是写的是微信昵称，非备注名，也不是微信号，可添加多个fangyueyan啦啦啦
-        friends.append(bot.friends().search('TonyMr')[0])
-        friends.append(bot.friends().search('向春晓')[0])
+        #添加需要接收消息的人，注意是写的是微信昵称，非备注名，也不是微信号，可添加多个
+        friends.append(bot.friends().search('微信昵称1')[0])
+        friends.append(bot.friends().search('微信昵称2')[0])
 
         # 设置发送的内容
         for friend in friends:
