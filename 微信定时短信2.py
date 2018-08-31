@@ -12,22 +12,23 @@ dateTime = None
 
 def send_news():
     try:
-        #用来储存接收人的昵称
+        # 添加需要接收消息的人的昵称，注意是写的是微信昵称，非备注名，也不是微信号，可添加多个
+        nickname = ['微信昵称1','微信昵称2','微信昵称3']
+
         friends = []
-        #添加需要接收消息的人，注意是写的是微信昵称，非备注名，也不是微信号，可添加多个
-        friends.append(bot.friends().search('微信昵称1')[0])
-        friends.append(bot.friends().search('微信昵称2')[0])
+        for i in nickname:
+            friends.append(bot.friends().search(i)[0])
 
         # 设置发送的内容
         for friend in friends:
-            friend.send('输入要发送的内容。----test-----')
-        print("消息已发送，送发时间: %s" % dateTime)
+            friend.send('输入要发送的内容。----for test----')
+        print("消息已发送，发送时间: %s" % dateTime)
 
-        #重复发送，设定时间间隔60秒，此功能默认不开启
+        #重复发送(骚扰功能)，设定时间间隔60秒，此功能默认不开启
         #t = Timer(60,send_news)
         #t.start()
     except:
-        print("定时发送失败。。。")
+        print("发送失败。。。")
 
 def set_time():
     # 设置发送时间
