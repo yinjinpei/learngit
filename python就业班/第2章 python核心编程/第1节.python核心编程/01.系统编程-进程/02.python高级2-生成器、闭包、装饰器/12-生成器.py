@@ -35,5 +35,5 @@ a = fib(9)
 print(a)
 
 #取值
-for i in range(9):
-    print(next(a))
+for i in a:
+    print(i)
