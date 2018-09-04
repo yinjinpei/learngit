@@ -10,10 +10,12 @@ print(a)
 b = (x*2 for x in range(10))    #得到一个对象的地址
 print(b)
 
+
 a = 1
 while a < 11:       #超出读取范围将出现异常 比如 a < 12
     print(next(b))  #利用 next函数读取生成器
     a+=1
+
 
 
 #生成器表示方式二（使用yield）：
@@ -34,6 +36,7 @@ def fib(times):
 a = fib(9)
 print(a)
 
-#取值
+#取值方法一：
 for i in a:
     print(i)
+
