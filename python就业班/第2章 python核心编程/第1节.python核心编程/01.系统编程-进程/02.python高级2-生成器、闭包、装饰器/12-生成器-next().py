@@ -49,7 +49,7 @@ print('-------------------------------')
 #取值方法三：(使用 __next__() 函数 或next() 函数，两个函数方式是一样的)
 b = fib(9)
 for i in range(9):
-    ret = b.__next__()
-    print(ret)
+    print(b.__next__())
+
 
 #使用 __next__() 函数 或next() 函数，两种方式是一样的)
