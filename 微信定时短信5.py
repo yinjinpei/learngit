@@ -8,7 +8,7 @@ import time,datetime
 
 # 生成登录二维码
 bot = Bot(cache_path=True)
-dateTime = None
+#dateTime = None
 
 #bot.file_helper.send('hello')   #给 文件传输助手 发消息
 
@@ -53,11 +53,13 @@ dateTime = None
 #     main()
 
 bot.groups(update=True, contact_only=False)
-group = bot.groups().search('漂车')[0]
-#print(group)
-group.send("@all 各位，这个星期四之前把要报销车票发到我微信上，我调休不在公司，所以不要发到我邮箱，谢谢！！！")
+group = bot.groups().search('漂车')[0]    #模糊匹配
+print(group)
+#group.send("@all 各位，这个星期四之前把要报销车票发到我微信上，我调休不在公司，所以不要发到我邮箱，谢谢！！！")
 
 #friends = bot.friends()
 #print(friends)
 #for friend in friends:
 #    print(friend)
+
+group2 = bot.groups().search()
