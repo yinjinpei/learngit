@@ -20,3 +20,20 @@ for id in ids:
     if id not in news_ids:
         news_ids.append(id)
 print (news_ids)
+
+
+class X(object):
+    def __init__(self, a, b, range):
+        self.a = a
+        self.b = b
+        self.range = range
+    def __call__(self, a, b):
+        self.a = a
+        self.b = b
+        print('__call__ with （{}, {}）'.format(self.a, self.b))
+    def __del__(self, a, b, range):
+        del self.a
+        del self.b
+        del self.range
+xInstance = X(1, 2, 3)
+xInstance(1,2)

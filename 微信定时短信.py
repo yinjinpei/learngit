@@ -13,7 +13,7 @@ TonyMr
 向春晓
 '''
 #生成登录二维码
-bot=Bot()
+bot=Bot(cache_path=True)
 
 def get_news():
     '''金山词霸英文和翻译'''

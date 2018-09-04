@@ -16,7 +16,7 @@ startTime = datetime.datetime(2018, 8, 30, 17, 14, 0)
 
 flag =False     # 重复发送(骚扰功能)，True：开启，False：不开启
 interval = 60   # 设定发送消息间隔60秒
-bot = Bot()     # 生成登录二维码
+bot = Bot(cache_path=True)     # 生成登录二维码
 dateTime = None
 
 def send_news():

@@ -7,7 +7,7 @@ from wxpy import  *
 import time,datetime
 
 # 生成登录二维码
-bot = Bot()
+bot = Bot(cache_path=True)
 dateTime = None
 group = bot.groups().search('兄弟')[0]
 
