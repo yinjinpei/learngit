@@ -16,6 +16,9 @@ def peter_run(self):
 def run(self):
     print("------- %s 在奔跑 --------" % self.name)
 
+def alex_run(self):
+    print("------- %s 在跑步 --------" % self.name)
+
 @staticmethod
 def test():
     print("----- static method ------")
@@ -51,7 +54,9 @@ peter.test2 ()
 alex.test2()
 
 
-
+#扩展 xxx 等同于 alex.alex_run
+xxx = types.MethodType(alex_run,alex)
+print(xxx())
 
 
 
