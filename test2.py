@@ -76,25 +76,53 @@ from wxpy import  *
 import time,datetime
 import itchat
 
-itchat.auto_login(hotReload=True)
+# itchat.auto_login(hotReload=True)
+#
+# # def send_msg(msg,gname):
+# #     rooms = itchat.get_chatrooms(update=True)
+# #     if rooms is not None:
+# #         print(rooms)
+# #     else:
+# #         print("空的")
+#
+# rooms = itchat.get_chatrooms(update=True)
+# #rooms = itchat.search_chatrooms(name="紫川")
+# if rooms is not None:
+#     print(len(rooms))
+#     print(rooms)
+#     for i in rooms:
+#         #print(type(i))
+#         #print(type(i['MemberList']))
+#         for j in i['MemberList']:
+#             print(j["NickName"])
+#
+# else:
+#     print("空的")
 
-# def send_msg(msg,gname):
-#     rooms = itchat.get_chatrooms(update=True)
-#     if rooms is not None:
-#         print(rooms)
-#     else:
-#         print("空的")
 
-rooms = itchat.get_chatrooms(update=True)
-#rooms = itchat.search_chatrooms(name="紫川")
-if rooms is not None:
-    print(len(rooms))
-    print(rooms)
-    for i in rooms:
-        #print(type(i))
-        #print(type(i['MemberList']))
-        for j in i['MemberList']:
-            print(j["NickName"])
+'''
+Created on 2013-7-31
+@author: Eric
+'''
+import time
+from threading import Timer
 
-else:
-    print("空的")
+
+def timer_start():
+    t = Timer(1, test_func, ("Parameter1",))
+    t.start()
+
+
+def test_func(msg1):
+    print("I'm test_func,", msg1)
+    timer_start()
+
+
+def timer2():
+    timer_start()
+    # while True:
+    #     time.sleep(1)
+
+
+if __name__ == "__main__":
+    timer2()

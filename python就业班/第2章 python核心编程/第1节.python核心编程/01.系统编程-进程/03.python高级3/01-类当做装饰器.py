@@ -17,4 +17,4 @@ class Test(object):
 def test():
     print("-------- test ----------")
 
-test()
+test() 
