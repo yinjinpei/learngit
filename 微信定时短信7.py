@@ -86,6 +86,7 @@ def set_time(year,month,day,hour,minute,second):
 # 如果对方发的是文字，则我们给对方回复以下的东西
 @itchat.msg_register([TEXT])
 def text_reply(msg):
+    print(msg)
     itchat.send(('---  来自文字的回复 -----'), msg['FromUserName'])
 
 
@@ -94,11 +95,31 @@ def text_reply(msg):
 def other_reply(msg):
     itchat.send(('---  来自图片，音频，视频和分享的回复 -----'), msg['FromUserName'])
 
+# 获取所有类型的消息（好友消息、群聊、公众号，不包括任何自己发送的消息）
+# 并将获得的消息打印到控制台
+@bot.register()
+def print_others(msg):
+    print(msg)
 
 
+
+def print_info():
+    print('''
+    功能介绍：    
+    1，给指定好友发消息
+    2，给所有好友发消息
+    3，给指定群发消息
+    4，给所有群发消息
+    5，定时发送消息
+    6，重复发送（骚扰功能）
+    7，自动回复
+    
+    ''')
 
 
 def main():
+    print_info()
+
     num = 2
     if num == 1:
         # 生成登录二维码，做了缓存，短时间内不用扫描登录
@@ -128,12 +149,12 @@ def main():
         # global msg
         # msg = "----- for test -----"
         # sendNews(groups,msg,"True")
-    elif num  == 2:
-        itchat.auto_login(hotReload=True)
-        try:
-            itchat.run()
-        except Exception:
-            print("有错。。。")
+    # elif num  == 2:
+    #     itchat.auto_login(hotReload=True)
+    #     try:
+    #         itchat.run()
+    #     except Exception:
+    #         print("有错。。。")
 
 
 if __name__ == "__main__":
