@@ -38,5 +38,11 @@ print(name[::-1])
 
 
 
+print('------------------------------------------')
+temp = ['@所有人','@all','@aLL','@alL','@aLl','@All','@ALL','@ALl','@AlL']
 
+for i in temp:
+    print(i.upper())
 
+num = input("num :")
+print(type(num))

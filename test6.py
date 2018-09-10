@@ -1,13 +1,11 @@
 #-*- coding:utf-8 -*-
 #author:YJ沛
 
-a =100
-b =200
-c = 'asdf'
 
-print(a, b, c, "ertert")
+def test():
+    global a
+    a = 100
+    print(a)
 
-
-a=['a','b']
-b = ['c',12]
-print(a + b)
+test()
+print(a)
