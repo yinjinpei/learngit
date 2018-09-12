@@ -18,11 +18,11 @@ ret = os.fork()     # 返回值 父进程大于0，新的子进程为0
 if ret == 0:    # 子进程
     print(ret)
     while True:
-        print('----- 1 -------进程PID :%d-----父进程PID :%d '%(os.getpid(),os.getppid()))
+        print('----- 1 -------子进程 PID :%d-----父进程PID :%d '%(os.getpid(),os.getppid()))
         time.sleep(1)
 else:   # 父进程
     print(ret)
     while True:
-        print('----- 2 -------进程PID :%d'%os.getpid())
+        print('----- 2 -------父进程PID :%d ---------- 父父进程PID: %d'%(os.getpid(),os.getppid()))
 
         time.sleep(1)
