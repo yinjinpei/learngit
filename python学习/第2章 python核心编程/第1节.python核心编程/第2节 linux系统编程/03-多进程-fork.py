@@ -14,13 +14,13 @@
 import os
 import time
 
-ret = os.fork()
-if ret == 0:
+ret = os.fork()     # 返回值 父进程大于0，新的子进程为0
+if ret == 0:    # 子进程
     print(ret)
     while True:
         print('----- 1 -------')
         time.sleep(1)
-else:
+else:   # 父进程
     print(ret)
     while True:
         print('----- 2 -------')
