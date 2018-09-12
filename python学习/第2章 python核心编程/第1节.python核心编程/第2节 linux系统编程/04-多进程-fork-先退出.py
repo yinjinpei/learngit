@@ -14,6 +14,7 @@
 import os
 import time
 
+#需要在Linux上或mac上运行
 ret = os.fork()     # 返回值 父进程大于0，新的子进程为0
 if ret == 0:    # 子进程
     print('------ 子进程 PID: %d---------' % os.getpid())

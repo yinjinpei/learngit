@@ -11,6 +11,7 @@
     并行：真正一起运行
 '''
 
+#需要在Linux上或mac上运行
 import os
 import time
 
