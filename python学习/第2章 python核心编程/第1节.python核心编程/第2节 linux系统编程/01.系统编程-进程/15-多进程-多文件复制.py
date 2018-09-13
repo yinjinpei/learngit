@@ -53,7 +53,7 @@ def main():
             pass
         num +=1
         sum = num/allNum
-        print('\r copy 的进度是：%.2f %%'%(sum*100),end='')
+        print('\r copy 的进度是：%.2f%%'%(sum*100),end='')
         if num == allNum:
             print('---------------------')
             print('复制完成了！！！！')
