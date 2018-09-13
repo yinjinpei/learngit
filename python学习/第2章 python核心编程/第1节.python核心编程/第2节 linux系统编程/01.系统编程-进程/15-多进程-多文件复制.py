@@ -10,7 +10,7 @@ def write(name, odlFolderName, newFolderName, q):
     fr = open(odlFolderName+"/"+name,'r',encoding='UTF-8')
     fw = open(newFolderName+"/"+name, "w",encoding='UTF-8')
     while True:
-        str = fr.read()
+        str = fr.read(1024)
         if str:
             fw.write(str)
         else:
