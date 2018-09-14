@@ -1,8 +1,9 @@
-Git is a distributed version control system.
-Git is free software distributed under the GPL.
-Git has a mutable index called stage.
-Git tracks changes of files.
-My stupid boss still prefers SVN.
-Creating a new branch is quick AND simple.
-Git is branch dev.
-Git is branch devtest.
+
+
+使用说明：
+    1，使用程序前需要安装python3环境以及安装第三方库：wxpy
+    2，微信群可能会查找不到，原因是一些不活跃的群可能无法被获取到，可通过在群内发言、
+       修改群名称，或把群"保存到通讯录"的方式来激活，建议用最后一种方法，100%有效解决。
+    3，给指定人发送消息时，填写的是"昵称"!!
+    4，程序只在部分输入地方做了限制和异常处理，请按提示正常输入，避免异常。（不想花太多时间修改bug，哈哈。。。）
+
