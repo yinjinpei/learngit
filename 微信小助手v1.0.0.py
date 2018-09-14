@@ -229,7 +229,7 @@ def main():
 
     num = input("请输入你要使用的功能：")
     while True:
-        if num in '1234567':
+        if num in '12345':
             break
         else:
             num = input("输入有误，请重新输入：")
