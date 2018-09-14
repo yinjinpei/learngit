@@ -1,12 +1,35 @@
 # -*- coding:utf-8 -*-
 # author:YJ沛
 
+'''
+微信助手-功能介绍：
+
+    1，给指定好友发消息（定时，重复发送）
+    2，给所有好友发消息（定时，重复发送）
+    3，给指定群发消息（定时，重复发送）
+    4，给所有群发消息（定时，重复发送）
+    5，自动回复（自动回复，关键字回复，群聊被'@'、'@all' 或 '@所有人'回复）
+
+
+使用说明：
+
+    1，使用程序前需要安装python3环境以及安装第三方库：wxpy
+    2，执行程序时，会自动生成二维码图片，用手机扫描二维码登录微信（其实就是登录网页版的微信）
+    3，微信群可能会找不到，原因是一些不活跃的群可能无法被获取到，可通过在群内发言、
+       修改群名称，或把群"保存到通讯录"的方式来激活，建议用最后一种方法，100%有效解决。
+    4，给指定人发送消息时，填写的是"昵称"!!
+    5，程序只在部分输入地方做了限制和异常处理，请按提示正常输入，避免异常。（不想花太多时间修改bug，哈哈。。。）
+    6，功能2和3，本人没有测试过，因没有多余的测试微信号，各位自测吧。
+    7，重复发送功能慎用，默认频率为1秒，小心被别人拉黑了@_@!!
+'''
+
 from __future__ import unicode_literals
 from threading import Timer
 import datetime
 import time
 import re
 from wxpy import *  #第三方库
+
 
 bot = Bot(cache_path=True)  # 生成登录二维码，开启缓存功能，短时间内不用扫描登录
 
@@ -20,7 +43,7 @@ allGroups = bot.groups(update=True, contact_only=False)  # 获取微信所有群
 allGroupName = []  # 储存微信所有群的昵称
 for group in allGroups:  # 获取所有群的昵称
     allGroupName.append(group.name)
-print(allGroupName)  # 打印所有群昵称 for test
+print('所获取的微信群名：',allGroupName)  # 打印所有群昵称 for test
 
 keywordReply = None
 keywordValue = None
@@ -34,7 +57,7 @@ dateTime = None
 
 def print_info():
     print('''
-        微信助手 V1.0.0
+        微信助手 v1.0.0
 
     功能介绍：
     1，给指定好友发消息（定时，重复发送）
@@ -94,7 +117,7 @@ def sendNews(groups_or_friends, msg, repeatSend=False, sendMsgCount=1):
     else:
         return
 
-    # 发送信息给好友或群聊
+    # 发送信息给好友或群
     for obj in groups_or_friends:
         print(obj)  # for test
         obj.send(msg)
@@ -104,7 +127,7 @@ def sendNews(groups_or_friends, msg, repeatSend=False, sendMsgCount=1):
 
     # 否启动重复发送功能
     if repeatSend:
-        t = Timer(5, sendNews, (groups_or_friends, msg, repeatSend, sendMsgCount))
+        t = Timer(1, sendNews, (groups_or_friends, msg, repeatSend, sendMsgCount))
         t.start()
 
 
@@ -173,7 +196,7 @@ def repeatSend_sendTime():
 def replyMsg(msg):
     '''
     自动回复好友和群聊功能
-    :param msg: 接收的消息类
+    :param msg: 接收的消息的对象
     '''
     print(msg.sender.name, ':', msg.text, 'Msg Type:', msg.type)
     # msg.sender.mark_as_read()   # 消除当前聊天对象的未读提示小红点。为方便阅读，不做消除
