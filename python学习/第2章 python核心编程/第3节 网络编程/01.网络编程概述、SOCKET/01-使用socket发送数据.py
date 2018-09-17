@@ -18,4 +18,5 @@ udpSocker.sendto(sendMsg.encode(encoding='utf8'),sendAddr)
 #udpSocker.sendto(sendMsg.encode(encoding='gb2312'),sendAddr)
 
 
+
 udpSocker.close()

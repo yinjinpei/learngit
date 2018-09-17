@@ -15,4 +15,5 @@ sendMsg = input('请输入要发送的数据：')
 # 发送内容
 udpSocker.sendto(sendMsg.encode('utf-8'),(sendIP,sendPort))
 
+
 udpSocker.close()
