@@ -1,4 +1,4 @@
-#-*- coding:utf-8 -*-
+
 #author:YJ沛
 
 from socket import *
@@ -7,15 +7,12 @@ from socket import *
 udpSocker = socket(AF_INET, SOCK_DGRAM)
 
 # 做准备接收方的地址
-sendAddr = ('192.168.0.10', 8080)
-
+sendIP = input("请输入接收人的IP地址：")
+sendPort = int(input("请输入接收人的端口号："))
 # 输入发送内容
 sendMsg = input('请输入要发送的数据：')
 
 # 发送内容
-udpSocker.sendto(sendMsg.encode(encoding='utf8'),sendAddr)
-
-#udpSocker.sendto(sendMsg.encode(encoding='gb2312'),sendAddr)
-
+udpSocker.sendto(sendMsg.encode('utf-8'),(sendIP,sendPort))
 
 udpSocker.close()
