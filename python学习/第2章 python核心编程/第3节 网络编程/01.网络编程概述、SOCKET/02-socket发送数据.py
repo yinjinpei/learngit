@@ -1,4 +1,4 @@
-
+#-*- coding:utf-8 -*-
 #author:YJ沛
 
 from socket import *
@@ -15,5 +15,6 @@ sendMsg = input('请输入要发送的数据：')
 # 发送内容
 udpSocker.sendto(sendMsg.encode('utf-8'),(sendIP,sendPort))
 
+#udpSocker.sendto(sendMsg.encode(encoding='gb2312'),sendAddr)
 
 udpSocker.close()
