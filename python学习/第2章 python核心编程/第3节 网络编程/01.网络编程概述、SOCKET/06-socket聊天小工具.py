@@ -34,12 +34,14 @@ def sendData():
 
 
 def main():
-
     t = Thread(target=recvData)
-    t.start()
+    #t2 = Thread(target=sendData)
 
-    # t2 = Thread(target=sendData)
-    # t2.start()
+    t.start()
+    #t2.start()
+
+    t.join()
+    #t2.join()
 
     # 关闭套接字
     # udpSocker.close()

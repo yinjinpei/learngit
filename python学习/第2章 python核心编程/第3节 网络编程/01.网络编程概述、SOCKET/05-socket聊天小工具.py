@@ -40,10 +40,13 @@ def sendData():
 
 if __name__ == "__main__":
     t = Thread(target=recvData)
-    t.start()
-
     t2 = Thread(target=sendData)
+
+    t.start()
     t2.start()
+
+    t.join()
+    t2.join()
 
     # 关闭套接字
     #udpSocker.close()
