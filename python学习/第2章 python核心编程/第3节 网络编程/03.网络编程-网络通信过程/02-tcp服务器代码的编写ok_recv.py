@@ -7,7 +7,7 @@ upd特点：1，不稳定  2，适当比tcp要快一些
 
 
 创建tcp服务器流程：
-1，socket创建一个套按字
+1，socket创建一个套接字
 2，bind绑定ip和port
 3，listen使套接字变为可以被动链接
 4，accept等待客端的链接
