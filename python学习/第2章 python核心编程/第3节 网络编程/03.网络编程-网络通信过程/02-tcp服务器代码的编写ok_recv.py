@@ -34,7 +34,7 @@ clientSocket, clientInfo = serverSocket.accept()
 recvData = clientSocket.recv(1024)
 
 # 打印数据
-print(recvData)
+print(recvData.decode('gb2312'))
 
 # 关闭套接字
 clientSocket.close()
