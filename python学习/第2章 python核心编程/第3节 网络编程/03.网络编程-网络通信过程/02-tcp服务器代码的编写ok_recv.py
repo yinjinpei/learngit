@@ -30,8 +30,11 @@ serverSocket.listen(5)
 # accept等待客端的链接
 clientSocket, clientInfo = serverSocket.accept()
 
-# recv/send接收发送数据
+# recv/send接收客户端发送的数据
 recvData = clientSocket.recv(1024)
+
+# 打印数据
+print(recvData)
 
 # 关闭套接字
 clientSocket.close()
