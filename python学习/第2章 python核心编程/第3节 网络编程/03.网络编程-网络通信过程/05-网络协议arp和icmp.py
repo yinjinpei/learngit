@@ -7,6 +7,8 @@
 2，icmp 用来ping   ping时要先获取mac
 3，rarp 用来广播，通过MAC获取IP
 
+判断是两个IP是否在同一网段方法：把IP与其子网掩码 按位与 得到的结果是否相同，相同则是同一网段
+
 电脑命令：
 arp -a  获取缓存中的ip和MAC列表
 arp -d  清除缓存中的ip和MAC列表
