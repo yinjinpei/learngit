@@ -28,7 +28,7 @@ def main():
     # 创建套接字
     serverSocket = socket(AF_INET, SOCK_STREAM)
 
-    # 解决程序占用端口问题
+    # 解决程序占用端口问题（服务器先结束则会出现端口被占用）
     serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
     # 绑定IP和port
