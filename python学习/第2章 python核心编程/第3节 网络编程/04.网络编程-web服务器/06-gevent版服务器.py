@@ -17,3 +17,18 @@ greenlet已经实现了协程，但是这个还的人工切换，是不是觉得
 
 import gevent
 
+def test1(a):
+    for i in range(a):
+        print(gevent.getcurrent(), i)
+
+        # 用来模拟一个耗时操作，注意不是time模块中的sleep
+        gevent.sleep(0.5)
+
+# 创建三个
+ge1 = gevent.spawn(test1, 5)
+ge2 = gevent.spawn(test1, 6)
+ge3 = gevent.spawn(test1, 7)
+
+ge1.join()
+ge2.join()
+ge2.join()
