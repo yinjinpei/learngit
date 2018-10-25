@@ -5,16 +5,16 @@ import sys
 import time
 import gevent
 
-from gevent import socket,monkey
+from gevent import socket, monkey
 
 # 对下面代码都做动态处理
 monkey.patch_all()
 
-def handle_request(cilent_socket,client_data):
+def handle_request(cilent_socket, client_data):
     while True:
         data = cilent_socket.recv(1024)
         if data:
-            print("有数据到，%s: %s"%(str(client_data),data))
+            print("有数据到，%s: %s"%(str(client_data), data))
             cilent_socket.send(data)
         else:
             cilent_socket.close()
@@ -31,7 +31,7 @@ def server(port):
         client_socket, client_data = server_socket.accept()
         print(socket)
         print(client_data)
-        gevent.spawn(handle_request,client_socket,client_data)
+        gevent.spawn(handle_request, client_socket, client_data)
 
 
 if __name__ == "__main__":
