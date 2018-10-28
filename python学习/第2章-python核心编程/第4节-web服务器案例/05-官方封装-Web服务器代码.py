@@ -26,15 +26,15 @@ class HttpServer():
         self.server_socket.listen(100)
 
         while True:
-            self.client_socket, self.client_data = self.server_socket.accept()
+            client_socket, client_data = self.server_socket.accept()
             # 创建子进程处理客户端的请求
-            self.handle_client_process = Process(target=self.handle_client, args=(self.client_socket, self.client_data))
+            self.handle_client_process = Process(target=self.handle_client, args=(client_socket, client_data))
             self.handle_client_process.start()
             # print("一个客户端已连接上：%s" % str(client_data))
-            print("一个客户端已连接上：%s:%s" % self.client_data)
+            print("一个客户端已连接上：%s:%s" % client_data)
 
             # 因为已经向子进程中copy了一份（引用），并且父进程中这个套接字也没有用处了,所有关闭
-            self.client_socket.close()
+            client_socket.close()
 
     def handle_client(self, client_socket, client_data):
         '''处理客户端请求'''
@@ -50,7 +50,7 @@ class HttpServer():
                 if recv_data:
 
                     # print("来自%s：\n%s" % (client_data, recv_data.decode('gb2312')))
-                    print("来自%s：\n%s" % (self.client_data, recv_data.decode('utf-8')))
+                    print("来自%s：\n%s" % (client_data, recv_data.decode('utf-8')))
                     request_lines = recv_data.splitlines()
 
                     for line in request_lines:
@@ -77,7 +77,7 @@ class HttpServer():
                         response = response_start_line + response_headers + "\r\n" + "<!DOCTYPE html>" + response_body
                         print(response)  # for tes
 
-                        self.client_socket.send(bytes(response, "utf-8"))
+                        client_socket.send(bytes(response, "utf-8"))
                     else:
                         # 获取客户请求文件内容
                         file_data = read_file.read()
@@ -92,7 +92,7 @@ class HttpServer():
                         print(response)  # for test
 
                         # client_socket.send(response.encode('gb2312'))
-                        self.client_socket.send(bytes(response, "utf-8"))
+                        client_socket.send(bytes(response, "utf-8"))
                 else:
                     break
 
@@ -100,7 +100,7 @@ class HttpServer():
             pass
         # 关闭套接字
         print("%s:%s 已断开连接！！" % (client_ip, client_port))
-        self.client_socket.close()
+        client_socket.close()
 
 
 
