@@ -12,6 +12,7 @@ HTML_ROOT_DIR = "./03-html"
 
 class HttpServer():
     '''定义一个HttpServer服务器'''
+
     def __init__(self, port):
         '''初始化服务器'''
         # 1，创建server_socket
@@ -32,6 +33,7 @@ class HttpServer():
 
 class Handle_client():
     '''处理客户端请求'''
+
     def __init__(self, client_socket, client_data):
         self.client_ip, self.client_port = client_data
         self.client_socket = client_socket
@@ -45,7 +47,9 @@ class Handle_client():
         '''解析请求报文,提取用户请求的文件名'''
         self.__request_lines = self.recv_data.splitlines()
         self.__request_start_line = self.__request_lines[0]
-        self.file_name = re.match(r"\w+ +(/[^ ]*) ", self.__request_start_line.decode('utf-8')).group(1)
+        self.file_name = re.match(
+            r"\w+ +(/[^ ]*) ",
+            self.__request_start_line.decode('utf-8')).group(1)
         return self.file_name
 
     def read_local_file(self):
@@ -59,7 +63,8 @@ class Handle_client():
             self.__response_start_line = "HTTP/1.1 404 Not Found!\r\n"
             self.__response_headers = "Server: My Server\r\n"
             self.__response_body = "The file is not found!!"
-            self.response = self.__response_start_line + self.__response_headers + "\r\n" + "<!DOCTYPE html>" + self.__response_body
+            self.response = self.__response_start_line + self.__response_headers + \
+                "\r\n" + "<!DOCTYPE html>" + self.__response_body
         else:
             # 获取客户请求文件内容
             self.file_data = self.read_file.read()
@@ -70,7 +75,8 @@ class Handle_client():
             self.__response_start_line = "HTTP/1.1 200 OK\r\n"
             self.__response_headers = "Server: My Server\r\n"
             self.__response_body = self.file_data.decode("utf-8")
-            self.response = self.__response_start_line + self.__response_headers + "\r\n" + self.__response_body
+            self.response = self.__response_start_line + \
+                self.__response_headers + "\r\n" + self.__response_body
         finally:
             return self.response
 
@@ -111,7 +117,10 @@ def handle_client(client_socket, client_data):
     except EOFError:
         pass
     # 关闭套接字
-    print("%s:%s 已断开连接！！" % (handle_client_procesee.client_ip, handle_client_procesee.client_port))
+    print(
+        "%s:%s 已断开连接！！" %
+        (handle_client_procesee.client_ip,
+         handle_client_procesee.client_port))
     client_socket.close()
 
 
@@ -127,7 +136,9 @@ def main():
         print("一个客户端已连接上：%s:%s" % client_data)
 
         # 创建子进程处理客户端的请求
-        handle_client_process = Process(target=handle_client, args=(client_socket, client_data))
+        handle_client_process = Process(
+            target=handle_client, args=(
+                client_socket, client_data))
         handle_client_process.start()
 
         # 因为已经向子进程中copy了一份（引用），并且父进程中这个套接字也没有用处了,所有关闭
