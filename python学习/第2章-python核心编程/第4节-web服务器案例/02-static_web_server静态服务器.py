@@ -23,8 +23,8 @@ def handle_client(client_socket, client_data):
                 # 构造响应数据
                 response_start_line = "HTTP/1.1 200 OK\r\n"
                 response_headers = "Server: BWS/1.0\r\n"
-                response_body = "hello world!  百度首页：www.baidu.com"
-                response = response_start_line + response_headers + "\r\n" + response_body
+                response_body = "hello world!"
+                response = response_start_line + response_headers + "\r\n" + "<!DOCTYPE html>" + response_body
                 print(response)
 
                 # client_socket.send(response.encode('gb2312'))

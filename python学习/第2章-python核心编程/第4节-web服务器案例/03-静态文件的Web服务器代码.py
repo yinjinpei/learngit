@@ -1,20 +1,13 @@
 # -*- coding:utf-8 -*-
 # author:YJ沛
 
-
+import re
 from socket import *
 from multiprocessing import Process
 
 
 # 设置静态文件根目录
-HTML_ROOT_DIR = "./html"
-
-# 构造响应数据
-response_start_line = "HTTP/1.1 200 OK\r\n"
-response_headers = "Server: BWS/1.0\r\n"
-response_body = "hello world!  百度首页：www.baidu.com"
-response = response_start_line + response_headers + "\r\n" + response_body
-print(response)
+HTML_ROOT_DIR = "./03-html"
 
 
 def handle_client(client_socket, client_data):
@@ -27,12 +20,53 @@ def handle_client(client_socket, client_data):
             # 获取客户端请求数据
             recv_data = client_socket.recv(1024)
 
+            # 解析请求报文
             if recv_data:
-                # print("来自%s：\n%s" % (client_data, recv_data.decode('gb2312')))
-                print("来自%s：\n%s" % (client_data, recv_data))
 
-                # client_socket.send(response.encode('gb2312'))
-                client_socket.send(bytes(response, "utf-8"))
+                # print("来自%s：\n%s" % (client_data, recv_data.decode('gb2312')))
+                print("来自%s：\n%s" % (client_data, recv_data.decode('utf-8')))
+                request_lines = recv_data.splitlines()
+
+                for line in request_lines:
+                    print(line)
+                request_start_line = request_lines[0]
+
+                # 提取用户请求的文件名
+                file_name = re.match(r"\w+ +(/[^ ]*) ", request_start_line.decode('utf-8')).group(1)
+                print(file_name)    # for test  "/"
+
+                try:
+                    # 判断用户请求文件的路径是否为"/",并打开文件
+                    if "/" == file_name:
+                        read_file = open(HTML_ROOT_DIR + file_name + "index.html", "rb")
+                        print(read_file)    # for test
+                    else:
+                        read_file = open(HTML_ROOT_DIR + file_name + "/index.html", "rb")
+                        print(read_file)    # for test
+                except IOError:
+                    # 构造响应数据
+                    response_start_line = "HTTP/1.1 404 Not Found!\r\n"
+                    response_headers = "Server: My Server\r\n"
+                    response_body = "The file is not found!!"
+                    response = response_start_line + response_headers + "\r\n" + "<!DOCTYPE html>" + response_body
+                    print(response)     # for tes
+
+                    client_socket.send(bytes(response, "utf-8"))
+                else:
+                    # 获取客户请求文件内容
+                    file_data = read_file.read()
+                    read_file.close()
+                    print(file_data)    # for test
+
+                    # 构造响应数据
+                    response_start_line = "HTTP/1.1 200 OK\r\n"
+                    response_headers = "Server: My Server\r\n"
+                    response_body = file_data.decode("utf-8")
+                    response = response_start_line + response_headers + "\r\n" + response_body
+                    print(response)  # for test
+
+                    # client_socket.send(response.encode('gb2312'))
+                    client_socket.send(bytes(response, "utf-8"))
             else:
                 break
 
