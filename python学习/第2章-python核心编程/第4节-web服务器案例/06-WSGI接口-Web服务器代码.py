@@ -94,6 +94,7 @@ class HttpServer():
                             # 拿到客户端请求的信息
                             env = {"PATH_INFO": file_name, "METHOD": method}
                             response_body = ctime.application(env, self.start_response)
+                            print("响应客户端内容：%s" % response_body)    # for test
 
                         response = self.response_headers + "\r\n" + "<!DOCTYPE html>" + response_body
                         # client_socket.send(bytes(response, "utf-8"))
