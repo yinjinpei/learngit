@@ -144,6 +144,7 @@ class HttpServer():
 
 
 def main():
+    # 添加搜索路径
     sys.path.insert(1, WSGI_PATH)
     http_server = HttpServer()
     http_server.bind(8000)
