@@ -10,7 +10,7 @@ import sys
 # 设置静态文件根目录
 HTML_ROOT_DIR = "./03-html"
 
-# 添加搜索路径
+# 动态资源存放位置
 WSGI_PATH = "./06-WSGI"
 
 class HttpServer():
@@ -144,6 +144,7 @@ class HttpServer():
 
 
 def main():
+    # 添加搜索路径
     sys.path.insert(1, WSGI_PATH)
     http_server = HttpServer()
     http_server.bind(8000)
