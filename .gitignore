@@ -1,8 +1,8 @@
 Thumbs.db
 learngit.iml
 misc.xml
-learngit.iml
-misc.xml
+.idea/learngit.iml
+.idea/misc.xml
 
 # DIY
 target/
