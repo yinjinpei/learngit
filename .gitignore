@@ -1,10 +1,9 @@
 Thumbs.db
 learngit.iml
 misc.xml
-
-# My system file
 learngit.iml
 misc.xml
+
 # DIY
 target/
  
@@ -138,8 +137,7 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
-# JAVA
-*.class
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 # Package Files #
@@ -160,3 +158,5 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 logs/
+# JAVA
+*.class
