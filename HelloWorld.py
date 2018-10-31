@@ -22,3 +22,33 @@ print(char)
 
 
 '''
+
+
+
+class A:
+    def test(self,a,b):
+        c=a+b
+        print("-----------",c)
+
+    def test2(self):
+        b.test3(self.test)
+
+
+class B:
+    def test3(self,fun):
+        a=1
+        b=2
+        fun(a,b)
+aa= A()
+b = B()
+aa.test2()
+
+
+for i in range(10):
+    if i == 5:
+        print ('found it! i = %s' % i)
+        break
+else:
+    print( 'not found it ...')
+
+
