@@ -13,7 +13,7 @@ class Application(object):
 
     def __call__(self, env, start_response):
 
-        # 查找env字典中有没有“PATH_INNFO”，如果没有默认设定为“/”
+        # 查找env字典中有没有“PATH_INNFO”的值：file_name，如果没有默认设定为“/”
         path = env.get("PATH_INFO", "/")
 
         #("/ctime", show_ctime)
@@ -27,7 +27,7 @@ class Application(object):
         start_response(status, headers)
         return "not found!!"
 
-
+# handler
 def show_ctime(env, start_response):
     status = "200 OK"
     headers = [
@@ -44,13 +44,42 @@ def say_hello(env, start_response):
     start_response(status, headers)
     return "say_hello!!!!"
 
+def say_haha(env, start_response):
+    status = "200 OK"
+    headers = [
+        ("Conntent-Type", "text/plain")
+    ]
+    start_response(status, headers)
+    return "say_haha!!!!"
+
+def index_html(env, start_response):
+    status = "404 Not Found!"
+    headers = []
+    start_response(status, headers)
+    return """
+            <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>沛哥办公室</title>
+        </head>
+        <body>
+        <h1> ----The path is /usr/html/index.html----</h1>
+        
+        wellcome to 沛哥办公室！
+        
+        </body>
+        </html>
+    """
+
 
 if __name__ == "__main__":
 
     urls = {
-        ("/", show_ctime),
+        ("/", index_html),
         ("/ctime", show_ctime),
         ("/sayhello", say_hello),
+        ("/sayhaha", say_haha),
     }
 
     app = Application(urls)

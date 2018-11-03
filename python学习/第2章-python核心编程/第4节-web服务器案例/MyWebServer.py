@@ -95,6 +95,7 @@ class HttpServer():
                     }
 
                     response_body = self.app(env, self.start_response)
+
                     response = self.response_headers + "\r\n" + "<!DOCTYPE html>" + response_body
 
                     # 响应客户的请求
