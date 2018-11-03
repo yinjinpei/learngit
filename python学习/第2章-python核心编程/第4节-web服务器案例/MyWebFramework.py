@@ -9,9 +9,7 @@ class Application(object):
     '''框架的核心部分， 也就是框架的主题程序，框架是通过的'''
     def __init__(self, urls):
         self.urls = urls
-        print("11111111111111111111111111111")
         print(self.urls)
-        print("2222222222222222222222222222")
 
     def __call__(self, env, start_response):
 
@@ -48,7 +46,6 @@ def say_hello(env, start_response):
 
 
 if __name__ == "__main__":
-
 
     urls = {
         ("/", show_ctime),
