@@ -9,7 +9,7 @@ class Application(object):
     '''框架的核心部分， 也就是框架的主题程序，框架是通过的'''
     def __init__(self, urls):
         self.urls = urls
-        print(self.urls)
+        print(self.urls)    # for test
 
     def __call__(self, env, start_response):
 
