@@ -9,11 +9,14 @@ class Application(object):
     '''框架的核心部分， 也就是框架的主题程序，框架是通过的'''
     def __init__(self, urls):
         self.urls = urls
+        print("11111111111111111111111111111")
+        print(self.urls)
+        print("2222222222222222222222222222")
 
     def __call__(self, env, start_response):
 
-        # 查找env字典中有没有“Content-Type”，如果没有默认设定为“/”
-        path = env.get("PATH_INNFO", "/")
+        # 查找env字典中有没有“PATH_INNFO”，如果没有默认设定为“/”
+        path = env.get("PATH_INFO", "/")
 
         #("/ctime", show_ctime)
         for url,handler in self.urls:
@@ -48,6 +51,7 @@ if __name__ == "__main__":
 
 
     urls = {
+        ("/", show_ctime),
         ("/ctime", show_ctime),
         ("/sayhello", say_hello),
     }

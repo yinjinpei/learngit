@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 # author:YJ沛
+# 此程序会被MyWebFramework.py程序调用
 # 07-web框架-my_web_framework.py
 
 import re
@@ -89,12 +90,12 @@ class HttpServer():
                     print(method)
 
                     env = {
-                        "PATH_INFO": file_name,
-                        "METHOD": method
+                        "PATH_INFO":file_name,
+                        "METHOD":method
                     }
 
                     response_body = self.app(env, self.start_response)
-                    response = self.response_headers + "\r\n" + response_body
+                    response = self.response_headers + "\r\n" + "<!DOCTYPE html>" + response_body
 
                     # 响应客户的请求
                     client_socket.send(bytes(response, "utf-8"))
@@ -106,15 +107,3 @@ class HttpServer():
         # 关闭套接字
         print("%s:%s 已断开连接！！" % (client_ip, client_port))
         client_socket.close()
-
-
-
-def main():
-    # 添加搜索路径
-    sys.path.insert(1, WSGI_PATH)
-    http_server = HttpServer()
-    http_server.bind(8000)
-    http_server.start()
-
-if __name__ == "__main__":
-    main()
