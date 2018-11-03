@@ -88,7 +88,7 @@ class HttpServer():
                         response_start_line = "HTTP/1.1 200 OK\r\n"
                         response_headers = "Server: My Server\r\n"
                         response_body = file_data.decode("utf-8")
-                        response = response_start_line + response_headers + "\r\n" + response_body
+                        response = response_start_line + response_headers + "\r\n" + "<!DOCTYPE html>" + response_body
                         print(response)  # for test
 
                         # client_socket.send(response.encode('gb2312'))
