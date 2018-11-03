@@ -2,6 +2,8 @@
 # author:YJ沛
 # 此程序会被MyWebFramework_02.py程序调用
 # 07-web框架-my_web_framework.py
+# 添加静态文件处理，之前的是不分静或动态的
+
 
 import re
 from socket import *
@@ -10,7 +12,7 @@ import sys
 
 
 # 设置静态文件根目录
-HTML_ROOT_DIR = "./03-html"
+HTML_ROOT_DIR = "./static"
 
 # 动态资源存放位置
 WSGI_PATH = "./06-WSGI"
