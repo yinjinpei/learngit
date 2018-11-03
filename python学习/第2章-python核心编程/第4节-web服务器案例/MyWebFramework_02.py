@@ -1,6 +1,7 @@
 # coding:utf-8
 # author:YJ沛
-# MyWebServer.py
+# 07-web框架-my_web_framework.py
+# 对应文件 MyWebFramework_02.py
 
 import time
 from MyWebServer import HttpServer

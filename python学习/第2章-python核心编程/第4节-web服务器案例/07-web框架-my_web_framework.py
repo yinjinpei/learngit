@@ -1,6 +1,6 @@
 # coding:utf-8
 # author:YJ沛
-
+# 参与MyWebFramework.py  MyWebServer.py
 
 import time
 
@@ -13,27 +13,9 @@ class Application(object):
 
         # 查找env字典中有没有“Content-Type”，如果没有默认设定为“/”
         path = env.get("Content-Type", "/")
-        for url,handler in urls:
+        for url,handler in self.urls:
             pass
 
 
 
 
-app = Application()
-
-def application(env, start_response):
-
-    urls = {
-        ("/ctime", show_ctime),
-        ("/sayhello", say_hello),
-    }
-
-    status = "200 OK"
-
-    headers = [
-        ("Content-Type", "text/plain")
-    ]
-
-    start_response(status, headers)
-
-    return time.ctime()
