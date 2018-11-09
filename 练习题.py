@@ -80,14 +80,16 @@
 # print(data)
 #
 
-
+# 2.求1--100之间可以被7整除的数的个数
 # sum = 0
-# for i in range(101):
+# for i in range(1,101):
 #     if 0 == i % 7:
 #         print(i)
 #         sum += i
 # print(sum)
 
+
+# 5.计算1到100以内能被7或者3整除但不能同时被这两者整除的数的个数。
 # i = 3
 # sum = 0
 # while i <= 100:
@@ -99,19 +101,161 @@
 #             print(i)
 #             sum += 1
 #     else:
-#         pass     de34566yhbbvcxmnbvcxzlkjhgfdsaUUUUUYH6DMJ
+#         pass
 #     i += 1
 # print("总个数：%d" % sum)
-i = 7
-k = 1
-sum = 0
-while 7*k <= 500:
-    if i % 2 == 0:
-        k += 1
-        continue
-    else:
-        print(7 * k)
-        sum += 1
-        k += 1
 
+
+
+# 6.计算1到500以内能被7整除但不是偶数的数的个数。
+i = 1
+sum = 0
+while True:
+    if i*7 >= 500:
+        break
+    elif i * 7 % 2 != 0:
+        print(i*7)
+        i += 1
+        sum += 1
+    else:
+        i += 1
+print("总个数：%d" % sum)
+
+
+
+# 7.计算从1到1000以内所有能同时被3，5和7整除的数的和并输出
+# 方法一
+i = 1
+sum = 0
+while i <= 1000:
+    if i % 3 == 0:
+        if i % 5 == 0:
+            if i % 7 == 0:
+                print(i)
+                sum += i
+    i += 1
 print(sum)
+
+print("-"*10)
+
+# 方法二
+i = 1
+sum = 0
+a = 3*5*7
+while i <= 1000:
+    if i % a == 0:
+        print(i)
+        sum += i
+    i+=1
+print(sum)
+
+print("-"*10)
+
+# 方法三
+i = 1
+sum = 0
+while True:
+    if i*105 >= 1000:
+        break
+    else:
+        print(i*105)
+        sum += i*105
+        i += 1
+print(sum)
+
+
+# 1.3000米长的绳子，每天减一半。问多少天这个绳子会小于5米？不考虑小数
+long = 3000
+day_num = 0
+while True:
+    if long/2 > 5:
+        print(long)
+        long /= 2
+        day_num += 1
+    else:
+        print(long)
+        print(day_num)
+        break
+
+
+# 例如： 153 = 1（3） + 5（3）+ 3（3） = 1+125+27 = 153
+i = 100
+while True:
+    if i > 1000:
+        break
+    else:
+        j = 0
+        for k in str(i):
+            j += int(k)**3
+        if j == int(i):
+            print("水仙花数字： %d " % i )
+        i += 1
+
+
+# 3.五位数中，对称的数称为回文数，打印所有的回文数并计算个数
+# 10000 - 99999
+i = 10000
+sum = 0
+while True:
+    if i > 99999:
+        break
+    else:
+        if str(i)[0] == str(i)[4]:
+            if str(i)[1] == str(i)[3]:
+                print(i)
+                sum += 1
+        i += 1
+print("回文数总个数: %d" % sum)
+
+
+# 1.输出9行内容，，第1行输出1，第2行输出12，第3行输出123，以此类推，第9行输出123456789
+for i in range(1,10):
+    for i in range(1,i+1):
+        print(i, end="")
+    print("")
+
+
+'''
+2.打印图形
+
+		*
+       ***
+      *****
+     *******
+'''
+i = 1
+k = 4   #打印行数
+while i <= k:
+    print(" "*(k-i),end="")
+    print("*" * (2 * i - 1))
+    i += 1
+
+
+'''
+3.打印实心菱形
+     *
+    ***
+   *****
+  *******
+   *****
+    ***
+     *
+'''
+
+
+
+
+
+
+
+'''
+4.打印空心菱形
+
+     *
+    * *
+   *   *
+  *     *
+   *   *
+    * *
+     *
+'''
