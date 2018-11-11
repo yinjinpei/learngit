@@ -78,3 +78,7 @@ print("总数：",m)
 #
 # if __name__=='__main__':
 #     pie_charts()
+
+class A(object):
+     def __init__(self,name,age):
+          pass
