@@ -2,6 +2,14 @@
 # author:YJ沛
 
 
+'''
+插入排序法稳定性： 不稳定
+
+最优时间复杂度：O(nlogn)
+最坏时间复杂度：O(n^2)
+'''
+
+
 def quick_sort(alist, first, last):
     '''快速排序'''
 

@@ -2,6 +2,14 @@
 # author:YJ沛
 
 
+'''
+插入排序法稳定性： 稳定
+
+最优时间复杂度：O(nlogn)
+最坏时间复杂度：O(nlogn)
+'''
+
+
 def merge_sort(alist):
     '''归并排序'''
 
@@ -12,6 +20,7 @@ def merge_sort(alist):
 
     # left 采用归并排序后形成的新的列表
     left_list = merge_sort(alist[:mid])
+
     # right 采用归并排序后形成的新的列表
     right_list = merge_sort(alist[mid:])
 
@@ -20,7 +29,7 @@ def merge_sort(alist):
     result = []
 
     while left_pointer < len(left_list) and right_pointer < len(right_list):
-        if left_list[left_pointer] < right_list[right_pointer]:
+        if left_list[left_pointer] <= right_list[right_pointer]:
             result.append(left_list[left_pointer])
             left_pointer += 1
         else:
@@ -40,3 +49,4 @@ if __name__ == "__main__":
     b = merge_sort(a)
     print(a)
     print(b)
+
