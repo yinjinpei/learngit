@@ -74,19 +74,15 @@ def replyMsg(msg):
                 for i in range(0, sheet.nrows):
                     # print(sheet.row_values(i))
                     if find_name == sheet.row_values(i)[0]:
-                        if sheet.row_values(i)[0]:
-                            print("%s: %d "%(sheet.row_values(i)[0],sheet.row_values(i)[1]))
-                            msg.reply_msg("%s: %d "%(sheet.row_values(i)[0],sheet.row_values(i)[1]))
+                        print("%s: %d "%(sheet.row_values(i)[0],sheet.row_values(i)[1]))
+                        msg.reply_msg("%s: %d "%(sheet.row_values(i)[0],sheet.row_values(i)[1]))
 
             elif re.search(str(keywordValue[1]), msg.text):
-                print('11111111111111')
                 data = xlrd.open_workbook('personal_information.xls')
-                print('11112222222222222')
                 sheet = data.sheet_by_name('Sheet2')  # 通过名称获取
-                print('33333333333333333333')
-                print("工作表名称:", sheet.name)
-                print("行数:", sheet.nrows)
-                print("列数:", sheet.ncols)
+                # print("工作表名称:", sheet.name)
+                # print("行数:", sheet.nrows)
+                # print("列数:", sheet.ncols)
                 for i in range(0, sheet.nrows):
                     if sheet.row_values(i)[0]:
                         print("%s: %s " % (sheet.row_values(i)[0], sheet.row_values(i)[1]))
