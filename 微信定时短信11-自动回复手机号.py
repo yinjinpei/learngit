@@ -50,7 +50,7 @@ def replyMsg(msg):
         elif "全部网址" == msg.text:
             data = xlrd.open_workbook('personal_information.xls')
             sheet = data.sheet_by_name('Sheet3')  # 通过名称获取
-            print("%s" % (sheet.row_values(0)[1]))
+            print("全部网址如下：\n%s" % (sheet.row_values(0)[1]))
             msg.reply_msg("全部网址如下：\n%s" % (sheet.row_values(0)[1]))
 
         elif re.search(str(keywordValue[1]), msg.text):
