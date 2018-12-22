@@ -45,21 +45,13 @@ def replyMsg(msg):
             for i in range(0, sheet.nrows):
                 # print(sheet.row_values(i))
                 if find_name == sheet.row_values(i)[0]:
-                    print("%s: %d " %
-                          (sheet.row_values(i)[0], sheet.row_values(i)[1]))
-                    msg.reply_msg(
-                        "%s: %d " %
-                        (sheet.row_values(i)[0], sheet.row_values(i)[1]))
+                    print("%s: %d " % (sheet.row_values(i)[0], sheet.row_values(i)[1]))
+                    msg.reply_msg("%s: %d " % (sheet.row_values(i)[0], sheet.row_values(i)[1]))
         elif "全部网址" == msg.text:
             data = xlrd.open_workbook('personal_information.xls')
-            sheet = data.sheet_by_name('Sheet2')  # 通过名称获取
-            for i in range(0, sheet.nrows):
-                if sheet.row_values(i)[0]:
-                    print("%s: %s " %
-                          (sheet.row_values(i)[0], sheet.row_values(i)[1]))
-                    msg.reply_msg(
-                        "%s: %s " %
-                        (sheet.row_values(i)[0], sheet.row_values(i)[1]))
+            sheet = data.sheet_by_name('Sheet3')  # 通过名称获取
+            print("%s" % (sheet.row_values(0)[1]))
+            msg.reply_msg("全部网址如下：\n%s" % (sheet.row_values(0)[1]))
 
         elif re.search(str(keywordValue[1]), msg.text):
             find_urlname = msg.text[0:msg.text.rfind('网址', 1)]  # 获取联系人名字
@@ -68,11 +60,8 @@ def replyMsg(msg):
             sheet = data.sheet_by_name('Sheet2')  # 通过名称获取
             for i in range(0, sheet.nrows):
                 if find_urlname == sheet.row_values(i)[0]:
-                    print("%s: %s " %
-                          (sheet.row_values(i)[0], sheet.row_values(i)[1]))
-                    msg.reply_msg(
-                        "%s: %s " %
-                        (sheet.row_values(i)[0], sheet.row_values(i)[1]))
+                    print("%s: %s " % (sheet.row_values(i)[0], sheet.row_values(i)[1]))
+                    msg.reply_msg("%s: %s " % (sheet.row_values(i)[0], sheet.row_values(i)[1]))
 
 
 def main():
