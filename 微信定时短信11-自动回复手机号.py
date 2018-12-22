@@ -45,8 +45,20 @@ def replyMsg(msg):
             for i in range(0, sheet.nrows):
                 # print(sheet.row_values(i))
                 if find_name == sheet.row_values(i)[0]:
-                    print("%s: %d " % (sheet.row_values(i)[0], sheet.row_values(i)[1]))
-                    msg.reply_msg("%s: %d " % (sheet.row_values(i)[0], sheet.row_values(i)[1]))
+                    print(
+                        "%s:\n%s%d  %s%d " %
+                        (sheet.row_values(i)[0],
+                         sheet.row_values(i)[1],
+                         sheet.row_values(i)[2],
+                         sheet.row_values(i)[3],
+                         sheet.row_values(i)[4]))
+                    msg.reply_msg(
+                        "%s:\n%s%d  %s%d " %
+                        (sheet.row_values(i)[0],
+                         sheet.row_values(i)[1],
+                         sheet.row_values(i)[2],
+                         sheet.row_values(i)[3],
+                         sheet.row_values(i)[4]))
         elif "全部网址" == msg.text:
             data = xlrd.open_workbook('personal_information.xls')
             sheet = data.sheet_by_name('Sheet3')  # 通过名称获取
@@ -60,14 +72,19 @@ def replyMsg(msg):
             sheet = data.sheet_by_name('Sheet2')  # 通过名称获取
             for i in range(0, sheet.nrows):
                 if find_urlname == sheet.row_values(i)[0]:
-                    print("%s: %s " % (sheet.row_values(i)[0], sheet.row_values(i)[1]))
-                    msg.reply_msg("%s: %s " % (sheet.row_values(i)[0], sheet.row_values(i)[1]))
+                    print(
+                        "%s:\n%s " %
+                        (sheet.row_values(i)[0],
+                         sheet.row_values(i)[1]))
+                    msg.reply_msg(
+                        "%s:\n%s " %
+                        (sheet.row_values(i)[0], sheet.row_values(i)[1]))
 
 
 def main():
     # 自动回复功能
-    global keywordValue,groups
-    keywordValue = ["手机","网址"]
+    global keywordValue, groups
+    keywordValue = ["手机", "网址"]
     groups = ["版本经理"]
     embed()  # 进入交互式的 Python 命令行界面，并堵塞当前线程
 
