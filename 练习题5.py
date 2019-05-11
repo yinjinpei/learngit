@@ -12,9 +12,17 @@
 #
 
 
-import datetime
-now1 = datetime.datetime.now()
-now2 = input("请输入一个2018-11-21格式的时间")
-now2 = datetime.datetime.strptime(now2,'%Y-%m-%d')
-now3 = now2+datetime.timedelta(days=1000)
-print(now3)
+# import datetime
+# now1 = datetime.datetime.now()
+# now2 = input("请输入一个2018-11-21格式的时间")
+# now2 = datetime.datetime.strptime(now2,'%Y-%m-%d')
+# now3 = now2+datetime.timedelta(days=1000)
+# print(now3)
+
+
+
+a="sdf2efsdv x"
+print(a)
+
+b=print(a)
+print(b)
