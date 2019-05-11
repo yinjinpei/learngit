@@ -4,6 +4,8 @@
 
 
 '''
+官网手册：http://redis.cn/commands.html
+
 string
     最大能储512MB数据
 

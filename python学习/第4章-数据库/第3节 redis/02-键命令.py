@@ -4,6 +4,8 @@
 
 
 '''
+官网手册：http://redis.cn/commands.html
+
 查找键，参数支持正则
 KEYS pattern
 

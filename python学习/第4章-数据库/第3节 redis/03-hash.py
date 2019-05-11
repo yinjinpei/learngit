@@ -4,6 +4,8 @@
 
 
 '''
+官网手册：http://redis.cn/commands.html
+
 hash用于存储对象，对象的格式为键值对
 
 设置
