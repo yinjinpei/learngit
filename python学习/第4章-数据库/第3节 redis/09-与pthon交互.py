@@ -61,16 +61,12 @@ from redis import *
 class RedisHelper():
     def __init__(self,hostname,port):
         self.__redis=StrictRedis(host=hostname,port=port)
-
     def set(self,key,value):
         self.__redis.set(key,value)
-
     def keys(self,key):
         return self.__redis.keys(key)
-
     def get(self,key):
         return self.__redis.get(key)
-
     def mget(self,key_list):
         # print(key_list)
         keys=[]
