@@ -12,7 +12,7 @@ mysql> create table users(
 mysql> insert into users(name,passwd) values('peter','40bd001563085fc35165329ea1ff5c5ecbdbbeef')
 mysql> insert into users(name,passwd) values('abc','40bd001563085fc35165329ea1ff5c5ecbdbbeef')
 
-用户的密码都为123
+abc,peter用户的密码都为123
 '''
 
 
@@ -24,7 +24,7 @@ from hashlib import sha1
 
 # 获得用户和密码
 userName = input("请输入登录用户名：")
-userPassed = input("请输入登录密码")
+userPassed = input("请输入登录密码：")
 
 
 
@@ -37,11 +37,11 @@ pwd=s1.hexdigest()
 
 # 验证用户和密码
 sql='select name,passwd from users where name=%s'
-mysql=MysqlHelper('192.168.31.100',3306,'python3','jinpei','123456')
+mysql=MysqlHelper('192.168.0.100',3306,'python3','jinpei','123456')
 result=mysql.myselect(sql,[userName])
 # print(type(result))
 # print(result)
-
+print(result)
 # 匹配用户和用户的密码
 if len(result)==0:
     print('用户名不存在!')
