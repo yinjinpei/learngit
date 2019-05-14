@@ -14,6 +14,11 @@ from redisHelper import RedisHelper
 userName=input("请输入用户名：")
 userPasswd=input("请输入密码：")
 
+s1=sha1()
+s1.update(userPasswd.encode('utf-8'))
+pwd=s1.hexdigest()
+print(pwd)
+
 
 sql = "select passwd from users where name=%s"
 
