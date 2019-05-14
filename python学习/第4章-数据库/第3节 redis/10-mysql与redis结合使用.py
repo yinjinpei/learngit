@@ -30,8 +30,11 @@ r_redis=RedisHelper('192.168.43.64',6379)
 if r_redis.get(userName) == pwd:
         print("登录成功")
 else:
-    r_mysql=MysqlHelper(host='192.168.43.64', port=3306, db='python3', user=userName, password=pwd, charset='utf8')
-
+    sql = "select name, passwd from users when name=%s"
+    # r_mysql=MysqlHelper(host='192.168.43.64', port=3306, db='python3', user=userName, password=pwd, charset='utf8')
+    r_mysql = MysqlHelper(host='192.168.0.100', port=3306, db='python3', user=userName, password=pwd, charset='utf8')
+    result=r_mysql.myselect(sql,[userName])
+    print(result)
 
 
 
