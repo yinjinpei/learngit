@@ -50,7 +50,7 @@ class MysqlHelper:
             result = self.cursor.fetchall()
 
             self.close()
-            print("sql语句执行完成！")
+            # print("sql语句执行完成！")
             return result
 
         except Exception as e:

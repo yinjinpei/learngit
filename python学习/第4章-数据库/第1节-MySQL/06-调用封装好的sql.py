@@ -22,6 +22,6 @@ sql_passwd = input("请输入数据库用户密码：")
 
 # 查询
 sql3="select id,name from students where id<8"
-mysql3=MysqlHelper('192.168.31.100',3306,'python3',sql_user,sql_passwd)
+mysql3=MysqlHelper('192.168.0.100',3306,'python3',sql_user,sql_passwd)
 result=mysql3.myselect(sql3)
 print(result)

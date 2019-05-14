@@ -10,6 +10,7 @@ class RedisHelper():
         self.__redis=StrictRedis(host=hostname,port=port)
     def set(self,key,value):
         self.__redis.set(key,value)
+        print('添加完成！')
     def keys(self,key):
         return self.__redis.keys(key)
     def get(self,key):
