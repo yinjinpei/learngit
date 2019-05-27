@@ -6,7 +6,16 @@
 </head>
 <!-- html内嵌框架：相当于自身页面内有一个框单独显示一个网址站-->
 <body>
+    <a href="http://www.baidu.com" target="myframe">百度网</a>
+    <a href="https://v.qq.com/" target="myframe">腾讯视频</a>
+    <a href="http://www.iqiyi.com/" target="myframe">爱奇艺视频</a>
+    <br>
+    <!--让上面三个网站点击后在内嵌框架显示-->
+    <iframe src="http://www.baidu.com" width="100%" height="900" frameborder="0" scrolling="yes" name="myframe"></iframe>
+
     <!--frameborder：设置边框大小。   scrolling：设置滚动条，默认为yes, 但可能会显示不全-->
-    <iframe src="http://www.baidu.com" width="600" height="300" frameborder="0" scrolling="yes"></iframe>
+    <iframe src="http://www.baidu.com" width="900" height="600" frameborder="0" scrolling="yes"></iframe>
+
+
 </body>
 </html>
