@@ -33,7 +33,9 @@ select
 
 <body>
     <h2>用户注册</h2>
-    <form action="http://www.baidu.com">
+    <!-- method默认使用get方式,使用post方式则不显示信息在网址上，而是显示在报头上-->
+    <!--<form action="http://www.baidu.com" method="post">-->
+    <form action="http://www.baidu.com" method="get">
         <div>
             <!-- for对应下面的id值-->
             <label for="username">用户名：</label>
@@ -80,6 +82,14 @@ select
             <textarea name="info"></textarea>
         </div>
         <br>
+        <!-- 单纯记录这个数据-->
+        <input type="hidden" name="hid" value="10000">
+
+        <!--图片提交 有一个bug,可能会重复提交两次-->
+        <input type="image" name="" src="../images/提交.png">
+        <br>
+        <br>
+        <!--文字提交-->
         <input type="submit" name="" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="reset" name="" value="重置">&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="button" name="" value="单纯按钮">
