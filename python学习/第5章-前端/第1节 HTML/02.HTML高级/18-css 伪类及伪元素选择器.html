@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组选择器</title>
+    <style type="text/css">
+        /*伪类及元素德操器  */
+        .box001:hover{
+            /*hover: 鼠标放在超链接上会变动颜色*/
+            color: red;
+
+            font-family: "microsoft Heiya";
+            font-weight: bold;font-size: 20px;
+        }
+
+        /*在内容前面插入文字*/
+        .box002::before{
+            content: '在内容前面插入文字！！  ';
+            color: red;
+            font-weight: bold;
+        }
+
+        .box003:after{
+            content: '    在内容后面插入文字。。';
+            font-size: 24px;
+        }
+
+        .box001{
+            color: gold;
+        }
+
+        .box002{
+            color: blue;
+        }
+
+        .box003{
+            color: green;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<div class="box001">
+    测试组选择器--001!!
+</div>
+
+<div class="box002">
+    测试组选择器--002
+</div>
+
+<div class="box003">
+    测试组选择器--003
+</div>
+
+
+
+
+
+
+
+
+</body>
+</html>
