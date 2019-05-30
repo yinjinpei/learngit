@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>21-css 盒子模型-margin</title>
+    <style type="text/css">
+        .box{
+            width: 300px;
+            height: 200px;
+            background-color: gold;
+            border: 10px solid red;
+            font-size: 27px;
+
+            /*左、右、上、下分开写,效果是盒子与浏览器或其他盒子之间的距离*/
+            /*margin-left: 50px;*/
+            /*margin-right: 100px; !*没效果是因为右边没有东西*!*/
+            /*margin-top: 100px;*/
+            /*margin-bottom: 200px;  !*没效果是因为下边没有东西*!*/
+
+
+            /*上、左右、下 分开写*/
+            /*margin: 100px 60px 200px;*/
+
+            /*上下、左右* 分开写*/
+            /*margin: 200px 300px;*/
+
+            /*上下左右一起写*/
+            margin: 300px;
+        }
+
+
+
+
+    </style>
+
+</head>
+<body>
+     <div class="box">
+        这里测试padding---这里测试padding--这里测试padding---这里测试padding--这里测试padding---这里测试padding
+     </div>
+
+</body>
+</html>
