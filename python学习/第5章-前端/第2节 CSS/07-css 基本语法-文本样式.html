@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css样式--文本样式</title>
+
+    <!-- link: 关联外链样式-->
+    <!--<link rel="stylesheet" type="text/css" href="../css/main.css">-->
+
+    <!-- em: 文本样式设置-->
+    <style>
+        em{
+            /*font-style：默认为倾斜字体*/
+            font-style:normal;
+            font-weight: bold;
+        }
+        span{
+            font-weight: bold;
+        }
+        h2{
+            /*设置不加粗*/
+            font-weight: normal;
+        }
+    </style>
+
+</head>
+<!--
+css文本设置
+    常用的应用文本的css样式：
+    color 设置文字的颜色，如： color:red;
+    font-size 设置文字的大小，如：font-size:12px;
+    font-family 设置文字的字体，如：font-family:'微软雅黑';
+    font-style 设置字体是否倾斜，如：font-style:'normal'; 设置不倾斜，font-style:'italic';设置文字倾斜
+    font-weight 设置文字是否加粗，如：font-weight:bold; 设置加粗 font-weight:normal 设置不加粗
+    font 同时设置文字的几个属性，写的顺序有兼容问题，建议按照如下顺序写： font：是否加粗 字号/行高 字体；如： font:normal 12px/36px '微软雅黑';
+    line-height 设置文字的行高，如：line-height:24px;
+    text-decoration 设置文字的下划线，如：text-decoration:none; 将文字下划线去掉
+    text-indent 设置文字首行缩进，如：text-indent:24px; 设置文字首行缩进24px
+    text-align 设置文字水平对齐方式，如text-align:center 设置文字水平居中
+-->
+
+<body>
+    <h2>css样式--文本样式</h2>
+    <div>
+        <span>HTML</span>是 <em> HyperText Mark-up Language </em> 的首字母简写，意思是超文本标记语言，超文本指的是超链接，标记指的是标签，
+        是一种用来制作网页的语言，这种语言由一个个的标签组成，用这种语言制作的文件保存的是一个文本文件，
+        文件的扩展名为html或者htm，一个<span>html</span>文件就是一个网页，html文件用编辑器打开显示的是文本，
+        可以用文本的方式编辑它，如果用浏览器打开，浏览器会按照标签描述内容将文件渲染成网页，
+        显示的网页可以从一个网页链接跳转到另外一个网页。
+    </div>
+</body>
+</html>
