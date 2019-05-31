@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>盒子尺寸-测量方法</title>
+    <style type="text/css">
+        .box,.box2,.box3{
+            width: 50px;
+            height: 50px;
+            background-color: gold;
+            margin-top: 20px;
+        }
+        .box2{
+            border: 50px solid red;
+        }
+        .box3{
+            border: 50px solid red;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">50</div>
+    盒子尺寸=50*50, 即: 宽=width, 高=height
+
+    <div class="box2">50</div>
+     盒子尺寸=（50+50*2）*（50+50*2）,  即：宽=width+border*2, 高=height+border*2
+
+    <div class="box3">50</div>
+    盒子尺寸=（50+50*2+50*2）*（50+50*2+50*2）, 即：宽=width+border*2+padding*2, 高=height+border*2+padding*2
+</body>
+</html>
