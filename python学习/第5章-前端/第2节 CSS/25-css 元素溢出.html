@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>margin-top 塌陷</title>
+    <!--如果box没有其它内容，则box2中的margin-top也会应用box上，造成塌陷-->
+
+    <!--解决方法一：在外框box中设置边框 border-->
+    <style type="text/css">
+        .box{
+            width: 400px;
+            height: 300px;
+            background: gold;
+
+            /*1、visible 默认值。内容不会被修剪，会呈现在元素框之外。*/
+            /*overflow: visible;*/
+
+            /*2、hidden 内容会被修剪，并且其余内容是不可见的，此属性还有清除浮动、清除margin-top塌陷的功能。*/
+            /*overflow: hidden;*/
+
+            /*3、scroll 内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。无论有没有内容都会显示滚动条*/
+            /*overflow: scroll;*/
+
+            /*4、auto 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。开发常用方法*/
+            overflow: auto;
+
+            /*5、inherit 规定应该从父元素继承 overflow 属性的值。*/
+            /*overflow: inherit;*/
+        }
+        .clearfix:before{
+            content: "";
+            display: table;
+        }
+        .box2{
+            /*width: 460px;*/
+            height: 150px;
+            background: chartreuse;
+            margin: 20px;
+            /*margin-top: 20px;*/
+            /*margin-left:    20px;*/
+            text-indent: 32px;
+        }
+    </style>
+</head>
+<!--
+css元素溢出
+    当子元素的尺寸超过父元素的尺寸时，需要设置父元素显示溢出的子元素的方式，设置的方法是通过overflow属性来设置。
+
+overflow的设置项：
+    1、visible 默认值。内容不会被修剪，会呈现在元素框之外。
+    2、hidden 内容会被修剪，并且其余内容是不可见的，此属性还有清除浮动、清除margin-top塌陷的功能。
+    3、scroll 内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。
+    4、auto 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。
+    5、inherit 规定应该从父元素继承 overflow 属性的值。
+-->
+
+<body>
+
+    <div class="box clearfix">
+        <div class="box2" >
+        css元素溢出
+        当子元素的尺寸超过父元素的尺寸时，需要设置父元素显示溢出的子元素的方式，设置的方法是通过overflow属性来设置。
+        overflow的设置项：
+        1、visible 默认值。内容不会被修剪，会呈现在元素框之外。
+        2、hidden 内容会被修剪，并且其余内容是不可见的，此属性还有清除浮动、清除margin-top塌陷的功能。
+        3、scroll 内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。
+        4、auto 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。
+        5、inherit 规定应该从父元素继承 overflow 属性的值。
+
+        css元素溢出
+        当子元素的尺寸超过父元素的尺寸时，需要设置父元素显示溢出的子元素的方式，设置的方法是通过overflow属性来设置。
+        overflow的设置项：
+        1、visible 默认值。内容不会被修剪，会呈现在元素框之外。
+        2、hidden 内容会被修剪，并且其余内容是不可见的，此属性还有清除浮动、清除margin-top塌陷的功能。
+        3、scroll 内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。
+        4、auto 如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。
+        5、inherit 规定应该从
+        </div>
+    </div>
+
+</body>
+</html>
