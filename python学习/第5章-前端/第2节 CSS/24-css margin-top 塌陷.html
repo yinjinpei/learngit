@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>margin-top 塌陷</title>
+    <!--如果box没有其它内容，则box2中的margin-top也会应用box上，造成塌陷-->
+
+    <!--解决方法一：在外框box中设置边框 border-->
+    <style type="text/css">
+        .box{
+            width: 400px;
+            height: 300px;
+            background: gold;
+
+            /*方法一：设置边框*/
+            /*border: 1px solid red;*/
+
+            /*方法二：外部盒子设置 overflow:hidden*/
+            /*overflow: hidden;*/
+        }
+
+        /*方法三：实际开发中常用的方法！*/
+        .clearfix:before{
+            content: "";
+            display: table;
+        }
+
+        .box2{
+            width: 200px;
+            height: 150px;
+            background: chartreuse;
+            margin-top: 50px;
+        }
+
+
+        /* .box3和.box4、.box5只是测试一下，与本次学习无关，事实证明同一个div块可以命名多个class名 */
+        .box3{
+            font-weight: bold;
+        }
+
+        .box4{
+            color: red;
+        }
+
+        .box5{
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box clearfix">
+        <div class="box2" >
+            内框
+        </div>
+    </div>
+
+
+    <div class="box3 box4 box5">
+        测试一下，事实证明同一个div块可以命名多个class名
+    </div>
+
+
+
+</body>
+</html>
