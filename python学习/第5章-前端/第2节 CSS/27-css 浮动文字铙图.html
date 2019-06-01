@@ -5,31 +5,26 @@
     <title>26-css 浮动元素</title>
 
     <style type="text/css">
-        .box1,.box2,.box3{
-            width: 200px;
-            height: 200px;
+        .con{
+            width: 400px;
+            height: 300px;
             background: gold;
-            margin: 20px;
-            text-align: center;
-            line-height: 200px;
+            margin: 20px auto;
         }
 
         .box1{
-            /*向左浮动*/
+            width: 200px;
+            height: 100px;
+            background: green;
             float: left;
+            margin-right: 10px;
+
         }
 
-        .box2{
-            /*向右浮动*/
-            float: right;
+        .img01{
+            width: 100%;
+            height: 100%;
         }
-
-
-        .box3{
-            /*向左浮动*/
-            float: left;
-        }
-
 
     </style>
 </head>
@@ -66,23 +61,22 @@
 
 <body>
 
-    <div class="box1">1</div>
-    <div class="box1">1</div>
-    <div class="box1">1</div>
-    <div class="box1">1</div>
-    <div class="box1">1</div>
-    <div class="box1">1</div>
-    <div class="box1">1</div>
-    <div class="box1">1</div>
-    <div class="box1">1</div>
+    <div class="con">
+        <div class="box1">
+            <img class="img01" src="./images/百度首页.png" alt="百度首页">
+        </div>
 
-    <div class="box2">2</div>
-    <div class="box2">2</div>
-    <div class="box2">2</div>
-
-    <div class="box3">3</div>
-    <div class="box3">3</div>
-    <div class="box3">3</div>
+        <div>
+            浮动特性
+            1、浮动元素有左浮动(float:left)和右浮动(float:right)两种
+            2、浮动的元素会向左或向右浮动，碰到父元素边界、浮动元素、未浮动的元素才停下来
+            3、相邻浮动的块元素可以并在一行，超出父级宽度就换行
+            4、浮动让行内元素或块元素自动转化为行内块元素
+            5、浮动元素后面没有浮动的元素会占据浮动元素的位置，没有浮动的元素内的文字会避开浮动的元素，形成文字饶图的效果
+            6、父元素内整体浮动的元素无法撑开父元素，需要清除浮动
+            7、浮动元素之间没有垂直margin的合并
+        </div>
+    </div>
 
 
 </body>
