@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>99-css 解决块与块之间的间隙</title>
+
+    <style type="text/css">
+
+
+        .con{
+            /*在父级设置字体大小为0*/
+            font-size: 0;
+        }
+
+        .con div{
+            display: inline-block;
+            /*在子级再重新设置字体大小*/
+            font-size: 16px;
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+        }
+
+    </style>
+
+</head>
+<!--
+解决内联元素间隙的方法
+1、去掉内联元素之间的换行
+2、将内联元素的父级设置font-size为0，内联元素自身再设置font-size
+-->
+
+<body>
+<div class="con">
+    <div style="background-color: red">
+    111
+</div>
+
+<div style="background-color: green">
+    222
+</div>
+
+
+</div>
+</body>
+</html>
