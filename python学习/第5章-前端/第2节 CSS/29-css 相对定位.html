@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相对定位</title>
+
+    <style type="text/css">
+        .con{
+            width: 400px;
+            height: 900px;
+            border: 1px solid red;
+            /*把块水平居中*/
+            margin: 10px auto 0;
+        }
+
+        .con div{
+            width: 200px;
+            height: 200px;
+            background-color: gold;
+            margin-top: 20px;
+        }
+
+        .con .box1{
+            /*设置为相对定位，即相对于原来的位置进行偏移*/
+            position: relative;
+
+            /*设置相距左边原来的位置的距离(50px)*/
+            left: 50px;
+
+            /*设置相距上边原来的位置的距离(50px)*/
+            top: 50px;
+
+            background-color: green;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+    <div class="con">
+        <div class="box1">
+
+        </div>
+
+        <div class="box2">
+
+        </div>
+
+        <div class="box3">
+
+        </div>
+
+
+    </div>
+</body>
+</html>
