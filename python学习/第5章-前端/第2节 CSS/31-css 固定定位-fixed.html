@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>31-css 固定定位-fixed</title>
+
+    <style type="text/css">
+        .con{
+            width: 400px;
+            height: 900px;
+            border: 1px solid red;
+            /*把块水平居中*/
+            margin: 100px auto 0;
+        }
+
+        .con div{
+            width: 200px;
+            height: 200px;
+            background-color: gold;
+            margin-top: 20px;
+        }
+
+        .con .box1{
+            /*设置为绝对定位，  相对于浏览器窗口进行定位。*/
+            position: fixed;
+            /*left: 300px;*/
+            /*top: 0;*/
+
+            right: -50px;
+            bottom: 200px;
+
+            background-color: green;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+    <div class="con">
+        <div class="box1">
+
+        </div>
+
+        <div class="box2">
+
+        </div>
+
+        <div class="box3">
+
+        </div>
+
+
+    </div>
+
+
+<!--
+关于定位
+
+我们可以使用css的position属性来设置元素的定位类型，postion的设置项如下：
+    relative 生成相对定位元素，元素所占据的文档流的位置不变，元素本身相对文档流的位置进行偏移
+    absolute 生成绝对定位元素，元素脱离文档流，不占据文档流的位置，可以理解为漂浮在文档流的上方，相对于上一个设置了相对或者绝对或者固定定位的父级元素来进行定位，如果找不到，则相对于body元素进行定位。
+    fixed 生成固定定位元素，元素脱离文档流，不占据文档流的位置，可以理解为漂浮在文档流的上方，相对于浏览器窗口进行定位。
+    static 默认值，没有定位，元素出现在正常的文档流中，相当于取消定位属性或者不设置定位属性
+    inherit 从父元素继承 position 属性的值
+
+定位元素特性
+    绝对定位和固定定位的块元素和行内元素会自动转化为行内块元素
+
+定位元素层级
+    定位元素是浮动的正常的文档流之上的，可以用z-index属性来设置元素的层级
+
+典型定位布局
+    1、固定在顶部的菜单
+    2、水平垂直居中的弹框
+    3、固定的侧边的工具栏
+    4、固定在底部的按钮
+-->
+
+</body>
+</html>
