@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻列表</title>
+
+    <style type="text/css">
+        .con{
+            width: 600px;
+            height: 290px;
+            border: 1px solid #5f5f5f;
+        }
+
+        .con2{
+            width: 558px;
+            border-top: 1px solid #5f5f5f;
+            padding: 0;
+            margin-left: 20px;
+        }
+
+        .con .h03{
+            display: inline-block;
+            height: 50px;
+            margin: 0 0 0 18px;
+            line-height: 50px;
+            text-indent: 32px;
+            font-family: "Microsoft YaHei";
+            font-size: 18px;
+            color: #000;
+            border-bottom: 1px solid red;
+        }
+
+        .ul1{
+            padding-left: 0;
+        }
+
+        .con li,.con a,.con span{
+            font-family: "Microsoft YaHei";
+            font-size: 14px;
+            color: #000;
+            line-height: 30px;
+        }
+
+        .con li{
+            list-style: none;
+        }
+
+        .con li:before{
+            content: '· ';
+        }
+
+        .con a{
+             text-decoration: none;
+        }
+
+        .con .h03:hover,.con a:hover,.con span:hover{
+                color: red;
+        }
+        .con span{
+            float: right;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="con">
+        <h3 class="h03">新闻列表</h3>
+        <div class="con2">
+            <ul class="ul1">
+            <li class="li1"><a href="#">默认值,内容不会被修剪，会呈现在元素框之外。</a><span>2019-06-04</span></li>
+            <li class="li1"><a href="#">内容会被修剪，并且其余内容是不可见的。</a><span>2019-06-04</span></li>
+            <li class="li1"><a href="#">设置的方法是通过overflow属性来设置。</a><span>2019-06-04</span></li>
+            <li class="li1"><a href="#">需要设置父元素显示溢出的子元素的方式。</a><span>2019-06-04</span></li>
+            <li class="li1"><a href="#">规定应该从父元素继承 overflow 属性的值。 </a><span>2019-06-04</span></li>
+        </ul>
+        </div>
+    </div>
+</body>
+</html>
