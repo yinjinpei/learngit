@@ -3,8 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>背景</title>
+    <style type="text/css">
+        .box{
+            width: 500px;
+            height: 400px;
+            border: 5px solid #000;
+            color: blue;
+            font-size: 32px;
+            font-weight: bold;
+
+
+            /*background-color: gold;*/
+            /*background-image: url("images/百度首页.png");*/
+
+            /*不重复*/
+            /*background-repeat: no-repeat;*/
+
+            /*横向（x轴）重复*/
+            /*background-repeat: repeat-x;*/
+
+            /*纵向（y轴）重复*/
+            /*background-repeat: repeat-y;*/
+
+            /*根据坐标显示背景图  一般和不重复配合使用：background-repeat: no-repeat;*/
+            /*background-position: 110px 200px;*/
+
+            /*以上可以写成一句：*/
+            background: url("images/百度首页.png") 100px 200px no-repeat gold;
+        }
+
+    </style>
 </head>
 <body>
-
+    <div class="box">
+        背景图
+    </div>
 </body>
 </html>
