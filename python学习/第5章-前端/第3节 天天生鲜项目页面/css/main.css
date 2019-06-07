@@ -240,14 +240,58 @@ body{
 
 
 
+/*幻灯片*/
+.center_con .slide_con{
+    width: 760px;
+    height: 270px;
+    position: relative;
+    z-index: 10;
+}
 
+.prev{
+    width: 25px;
+    height: 23px;
+    position: absolute;
+    background: url("../images/icons.png") 0 -388px no-repeat;
+    left: 15px;
+    top: 117px;
+    z-index: 20;
+}
 
+.next{
+    width: 25px;
+    height: 23px;
+    position: absolute;
+    background: url("../images/icons.png") 0 -428px no-repeat;
+    right: 10px;
+    top: 117px;
+    z-index: 30;
+}
 
+.points{
+    position: absolute;
+    width: 100%;
+    height: 11px;
+    /*background: red;*/
+    left: 0;
+    bottom: 9px;
+    text-align: center;
+    font-size: 0;
+}
 
+.points li{
+    width: 11px;
+    height: 11px;
+    display: inline-block;
+    background-color: #9f9f9f;
+    /*把块的大小背景变为圆角*/
+    border-radius: 50%;
+    margin: 0 5px;
+}
 
-
-
-
+.points .active{
+    background-color: #cecece;
+}
 
 
 
