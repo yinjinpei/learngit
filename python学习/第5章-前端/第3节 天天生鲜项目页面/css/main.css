@@ -2,6 +2,7 @@ body{
     font-family: "microsoft Heiya";
     color: #666;
     font-size: 12px;
+
 }
 
 /*顶部状态条样式*/
@@ -417,3 +418,10 @@ body{
 .company_info a:hover{
     color: #f80;
 }
+
+.back_to_top{
+    position: fixed;
+    right: 30px;
+    bottom: 100px;
+}
+
