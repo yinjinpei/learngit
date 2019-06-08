@@ -413,3 +413,7 @@ body{
 .company_info p{
     color: #4e4e4e
 }
+
+.company_info a:hover{
+    color: #f80;
+}
