@@ -284,7 +284,7 @@ body{
     height: 11px;
     display: inline-block;
     background-color: #9f9f9f;
-    /*把块的大小背景变为圆角*/
+    /*把块的方形背景变为圆形*/
     border-radius: 50%;
     margin: 0 5px;
 }
@@ -293,5 +293,123 @@ body{
     background-color: #cecece;
 }
 
+/*解决广告图片之间的空白边bug，方法一：设置父级大小为0*/
+/*.adv{*/
+    /*width: 240px;*/
+    /*height: 270px;*/
+    /*font-size: 0;*/
+/*}*/
+
+/*解决广告图片之间的空白边bug，方法二：设置.adv{}、.adv a{} 、.adv a img{}*/
+.adv{
+    width: 240px;
+    height: 270px;
+}
+.adv a{
+    float: left;
+    width: 240px;
+    height: 135px;
+}
+/*解决广告图片之间的3像素空白边bug，部分浏览器会这个bug*/
+.adv a img{
+    display: block;
+}
 
 
+
+
+
+/*公共*/
+.common_model{
+    width: 1200px;
+    height: 340px;
+    margin: 18px auto 0;
+    /*background-color: cyan;*/
+}
+
+
+.common_title{
+    height: 38px;
+    border-bottom: 2px solid #42ad46;
+    margin: 0 auto;
+}
+
+.common_title span,.common_title li,.common_title .more{
+    float: left;
+    margin: 14px 20px 0 0;
+}
+
+.common_title h3{
+    float: left;
+    margin-right:20px;
+    font:bolder 16px/38px 'microsoft Heiya';
+    color: #37ab40;
+}
+
+.common_title .more{
+   float: right;
+    margin: 14px 0 0;
+}
+
+.common_title a:hover{
+    color: #f80;
+}
+
+.banner_img{
+    width: 200px;
+    height: 300px;
+}
+
+.fruit_list{
+    border-bottom: 1px solid #ededed;
+}
+
+
+.fruit_list li{
+    float: left;
+    width: 249px;
+    height: 299px;
+    border-right: 1px solid #ededed;
+}
+
+
+.fruit_list h4,.fruit_list a,.fruit_list span{
+    display: block;
+    text-align: center;
+}
+
+.fruit_list h4{
+    font: 14px/60px 'microsoft Heiya';
+}
+
+.fruit_list span{
+    font: 20px/60px 'microsoft Heiya';
+    color: red;
+}
+
+.fruit_list li:hover{
+    width: 248px;
+    height: 298px;
+    border: 1px solid #ff0;
+}
+
+.company_info{
+    text-align: center;
+    margin: 30px auto 0;
+    padding: 30px 0;
+    /*background-color: #55a8ea;*/
+    border-top: 2px solid #42ad46;
+}
+
+.company_info li{
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.company_info a,.company_info p{
+    font: 12px/25px 'microsoft Heiya'
+}
+
+.company_info p{
+    color: #4e4e4e
+}
