@@ -557,6 +557,8 @@ body{
 .login_button .input_submit{
     width: 305px;
     height: 36px;
+    font: 22px/22px 'microsoft Heiya';
+    color: #fff;
     background-color: #47aa34;
     cursor: pointer;
     border: 0;
