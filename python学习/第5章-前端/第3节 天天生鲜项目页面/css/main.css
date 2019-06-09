@@ -425,3 +425,162 @@ body{
     bottom: 100px;
 }
 
+
+
+
+
+
+/*以下样式为登录页面样式*/
+.login_header{
+    width: 960px;
+    height: 130px;
+    margin: 0 auto;
+}
+
+/*logo图标*/
+.login_header a{
+    display: block;
+    width: 193px;
+    height: 76px;
+    margin-top: 30px;
+}
+
+/*背景颜色*/
+.login_form_bg{
+    height: 480px;
+    background-color: #518e17;
+    margin: 0 auto;
+}
+
+
+/*左侧图片*/
+.login_form_wrap{
+    width: 960px;
+    height: 480px;
+    margin: 90px auto 0;
+}
+
+.slogan{
+    width: 40px;
+    height: 350px;
+    font: 30px/36px 'microsoft Heiya';
+    color: gold;
+    margin: -10px 55px 0 110px;
+    text-align: center;
+}
+
+
+.user_login{
+    width: 370px;
+    height: 380px;
+    background-color: #fff;
+    margin-top: -40px;
+}
+
+.user_login{
+    padding: 0;
+}
+
+.user_login h3{
+    font: bolder 24px 'microsoft Heiya';
+    color: #a8a8a8;
+    display: inline-block;
+    margin: 25px 35px 10px 75px;
+}
+
+.user_login .registered{
+    display: inline-block;
+    background: url("../images/icons02.png") 0 0 no-repeat;
+    font: bolder 16px/16px 'microsoft Heiya';
+    text-indent: 25px;
+    color: #5fb42a;
+}
+
+.user_login .registered:hover{
+    color: #f80;
+}
+
+.user_login hr{
+    display: block;
+    width: 310px;
+    color: #9f9f9f;
+}
+
+.login_user_name,.login_user_pwd{
+    display: block;
+    width: 305px;
+    height: 36px;
+    margin: 30px auto;
+    border: 1px solid #e0e0e0;
+    background: #f8f8f8;
+    text-indent: 10px;
+}
+
+.login_user_name{
+    background: url("../images/icons02.png") 270px -42px no-repeat;
+}
+
+.login_user_pwd{
+    background: url("../images/icons02.png") 270px -93px no-repeat;
+}
+
+.form_group{
+    font: 12px/12px 'microsoft Heiya';
+    overflow: hidden;
+
+}
+
+.form_group input{
+    float: left;
+    margin-left: 32px;
+}
+
+.form_group label{
+    text-indent: 10px;
+    float: left;
+}
+
+.form_group a{
+    float: right;
+    margin-right: 32px;
+}
+
+.form_group a:hover{
+    color: #f80;
+}
+
+.login_button{
+    margin: 30px auto;
+    text-align: center;
+}
+
+.login_button .input_submit{
+    width: 305px;
+    height: 36px;
+    background-color: #47aa34;
+    cursor: pointer;
+    border: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
