@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>css3--选择器</title>
+    <style type="text/css">
+
+
+        .ul1 li,.ul1 span,.ul2 li,.ul2 span{
+            display: block;
+            height: 30px;
+            margin-bottom: 10px;
+            background-color: gold;
+        }
+
+        /*1、E:nth-child(n)：匹配元素类型为E且是父元素的第n个子元素 <br>*/
+        .ul1 li:nth-child(3){
+            background-color: green;
+        }
+        .ul1 li:nth-child(4){
+            background-color: green;
+        }
+        /*第奇数个子元素*/
+        .ul1 li:nth-child(2n+1){
+            background-color: red;
+        }
+
+        /*2、E:nth-last-child(n)：匹配元素类型为E且是父元素的倒数第n个子元素（与上一项顺序相反）<br>*/
+        .ul1 li:nth-last-child(2){
+            background-color: blue;
+        }
+
+        /*6、E:nth-of-type(n)：匹配父元素的第n个类型为E的子元素<br>*/
+        .ul2 li:nth-of-type(2){
+            background-color: pink;
+        }
+        .ul2 li:nth-of-type(2n+1){
+            background-color: blueviolet;
+        }
+        .ul2 li:nth-of-type(3){
+            background-color: blue;
+        }
+
+        /*E:last-of-type：匹配父元素的最后一个类型为E的子元*/
+        .ul2 li:last-of-type{
+            background-color: green;
+
+
+    </style>
+
+</head>
+<body>
+<ul class="ul1">
+    <li>1</li>
+    <li>2</li>
+    <span>span</span>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<br><br>
+<ul class="ul2">
+    <li>a</li>
+    <li>b</li>
+    <span>span</span>
+    <li>c</li>
+    <li>d</li>
+    <li>e</li>
+</ul>
+
+
+
+1、E:nth-child(n)：匹配元素类型为E且是父元素的第n个子元素 <br>
+2、E:nth-last-child(n)：匹配元素类型为E且是父元素的倒数第n个子元素（与上一项顺序相反）<br>
+3、E:first-child：匹配元素类型为E且是父元素的第一个子元素<br>
+4、E:last-child：匹配元素类型为E且是父元素的最后一个子元素<br>
+5、E:only-child：匹配元素类型为E且是父元素中唯一的子元素<br>
+6、E:nth-of-type(n)：匹配父元素的第n个类型为E的子元素<br>
+7、E:nth-last-of-type(n)：匹配父元素的倒数第n个类型为E的子元素（与上一项顺序相反）<br>
+8、E:first-of-type：匹配父元素的第一个类型为E的子元素<br>
+9、E:last-of-type：匹配父元素的最后一个类型为E的子元素<br>
+10、E:only-of-type：匹配父元素中唯一子元素是E的子元素<br>
+11、E:empty 选择一个空的元素<br>
+12、E:enabled 可用的表单控件<br>
+13、E:disabled 失效的表单控件<br>
+14、E:checked 选中的checkbox<br>
+15、E:not(s) 不包含某元素<br>
+16、E:target 对应锚点的样式<br>
+17、E > F E元素下面第一层子集<br>
+18、E ~ F E元素后面的兄弟元素<br>
+19、E + F 紧挨着的兄弟元素<br>
+<br>
+属性选择器：<br>
+1、E[data-attr] 含有data-attr属性的元素<br>
+2、E[data-attr='ok'] 含有data-attr属性的元素且它的值为“ok”<br>
+3、E[data-attr^='ok'] 含有data-attr属性的元素且它的值的开头含有“ok”<br>
+4、E[data-attr$='ok'] 含有data-attr属性的元素且它的值的结尾含有“ok”<br>
+5、E[data-attr*='ok'] 含有data-attr属性的元素且它的值中含有“ok”<br>
+
+</body>
+</html>
