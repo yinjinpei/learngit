@@ -46,8 +46,46 @@
             background-color: green;
         }
 
-    </style>
 
+        /*11、E:empty 选择一个空的元素<br>*/
+        .box1:empty{
+            height: 20px;
+            background-color: black;
+        }
+
+
+        /*12、E:enabled 可用的表单控件<br>*/
+        .input_off:disabled{
+            background-color: red;
+        }
+
+        /*13、E:disabled 失效的表单控件<br>*/
+        .input_on:enabled{
+            background-color: green;
+        }
+
+        /*14、E:checked 选中的checkbox  和19、E + F 紧挨着的兄弟元素*/
+        .check:checked + .checkcon{
+            display: block;
+        }
+
+        .checkcon{
+            width: 100px;
+            height: 55px;
+            background-color: #00bc6f;
+            display: none;
+        }
+
+        .check2 input:checked + label{
+            color: red;
+        }
+
+        label{
+            color: blue;
+        }
+
+
+    </style>
 </head>
 <body>
 <ul class="ul1">
@@ -69,8 +107,25 @@
     <li>e</li>
 </ul>
 
+<div class="box1"></div>
+<br>
+<br>
+
+<input class="input_off" type="text" name="" disabled>
+<input class="input_on" type="text" name="">
+<br>
+<input class="check" type="checkbox" name="">
+<div class="checkcon">测试一下选中一个元素</div>
+<br>
+<input class="check2" type="checkbox" name="">
 
 
+
+
+
+<br>
+<br>
+<br>
 1、E:nth-child(n)：匹配元素类型为E且是父元素的第n个子元素 <br>
 2、E:nth-last-child(n)：匹配元素类型为E且是父元素的倒数第n个子元素（与上一项顺序相反）<br>
 3、E:first-child：匹配元素类型为E且是父元素的第一个子元素<br>
