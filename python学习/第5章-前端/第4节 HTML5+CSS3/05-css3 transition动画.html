@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05-css3 transition动画</title>
+
+    <style type="text/css">
+        .box1 {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            background-color: red;
+            border-radius: 50%;
+
+            /*设置动画 对应下面hover设置对应的动画,单个设置*/
+            /*transition: width 500ms ease 500ms,height 500ms ease 500ms,background-color 500ms ease 1s;*/
+
+            /*统一设置动画时间*/
+            transition:all 500ms ease;
+        }
+
+        .box1:hover{
+            width: 1000px;
+            height: 500px;
+            background-color: green;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="box1"></div>
+
+
+<br>
+<br>
+transition动画 <br>
+1、transition-property 设置过渡的属性，比如：width height background-color <br>
+2、transition-duration 设置过渡的时间，比如：1s 500ms<br>
+3、transition-timing-function 设置过渡的运动方式<br>
+<br>
+linear 匀速<br>
+ease 开始和结束慢速<br>
+ease-in 开始是慢速<br>
+ease-out 结束时慢速<br>
+ease-in-out 开始和结束时慢速<br>
+cubic-bezier(n,n,n,n)<br>
+比如：cubic-bezier(0.845, -0.375, 0.215, 1.335)<br>
+曲线设置网站：https://matthewlein.com/ceaser/<br>
+4、transition-delay 设置动画的延迟<br>
+5、transition: property duration timing-function delay 同时设置四个属性<br>
+
+</body>
+</html>
