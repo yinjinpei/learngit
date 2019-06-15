@@ -76,13 +76,8 @@
             display: none;
         }
 
-        .check2 input
-        :checked + label{
+        .check2:checked + label{
             color: red;
-        }
-
-        label{
-            color: blue;
         }
 
 
@@ -118,7 +113,7 @@
 <input class="check" type="checkbox" name="">
 <div class="checkcon">测试一下选中一个元素</div>
 <br>
-<input class="check2" type="checkbox" name="">
+<input class="check2" type="checkbox" name=""><label>选中一个，然后变色</label>
 
 
 
