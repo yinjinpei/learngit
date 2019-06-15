@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+
+        .box,.box1,.box2,.box3,.box4{
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            background-color: dodgerblue;
+            margin: 50px auto;
+            transition: all 500ms ease;
+
+            /*透视旋转出现异常，需要初始化 transform*/
+            transform: perspective(800px) rotateY(0deg);
+        }
+
+
+        .box1{
+            background-color: gold;
+        }
+
+        .box2{
+            background-color: red;
+        }
+
+        .box3{
+
+            background-color: green;
+        }
+
+        .box1:hover{
+            /*透视旋转,以X为轴旋转150度，第一个参数一般为800px，会有异常，需要初始化*/
+            transform: perspective(800px) rotateY(150deg);
+        }
+
+        .box2:hover{
+            /*透视旋转,以Y为轴旋转150度，第一个参数一般为800px，会有异常，需要初始化*/
+            transform: perspective(800px) rotateX(150deg);
+        }
+
+        .box3:hover{
+            /*透视旋转,以Z为轴旋转150度，第一个参数一般为800px，会有异常，需要初始化*/
+            transform: perspective(800px) rotateZ(150deg);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">原图</div>
+    <div class="box1">以X为轴旋转</div>
+    <div class="box2">以Y为轴旋转</div>
+    <div class="box3">以Z为轴旋转</div>
+
+    <br>
+    <br>
+    <br>
+CSS3 transform变换<br>
+1、translate(x,y) 设置盒子位移<br>
+2、scale(x,y) 设置盒子缩放<br>
+3、rotate(deg) 设置盒子旋转<br>
+4、skew(x-angle,y-angle) 设置盒子斜切<br>
+5、perspective 设置透视距离<br>
+6、transform-style flat | preserve-3d 设置盒子是否按3d空间显示<br>
+7、translateX、translateY、translateZ 设置三维移动<br>
+8、rotateX、rotateY、rotateZ 设置三维旋转<br>
+9、scaleX、scaleY、scaleZ 设置三维缩放<br>
+10、tranform-origin 设置变形的中心点<br>
+11、backface-visibility 设置盒子背面是否可见<br>
+
+</body>
+</html>
