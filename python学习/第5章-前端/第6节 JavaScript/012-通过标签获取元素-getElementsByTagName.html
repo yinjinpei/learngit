@@ -6,6 +6,7 @@
     <script type="text/javascript">
         window.onload = function () {
 
+            // 注意，不是一个数组，只是类似数组的选择集，不能用数组的一些方法，比如pop
             var oLi = document.getElementsByTagName('li');
             alert(oLi.length); // 显示12，因为是获取了标签里所有li个数
 
@@ -14,7 +15,7 @@
             alert(oLi01.length);    // 显示8
 
             // 第一个容器隔行显示gold背景颜色
-            for(var i=0;i<8;i++){
+            for(var i=0;i<oLi01.length;i++){
                 if(i%2==0){
                     oLi01[i].style.backgroundColor = 'gold';
                 }
