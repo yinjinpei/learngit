@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02-获取元素-操作元素属性</title>
+    <script type="text/javascript">
+        window.onload = function(){
+
+            // 获取元素方法一：以id方式获取
+            var oDiv = document.getElementById('div1');
+            oDiv.style.width = 300 + 'px';
+            oDiv.style.height = 200 + 'px';
+            oDiv.style.backgroundColor = 'gold';
+
+            var oInput01 = document.getElementById('input01');
+            // 获取class值
+            var cla = oInput01.className;
+            // 获取value值
+            var val01 = oInput01.value;
+            // 获取name值
+            var name01 = oInput01.name;
+            // 获取type值
+            var typ = oInput01.type;
+
+
+            // 弹窗
+            // alert(cla);
+            // alert(val01);
+            // alert(name01);
+            // alert(typ);
+
+
+        }
+
+
+
+    </script>
+
+
+</head>
+<body>
+    <div id="div1">'这是id = div1'</div>
+    <input type="text" class="con" name="setattr" id="input01" value="初始值" >
+    <br>
+    <input type="text" id="input02" placeholder="初始值，用于提示">
+
+    <a href="http://www.baidu.com" title="百度">百度首页</a>
+
+    <br>
+    <br>
+    <br>
+    <div class="con">
+操作元素属性
+    获取的页面元素，就可以对页面元素的属性进行操作，属性的操作包括属性的读和写。
+
+
+操作属性的方法
+    1、“.” 操作
+    2、“[ ]”操作
+
+属性写法
+    1、html的属性和js里面属性写法一样
+    2、“class” 属性写成 “className”
+    3、“style” 属性里面的属性，有横杠的改成驼峰式，比如：“font-size”，改成”style.fontSize”
+
+
+    </div>
+</body>
+</html>
