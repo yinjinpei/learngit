@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>14-js-字符串处理方法-js调试方法</title>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            // 1、字符串合并操作：“ + ”
+            var str1 = 'peter';
+            var str2 = 'boy';
+            alert(str1+' is '+str2);    // 显示 peter is boy
+
+
+            // 2、parseInt() 将数字字符串转化为整数
+            var num1 = 123.55;
+            var num2 = '456boy';
+            alert(parseInt(num1));  // 显示 123
+            alert(parseInt(num2));  // 显示 456
+
+
+            // 3、parseFloat() 将数字字符串转化为小数
+            var num3 = 123;
+            var num4 = '789abc';
+            var num5 = 99.55;
+            alert(parseFloat(num3));    // 显示 123
+            alert(parseFloat(num4));    // 显示 789
+            alert(parseFloat(num5));    // 显示 99.55
+
+
+            // 4、split() 把一个字符串分隔成字符串组成的数组
+            var str3 = '1-2-3-4-5-6-7-8-9';
+            var sList = str3.split('-');
+            alert(sList); // 显示 1,2,3,4,5,6,7,8,9  是个数组
+
+            var str4 = 'abc';
+            alert(str4.split(''));  // 显示 a,b,c  是个数组
+
+
+
+            // 5、charAt() 获取字符串中的某一个字符
+            var str5 = '#div';
+            var str6 = str5.charAt(0);
+            alert(str6);    //显示 #
+
+
+
+            // 6、indexOf() 查找字符串是否含有某字符
+            var str7 = 'microsoft yahei';
+            var str8 = str7.indexOf('microsoft');
+            alert(str8);  // 显示 0  表示这个字符串是从第0个出现
+
+            var str9 = str7.indexOf('hei');
+            alert(str9);    // 显示 12  表示这个字符串是从第12个出现
+
+            var str10 = str7.indexOf('abc');
+            alert(str10);   // 显示 -1   表示没有找到字符串
+
+
+
+            // 7、substring() 截取字符串 用法： substring(start,end)（不包括end）
+            var str11 = str7.substring(12,16);
+            alert(str11);   // 显示 hei
+
+            alert(str7.substring(10));  // 显示 yahei，从第10开始截取到最后一个
+
+
+
+            // 8、toUpperCase() 字符串转大写
+            var str12 = 'My name is Peter';
+            alert(str12.toUpperCase()); // 显示 MY NAME IS PETER
+
+
+            // 9、toLowerCase() 字符串转小写
+            alert(str12.toLowerCase()); // 显示 my name is peter
+
+
+
+            //10、字符串反转
+            var sTr1 = '123456789abcdefg';
+            var sTr2 = sTr1.split('').reverse().join('');
+            alert(sTr2);    //显示 gfedcba987654321
+
+
+
+
+            // 调试程序的方法一: console.log  操作方法：在浏览器按F12，点Console
+            var a = '2019-09-09';
+            var b = a.split('-');
+            console.log(b);
+
+            // 调试程序的方法二: document.title   结果显示在页面标题
+            document.title = b; //直接显示在页面标题
+
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <div id="div"></div>
+
+
+    <hr>
+    Javascript组成
+        1、ECMAscript javascript的语法（变量、函数、循环语句等语法）
+        2、DOM 文档对象模型 操作html和css的方法
+        3、BOM 浏览器对象模型 操作浏览器的一些方法
+
+    <hr>
+    字符串处理方法
+        1、字符串合并操作：“ + ”
+        2、parseInt() 将数字字符串转化为整数
+        3、parseFloat() 将数字字符串转化为小数
+        4、split() 把一个字符串分隔成字符串组成的数组
+        5、charAt() 获取字符串中的某一个字符
+        6、indexOf() 查找字符串是否含有某字符
+        7、substring() 截取字符串 用法： substring(start,end)（不包括end）
+        8、toUpperCase() 字符串转大写
+        9、toLowerCase() 字符串转小写
+        10、字符串反转
+
+    <hr>
+    字符串反转
+        var str = 'asdfj12jlsdkf098';
+        var str2 = str.split('').reverse().join('');
+
+        alert(str2);
+
+    <hr>
+    调试程序的方法
+        1、alert
+
+        2、console.log
+
+        3、document.title
+
+</body>
+</html>
