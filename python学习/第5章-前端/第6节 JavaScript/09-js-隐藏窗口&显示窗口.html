@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>09-js-隐藏窗口&显示窗口</title>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            var oDiv = document.getElementById('con');
+            oDiv.style.width = '300px';
+            oDiv.style.height = '200px';
+            oDiv.style.border = '2px solid red';
+            oDiv.style.fontSize = '20px';
+            oDiv.style.textAlign = 'center';
+
+            var oBtn = document.getElementById('btn');
+            oBtn.value = '隐藏';
+            oBtn.onclick = changeWindow;
+
+            function changeWindow() {
+                if(oDiv.style.display=='none'){
+                    oDiv.style.display = 'block';
+                    oBtn.value = '隐藏';
+                }
+                else{
+                    oDiv.style.display = 'none';
+                    oBtn.value = '显示';
+                }
+            }
+
+
+        }
+
+    </script>
+
+</head>
+<body>
+    <input id="btn" type="button" name="" value="切换">
+    <div id="con" >隐藏窗口&显示窗口</div>
+
+
+</body>
+</html>
