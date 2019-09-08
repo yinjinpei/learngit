@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06-js-函数传参-函数return关键字</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oDiv1 = document.getElementById('div1');
+
+            // 更改颜色
+            changeStyle('color','red');
+
+            // 更改字体大小
+            changeStyle('fontSize','30px');
+
+            // 设置框大小
+            changeStyle('width','300px');
+            changeStyle('height','200px');
+
+            // 设置背景颜色
+            changeStyle('background','gold');
+
+            // 设置边框
+            changeStyle('border','2px solid #000');
+
+
+
+            function changeStyle(style,value) {
+                oDiv1.style[style] = value;
+            }
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <div id="div1">div1 元素</div>
+</body>
+</html>
