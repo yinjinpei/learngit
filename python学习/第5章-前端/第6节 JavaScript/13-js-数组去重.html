@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13-js-数组去重.html</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var alist = [1,2,3,4,1,3,2,6,7,8,9,4,3,2,11,2,3,4,5,6,1,2,22,1];
+
+            // 去重，原理是：把第一个出现索引值和此时读的列表位置索引值i是否相同，如果相同说明是第一个，如果不同，说明有重复的了。
+            var blist = [];
+
+            for (var i=0;i<alist.length;i++){
+                num=alist.indexOf(alist[i]);
+                if (i==num){
+                    blist.push(alist[i])
+                }
+            }
+
+            // 显示去重后的alist
+            alert(blist)
+
+
+
+        }
+
+
+
+    </script>
+
+
+</head>
+<body>
+    <div id="div"></div>
+
+</body>
+</html>
