@@ -11,6 +11,7 @@
             oDiv.style.width = 300 + 'px';
             oDiv.style.height = 200 + 'px';
             oDiv.style.backgroundColor = 'gold';
+            oDiv.style.fontSize = 32 + 'px';
 
             var oInput01 = document.getElementById('input01');
             // 获取class值
@@ -22,12 +23,15 @@
             // 获取type值
             var typ = oInput01.type;
 
-
             // 弹窗
             // alert(cla);
             // alert(val01);
             // alert(name01);
             // alert(typ);
+
+            var oA = document.getElementById('link');
+            oA.title="百度"
+
 
 
         }
@@ -43,12 +47,12 @@
     <input type="text" class="con" name="setattr" id="input01" value="初始值" >
     <br>
     <input type="text" id="input02" placeholder="初始值，用于提示">
+    <br>
+    <a href="http://www.baidu.com" target="_blank" id="link">百度首页</a>
 
-    <a href="http://www.baidu.com" title="百度">百度首页</a>
-
     <br>
     <br>
-    <br>
+    <hr>
     <div class="con">
 操作元素属性
     获取的页面元素，就可以对页面元素的属性进行操作，属性的操作包括属性的读和写。
