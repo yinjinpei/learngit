@@ -13,6 +13,7 @@
             oDiv.style.backgroundColor = 'gold';
             oDiv.style.fontSize = 32 + 'px';
 
+            // 通过“.”操作属性：
             var oInput01 = document.getElementById('input01');
             // 获取class值
             var cla = oInput01.className;
@@ -29,10 +30,11 @@
             // alert(name01);
             // alert(typ);
 
+            // 通过“[ ]”操作属性：
             var oA = document.getElementById('link');
-            oA.title="百度"
-
-
+            oA.title = "百度";
+            oA.style['fontSize'] = 36 + 'px';
+            oA.style['text-decoration'] = 'none';
 
         }
 
