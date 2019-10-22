@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-js-换肤</title>
+    <script type="text/javascript">
+      window.onload = function(){
+          var oBody = document.getElementById('body');
+          oBody.style.backgroundColor = 'gold';
+
+          var oDiv1 = document.getElementById('div1');
+          // oDiv1.style.width = 300 + 'px';
+          oDiv1.style.width = '300px';
+          oDiv1.style.height = 200 + 'px';
+          oDiv1.style.backgroundColor = 'red';
+
+          var oDiv2 = document.getElementById('div2');
+          oDiv2.style.width = 300 + 'px';
+          oDiv2.style.height = 200 + 'px';
+          oDiv2.style.backgroundColor = 'green';
+
+          var btn = document.getElementById('btn');
+          btn.onclick = function () {
+              oBody.style.backgroundColor = 'blue';
+              oDiv1.style.backgroundColor = 'green';
+              oDiv2.style.backgroundColor = 'gold';
+          };
+
+          var btn2 = document.getElementById('btn2');
+          btn2.onclick = function () {
+              oBody.style.backgroundColor = 'gold';
+              oDiv1.style.backgroundColor = 'red';
+              oDiv2.style.backgroundColor = 'green';
+          };
+
+      }
+
+
+    </script>
+</head>
+<body id="body">
+    <div id="div1">方块1</div>
+    <div id="div2">方块1</div>
+    <br>
+    <input type="button" value="换肤1" id="btn" title="1">
+    <input type="button" value="换肤2" id="btn2" title="1">
+
+</body>
+</html>

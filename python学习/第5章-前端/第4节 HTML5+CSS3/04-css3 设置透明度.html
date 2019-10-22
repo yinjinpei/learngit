@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>透明</title>
+    <style type="text/css">
+
+        body{
+            background-color: #00bc6f;
+        }
+
+        .box3{
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            margin: 0 auto;
+            background: url("../第3节 天天生鲜项目页面/images/banner01.jpg") 0 -117px gold no-repeat;
+
+            /*设置透明度，方法一：把整体设置透明度*/
+            /*设置透明度 0.5代表50%不透明度*/
+            opacity: 0.5;
+            /*为了兼容IE,设置透明度也同时写下面这句 50代表50% */
+            filter: alpha(opacity:50);
+
+        }
+
+
+        .box4{
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            margin: 0 auto;
+
+            /*设置透明度，方法二：把背景设置透明度，字体 不设置透明*/
+            background-color: rgba(255,215,0,0.3);
+
+            /*也可以设置边框透明度*/
+            border: 10px solid rgba(0,0,0,0.2);
+
+            /*总结：凡是可以加颜色都可以用 rgba 表示，可以设置成透明度*/
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+
+    <div class="box3">如果有一天，我哈哈哈！！</div>
+    <br>
+    <br>
+    <div class="box4">如果有一天，我哈哈哈！！</div>
+
+
+
+
+</body>
+</html>

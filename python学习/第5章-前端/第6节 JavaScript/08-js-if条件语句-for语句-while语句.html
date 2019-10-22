@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08-js-条件语句</title>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            var a = 2;
+
+            if(a==1){
+                alert('语文');
+            }
+            else if(a==2){
+                alert('数学');
+            }
+            else if(a==3){
+                alert('英语');
+            }
+            else{
+                alert('其他');
+            }
+
+
+            // switch 比 if... else if...高效
+            switch (a) {
+                case 1:
+                    alert('语文');
+                    break;
+                case 2:
+                    alert('数学');
+                    break;
+                case 3:
+                    alert('英语');
+                    break;
+                default:
+                    alert('其它');
+            }
+
+
+            // for循环语句
+            for (var i=0;i<3;i++){
+                alert(i)
+            }
+
+
+            // while循环语句
+            var k = 0;
+            while (k<2){
+                alert(k);
+                k++;
+            }
+
+
+
+        }
+
+    </script>
+
+</head>
+<body>
+
+<br>
+<hr>
+条件语句
+    通过条件来控制程序的走向，就需要用到条件语句。
+
+运算符
+    1、算术运算符： +(加)、 -(减)、 *(乘)、 /(除)、 %(求余)
+    2、赋值运算符：=、 +=、 -=、 *=、 /=、 %=
+    3、条件运算符：==、===、>、>=、<、<=、!=、&&(而且)、||(或者)、!(否)
+</body>
+</html>

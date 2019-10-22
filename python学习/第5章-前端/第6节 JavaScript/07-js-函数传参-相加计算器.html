@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07-js-函数传参-相加计算器</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oInput01 = document.getElementById('input01');
+            var oInput02 = document.getElementById('input02');
+            var oBtn = document.getElementById('btn');
+
+            oBtn.onclick = function () {
+
+                // var result = parseFloat(oInput01.value) + parseFloat(oInput02.value);
+                // 因为 0.1+.02 结果会出现 0.30000000000000004，解决如下：两个数各自先乘100再相加，结果再除100：
+                var result = ((parseFloat(oInput01.value))*100 + (parseFloat(oInput02.value))*100)/100;
+
+                alert(result);
+
+            }
+
+
+        }
+
+    </script>
+
+</head>
+<body>
+    <input type="text" name="" id="input01" placeholder="数字1">
+    <input type="text" name="" id="input02" placeholder="数字2">
+    <input type="button" name="" value="相加" id="btn">
+
+
+</body>
+</html>

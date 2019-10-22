@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>012-通过标签获取元素-getElementsByTagName</title>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            // 注意，不是一个数组，只是类似数组的选择集，不能用数组的一些方法，比如pop
+            var oLi = document.getElementsByTagName('li');
+            alert(oLi.length); // 显示12，因为是获取了标签里所有li个数
+
+            var oUl01 = document.getElementById('list01');
+            var oLi01 = oUl01.getElementsByTagName('li');
+            alert(oLi01.length);    // 显示8
+
+            // 第一个容器隔行显示gold背景颜色
+            for(var i=0;i<oLi01.length;i++){
+                if(i%2==0){
+                    oLi01[i].style.backgroundColor = 'gold';
+                }
+            }
+
+
+        }
+
+    </script>
+</head>
+<body>
+    <ul id="list01">
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+    </ul>
+
+    <ul id="list02">
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>12</li>
+    </ul>
+
+</body>
+</html>

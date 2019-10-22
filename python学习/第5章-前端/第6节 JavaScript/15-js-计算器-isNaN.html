@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>15-js-计算器-isNaN</title>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            var oInput01 = document.getElementById('input01');
+            var oInput02 = document.getElementById('input02');
+            var oOperator = document.getElementById('operator');
+
+            var oBtn = document.getElementById('btn');
+            oBtn.onclick = count;
+
+            function count() {
+                 // 1：获取select对象
+                // var oOperator = document.getElementById('operator');
+                // 2：取到选中项的索引：
+                // var index = oOperator.selectedIndex;
+                // 3：获取选中项的value
+                // var operator_value = oOperator.options[index].value;  // 获取运算符
+                // 4：取到选中项的文本内容：
+                // var operator_txt = oOperator.options[0].text;    // 获取运算符
+
+
+                //判断输入的内容是否为空
+                if (oInput01.value=="" || oInput02.value==""){
+                    alert('输入框不能为空！');
+                    return;
+                }
+
+                //判断输入的内容是否为非数字
+                if (isNaN(oInput01.value) || (isNaN(oInput02.value))){
+                    alert('请输入数字类型！！');
+                    return;
+                }
+
+
+                var operator_value = oOperator.value;
+
+                switch (operator_value) {
+                case '+':
+                    alert(((parseFloat(oInput01.value))*100 + (parseFloat(oInput02.value))*100)/100);
+                    break;
+                case '-':
+                    alert(((parseFloat(oInput01.value))*100 - (parseFloat(oInput02.value))*100)/100);
+                    break;
+                case '*':
+                    alert(((parseFloat(oInput01.value)*100)*(parseFloat(oInput02.value)*100))/10000);
+                    break;
+                case '/':
+                    // 除数不能为0
+                    if (oInput02.value==0){
+                        alert('除数不能等于0 ！');
+                        return;
+                    }
+                    alert(((parseFloat(oInput01.value)*100)/(parseFloat(oInput02.value)*100)));
+                    break;
+                default:
+                    alert('运算符错误！');
+                }
+            }
+
+
+            // function judgment(num) {
+            //     var reg= /^[A-Za-z]/;
+            //
+            //     //判断输入的内容中首字符串是否为非数字，即判断是否符合正则表达式
+            //     if (reg.test(num)){
+            //         alert(num+' '+'输入错误!');
+            //
+            //         // 这将关闭页面
+            //         window.close();
+            //     }
+            // }
+
+
+        }
+
+
+
+    </script>
+
+
+
+
+</head>
+<body>
+
+    <input type="text" name="" id="input01" placeholder="请输入一个数字">
+
+    <select id="operator" style="font-size: 20px">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+
+    <input type="text" name="" id="input02" placeholder="请输入一个数字">
+    <input type="button" name="" id="btn" value="计算">
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

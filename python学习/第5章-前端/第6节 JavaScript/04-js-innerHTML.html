@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04-js-innerHTML</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var oDiv = document.getElementById('div1');
+            oDiv.style.width = '300px';
+            oDiv.style.height = '200px';
+            oDiv.style.background = 'gold';
+
+            // 读取标签包裹的内容
+            var text = oDiv.innerHTML;
+            alert(text);
+
+            // 写入标签包裹的内容
+            oDiv.innerHTML = "<a href='http://www.baidu.com' target='_blank' style='text-decoration:none'>百度首页</a>"
+
+
+        }
+
+    </script>
+</head>
+<body>
+    <div id="div1">显示一下</div>
+
+
+<br>
+<br>
+innerHTML可以读取或者写入标签包裹的内容
+
+</body>
+</html>
