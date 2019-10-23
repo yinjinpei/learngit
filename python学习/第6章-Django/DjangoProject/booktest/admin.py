@@ -5,6 +5,14 @@ from django.contrib import admin
 from .models import *
 
 
+class HeroInfoInline(admin.TabularInline):
+    '''关联对象：
+        admin.StackedInline：正常的列表显示方式
+        admin.TabularInline：表格显示方式
+    '''
+    model = HeroInfo
+    extra = 3
+
 class BookInfoAdmin(admin.ModelAdmin):
     list_display = ['id', 'btitle', 'bpub_date']  # 显示的内容
     list_filter = ['btitle']  # 过滤字段，过滤框会出现在右侧
@@ -17,7 +25,7 @@ class BookInfoAdmin(admin.ModelAdmin):
         ('书名', {'fields': ['btitle']}),
         ('英雄人物', {'fields': ['bpub_date']}),
     ]  # 属性分组
-
+    inlines = [HeroInfoInline]
 
 class HeroInfoAdmin(admin.ModelAdmin):
     list_display = ['id', 'hname', 'hgender', 'hcontent']
