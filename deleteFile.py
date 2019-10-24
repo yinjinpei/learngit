@@ -11,16 +11,16 @@ import sys
 # 获取超时时间戳
 def getTimestamp(day):
     today = datetime.datetime.now()  # 获取当前时间
-    offsettime = datetime.timedelta(days=-day)  # 计算偏移量,前10天
-    re_date = (today + offsettime)  # 获取想要的日期的时间,即前10天时间
-    timestamp = time.mktime(re_date.timetuple())    # 前10天时间转换为时间戳
+    offsettime = datetime.timedelta(days=-day)  # 计算偏移量,前*天
+    re_date = (today + offsettime)  # 获取想要的日期的时间,即前*天时间
+    timestamp = time.mktime(re_date.timetuple())    # 前*天时间转换为时间戳
     return timestamp
 
 # 处理过期文件
 def fileHandle(timestamp, rootDir):
-    _deleteFileList = ''  # 用来储存已过期的文件名
-    _reservedFileList = ''   # 用来储存未过期的文件名
-    fileList = os.listdir(rootDir)  # 获取目录下的文件
+    _deleteFileList = ''  # 用来储存所有已过期的文件名或目录名
+    _reservedFileList = ''   # 用来储存所有未过期的文件名或目录名
+    fileList = os.listdir(rootDir)  # 获取目录下所有文件
     try:
         fileList.remove('deleteFile.log')  # 排除当前目录下的deleteFile.log日志文件
     except ValueError:
@@ -28,7 +28,7 @@ def fileHandle(timestamp, rootDir):
 
     for file in fileList:
         filepath = os.path.join(rootDir, file)
-        fileTime = os.path.getmtime(filepath)   # 获取文件修改时间,时间戳
+        fileTime = os.path.getmtime(filepath)   # 获取文件或目录修改时间,时间戳
 
         if fileTime <= timestamp:
             _deleteFileList += str(file) + "\n"
@@ -46,7 +46,7 @@ def fileHandle(timestamp, rootDir):
 def logFileHandle(deleteFileList, rootDir):
     filepath = os.path.join(rootDir, 'deleteFile.log')
     with open(filepath, 'a') as f:
-        f.write("删除时间:" +
+        f.write("执行时间:" +
                 str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")) +
                 "  删除的文件及目录如下:\n")
         f.write(str(deleteFileList) + "\n")
