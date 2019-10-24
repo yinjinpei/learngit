@@ -32,3 +32,8 @@ class HeroInfo(models.Model):
     hbook = models.ForeignKey(BookInfo, on_delete=models.CASCADE,)
     def __str__(self):
         return self.hname
+    def gender(self):
+        if self.hgender:
+            return '女'
+        else:
+            return '男'

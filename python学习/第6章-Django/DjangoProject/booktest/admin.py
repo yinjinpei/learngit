@@ -28,7 +28,8 @@ class BookInfoAdmin(admin.ModelAdmin):
     inlines = [HeroInfoInline]
 
 class HeroInfoAdmin(admin.ModelAdmin):
-    list_display = ['id', 'hname', 'hgender', 'hcontent']
+    # list_display = ['id', 'hname', 'hgender', 'hcontent']
+    list_display = ['id', 'hname', 'gender', 'hcontent']
 
 
 admin.site.register(BookInfo, BookInfoAdmin)
