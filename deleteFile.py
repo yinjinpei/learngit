@@ -5,6 +5,7 @@ import os
 import time
 import datetime
 import shutil
+import sys
 
 
 # 获取超时时间戳
@@ -55,11 +56,16 @@ def logFileHandle(deleteFileList, rootDir):
 
 
 def main():
-    rootDir = 'D:\\Svn-Backup'  # 需要删除的文件和目录存放的路径
+    rootDir = 'D:\\Svn-Backup1'  # 需要删除的文件和目录存放的路径
     outTime = 10    # 文件和目录过期时间，即*天前，单位：天
 
     if not os.path.exists(rootDir):
-        print(rootDir, '路径不存在,请检查下路径!!')
+        print(rootDir, '路径不存在,请检查下路径！！！')
+        output = sys.stdout
+        for i in range(10, -1, -1):
+            time.sleep(1)
+            output.write("\r将退出程序:{0}".format(i))
+            output.flush()
         exit()
     timestamp = getTimestamp(outTime)
     deleteFileList = fileHandle(timestamp, rootDir)
