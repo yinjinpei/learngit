@@ -42,7 +42,7 @@ class BookInfo(models.Model):
 
 
 class HeroInfo(models.Model):
-    hanme=models.CharField(max_length=10)
+    hname=models.CharField(max_length=10)
     hgender=models.BooleanField(default=True)
     hcontent=models.CharField(max_length=1000)
     isDelete=models.BooleanField(default=False)
