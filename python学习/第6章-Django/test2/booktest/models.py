@@ -4,6 +4,7 @@ from django.db import models
 
 
 class BookInfoManager(models.Manager):
+    # 更改查询集
     def get_queryset(self):
         return super(BookInfoManager,self).get_queryset().filter(isDelete=False)
     # 自定义模型类方法二
