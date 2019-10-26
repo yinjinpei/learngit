@@ -7,7 +7,7 @@ class BookInfoManager(models.Manager):
     # 更改查询集
     def get_queryset(self):
         return super(BookInfoManager,self).get_queryset().filter(isDelete=False)
-    # 自定义模型类方法二
+    # 自定义模型类方法二，（推荐方法）
     def create(self,btitle,bpub_date):
         b=BookInfo()
         b.btitle=btitle
@@ -16,6 +16,7 @@ class BookInfoManager(models.Manager):
         b.bcommet=0
         b.isDelete=False
         return b
+
 
 class BookInfo(models.Model):
     btitle=models.CharField(max_length=20)
@@ -38,7 +39,6 @@ class BookInfo(models.Model):
         b.bcommet=0
         b.isDelete=False
         return b
-
 
 
 class HeroInfo(models.Model):
