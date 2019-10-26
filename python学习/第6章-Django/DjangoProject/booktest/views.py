@@ -10,8 +10,8 @@ def index(request):
     # temp=loader.get_template('booktest/index.html')
     # return HttpResponse(temp.render())
     # 方法二
-    bookList={'bookName':['大话西游','演员的自我修养','ptyhon3基础']}
-    # bookList={'bookName':'大话西游'}
+    # bookList={'bookName':['大话西游','演员的自我修养','ptyhon3基础']}
+    bookList={'bookName':'大话西游'}
     return render(request,'booktest/index.html',bookList)
 
 def index_bak(request):
