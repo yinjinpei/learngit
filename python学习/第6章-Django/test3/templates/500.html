@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>500</title>
+</head>
+<body>
+    <h1>500 服务器错误！！！</h1>
+    <h2>路径：{{request_path}}</h2>
+    <h3>修改页面需要要重启应用才生效：python manager.py runserver</h3>
+    <hr>
+    <h3>500 (server error) 视图
+        1，defaults.server_error(request, template_name='500.html')
+        2，在视图代码中出现运行时错误
+        3，默认的500视图不会传递变量给500.html模板
+        4，如果在settings中DEBUG设置为True，那么将永远不会调用505视图，而是显示URLconf 并带有一些调试信息
+    </h3>
+</body>
+</html>
+
