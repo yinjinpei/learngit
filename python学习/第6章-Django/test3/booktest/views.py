@@ -8,7 +8,11 @@ def index(request):
     return HttpResponse('hello index !!')
 
 def index2(request):
-    return HttpResponse('hello booktest index2 !!')
+    return HttpResponse('hello 只包含booktest index2 !!')
+
+def index3(request):
+    return HttpResponse('hello，包含booktest index3')
 
 def detail(request,number):
     return HttpResponse(number)
+
