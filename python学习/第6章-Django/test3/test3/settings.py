@@ -24,11 +24,10 @@ SECRET_KEY = 'jb#!fwp4wmq9plhq5j1y7)5nqe!-%)n6kt7wxhy12udtq8)p*p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # 调式状态为True, 一般上线要修改为False
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['127.0.0.1'] # 表示本地显示定义404页面
 ALLOWED_HOSTS = ['*']   # '*'表示本地显示定义404页面
-
 
 
 # Application definition

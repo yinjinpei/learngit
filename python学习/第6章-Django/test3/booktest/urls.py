@@ -18,6 +18,13 @@ urlpatterns = [
 
     # re_path('(?P<p1>\d+)/(?P<p2>\d+)/(?P<p3>\d+)/',views.detail3), #关键字参数，指定参数位置，和上面一样
 
-    re_path(r'^peter',views.peter)
+    re_path(r'^peter',views.peter),
+
+
+    re_path(r'^getTest1/$',views.getTest1),
+
+    re_path(r'^getTest2/$',views.getTest2),
+
+    re_path(r'^getTest3/$',views.getTest3),
 
 ]
