@@ -12,4 +12,6 @@
     然后到test3.settings找（path('admin/', admin.site.urls)），这里指向'admin/'-->
     再然后到这里匹配admin，在admin.site.urls找
 
+    网址匹配顺序：ROOT_URLCONF -->test3.urls -->booktest.urls -->booktest.views
+
 '''
