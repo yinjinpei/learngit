@@ -14,7 +14,7 @@ urlpatterns = [
     # 如果不是re_path,而是使用的path则使用正则匹配带数字路径的时候语法都不会高亮，从而会导致404
     # re_path('(\d+)',views.detail),
 
-    re_path(r'^(\d+)/(\d+)/(\d+)/',views.detail2),  #匹配 数字/数字/数字/ ，如:2019/10/27
+    re_path(r'^(\d+)/(\d+)/(\d+)/$',views.detail2),  #匹配 数字/数字/数字/ ，如:2019/10/27
 
     # re_path('(?P<p1>\d+)/(?P<p2>\d+)/(?P<p3>\d+)/',views.detail3), #关键字参数，指定参数位置，和上面一样
 
