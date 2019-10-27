@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>400</title>
+</head>
+<body>
+    <h1>页面找不到 400！！！</h1>
+    <h2>路径：{{request_path}}</h2>
+    <h3>
+        (bad request) 视图
+        <hr>
+        1，defaults.bad_request(request, template_name='400.html')
+        <hr>
+        2，错误来自客户端的操作
+        <hr>
+        3，当用户进行的操作在安全方面可疑的时候，例如篡改会话cookie
+    </h3>
+</body>
+</html>
+
