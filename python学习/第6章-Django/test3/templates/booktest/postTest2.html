@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>postTest2</title>
+
+</head>
+<body>
+    <h1>接收一键多值的情况</h1>
+    <hr>
+    用户：{{uname}}
+    <hr>
+    密码：{{upwd}}
+    <hr>
+    性别：{{ugender}}
+    <hr>
+    爱号：
+        {%for hobby in uhobby%}
+            {{hobby}}&nbsp;&nbsp;
+        {%endfor%}
+
+</body>
+</html>
