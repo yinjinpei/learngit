@@ -23,9 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jb#!fwp4wmq9plhq5j1y7)5nqe!-%)n6kt7wxhy12udtq8)p*p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# 调式状态为True, 一般上线要修改为False
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['127.0.0.1'] # 表示本地显示定义404页面
+ALLOWED_HOSTS = ['*']   # '*'表示本地显示定义404页面
+
 
 
 # Application definition
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'test3.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
