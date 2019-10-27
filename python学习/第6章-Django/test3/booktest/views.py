@@ -14,5 +14,5 @@ def index3(request):
     return HttpResponse('hello，包含booktest index3')
 
 def detail(request,number):
-    return HttpResponse(number)
+    return HttpResponse('<h1> hello 匹配包含数字的  '+number+'</h1>')
 
