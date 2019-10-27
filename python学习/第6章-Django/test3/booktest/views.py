@@ -24,4 +24,7 @@ def detail2(request,p1,p2,p3):
 def detail3(request,p1,p2,p3):
     return HttpResponse('year:%s  moth:%s  day:%s' % (p2, p1, p3))
 
-
+def peter(request):
+    # HttpReqeust对象:
+    # 属性:path：一个字符串，表示请求的页面的完整路径，不包含域名
+    return HttpResponse('输出路径使用request.path:  &nbsp&nbsp'+request.path)
