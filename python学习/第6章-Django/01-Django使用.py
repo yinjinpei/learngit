@@ -13,8 +13,8 @@
     查看已安装的库：pip list    、pip freeze
 
 django的命令：
-    创建一个项目：django-admin startproject
-    生成一个应用：python manage.py startapp
+    创建一个项目：django-admin startproject 项目名
+    生成一个应用：python manage.py startapp 应用名
     生成移交：python manage.py makemigrations
     移交：python manage.py migrate
     启动服务器：python manage.py runserver
