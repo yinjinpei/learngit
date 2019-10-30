@@ -101,8 +101,31 @@ def redTest1(request):
     # return HttpResponseRedirect('/redTest2')
 
     #HttpResponseRedirect简写:redirect
-    return redirect('/redTest2')
+    return redirect('/redTest2')    # 内容"/redTest2"与url中redTest2匹配
 
 def redTest2(request):
     context={'detail':'这是子类HttpResponseRedirect重定向！！！简写方法:redirect'}
     return render(request,'booktest/redTest2.html',context)
+
+
+#通过用户登录练习session，seeion:状态保持
+def session1(request):
+    # uname=request.session['myname']   #获取session值，方法一
+    uname=request.session.get('myname','未登录')    #获取session值，方法二，如果不存在，则返回指定内容：‘未登录’，推荐
+    context={'uname':uname}
+    return render(request,'booktest/session1.html',context)
+
+def session2(request):
+    return render(request,'booktest/session2.html')
+
+def session2_handle(request):
+    # 获取表单中的uname值
+    uname=request.POST['uname']
+    # 设置session
+    request.session['myname']=uname
+    return redirect('/session1')    # 内容"/session1"与url中session1匹配
+
+def session3(request):
+    # 删除session
+    del request.session['myname']
+    return redirect('/session1')

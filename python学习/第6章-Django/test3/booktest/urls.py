@@ -33,4 +33,10 @@ urlpatterns = [
     re_path(r'^redTest1/$',views.redTest1),
     re_path(r'^redTest2/$',views.redTest2),
 
+    #session状态保持
+    re_path(r'^session1/$',views.session1),
+    re_path(r'^session2/$',views.session2),
+    re_path(r'^session2_handle/$',views.session2_handle),
+    re_path(r'^session3/$',views.session3),
+
 ]
