@@ -74,3 +74,21 @@ def postTest2(request):
     context={'uname':uname,'upwd':upwd,'ugender':ugender,'uhobby':uhobby}
     return render(request,'booktest/postTest2.html',context)
 
+
+
+#cookie练习
+def cookieTest(request):
+    response=HttpResponse()
+    #设置cookie
+    # response.set_cookie('t1','abc')
+
+    #下面操作前需要设置cookie
+    #接收cookie，得到字典键和键值
+    cookie=request.COOKIES
+    #判断't1'键和键值是否在cookie字典里
+    if ('t1' in cookie.keys()):
+        #写cookie
+        response.write(cookie['t1'])
+
+    return response
+

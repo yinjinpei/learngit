@@ -26,4 +26,6 @@ urlpatterns = [
     re_path(r'^postTest1/$',views.postTest1),
     re_path(r'^postTest2/$',views.postTest2),
 
+    re_path(r'^cookieTest/$',views.cookieTest),
+
 ]
