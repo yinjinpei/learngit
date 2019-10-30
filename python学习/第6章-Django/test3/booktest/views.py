@@ -3,6 +3,9 @@ from django.http import HttpResponse,HttpResponseRedirect
 
 # Create your views here.
 
+#render是HttpResponse简写
+#redirect是HttpResponseRedirect简写
+
 
 def index(request):
     return HttpResponse('hello index !!')
