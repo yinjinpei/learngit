@@ -123,6 +123,7 @@ def session2_handle(request):
     uname=request.POST['uname']
     # 设置session
     request.session['myname']=uname
+    request.session.set_expiry(0)   # 设置关闭浏览器后session立即过期
     return redirect('/session1')    # 内容"/session1"与url中session1匹配
 
 def session3(request):
