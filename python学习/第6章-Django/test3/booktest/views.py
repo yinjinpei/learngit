@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse,HttpResponseRedirect
 
 # Create your views here.
@@ -95,7 +95,10 @@ def cookieTest(request):
 
 #子类HttpResponseRedirect：重写向
 def redTest1(request):
-    return HttpResponseRedirect('/redTest2')
+    # return HttpResponseRedirect('/redTest2')
+
+    #HttpResponseRedirect简写方法:redirect
+    return redirect('/redTest2')
 
 def redTest2(request):
     context={'detail':'这是子类HttpResponseRedirect重定向！！！'}
