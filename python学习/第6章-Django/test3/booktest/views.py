@@ -100,9 +100,9 @@ def cookieTest(request):
 def redTest1(request):
     # return HttpResponseRedirect('/redTest2')
 
-    #HttpResponseRedirect简写方法:redirect
+    #HttpResponseRedirect简写:redirect
     return redirect('/redTest2')
 
 def redTest2(request):
-    context={'detail':'这是子类HttpResponseRedirect重定向！！！'}
+    context={'detail':'这是子类HttpResponseRedirect重定向！！！简写方法:redirect'}
     return render(request,'booktest/redTest2.html',context)
