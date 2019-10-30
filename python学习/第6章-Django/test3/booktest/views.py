@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 
 # Create your views here.
 
@@ -76,7 +76,7 @@ def postTest2(request):
 
 
 
-#cookie练习
+#cookie练习，设置与获取
 def cookieTest(request):
     response=HttpResponse()
     #设置cookie
@@ -92,3 +92,11 @@ def cookieTest(request):
 
     return response
 
+
+#子类HttpResponseRedirect：重写向
+def redTest1(request):
+    return HttpResponseRedirect('/redTest2')
+
+def redTest2(request):
+    context={'detail':'这是子类HttpResponseRedirect重定向！！！'}
+    return render(request,'booktest/redTest2.html',context)

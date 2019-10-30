@@ -26,6 +26,11 @@ urlpatterns = [
     re_path(r'^postTest1/$',views.postTest1),
     re_path(r'^postTest2/$',views.postTest2),
 
+    #cookie
     re_path(r'^cookieTest/$',views.cookieTest),
+
+    #子类HttpResponseRedirect重定向
+    re_path(r'^redTest1/$',views.redTest1),
+    re_path(r'^redTest2/$',views.redTest2),
 
 ]
