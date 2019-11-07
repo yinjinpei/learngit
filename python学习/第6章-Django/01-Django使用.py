@@ -139,7 +139,7 @@ class HeroInfo(models.Model):
     hgender = models.BooleanField(default=True)
     isDelete = models.BooleanField(default=False)
     hcontent = models.CharField(max_length=100)
-    hbook = models.ForeignKey('BookInfo')
+    hbook = models.ForeignKey('BookInfoBookInfo')
 定义index、detail视图
 index.html、detail.html模板
 配置url，能够完成图书及英雄
