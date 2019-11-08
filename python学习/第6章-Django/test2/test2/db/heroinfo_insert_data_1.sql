@@ -1,4 +1,4 @@
-insert into booktest_heroinfo(hanme,hgender,book_id,hcontent,isDelete) values
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values
 ('郭靖',1,1,'降龙十八掌',0),
 ('黄蓉',0,1,'打狗棍法',0),
 ('黄药师',1,1,'弹指神通',0),
