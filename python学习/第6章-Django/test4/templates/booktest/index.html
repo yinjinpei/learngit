@@ -16,12 +16,22 @@ test4
 <!--<br>-->
 <!--{{ hero2.showname }} &#45;&#45;&#45;&#45; 利用方法获取名字-->
 
-# 练习二，读取所有英雄的名字
+<!--# 练习二，读取所有英雄的名字-->
+<!--<ul>-->
+<!--{% for hero in list %}-->
+    <!--<li>{{ hero.hname }}</li>-->
+<!--{% endfor %}-->
+<!--</ul>-->
+
+# 练习三，获取被已删除的英雄
 <ul>
-{% for hero in list %}
-    <li>{{hero.hname}}</li>
+{% for hero in list2 %}
+    <li>{{ hero.hname }}</li>
+{% empty %}
+    啥都没有找到！！
 {% endfor %}
 </ul>
+
 
 </body>
 </html>
