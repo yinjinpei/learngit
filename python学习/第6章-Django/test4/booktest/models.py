@@ -18,3 +18,5 @@ class HeroInfo(models.Model):
     hcontent=models.CharField(max_length=1000)
     isDelete=models.BooleanField(default=False)
     book=models.ForeignKey('BookInfo',on_delete=models.CASCADE)
+    def showname(self):
+        return self.hname
