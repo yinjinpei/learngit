@@ -35,8 +35,17 @@ test4
 
 # 练习四，if语法
 <hr>
+<ul>
 {% for hero in list3 %}
-    {% if hero.showID == 1 %}1
+    {% if forloop.counter|divisibleby:"2" %}
+        <li style="color: red">
+    {% else %}
+        <li style="color: blue">
+    {% endif %}
+        ee
+    <!--# forloop.counter:显示循环的第几次-->
+    {{forloop.counter}}-->
+    {% if hero.showID == 1 %}
         英雄1：{{hero.hname}}
         <br>
     {% elif hero.showID == 2 %}
@@ -46,9 +55,9 @@ test4
         其它英雄:{{hero.hname}}
         <br>
     {% endif %}
+     </li>
 {% endfor %}
-
-
+</ul>
 
 </body>
 </html>
