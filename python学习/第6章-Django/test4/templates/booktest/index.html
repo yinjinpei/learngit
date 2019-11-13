@@ -23,14 +23,31 @@ test4
 <!--{% endfor %}-->
 <!--</ul>-->
 
-# 练习三，获取被已删除的英雄
-<ul>
-{% for hero in list2 %}
-    <li>{{ hero.hname }}</li>
-{% empty %}
-    啥都没有找到！！
+<!--# 练习三，获取被已删除的英雄-->
+<!--<ul>-->
+<!--{% for hero in list2 %}-->
+    <!--<li>{{ hero.hname }}</li>-->
+<!--{% empty %}-->
+    <!--啥都没有找到！！-->
+<!--{% endfor %}-->
+<!--</ul>-->
+
+
+# 练习四，if语法
+<hr>
+{% for hero in list3 %}
+    {% if hero.showID == 1 %}1
+        英雄1：{{hero.hname}}
+        <br>
+    {% elif hero.showID == 2 %}
+        英雄2：{{hero.hname}}
+        <br>
+    {% else %}
+        其它英雄:{{hero.hname}}
+        <br>
+    {% endif %}
 {% endfor %}
-</ul>
+
 
 
 </body>
