@@ -22,3 +22,8 @@ def index(request):
     list3=HeroInfo.objects.filter(id__lt=10) # 获取id小于10的值   id__gt是大于
     context={'list3':list3}
     return render(request, 'booktest/index.html',context)
+
+def show(request,id):
+    # 练习五，获取数字
+    context = {'id':id}
+    return render(request, 'booktest/show.html',context)
