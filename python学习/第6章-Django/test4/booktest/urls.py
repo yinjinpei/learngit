@@ -7,6 +7,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index,name='index'),
-    re_path(r'(\d+)$', views.show, name='show')
+    re_path(r'^(\d+\S+)', views.show, name='show')
 ]
 
