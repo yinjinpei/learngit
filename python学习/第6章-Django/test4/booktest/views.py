@@ -23,7 +23,8 @@ def index(request):
     context={'list3':list3}
     return render(request, 'booktest/index.html',context)
 
-def show(request,id):
+def show(request,id,id2):
     # 练习五，获取数字
-    context = {'id':id}
+    listid = [id,id2]
+    context = {'listid':listid}
     return render(request, 'booktest/show.html',context)
