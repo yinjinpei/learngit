@@ -25,6 +25,11 @@ def index(request):
 
 def show(request,id,id2):
     # 练习五，获取数字
+    # 练习六，获取数字--反向解析
     listid = [id,id2]
     context = {'listid':listid}
     return render(request, 'booktest/show.html',context)
+
+# 模板继承
+def index2(request):
+    return render(request, 'booktest/index2.html')
