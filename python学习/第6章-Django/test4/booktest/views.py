@@ -33,3 +33,7 @@ def show(request,id,id2):
 # 模板继承
 def index2(request):
     return render(request, 'booktest/index2.html')
+
+def base2_user(request,user):
+    context={'user':user}
+    return render(request,'booktest/base2_user.html',context)
