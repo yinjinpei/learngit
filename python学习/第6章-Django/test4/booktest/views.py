@@ -38,6 +38,6 @@ def base2_user(request,user):
     context={'user':user}
     return render(request,'booktest/base2_user.html',context)
 
-def user1(request,user):
-    context = {'user': user}
+def user1(request,user1):
+    context = {'user1': user1}
     return render(request,'booktest/user1.html',context)
