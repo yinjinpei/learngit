@@ -41,3 +41,8 @@ def base2_user(request,user):
 def user1(request,user1):
     context = {'user1': user1}
     return render(request,'booktest/user1.html',context)
+
+# html转义
+def htmltest(request):
+    context={'t1':'<h1>123</h1>'}
+    return render(request,'booktest/htmltest.html',context)

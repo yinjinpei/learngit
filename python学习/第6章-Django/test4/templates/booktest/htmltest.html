@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html转义</title>
+</head>
+<body>
+
+Django会将如下字符自动转义：
+< 会转换为&lt;
+
+> 会转换为&gt;
+
+' (单引号) 会转换为&#39;
+
+" (双引号)会转换为 &quot;
+
+& 会转换为 &amp;
+<hr>
+<hr>
+html转义
+<hr>
+默认是转义的了，所以传什么样的参数就显示样子的。如下： <br>
+{{t1}}
+<hr>
+<br>
+关闭转义，方法一：使用过滤器safe <br>
+{{t1|safe}}
+<hr>
+<br>
+
+关闭转义，方法二：使用autoescape标签
+{% autoescape off %}
+{{t1}}
+{% endautoescape %}
+<hr>
+<br>
+
+手动转义: <br>
+字面值：
+{{ t2|default:"<h1>123</h1>" }}
+<br>
+手动转义：<br>
+{{ t3|default:'&lt;h1&gt;abc&lt;/h1&gt;' }}
+<br>
+
+<br>
+{{ t3|default:'&amplt;h1&ampgt;abc&amplt;/h1&ampgt;' }}
+<br>
+</body>
+</html>
