@@ -1,6 +1,7 @@
 # coding:utf-8
 from django.shortcuts import render
 from django.db.models import Max,F,Q
+from django.http import HttpResponse
 from .models import *
 
 
@@ -46,3 +47,11 @@ def user1(request,user1):
 def htmltest(request):
     context={'t1':'<h1>123</h1>'}
     return render(request,'booktest/htmltest.html',context)
+
+# csrf--跨站攻击
+def csrf1(request):
+    return render(request,'booktest/csrf1.html')
+
+def csrf2(request):
+    uname=request.POST['uname']
+    return HttpResponse(uname)
