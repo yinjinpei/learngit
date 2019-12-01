@@ -57,9 +57,9 @@ def csrf2(request):
     return HttpResponse(uname)
 
 
-# 验证码
+# 验证码-verifyCode方法
 def verifyCode(request):
-    # 引入绘图模块
+    # 引入绘图模块，需要安装Pillow ：pip install Pillow
     from PIL import Image, ImageDraw, ImageFont
     # 引入随机函数模块
     import random
@@ -108,3 +108,25 @@ def verifyTest2(request):
         return HttpResponse('ERROR，验证码错误！')
 
 
+# 验证码验证-gvcode方法
+#此函数用来进行点击验证码时刷新验证码
+def gvcode(request):
+    # 导入生成验证码库：gvcode，需要安装：pip install graphic-verification-code
+    import gvcode
+    # 生成验证码图片和正确的验证码
+    img, right_code = gvcode.base64()
+    request.session['right_code']=right_code
+    context={'img':img}
+    return render(request,'booktest/gvcode1.html',context)
+
+def gvcode2(request):
+    # 获取用户提交的验证码
+    user_code=request.POST['gvcodeText']
+    # 获取gvcode系统随机生成的验证码
+    right_code=request.session['right_code']
+    # 判断用户和系统生成的验证码是否一致
+    if user_code == right_code:
+    # if user_code.upper() == right_code.upper(): # 不分大小写，全部转换成大写再比较
+        return HttpResponse('OK，验证成功！')
+    else:
+        return HttpResponse('ERROR，验证码错误！')
