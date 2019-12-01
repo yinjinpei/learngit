@@ -98,6 +98,7 @@ def verifyCode(request):
     # 将内存流中的内容输出到客户端中
     return HttpResponse(buf.getvalue(),'image/png')
 
+# 验证码验证-verifyCode方法
 def verifyTest1(request):
     return render(request,'booktest/verifyTest1.html')
 def verifyTest2(request):
@@ -105,4 +106,5 @@ def verifyTest2(request):
         return HttpResponse('OK,验证成功！')
     else:
         return HttpResponse('ERROR，验证码错误！')
+
 
