@@ -63,6 +63,8 @@ def verifyCode(request):
     from PIL import Image, ImageDraw, ImageFont
     # 引入随机函数模块
     import random
+    # 引入数字和大小写字母
+    import string
 
     # 创建背景颜色,用于画面的背景色、宽、高
     bgColor=(random.randrange(50,100),random.randrange(50,100),random.randrange(50,100))
@@ -79,7 +81,9 @@ def verifyCode(request):
     # 创建画笔
     draw=ImageDraw.Draw(image)
     # 创建文本内容
-    text='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    text=string.digits+string.ascii_letters
+    # 即 text='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
     # 记录一个每次随机生成的验证码
     textTemp=''
     # 逐个绘制字符
@@ -109,7 +113,6 @@ def verifyTest2(request):
 
 
 # 验证码验证-gvcode方法
-#此函数用来进行点击验证码时刷新验证码
 def gvcode(request):
     # 导入生成验证码库：gvcode，需要安装：pip install graphic-verification-code
     import gvcode
@@ -130,5 +133,55 @@ def gvcode2(request):
     if user_code == right_code:
     # if user_code.upper() == right_code.upper(): # 不分大小写，全部转换成大写再比较
         return HttpResponse('OK，验证成功！'+'用户名：'+uname+' '+'密码：'+password)
+    else:
+        return HttpResponse('ERROR，验证码错误！')
+
+# 验证码验证-captcha方法
+def captchaCode(request):
+    # 导入生成验证码库：captcha，需要安装：pip install captcha
+    from captcha.image import ImageCaptcha
+    import random
+    # 引入数字和大小写字母
+    import string
+    text=string.digits+string.ascii_letters
+
+    # 设置验证码图片：宽、高、大小、范围
+    width, height, n_len, n_class = 170, 80, 4, len(text)
+    # 创建图片生成对象
+    generator = ImageCaptcha(width=width, height=height)
+    # 随机选取 4 个字符
+    tempCode = ''.join([random.choice(text) for j in range(4)])
+    request.session['right_code']=tempCode
+    # img = generator.create_captcha_image(random_str, (127, 0, 255), (74, 191, 239))  # 创建图片 , 将字符串转换为图片
+    # 创建图片 , 将字符串转换为图片
+    img = generator.create_captcha_image(tempCode,
+            (random.randrange(0,255), random.randrange(0,255), random.randrange(0,255)),
+            (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)))
+    context={'img':img}
+    # 显示图片
+    # img.show()
+
+    # 将图片保存到内存流中
+    from io import BytesIO
+    buf = BytesIO()
+    img.save(buf, 'png')
+    # 将内存流中的内容输出到客户端中
+    return HttpResponse(buf.getvalue(), 'image/png')
+
+# 验证码验证-captcha方法
+def captchaCode1(request):
+    return render(request, 'booktest/captchaCode1.html')
+def captchaCode2(request):
+    uname = request.POST['uname']
+    password = request.POST['password']
+    # 获取用户提交的验证码
+    user_code = request.POST['gvcodeText']
+    # 获取gvcode系统随机生成的验证码
+    right_code = request.session['right_code']
+    print(right_code)
+    # 判断用户和系统生成的验证码是否一致
+    if user_code == right_code:
+        # if user_code.upper() == right_code.upper(): # 不分大小写，全部转换成大写再比较
+        return HttpResponse('OK，验证成功！' + '用户名：' + uname + ' ' + '密码：' + password)
     else:
         return HttpResponse('ERROR，验证码错误！')
