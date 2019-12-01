@@ -120,6 +120,8 @@ def gvcode(request):
     return render(request,'booktest/gvcode1.html',context)
 
 def gvcode2(request):
+    uname=request.POST['uname']
+    password=request.POST['password']
     # 获取用户提交的验证码
     user_code=request.POST['gvcodeText']
     # 获取gvcode系统随机生成的验证码
@@ -127,6 +129,6 @@ def gvcode2(request):
     # 判断用户和系统生成的验证码是否一致
     if user_code == right_code:
     # if user_code.upper() == right_code.upper(): # 不分大小写，全部转换成大写再比较
-        return HttpResponse('OK，验证成功！')
+        return HttpResponse('OK，验证成功！'+'用户名：'+uname+' '+'密码：'+password)
     else:
         return HttpResponse('ERROR，验证码错误！')
