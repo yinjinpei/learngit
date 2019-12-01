@@ -6,6 +6,9 @@ from django.urls import path,re_path
 from . import views
 
 urlpatterns = [
+    re_path('^verifyTest2$', views.verifyTest2),
+    re_path('^verifyTest1$', views.verifyTest1),
+    re_path('^verifyCode$',views.verifyCode),
     re_path('^csrf1$',views.csrf1),
     re_path('^csrf2$',views.csrf2),
     re_path('^htmltest$',views.htmltest,name='htmltest'),

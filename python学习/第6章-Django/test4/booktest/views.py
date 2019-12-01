@@ -55,3 +55,54 @@ def csrf1(request):
 def csrf2(request):
     uname=request.POST['uname']
     return HttpResponse(uname)
+
+
+# 验证码
+def verifyCode(request):
+    # 引入绘图模块
+    from PIL import Image, ImageDraw, ImageFont
+    # 引入随机函数模块
+    import random
+
+    # 创建背景颜色,用于画面的背景色、宽、高
+    bgColor=(random.randrange(50,100),random.randrange(50,100),random.randrange(50,100))
+    #规定宽和高
+    width=100
+    height=50
+    # 创建画面对象
+    image=Image.new('RGB',(width,height),bgColor)
+    # 构造字体对象
+    font=ImageFont.truetype(r'C:\Windows\Fonts\Arial.ttf',30)
+    # font = ImageFont.truetype(r'C:\Windows\Fonts\STCAIYUN.TTF', 30)
+    # 构造字体颜色
+    fontcolor = (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255))
+    # 创建画笔
+    draw=ImageDraw.Draw(image)
+    # 创建文本内容
+    text='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    # 记录一个每次随机生成的验证码
+    textTemp=''
+    # 逐个绘制字符
+    for i in  range(4):
+        textTemp1=text[random.randrange(0,len(text))]
+        textTemp+=textTemp1
+        draw.text((i*25,0),
+            textTemp1,
+            fontcolor,
+            font)
+    request.session['code']=textTemp
+    # 保存到内存流中
+    from io import BytesIO
+    buf=BytesIO()
+    image.save(buf,'png')
+    # 将内存流中的内容输出到客户端中
+    return HttpResponse(buf.getvalue(),'image/png')
+
+def verifyTest1(request):
+    return render(request,'booktest/verifyTest1.html')
+def verifyTest2(request):
+    if request.session['code'] == request.POST['code1']:
+        return HttpResponse('OK,验证成功！')
+    else:
+        return HttpResponse('ERROR，验证码错误！')
+

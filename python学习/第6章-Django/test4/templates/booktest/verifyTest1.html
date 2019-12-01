@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PIL验证码</title>
+    
+</head>
+<body>
+
+<form action="verifyTest2" method="post">
+    {% csrf_token %}
+    输入验证码：
+    <input type="text" name="code1">
+    <a href="" target="_self"><img src="verifyCode">刷新验证码</a>
+    <input type="submit" value="提交">
+
+</form>
+</body>
+</html>
