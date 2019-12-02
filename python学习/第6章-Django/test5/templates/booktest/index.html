@@ -1,11 +1,28 @@
 <!DOCTYPE html>
+
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
 </head>
 <body>
+
+方法一，绝对路径：下面的static名字和test5/settings.py中的 STATIC_URL 的值要一致 <br>
 <img src="/static/booktest/qq.png" width="300" height="300" >
+<hr>
+<br>
+
+不一致显示如下：找不到图片 <br>
+<img src="/abc/booktest/qq.png" width="300" height="300" >
+<hr>
+<br>
+
+方法二：动态生成静态资源路径：需要在文件加：｛% load static from staticfiles %｝ <br>
+
+{% load static from staticfiles %}
+<img src="{% static 'booktest/qq.png' %}" width="300" height="300" >
 
 </body>
 </html>
