@@ -2,10 +2,10 @@
 #批量添加用户
 
 
-
 showContent(){
 	local content=$1
 	local colorFlag=$2
+
 	if [ 'black' == $colorFlag ]; then
 		color=30
 	elif [ 'red' == $colorFlag ]; then
@@ -23,7 +23,7 @@ showContent(){
 	elif [ 'white' == $colorFlag ]; then
 		color=37
 	else
-		color='36'
+		color=36
 	fi
 	
 	echo -e "\033[${color}m${content}\033[0m" 
@@ -41,19 +41,21 @@ showHead(){
 	showContent '******************************************' 'cyanblue'
 }
 
-checkUser(){
+checkUserID(){
 	id $userName &>/dev/null
 	if [ '0' == $? ]; then
-		showContent '用户已存在！' 'red'
+		showContent "$2" 'red'
 		return 1
 	fi
+}
 
+checkUserStr(){
 	if echo "$userName" | grep -q '^[a-zA-Z0-9]\+$'; then
-	        showContent '输入用户名正确！' 'green' &>/dev/null
-	else
-		showContent '输入用户名错误！用户名只仅限于字母和数字组合，请正确输入！' 'red' 
-		return 2
-	fi
+                showContent '输入用户名正确！' 'green' &>/dev/null
+        else
+                showContent '输入用户名错误！用户名只仅限于字母和数字组合，请正确输入！' 'red'
+                return 1
+        fi
 
 }
 
@@ -69,12 +71,21 @@ addToUser(){
 }
 
 modifyPasswd(){
-	read -e -p "请设置${userName}用户的密码: " userPasswd
+	while true
+	do
+		read -e -p "请设置${userName}用户的密码: " userPasswd
+		if [ -z $userPasswd ];then
+			showContent "密码不能为空！！" 'red'			
+			continue
+		else
+			break
+		fi
+	done
 	echo "$userPasswd" | /usr/bin/passwd $userName --stdin &>/dev/null	
 	if [ '0' == $? ]; then
 		showContent "$userName 更新密码成功！" 'green'
 	else
-		showContent "$userName 更新密码失败！" 'red'
+		showContent "$userName 更新密码失败,密码格式不对！" 'red'
 	fi
 }
 
@@ -89,14 +100,21 @@ deleteUser(){
 
 }
 
-
 inputNewUserName(){
 	while true
         do
 		read -n 30 -e -p "${content} ： "  userName
+		if [ -z $userName ];then
+			showContent '用户名不能为空！' 'red'
+			continue
+		fi
 		exitProgram $userName
-		checkUser $userName
-		if [ "1" == $? -o "2" == $? ];then
+		checkUserID $userName "用户已存在！"
+		codeID=$?
+		checkUserStr $userName
+		codeStr=$?
+
+		if [ "1" == $codeID -o "1" == $codeStr ];then
 			continue	
 		else
 			break
@@ -112,8 +130,8 @@ exitProgram(){
 }
 
 main(){
-	userName=
-	userPasswd=
+	userName=""
+	userPasswd=""
 	showHead
 
 	while true
@@ -121,7 +139,7 @@ main(){
 		if [[ $funcNO =~ ^[1-3]$ ]];then
 			break
 		else
-			read -n 1 -e -p "请正确输入对应环境的编号  [ 1 - 3 ] ： "  funcNO
+			read -n 1 -e -p "请正确输入对应功能的编号  [ 1 - 3 ] ： "  funcNO
 			continue
 		fi
 	done
@@ -137,21 +155,36 @@ main(){
 		# 2,修改用户密码
 		elif [ 2 == $funcNO ];then
 			read -e -p "请输入需要更改密码的用户名: " userName
+			if [ -z $userName ];then
+                                showContent '用户名不能为空！' 'red'
+                                continue
+                        fi
 			exitProgram $userName
-			modifyPasswd $userName $userPasswd
+			checkUserID $userName "`id $userName`"
+			if [ '1' == $? ]; then
+				modifyPasswd $userName
+                        else
+                                showContent "${userName}用户不存在！" 'red'
+                                continue
+                        fi
+
 		# 3,删除用户
 		elif [ 3 == $funcNO ];then
 			read -e -p "请输入需要删除的用户名: " userName
-			exitProgram $userName
-			id $userName &>/dev/null
-			if [ '0' == $? ]; then
+			if [ -z $userName ];then
+                        	showContent '用户名不能为空！' 'red'
+                        	continue
+	                fi
+			exitProgram $userName 
+			checkUserID $userName "`id $userName`"
+			if [ '1' == $? ]; then
 				read -e -p "确定删除${userName}用户? 请输入 y or Y  ,任意键将取消: " verifyCode
-				if [ "y" == $verifyCode -o "y" == $verifyCode ];then
+				if [[ "y" == $verifyCode ]] || [[ "Y" == $verifyCode ]];then
 					deleteUser $userName
 				fi
 			else
 				showContent "${userName}用户不存在！" 'red'
-				exit
+				continue
 			fi
 		else
 			echo $funcNO
@@ -161,3 +194,4 @@ main(){
 
 
 main
+
