@@ -4,7 +4,7 @@
 '''
 虚拟环境命令：
     安装virtualenv虚拟环境方法一：：pip install virtualenv
-    安装virtualenv虚拟环境方法二：pip install virltualenvwrapper-win
+    安装virtualenv虚拟环境方法二：pip install virtualenvwrapper-win
     查看已创建的虚拟环境：workon
     创建：mkvirtualenv [虚拟环境名称]
     删除：rmvirtualenv [虚拟环境名称]
