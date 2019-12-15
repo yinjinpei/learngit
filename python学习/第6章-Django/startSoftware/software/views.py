@@ -1,14 +1,10 @@
-from django.shortcuts import render
-
-# Create your views here.
-
 # coding:utf-8
+import os
 from django.shortcuts import render
 from django.db.models import Max,F,Q
 from django.http import HttpResponse
-from .models import *
 from win32 import win32api
-import os
+from .models import *
 
 class app(object):
     def __init__(self,appDir,):
@@ -17,7 +13,7 @@ class app(object):
         os.startfile(self.appDir)  # os.startfile（）打开外部应该程序，与windows双击相同
 
 def index(request):
-    list='<ul>    <li>1</li>    <li>2</li>    <li>3</li></ul>'
+    list='abc'
     context={'list3':list}
     return render(request, 'software/index.html',context)
 
@@ -34,10 +30,23 @@ def WeChat(request):
     return render(request, 'software/index.html', context)
 
 def navicat(request):
-    appDir=r'E:\应用程序\Navicat Premium 12\navicat.exe1'
+    appDir=r'E:\应用程序\Navicat Premium 12\navicat.exe'
     try:
         os.startfile(appDir)  # os.startfile（）打开外部应该程序，与windows双击相同
     except FileNotFoundError:
         return HttpResponse('找不到应用！！')
     context = {'list3': 'abc'}
+    return render(request, 'software/index.html', context)
+
+def navicat2(request):
+    list = AppInfo.apps.all()
+    for app in list:
+        print(app.appName)
+
+    appDir=r'E:\应用程序\Navicat Premium 12\navicat.exe'
+    try:
+        os.startfile(appDir)  # os.startfile（）打开外部应该程序，与windows双击相同
+    except FileNotFoundError:
+        return HttpResponse('找不到应用！！')
+    context = {'list': list}
     return render(request, 'software/index.html', context)
