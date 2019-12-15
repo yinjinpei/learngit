@@ -3,8 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            //动态添加li 同时动态添加数据
+            var str="";
+            for(var i=0;i<3;i++){
+            str+="<li class='list'><p>"+i+"</p><div class='text'><span class='in'>"+i+"</span><span class='out''>"+i+"</span></div></li>";
+            document.getElementById("abc").innerHTML = str;
+            }
+
+            //计算进入总人数  同时动态添加内容
+            var inTotal=0;
+            for(var k=0;k<3;k++){
+                inTotal+=k;
+            }
+            document.getElementById("a").innerText=inTotal;
+    }
+    </script>
 </head>
 <body>
+<li class="list" id="abc"></li>
+<ul class="list1" id="a"></ul>
+
 
 </body>
 </html>
