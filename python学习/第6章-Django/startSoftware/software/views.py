@@ -14,7 +14,7 @@ def getAppDir(appName):
         if appName == app.appName:
             print('应用名：' + app.appName + '  路径：' + app.appDir)
             return app.appDir
-    return ("%s not found the path") % appName
+    return ("not found the path for \"%s\"") % appName
 
 
 # 打开应用程序
@@ -52,10 +52,11 @@ def openAppHelper(request):
     if request.method=='GET':
         appName = request.GET.get('name')
         appDir = getAppDir(appName)
+        print(appDir)
         flag = openApp(appDir)
         if flag:
             return index(request)
         else:
-            return HttpResponse(("%s not found the path") % appName)
+            return HttpResponse(("not found the path for \"%s\"") % appName)
     else:
         return HttpResponse("请求失败！！")
