@@ -52,7 +52,6 @@ def openAppHelper(request):
     if request.method=='GET':
         appName = request.GET.get('name')
         appDir = getAppDir(appName)
-        print(appDir)
         flag = openApp(appDir)
         if flag:
             return index(request)
