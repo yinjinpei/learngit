@@ -15,22 +15,13 @@
     </script>
 </head>
 <body>
-{{list3}}
 <hr>
-<!--<a href="{% url 'software:WeChat' %}">微信</a>-->
-<!--<br>-->
-<!--<a href="{% url 'software:navicat' %}">navicat</a>-->
-<br>
-<!--<a href="{% url 'software:navicat2' %}">navicat2</a>-->
-<hr>
-
 <ul>
-    {% for app in list %}
-    <li id="li1"><a href={{app.appName}}>{{app.remark}}</a></li>
+    {% for app in appsList %}
+    <li id="li1"><a href={{app.appName}}?name={{app.appName}}>{{app.remark}}</a></li>
     {% endfor %}
 </ul>
-<hr>
-11
+
 <hr>
 </body>
 </html>
