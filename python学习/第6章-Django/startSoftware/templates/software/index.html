@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript">
+        window.onload = function(){
+
+            // 获取元素方法一：以id方式获取
+            var oDiv = document.getElementById('li1');
+        }
+
+
+    </script>
+</head>
+<body>
+{{list3}}
+<hr>
+<!--<a href="{% url 'software:WeChat' %}">微信</a>-->
+<!--<br>-->
+<!--<a href="{% url 'software:navicat' %}">navicat</a>-->
+<br>
+<!--<a href="{% url 'software:navicat2' %}">navicat2</a>-->
+<hr>
+
+<ul>
+    {% for app in list %}
+    <li id="li1"><a href={{app.appName}}>{{app.remark}}</a></li>
+    {% endfor %}
+</ul>
+<hr>
+11
+<hr>
+</body>
+</html>
