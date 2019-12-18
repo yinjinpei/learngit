@@ -1,0 +1,899 @@
+2019-12-18 20:06:37,176 - Watching for file changes with StatReloader
+2019-12-18 20:08:53,544 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-18 20:08:54,908 - Watching for file changes with StatReloader
+2019-12-18 20:09:02,955 - Watching for file changes with StatReloader
+2019-12-18 20:09:35,826 - Watching for file changes with StatReloader
+2019-12-18 20:09:42,125 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:09:42,126 - 打开应用程序：not found the path for "None"
+2019-12-18 20:09:42,176 - ERROR：None应用程序找不到！！！
+2019-12-18 20:10:21,415 - 打开应用程序：C:\Program Files (x86)\Tencent\WeChat\WeChat.exe
+2019-12-18 20:10:26,085 - 打开应用程序：E:\应用程序\Navicat Premium 12\navicat.exe
+2019-12-18 20:12:25,965 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:12:25,965 - 打开应用程序：not found the path for "None"
+2019-12-18 20:12:25,980 - ERROR：None应用程序找不到！！！
+2019-12-18 20:13:45,591 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:13:46,862 - Watching for file changes with StatReloader
+2019-12-18 20:14:20,970 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:14:20,970 - 打开应用程序：not found the path for "None"
+2019-12-18 20:14:21,088 - ERROR：None应用程序找不到！！！
+2019-12-18 20:14:33,532 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:14:33,532 - 打开应用程序：not found the path for "None"
+2019-12-18 20:14:33,546 - ERROR：None应用程序找不到！！！
+2019-12-18 20:18:33,000 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:18:34,347 - Watching for file changes with StatReloader
+2019-12-18 20:19:46,702 - 打开应用程序：D:\Program Files (x86)\Youdao\YoudaoNote\YoudaoNote.exe
+2019-12-18 20:22:38,241 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:22:39,482 - Watching for file changes with StatReloader
+2019-12-18 20:22:45,969 - Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 42, in index
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %clientIP, webName)
+TypeError: not enough arguments for format string
+2019-12-18 20:22:46,191 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:22:46,191 - 打开应用程序：not found the path for "None"
+2019-12-18 20:22:46,293 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 74, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, clientIP)
+TypeError: not enough arguments for format string
+2019-12-18 20:23:09,642 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:23:11,164 - Watching for file changes with StatReloader
+2019-12-18 20:23:12,858 - Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 43, in index
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %clientIP, webName)
+TypeError: not enough arguments for format string
+2019-12-18 20:24:11,105 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:24:12,541 - Watching for file changes with StatReloader
+2019-12-18 20:24:14,413 - Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 43, in index
+    logging.info(("INFO：来自：%d, 访问%s.html页面！！！") %clientIP, webName)
+TypeError: %d format: a number is required, not str
+2019-12-18 20:24:14,516 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:24:14,516 - 打开应用程序：not found the path for "None"
+2019-12-18 20:24:14,603 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 75, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, clientIP)
+TypeError: not enough arguments for format string
+2019-12-18 20:24:51,256 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:24:52,706 - Watching for file changes with StatReloader
+2019-12-18 20:25:04,579 - Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 43, in index
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %clientIP, webName)
+TypeError: not enough arguments for format string
+2019-12-18 20:25:04,678 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:25:04,678 - 打开应用程序：not found the path for "None"
+2019-12-18 20:25:04,762 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 75, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, clientIP)
+TypeError: not enough arguments for format string
+2019-12-18 20:25:33,166 - Watching for file changes with StatReloader
+2019-12-18 20:25:36,038 - Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 43, in index
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %clientIP, webName)
+TypeError: not enough arguments for format string
+2019-12-18 20:25:36,369 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:25:36,369 - 打开应用程序：not found the path for "None"
+2019-12-18 20:25:36,474 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 75, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, clientIP)
+TypeError: not enough arguments for format string
+2019-12-18 20:26:28,729 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:26:30,162 - Watching for file changes with StatReloader
+2019-12-18 20:26:30,829 - Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 43, in index
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %str(clientIP), str(webName))
+TypeError: not enough arguments for format string
+2019-12-18 20:27:03,213 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:27:04,816 - Watching for file changes with StatReloader
+2019-12-18 20:27:05,491 - INFO：来自：192.168.0.7, 访问.html页面！！！
+2019-12-18 20:27:05,593 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:27:05,593 - 打开应用程序：not found the path for "None"
+2019-12-18 20:27:05,694 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 75, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, clientIP)
+TypeError: not enough arguments for format string
+2019-12-18 20:27:23,765 - 打开应用程序：E:\应用程序\Navicat Premium 12\navicat.exe
+2019-12-18 20:27:23,846 - INFO：来自：192.168.0.7, 访问.html页面！！！
+2019-12-18 20:27:23,984 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:27:23,984 - 打开应用程序：not found the path for "None"
+2019-12-18 20:27:24,052 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 75, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, clientIP)
+TypeError: not enough arguments for format string
+2019-12-18 20:28:06,652 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:28:08,079 - Watching for file changes with StatReloader
+2019-12-18 20:28:10,082 - 打开应用程序：E:\应用程序\Navicat Premium 12\navicat.exe
+2019-12-18 20:28:10,165 - INFO：来自：192.168.0.7, 访问.html页面！！！
+2019-12-18 20:28:57,691 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:28:59,080 - Watching for file changes with StatReloader
+2019-12-18 20:29:21,688 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:29:23,234 - Watching for file changes with StatReloader
+2019-12-18 20:29:25,797 - 打开应用程序：E:\应用程序\Navicat Premium 12\navicat.exe
+2019-12-18 20:29:25,966 - Internal Server Error: /navicat
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 73, in openAppHelper
+    return index(request)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 43, in index
+    logging.info(("INFO：来自：%s, 访问%s\.html页面！！！") %str(clientIP),webName)
+TypeError: not enough arguments for format string
+2019-12-18 20:29:29,990 - 打开应用程序：E:\应用程序\Navicat Premium 12\navicat.exe
+2019-12-18 20:29:30,088 - Internal Server Error: /navicat
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 73, in openAppHelper
+    return index(request)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 43, in index
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %str(clientIP),webName)
+TypeError: not enough arguments for format string
+2019-12-18 20:29:30,181 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:29:31,698 - Watching for file changes with StatReloader
+2019-12-18 20:29:36,032 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:29:36,032 - 打开应用程序：not found the path for "None"
+2019-12-18 20:29:36,126 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 75, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, str(clientIP))
+TypeError: not enough arguments for format string
+2019-12-18 20:29:36,331 - Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 43, in index
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %str(clientIP),webName)
+TypeError: not enough arguments for format string
+2019-12-18 20:29:36,429 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:29:36,429 - 打开应用程序：not found the path for "None"
+2019-12-18 20:29:36,497 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 75, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, str(clientIP))
+TypeError: not enough arguments for format string
+2019-12-18 20:29:40,976 - Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 43, in index
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %str(clientIP),webName)
+TypeError: not enough arguments for format string
+2019-12-18 20:29:41,082 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:29:41,082 - 打开应用程序：not found the path for "None"
+2019-12-18 20:29:41,141 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 75, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, str(clientIP))
+TypeError: not enough arguments for format string
+2019-12-18 20:30:11,618 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:30:13,303 - Watching for file changes with StatReloader
+2019-12-18 20:30:20,325 - Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 45, in index
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %str(clientIP),webName)
+TypeError: not enough arguments for format string
+2019-12-18 20:30:20,417 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:30:20,418 - 打开应用程序：not found the path for "None"
+2019-12-18 20:30:20,504 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 77, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") % appName, str(clientIP))
+TypeError: not enough arguments for format string
+2019-12-18 20:31:40,832 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:31:42,046 - Watching for file changes with StatReloader
+2019-12-18 20:31:45,698 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:31:46,005 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:31:46,005 - 打开应用程序：not found the path for "None"
+2019-12-18 20:31:46,110 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 77, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") %(clientIP,webName))
+NameError: name 'webName' is not defined
+2019-12-18 20:31:49,700 - 打开应用程序：C:\Program Files (x86)\Tencent\WeChat\WeChat.exe
+2019-12-18 20:31:49,750 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:31:49,859 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:31:49,860 - 打开应用程序：not found the path for "None"
+2019-12-18 20:31:49,943 - Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\exception.py", line 34, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 115, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\Administrator\h4\lib\site-packages\django\core\handlers\base.py", line 113, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py", line 77, in openAppHelper
+    logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") %(clientIP,webName))
+NameError: name 'webName' is not defined
+2019-12-18 20:32:18,544 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:32:19,967 - Watching for file changes with StatReloader
+2019-12-18 20:32:29,067 - 打开应用程序：C:\Program Files (x86)\Tencent\WeChat\WeChat.exe
+2019-12-18 20:32:29,139 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:32:32,496 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:32:32,601 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:32:32,602 - 打开应用程序：not found the path for "None"
+2019-12-18 20:32:32,626 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+
+2019-12-18 20:32:53,081 - INFO：来自：192.168.0.6, 访问index.html页面！！！
+2019-12-18 20:33:06,388 - 打开应用程序：C:\Program Files (x86)\Tencent\WeChat\WeChat.exe
+2019-12-18 20:33:06,407 - INFO：来自：192.168.0.6, 访问index.html页面！！！
+2019-12-18 20:33:27,606 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\views.py changed, reloading.
+2019-12-18 20:33:29,020 - Watching for file changes with StatReloader
+2019-12-18 20:33:55,361 - INFO：来自：192.168.0.6, 访问index.html页面！！！
+2019-12-18 20:37:02,844 - INFO：来自：192.168.0.6, 访问index.html页面！！！
+2019-12-18 20:38:39,496 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:39:37,179 - INFO：来自：192.168.0.9, 访问index.html页面！！！
+2019-12-18 20:39:37,776 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:39:37,776 - 打开应用程序：not found the path for "None"
+2019-12-18 20:39:37,822 - ERROR：来自：192.168.0.9, None应用程序找不到！！！
+2019-12-18 20:39:38,037 - INFO：来自：192.168.0.9, 访问index.html页面！！！
+2019-12-18 20:39:38,321 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:39:38,321 - 打开应用程序：not found the path for "None"
+2019-12-18 20:39:38,336 - ERROR：来自：192.168.0.9, None应用程序找不到！！！
+2019-12-18 20:39:49,582 - 打开应用程序：C:\Program Files (x86)\Tencent\WeChat\WeChat.exe
+2019-12-18 20:39:49,653 - INFO：来自：192.168.0.9, 访问index.html页面！！！
+2019-12-18 20:39:49,739 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:39:49,740 - 打开应用程序：not found the path for "None"
+2019-12-18 20:39:49,752 - ERROR：来自：192.168.0.9, None应用程序找不到！！！
+
+
+2019-12-18 20:40:50,993 - 打开应用程序：E:\应用程序\Navicat Premium 12\navicat.exe
+2019-12-18 20:40:51,053 - INFO：来自：192.168.0.9, 访问index.html页面！！！
+2019-12-18 20:40:51,155 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:40:51,155 - 打开应用程序：not found the path for "None"
+2019-12-18 20:40:51,166 - ERROR：来自：192.168.0.9, None应用程序找不到！！！
+2019-12-18 20:41:01,561 - INFO：来自：192.168.0.9, 访问index.html页面！！！
+2019-12-18 20:41:01,711 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:41:01,711 - 打开应用程序：not found the path for "None"
+2019-12-18 20:41:01,723 - ERROR：来自：192.168.0.9, None应用程序找不到！！！
+
+
+
+2019-12-18 20:42:38,653 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:42:38,653 - 打开应用程序：not found the path for "None"
+2019-12-18 20:42:38,667 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:42:39,872 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:42:39,872 - 打开应用程序：not found the path for "None"
+2019-12-18 20:42:39,884 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+
+2019-12-18 20:42:48,505 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:42:48,505 - 打开应用程序：not found the path for "None"
+2019-12-18 20:42:48,519 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:42:53,541 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:42:53,541 - 打开应用程序：not found the path for "None"
+2019-12-18 20:42:53,556 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:43:18,881 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:43:18,881 - 打开应用程序：not found the path for "None"
+2019-12-18 20:43:18,892 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:44:20,952 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:44:21,120 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:44:21,120 - 打开应用程序：not found the path for "None"
+2019-12-18 20:44:21,146 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:44:25,385 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:44:25,385 - 打开应用程序：not found the path for "None"
+2019-12-18 20:44:25,398 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:45:45,033 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:45:46,487 - Watching for file changes with StatReloader
+2019-12-18 20:49:45,342 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:49:46,735 - Watching for file changes with StatReloader
+2019-12-18 20:49:50,177 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:49:50,177 - 打开应用程序：not found the path for "None"
+2019-12-18 20:49:50,213 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:49:55,215 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:49:55,216 - 打开应用程序：not found the path for "None"
+2019-12-18 20:49:55,233 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:55:31,190 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:55:32,603 - Watching for file changes with StatReloader
+2019-12-18 20:55:36,306 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:55:36,590 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:55:36,590 - 打开应用程序：not found the path for "None"
+2019-12-18 20:55:36,638 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:55:38,346 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:55:38,347 - 打开应用程序：not found the path for "None"
+2019-12-18 20:55:38,359 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:55:39,767 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:55:39,767 - 打开应用程序：not found the path for "None"
+2019-12-18 20:55:39,781 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:56:03,884 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:56:05,373 - Watching for file changes with StatReloader
+2019-12-18 20:56:09,012 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:56:10,428 - Watching for file changes with StatReloader
+2019-12-18 20:56:17,282 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:56:18,704 - Watching for file changes with StatReloader
+2019-12-18 20:56:24,158 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:56:44,055 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:56:44,055 - 打开应用程序：not found the path for "None"
+2019-12-18 20:56:44,214 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:56:45,976 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:56:46,174 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:56:46,174 - 打开应用程序：not found the path for "None"
+2019-12-18 20:56:46,189 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:56:49,699 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:56:49,699 - 打开应用程序：not found the path for "None"
+2019-12-18 20:56:49,714 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:56:54,143 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:56:54,144 - 打开应用程序：not found the path for "None"
+2019-12-18 20:56:54,157 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:57:06,757 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:57:08,216 - Watching for file changes with StatReloader
+2019-12-18 20:57:10,752 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:57:10,752 - 打开应用程序：not found the path for "None"
+2019-12-18 20:57:10,789 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:57:16,362 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:57:16,363 - 打开应用程序：not found the path for "None"
+2019-12-18 20:57:16,390 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:57:17,924 - Watching for file changes with StatReloader
+2019-12-18 20:57:18,513 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:57:18,513 - 打开应用程序：not found the path for "None"
+2019-12-18 20:57:18,547 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:57:25,941 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:57:27,445 - Watching for file changes with StatReloader
+2019-12-18 20:57:27,863 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:57:27,863 - 打开应用程序：not found the path for "None"
+2019-12-18 20:57:27,898 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:57:30,940 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:57:32,429 - Watching for file changes with StatReloader
+2019-12-18 20:57:34,346 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-18 20:57:34,586 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:57:34,587 - 打开应用程序：not found the path for "None"
+2019-12-18 20:57:34,629 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:57:37,541 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:57:37,541 - 打开应用程序：not found the path for "None"
+2019-12-18 20:57:37,556 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:57:42,280 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:57:43,707 - Watching for file changes with StatReloader
+2019-12-18 20:57:44,174 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:57:44,174 - 打开应用程序：not found the path for "None"
+2019-12-18 20:57:44,208 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:57:51,678 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:57:53,137 - Watching for file changes with StatReloader
+2019-12-18 20:58:57,522 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-18 20:58:58,903 - Watching for file changes with StatReloader
+2019-12-18 20:59:08,053 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:59:08,053 - 打开应用程序：not found the path for "None"
+2019-12-18 20:59:08,089 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-18 20:59:52,935 - ERROR：None应用程序路径找不到！！！
+2019-12-18 20:59:52,935 - 打开应用程序：not found the path for "None"
+2019-12-18 20:59:52,962 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-19 00:37:46,135 - Watching for file changes with StatReloader
+2019-12-19 00:38:21,625 - Watching for file changes with StatReloader
+2019-12-19 00:38:57,263 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-19 00:38:58,871 - ERROR：None应用程序路径找不到！！！
+2019-12-19 00:38:58,871 - 打开应用程序：not found the path for "None"
+2019-12-19 00:38:58,992 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-19 00:39:01,024 - ERROR：None应用程序路径找不到！！！
+2019-12-19 00:39:01,024 - 打开应用程序：not found the path for "None"
+2019-12-19 00:39:01,092 - ERROR：来自：192.168.0.7, None应用程序找不到！！！
+2019-12-19 00:46:47,865 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-19 00:47:01,391 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-19 00:47:34,577 - INFO：来自：192.168.0.7, 访问index.html页面！！！
+2019-12-19 01:35:24,679 - Watching for file changes with StatReloader
+2019-12-19 01:35:36,185 - ERROR：None应用程序路径找不到！！！
+2019-12-19 01:35:36,185 - 打开应用程序：not found the path for "None"
+2019-12-19 01:35:36,228 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 01:35:37,578 - ERROR：None应用程序路径找不到！！！
+2019-12-19 01:35:37,579 - 打开应用程序：not found the path for "None"
+2019-12-19 01:35:37,590 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 01:35:38,118 - ERROR：None应用程序路径找不到！！！
+2019-12-19 01:35:38,118 - 打开应用程序：not found the path for "None"
+2019-12-19 01:35:38,204 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 01:35:49,587 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-19 01:35:51,248 - Watching for file changes with StatReloader
+2019-12-19 01:35:53,764 - Not Found: /accounts/signup/
+2019-12-19 01:35:53,877 - Not Found: /favicon.ico
+2019-12-19 01:35:58,521 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\software\urls.py changed, reloading.
+2019-12-19 01:35:59,950 - Watching for file changes with StatReloader
+2019-12-19 01:38:19,931 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 01:38:21,700 - Watching for file changes with StatReloader
+2019-12-19 01:38:51,092 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 01:38:52,693 - Watching for file changes with StatReloader
+2019-12-19 01:39:03,044 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 01:39:04,520 - Watching for file changes with StatReloader
+2019-12-19 01:39:43,443 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 01:39:44,972 - Watching for file changes with StatReloader
+2019-12-19 01:40:45,131 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 01:44:17,926 - Watching for file changes with StatReloader
+2019-12-19 01:45:03,571 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 01:45:05,254 - Watching for file changes with StatReloader
+2019-12-19 01:45:19,169 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 01:45:20,800 - Watching for file changes with StatReloader
+2019-12-19 01:45:28,136 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 01:45:29,624 - Watching for file changes with StatReloader
+2019-12-19 01:45:34,079 - INFO：来自：127.0.0.1, 访问index.html页面！！！
+2019-12-19 01:45:56,421 - ERROR：None应用程序路径找不到！！！
+2019-12-19 01:45:56,422 - 打开应用程序：not found the path for "None"
+2019-12-19 01:45:56,453 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 01:45:57,519 - ERROR：None应用程序路径找不到！！！
+2019-12-19 01:45:57,519 - 打开应用程序：not found the path for "None"
+2019-12-19 01:45:57,537 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 01:46:01,096 - ERROR：None应用程序路径找不到！！！
+2019-12-19 01:46:01,097 - 打开应用程序：not found the path for "None"
+2019-12-19 01:46:01,112 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 01:46:04,220 - ERROR：None应用程序路径找不到！！！
+2019-12-19 01:46:04,220 - 打开应用程序：not found the path for "None"
+2019-12-19 01:46:04,237 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 01:46:15,509 - ERROR：None应用程序路径找不到！！！
+2019-12-19 01:46:15,509 - 打开应用程序：not found the path for "None"
+2019-12-19 01:46:15,525 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 01:46:19,107 - INFO：来自：127.0.0.1, 访问index.html页面！！！
+2019-12-19 01:47:55,060 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 01:47:56,565 - Watching for file changes with StatReloader
+2019-12-19 01:49:42,916 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 01:49:44,525 - Watching for file changes with StatReloader
+2019-12-19 01:49:56,714 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 01:49:58,146 - Watching for file changes with StatReloader
+2019-12-19 02:23:23,170 - Watching for file changes with StatReloader
+2019-12-19 02:26:39,202 - Watching for file changes with StatReloader
+2019-12-19 02:37:15,975 - Watching for file changes with StatReloader
+2019-12-19 02:50:30,056 - Watching for file changes with StatReloader
+2019-12-19 02:54:09,664 - Watching for file changes with StatReloader
+2019-12-19 02:57:50,522 - Watching for file changes with StatReloader
+2019-12-19 02:59:49,883 - Watching for file changes with StatReloader
+2019-12-19 03:00:06,570 - Watching for file changes with StatReloader
+2019-12-19 03:01:04,654 - Watching for file changes with StatReloader
+2019-12-19 03:01:19,628 - Watching for file changes with StatReloader
+2019-12-19 03:02:00,517 - Watching for file changes with StatReloader
+2019-12-19 03:02:41,493 - Watching for file changes with StatReloader
+2019-12-19 03:03:34,749 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 03:03:36,201 - Watching for file changes with StatReloader
+2019-12-19 03:06:53,988 - Watching for file changes with StatReloader
+2019-12-19 03:06:55,426 - INFO：来自：127.0.0.1, 访问index.html页面！！！
+2019-12-19 03:19:48,927 - Watching for file changes with StatReloader
+2019-12-19 03:20:06,356 - INFO：来自：127.0.0.1, 访问index.html页面！！！
+2019-12-19 03:20:08,122 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:20:08,123 - 打开应用程序：not found the path for "None"
+2019-12-19 03:20:08,160 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:27:35,209 - Watching for file changes with StatReloader
+2019-12-19 03:27:36,972 - INFO：来自：127.0.0.1, 访问index.html页面！！！
+2019-12-19 03:27:45,081 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:27:45,081 - 打开应用程序：not found the path for "None"
+2019-12-19 03:27:45,126 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:28:42,808 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:28:44,415 - Watching for file changes with StatReloader
+2019-12-19 03:28:47,626 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:28:47,626 - 打开应用程序：not found the path for "None"
+2019-12-19 03:28:47,666 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:28:56,993 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:28:56,994 - 打开应用程序：not found the path for "None"
+2019-12-19 03:28:57,009 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:28:57,119 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:28:57,119 - 打开应用程序：not found the path for "None"
+2019-12-19 03:28:57,133 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:29:10,562 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:29:12,013 - Watching for file changes with StatReloader
+2019-12-19 03:29:13,706 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:29:13,707 - 打开应用程序：not found the path for "None"
+2019-12-19 03:29:13,742 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:30:48,700 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:30:50,051 - Watching for file changes with StatReloader
+2019-12-19 03:31:02,741 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:31:02,741 - 打开应用程序：not found the path for "None"
+2019-12-19 03:31:02,779 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:31:28,127 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:31:29,482 - Watching for file changes with StatReloader
+2019-12-19 03:31:30,884 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:31:30,885 - 打开应用程序：not found the path for "None"
+2019-12-19 03:31:30,922 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:32:20,177 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:32:21,644 - Watching for file changes with StatReloader
+2019-12-19 03:32:22,453 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:32:22,454 - 打开应用程序：not found the path for "None"
+2019-12-19 03:32:22,492 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:32:23,508 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:32:23,508 - 打开应用程序：not found the path for "None"
+2019-12-19 03:32:23,522 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:34:43,967 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\views.py changed, reloading.
+2019-12-19 03:34:45,347 - Watching for file changes with StatReloader
+2019-12-19 03:35:00,728 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\views.py changed, reloading.
+2019-12-19 03:35:02,221 - Watching for file changes with StatReloader
+2019-12-19 03:35:02,909 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:35:02,910 - 打开应用程序：not found the path for "None"
+2019-12-19 03:35:02,950 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:35:39,373 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\views.py changed, reloading.
+2019-12-19 03:35:40,830 - Watching for file changes with StatReloader
+2019-12-19 03:35:42,106 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:35:42,107 - 打开应用程序：not found the path for "None"
+2019-12-19 03:35:42,139 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:35:53,401 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\views.py changed, reloading.
+2019-12-19 03:35:54,988 - Watching for file changes with StatReloader
+2019-12-19 03:36:53,632 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\views.py changed, reloading.
+2019-12-19 03:36:55,298 - Watching for file changes with StatReloader
+2019-12-19 03:36:55,647 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:36:55,647 - 打开应用程序：not found the path for "None"
+2019-12-19 03:36:55,686 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:37:43,853 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:37:45,352 - Watching for file changes with StatReloader
+2019-12-19 03:37:46,642 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:37:46,643 - 打开应用程序：not found the path for "None"
+2019-12-19 03:37:46,680 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:38:05,068 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:38:06,431 - Watching for file changes with StatReloader
+2019-12-19 03:38:07,798 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:38:07,799 - 打开应用程序：not found the path for "None"
+2019-12-19 03:38:07,834 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:38:17,337 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:38:17,337 - 打开应用程序：not found the path for "None"
+2019-12-19 03:38:17,350 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:38:25,012 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\views.py changed, reloading.
+2019-12-19 03:38:26,399 - Watching for file changes with StatReloader
+2019-12-19 03:39:09,453 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:39:10,896 - Watching for file changes with StatReloader
+2019-12-19 03:39:11,246 - Not Found: /index
+2019-12-19 03:39:12,592 - Not Found: /index
+2019-12-19 03:39:15,085 - Not Found: /index
+2019-12-19 03:39:21,877 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:39:23,274 - Watching for file changes with StatReloader
+2019-12-19 03:39:25,373 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:39:26,848 - Watching for file changes with StatReloader
+2019-12-19 03:39:28,040 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:39:28,040 - 打开应用程序：not found the path for "None"
+2019-12-19 03:39:28,076 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:39:52,532 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:39:53,913 - Watching for file changes with StatReloader
+2019-12-19 03:39:55,273 - Not Found: /index
+2019-12-19 03:39:59,422 - Not Found: /index
+2019-12-19 03:40:06,324 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:40:07,851 - Watching for file changes with StatReloader
+2019-12-19 03:40:24,812 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:40:26,363 - Watching for file changes with StatReloader
+2019-12-19 03:40:29,965 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:40:29,966 - 打开应用程序：not found the path for "None"
+2019-12-19 03:40:30,003 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:40:30,591 - ERROR：None应用程序路径找不到！！！
+2019-12-19 03:40:30,591 - 打开应用程序：not found the path for "None"
+2019-12-19 03:40:30,611 - ERROR：来自：127.0.0.1, None应用程序找不到！！！
+2019-12-19 03:40:48,341 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:40:49,850 - Watching for file changes with StatReloader
+2019-12-19 03:40:51,794 - Not Found: /index
+2019-12-19 03:41:05,332 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:41:06,911 - Watching for file changes with StatReloader
+2019-12-19 03:41:08,232 - Not Found: /index
+2019-12-19 03:41:09,549 - Not Found: /index
+2019-12-19 03:41:23,696 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:41:25,123 - Watching for file changes with StatReloader
+2019-12-19 03:41:27,304 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:41:28,678 - Watching for file changes with StatReloader
+2019-12-19 03:41:32,920 - Not Found: /index
+2019-12-19 03:41:48,556 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:41:50,164 - Watching for file changes with StatReloader
+2019-12-19 03:41:51,638 - Not Found: /index
+2019-12-19 03:41:55,225 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:41:56,633 - Watching for file changes with StatReloader
+2019-12-19 03:41:58,710 - Not Found: /index
+2019-12-19 03:42:00,483 - Not Found: /index
+2019-12-19 03:42:18,220 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:42:19,635 - Watching for file changes with StatReloader
+2019-12-19 03:42:20,920 - Not Found: /index
+2019-12-19 03:42:22,496 - Not Found: /index
+2019-12-19 03:42:48,093 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:42:49,541 - Watching for file changes with StatReloader
+2019-12-19 03:42:49,781 - Not Found: /index
+2019-12-19 03:42:50,512 - Not Found: /index
+2019-12-19 03:43:01,990 - Not Found: /index
+2019-12-19 03:43:01,992 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:43:03,448 - Watching for file changes with StatReloader
+2019-12-19 03:43:05,135 - Not Found: /index
+2019-12-19 03:43:06,477 - Not Found: /index
+2019-12-19 03:45:01,350 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:45:02,764 - Watching for file changes with StatReloader
+2019-12-19 03:45:55,651 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:45:57,085 - Watching for file changes with StatReloader
+2019-12-19 03:46:03,258 - Not Found: /favicon.ico
+2019-12-19 03:46:03,719 - Not Found: /logout
+2019-12-19 03:46:05,896 - Not Found: /logout
+2019-12-19 03:46:18,489 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:46:19,888 - Watching for file changes with StatReloader
+2019-12-19 03:46:23,390 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:46:24,826 - Watching for file changes with StatReloader
+2019-12-19 03:46:27,931 - Not Found: /logout
+2019-12-19 03:47:34,857 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:47:36,352 - Watching for file changes with StatReloader
+2019-12-19 03:47:37,940 - Not Found: /logout
+2019-12-19 03:49:03,960 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 03:49:05,318 - Watching for file changes with StatReloader
+2019-12-19 03:49:38,439 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:49:39,836 - Watching for file changes with StatReloader
+2019-12-19 03:50:04,248 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\views.py changed, reloading.
+2019-12-19 03:50:05,772 - Watching for file changes with StatReloader
+2019-12-19 03:50:22,698 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\views.py changed, reloading.
+2019-12-19 03:50:24,114 - Watching for file changes with StatReloader
+2019-12-19 03:51:03,053 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\views.py changed, reloading.
+2019-12-19 03:51:04,454 - Watching for file changes with StatReloader
+2019-12-19 03:51:40,510 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:51:41,988 - Watching for file changes with StatReloader
+2019-12-19 03:52:04,533 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:52:05,990 - Watching for file changes with StatReloader
+2019-12-19 03:52:48,157 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:52:49,675 - Watching for file changes with StatReloader
+2019-12-19 03:52:57,888 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:52:59,293 - Watching for file changes with StatReloader
+2019-12-19 03:53:04,408 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:53:05,876 - Watching for file changes with StatReloader
+2019-12-19 03:53:24,269 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:53:25,682 - Watching for file changes with StatReloader
+2019-12-19 03:53:30,708 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:53:32,139 - Watching for file changes with StatReloader
+2019-12-19 03:53:55,832 - Not Found: /favicon.ico
+2019-12-19 03:54:29,857 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:54:31,125 - Watching for file changes with StatReloader
+2019-12-19 03:54:37,194 - Not Found: /
+2019-12-19 03:54:39,974 - Not Found: /favicon.ico
+2019-12-19 03:54:41,753 - Not Found: /login
+2019-12-19 03:54:52,880 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:54:54,352 - Watching for file changes with StatReloader
+2019-12-19 03:54:56,409 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:54:57,818 - Watching for file changes with StatReloader
+2019-12-19 03:55:02,861 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:55:04,336 - Watching for file changes with StatReloader
+2019-12-19 03:55:04,669 - Not Found: /login
+2019-12-19 03:55:05,660 - Not Found: /login
+2019-12-19 03:55:09,485 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:55:10,967 - Watching for file changes with StatReloader
+2019-12-19 03:55:12,374 - Not Found: /login
+2019-12-19 03:55:12,832 - Not Found: /login
+2019-12-19 03:55:20,591 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:55:21,983 - Watching for file changes with StatReloader
+2019-12-19 03:56:50,312 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:56:51,726 - Watching for file changes with StatReloader
+2019-12-19 03:57:34,729 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:57:36,184 - Watching for file changes with StatReloader
+2019-12-19 03:57:36,467 - Not Found: /login
+2019-12-19 03:57:37,164 - Not Found: /login
+2019-12-19 03:57:44,106 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:57:45,496 - Watching for file changes with StatReloader
+2019-12-19 03:58:09,861 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:58:11,373 - Watching for file changes with StatReloader
+2019-12-19 03:58:18,132 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 03:58:19,550 - Watching for file changes with StatReloader
+2019-12-19 04:01:08,132 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:01:09,622 - Watching for file changes with StatReloader
+2019-12-19 04:01:17,717 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:01:19,268 - Watching for file changes with StatReloader
+2019-12-19 04:01:20,468 - Not Found: /register
+2019-12-19 04:01:22,816 - Not Found: /register
+2019-12-19 04:01:27,363 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:01:28,896 - Watching for file changes with StatReloader
+2019-12-19 04:03:05,615 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:03:07,024 - Watching for file changes with StatReloader
+2019-12-19 04:03:16,521 - Not Found: /favicon.ico
+2019-12-19 04:03:22,802 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:03:24,232 - Watching for file changes with StatReloader
+2019-12-19 04:03:24,621 - Not Found: /login
+2019-12-19 04:03:25,246 - Not Found: /login
+2019-12-19 04:03:39,126 - Not Found: /login
+2019-12-19 04:03:39,168 - Not Found: /favicon.ico
+2019-12-19 04:03:41,350 - Not Found: /login
+2019-12-19 04:05:13,459 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:05:14,919 - Watching for file changes with StatReloader
+2019-12-19 04:05:15,479 - Not Found: /login
+2019-12-19 04:05:16,185 - Not Found: /login
+2019-12-19 04:05:19,960 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:05:21,457 - Watching for file changes with StatReloader
+2019-12-19 04:05:49,954 - Not Found: /login
+2019-12-19 04:06:12,129 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:06:13,572 - Watching for file changes with StatReloader
+2019-12-19 04:06:14,596 - Not Found: /login
+2019-12-19 04:06:16,899 - Not Found: /login
+2019-12-19 04:06:25,999 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:06:27,392 - Watching for file changes with StatReloader
+2019-12-19 04:06:27,761 - Not Found: /login
+2019-12-19 04:06:28,878 - Not Found: /login
+2019-12-19 04:06:29,438 - Not Found: /login
+2019-12-19 04:06:29,776 - Not Found: /login
+2019-12-19 04:06:36,839 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:06:38,211 - Watching for file changes with StatReloader
+2019-12-19 04:06:48,054 - Not Found: /login
+2019-12-19 04:06:48,086 - Not Found: /favicon.ico
+2019-12-19 04:06:56,009 - Not Found: /login
+2019-12-19 04:07:51,623 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:07:52,910 - Watching for file changes with StatReloader
+2019-12-19 04:08:01,965 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:08:03,243 - Watching for file changes with StatReloader
+2019-12-19 04:08:06,270 - Not Found: /
+2019-12-19 04:08:09,671 - Not Found: /favicon.ico
+2019-12-19 04:08:10,477 - Not Found: /login
+2019-12-19 04:08:33,392 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:08:34,861 - Watching for file changes with StatReloader
+2019-12-19 04:08:35,797 - Not Found: /
+2019-12-19 04:08:39,128 - Not Found: /
+2019-12-19 04:08:44,160 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:08:45,652 - Watching for file changes with StatReloader
+2019-12-19 04:08:45,970 - Not Found: /
+2019-12-19 04:08:46,341 - Not Found: /
+2019-12-19 04:08:47,682 - Not Found: /
+2019-12-19 04:08:58,651 - Not Found: /
+2019-12-19 04:09:07,733 - Not Found: /
+2019-12-19 04:09:08,792 - Not Found: /
+2019-12-19 04:09:09,470 - Not Found: /
+2019-12-19 04:09:09,821 - Not Found: /
+2019-12-19 04:09:21,614 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:09:23,022 - Watching for file changes with StatReloader
+2019-12-19 04:09:23,466 - Not Found: /
+2019-12-19 04:09:24,321 - Not Found: /
+2019-12-19 04:09:30,973 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:09:32,415 - Watching for file changes with StatReloader
+2019-12-19 04:09:32,862 - Not Found: /
+2019-12-19 04:09:33,124 - Not Found: /
+2019-12-19 04:09:33,993 - Not Found: /
+2019-12-19 04:09:34,381 - Not Found: /
+2019-12-19 04:09:34,664 - Not Found: /
+2019-12-19 04:09:34,870 - Not Found: /
+2019-12-19 04:09:35,091 - Not Found: /
+2019-12-19 04:09:52,123 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:09:53,607 - Watching for file changes with StatReloader
+2019-12-19 04:09:54,049 - Not Found: /
+2019-12-19 04:09:54,199 - Not Found: /
+2019-12-19 04:09:54,938 - Not Found: /
+2019-12-19 04:09:55,406 - Not Found: /
+2019-12-19 04:09:55,668 - Not Found: /
+2019-12-19 04:09:55,876 - Not Found: /
+2019-12-19 04:09:56,133 - Not Found: /
+2019-12-19 04:09:56,324 - Not Found: /
+2019-12-19 04:10:31,730 - Watching for file changes with StatReloader
+2019-12-19 04:10:33,362 - Not Found: /
+2019-12-19 04:10:34,246 - Not Found: /
+2019-12-19 04:10:44,050 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:10:45,490 - Watching for file changes with StatReloader
+2019-12-19 04:10:47,111 - Not Found: /
+2019-12-19 04:11:17,213 - Not Found: /long
+2019-12-19 04:11:25,350 - Not Found: /login
+2019-12-19 04:11:30,005 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:11:31,435 - Watching for file changes with StatReloader
+2019-12-19 04:11:39,451 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:11:40,872 - Watching for file changes with StatReloader
+2019-12-19 04:12:21,171 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:12:22,703 - Watching for file changes with StatReloader
+2019-12-19 04:12:57,372 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:12:58,833 - Watching for file changes with StatReloader
+2019-12-19 04:13:28,900 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\urls.py changed, reloading.
+2019-12-19 04:13:30,328 - Watching for file changes with StatReloader
+2019-12-19 04:14:43,296 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:14:44,643 - Watching for file changes with StatReloader
+2019-12-19 04:15:12,973 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:15:14,423 - Watching for file changes with StatReloader
+2019-12-19 04:15:15,533 - Not Found: /favicon.ico
+2019-12-19 04:15:28,273 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:15:29,674 - Watching for file changes with StatReloader
+2019-12-19 04:15:42,174 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:15:43,608 - Watching for file changes with StatReloader
+2019-12-19 04:15:48,659 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:15:50,000 - Watching for file changes with StatReloader
+2019-12-19 04:15:57,980 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:15:59,383 - Watching for file changes with StatReloader
+2019-12-19 04:16:01,465 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\login\urls.py changed, reloading.
+2019-12-19 04:16:02,976 - Watching for file changes with StatReloader
+2019-12-19 04:26:23,394 - C:\Users\Administrator\PycharmProjects\learngit\python学习\第6章-Django\startSoftware\startSoftware\settings.py changed, reloading.
+2019-12-19 04:26:24,951 - Watching for file changes with StatReloader
