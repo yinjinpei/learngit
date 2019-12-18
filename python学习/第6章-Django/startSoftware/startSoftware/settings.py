@@ -25,7 +25,7 @@ SECRET_KEY = 'wd=+!98z5p9s8!p^wsk$pf7&p)f_)_5c7b^#4h#^1!gjsd3#13'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
