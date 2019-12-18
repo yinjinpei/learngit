@@ -36,6 +36,10 @@ def openApp(appDir):
 
 # 首页
 def index(request):
+    clientIP = request.META['REMOTE_ADDR']
+    print(clientIP)
+    webName = index.__name__
+    logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %(clientIP,webName))
     appsList = AppInfo.apps.all()
     for app in appsList:
         print('应用名：' + app.appName + '  路径：' + app.appDir)
@@ -57,6 +61,8 @@ def index(request):
 
 # 用户打开应用请求处理
 def openAppHelper(request):
+    clientIP = request.META['REMOTE_ADDR']
+    print(clientIP)
     if request.method=='GET':
         appName = request.GET.get('name')
         appDir = getAppDir(appName)
@@ -65,8 +71,8 @@ def openAppHelper(request):
         if flag:
             return index(request)
         else:
-            logging.error(("ERROR：%s应用程序找不到！！！") % appName)
+            logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") %(clientIP,appName))
             return HttpResponse(("not found the path for \"%s\"") % appName)
     else:
-        logging.error("ERROR：请求失败，请求方式不是GET！")
+        logging.error(("ERROR：来自：%s, 请求失败，请求方式不是GET！")%clientIP)
         return HttpResponse("请求失败！！")

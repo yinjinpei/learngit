@@ -1,11 +1,12 @@
 #-*- coding:utf-8 -*-
 #author:YJ沛
 
-
+from django.contrib import admin
 from django.urls import path,re_path
 from . import views
 
 urlpatterns = [
+    path('admin', admin.site.urls), # 访问管理页面
     path('', views.index,name='index'),
     # re_path('^WeChat$' ,views.WeChat,name='WeChat'),
     # re_path('^navicat$' ,views.navicat,name='navicat'),
