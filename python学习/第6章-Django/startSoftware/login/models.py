@@ -23,10 +23,22 @@ class User(models.Model):
     sex = models.CharField(max_length=32, choices=gender, default="男")
     c_time = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         ordering = ["c_time"]
         verbose_name = "用户"
         verbose_name_plural = "用户"
+
+    def __str__(self):
+        return self.name
+
+    userinfo = models.Manager()
+    def showname(self):
+        return self.name
+    def showpasswd(self):
+        return self.password
+    def showemail(self):
+        return self.email
+    def showsex(self):
+        return self.sex
+    def showctime(self):
+        return self.c_time

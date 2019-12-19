@@ -11,6 +11,7 @@ urlpatterns = [
 
     re_path('login$', views.login,name='login'),
     re_path('register$', views.register,name='register'),
-    re_path('logout$', views.logout,name='register'),
+    re_path('logout$', views.logout,name='login'),
+    re_path('index$', views.index, name='index'),
     re_path('', views.index, name='index'),
 ]
