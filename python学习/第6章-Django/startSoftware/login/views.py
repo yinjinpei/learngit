@@ -80,6 +80,18 @@ def register(request):
 
 def logout(request):
     print('注销')
-    return render(request, 'login/login.html')
-    # return redirect('/index/')
+    if not request.session.get('is_login', None):
+        # 如果本来就未登录，也就没有登出一说
+        return render(request, 'login/index.html')
+
+    request.session.flush()
+    # flush()方法是比较安全的一种做法，而且一次性将session中的所有内容全部清空，确保不留后患。但也有不好的地方，
+    # 那就是如果你在session中夹带了一点‘私货’，会被一并删除，这一点一定要注意。
+
+    # 或者使用下面的方法
+    # del request.session['is_login']
+    # del request.session['user_id']
+    # del request.session['user_name']
+    return render(request, 'login/index.html')
+
 
