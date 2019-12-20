@@ -39,15 +39,19 @@ def login(request):
                         print('登录密码验证成功！！')
                         logging.info(("INFO：来自：%s, 登录密码验证成功！！") % clientIP)
                         logging.info(("INFO：用户：%s，密码：%s") % (user_name.name,user_name.password))
-                        return render(request, 'login/register.html')
+                        message = "登录成功"
+                        # return HttpResponse('<h1>登录成功！！</h1>') # for test
+                        return render(request, 'login/index.html', {"message": message})
                     else:
                         print('登录密码不正确！！')
                         logging.error(("ERROR：来自：%s, 登录密码不正确！！") % clientIP)
+                        message = "密码不正确！"
                         break
             else:
                 print('登录用户不存在！！')
                 logging.error(("ERROR：来自：%s, 登录用户不存在！！") % clientIP)
-                return render(request, 'login/login.html')
+                message = "用户名不存在！"
+            return render(request, 'login/login.html',{"message": message})
     logging.error(("ERROR：来自：%s, 请求失败，请求方式不是POST！") % clientIP)
     return render(request, 'login/login.html')
 
