@@ -4,13 +4,12 @@ from captcha.fields import CaptchaField
 # Create your models here.
 
 
+gender = (
+    ('male', "男"),
+    ('female', "女"),
+)
+
 class User(models.Model):
-
-    gender = (
-        ('male', "男"),
-        ('female', "女"),
-    )
-
     # name必填，最长不超过128个字符，并且唯一，也就是不能有相同姓名；
     # password必填，最长不超过256个字符（实际可能不需要这么长）；
     # email使用Django内置的邮箱类型，并且唯一；
@@ -23,15 +22,12 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     sex = models.CharField(max_length=32, choices=gender, default="男")
     c_time = models.DateTimeField(auto_now_add=True)
-
     class Meta:
         ordering = ["c_time"]
         verbose_name = "用户"
         verbose_name_plural = "用户"
-
     def __str__(self):
         return self.name
-
     userinfo = models.Manager()
     def showname(self):
         return self.name
@@ -45,8 +41,17 @@ class User(models.Model):
         return self.c_time
 
 
-
 class UserForm(forms.Form):
     username = forms.CharField(label="用户名", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(label="密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    captcha = CaptchaField(label='验证码')
+
+
+class RegisterForm(forms.Form):
+    username = forms.CharField(label="用户名", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    # password1和password2，用于注册时输入两遍密码，并进行比较，防止误输密码；
+    password1 = forms.CharField(label="密码", max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label="确认密码", max_length=256,widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(label="邮箱地址", widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    sex = forms.ChoiceField(label='性别', choices=gender)
     captcha = CaptchaField(label='验证码')

@@ -76,7 +76,45 @@ def login(request):
 
 def register(request):
     print('注册')
-    return render(request,'login/register.html')
+    if request.session.get('is_login', None):
+        # 登录状态不允许注册。你可以修改这条原则！
+        return render(request, 'login/index.html')
+    if request.method == "POST":
+        register_form = RegisterForm(request.POST)
+        message = "请检查填写的内容！"
+        if register_form.is_valid():  # 获取数据
+            username = register_form.cleaned_data['username']
+            password1 = register_form.cleaned_data['password1']
+            password2 = register_form.cleaned_data['password2']
+            email = register_form.cleaned_data['email']
+            sex = register_form.cleaned_data['sex']
+            if password1 != password2:  # 判断两次密码是否相同
+                message = "两次输入的密码不同！"
+                return render(request, 'login/register.html', locals())
+            else:
+                same_name_user = User.userinfo.filter(name=username)  # 获取数据库所有用户对象
+                print(same_name_user)
+                if same_name_user:  # 用户名唯一
+                    message = '用户已经存在，请重新选择用户名！'
+                    return render(request, 'login/register.html', locals())
+                same_email_user = User.userinfo.filter(email=email)
+                if same_email_user:  # 邮箱地址唯一
+                    message = '该邮箱地址已被注册，请使用别的邮箱！'
+                    return render(request, 'login/register.html', locals())
+
+                # 当一切都OK的情况下，创建新用户
+
+                new_user = User.userinfo.create()
+                new_user.name = username
+                new_user.password = password1
+                new_user.email = email
+                new_user.sex = sex
+                new_user.save()
+                print(new_user.name,new_user.password,new_user.email,new_user.save)
+                message='注册成功!!'
+                return render(request, 'login/register.html', locals())  # 自动跳转到登录页面
+    register_form = RegisterForm()
+    return render(request, 'login/register.html', locals())
 
 def logout(request):
     print('注销')
