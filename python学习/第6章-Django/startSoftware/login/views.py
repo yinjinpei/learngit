@@ -19,6 +19,11 @@ def index(request):
     return render(request,'login/index.html')
 
 def login(request):
+    # 通过下面的if语句，我们不允许重复登录：
+    if request.session.get('is_login', None):
+        return render(request, 'login/index.html')
+        # return redirect('user/index')
+
     clientIP = request.META['REMOTE_ADDR']
     print(("INFO：来自：%s, 访问用户登录页面") % clientIP)
     if request.method == "POST":
@@ -45,6 +50,12 @@ def login(request):
                             logging.info(("INFO：来自：%s, 登录密码验证成功！！") % clientIP)
                             logging.info(("INFO：用户：%s，密码：%s") % (user_name.name,user_name.password))
                             message = "登录成功"
+
+                            # 通过下面的语句，我们往session字典内写入用户状态和数据：
+                            request.session['is_login'] = True
+                            request.session['user_id'] = user_name.id
+                            request.session['user_name'] = user_name.name
+
                             # return HttpResponse('<h1>登录成功！！</h1>') # for test
                             return render(request, 'login/index.html', {"message": message})
                         else:
