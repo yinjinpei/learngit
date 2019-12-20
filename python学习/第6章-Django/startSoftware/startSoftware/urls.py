@@ -19,5 +19,7 @@ from django.urls import path,include,re_path
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('user',include(('login.urls','login',),namespace='user')),
+    re_path('captcha', include('captcha.urls')),
     re_path('',include(('software.urls','software',),namespace='software')),
+
 ]
