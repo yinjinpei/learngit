@@ -1,21 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{#login/templates/login/index.html#}
 
-    <script type="text/javascript">
-        window.onload = function(){
+{% extends 'software_base.html' %}
+{% block title %}主页{% endblock %}
+{% block content %}
+{% if request.session.is_login %}
+    <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
+    {% else %}
+    <h1>你尚未登录，只能访问公开内容！</h1>
+    {% endif %}
 
-            // 获取元素方法一：以id方式获取
-            var oDiv = document.getElementById('li1');
-
-        }
-
-
-    </script>
-</head>
-<body>
 <hr>
 <ul>
     {% for app in appsList %}
@@ -27,5 +20,4 @@
 <br>
 <a href="#">跳到顶部</a>
 
-</body>
-</html>
+{% endblock %}
