@@ -36,7 +36,7 @@ def login(request):
     print(("INFO：来自：%s, 访问用户登录页面") % clientIP)
     if request.method == "POST":
         login_form = UserForm(request.POST)
-        message = "请检查填写的内容！"
+        message = "验证码错误！！"
 
         if login_form.is_valid():
             # username = request.POST.get('username')
@@ -91,7 +91,7 @@ def register(request):
         return render(request, 'login/index.html')
     if request.method == "POST":
         register_form = RegisterForm(request.POST)
-        message = "请检查填写的内容！"
+        message = "验证码错误！！！"
         if register_form.is_valid():  # 获取数据
             username = register_form.cleaned_data['username']
             password1 = register_form.cleaned_data['password1']
