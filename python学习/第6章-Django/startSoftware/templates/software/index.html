@@ -9,17 +9,20 @@
     <h4>常用软件：</h4>
     <ul>
     {% for app in appsList %}
-    <li id="li1"><a href={{app.appName}}?name={{app.appName}}>{{app.remark}}</a></li>
+        <li id="li1"><a href={{app.appName}}?name={{app.appName}}>{{app.remark}}</a></li>
     {% endfor %}
     </ul>
-    <a href="/admin">添加常用软件</a>
 
+    <hr>
+    <a href="/admin">添加常用软件</a>
 {% else %}
-    <h1>你尚未登录，只能访问公开内容！</h1>
+    <h2>你尚未登录，只能访问公开内容！</h2>
+    <hr>
+    <h4 style="color: red">无法显示常用软件，请先登录！</h4>
 {% endif %}
 
 <hr>
-<a href="user/login">进入用户登录页面</a>
+<a href="/user/login">进入用户登录页面</a>
 <br>
 <a href="#">跳到顶部</a>
 

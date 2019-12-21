@@ -67,7 +67,7 @@ def login(request):
                             request.session['user_name'] = user_name.name
                             return redirect('/')
                             # return HttpResponse('<h1>登录成功！！</h1>') # for test
-                            # return render(request, 'software/index.html', {"message": message})
+                            # return render(request, '/software/index.html', {"message": user_name.name})
                         else:
                             print('登录密码不正确！！')
                             logging.error(("ERROR：来自：%s, 登录密码不正确！！") % clientIP)

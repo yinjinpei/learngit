@@ -41,11 +41,18 @@ def index(request):
     webName = index.__name__
     print((("INFO：来自：%s, 访问%s.html页面！！！") % (clientIP, webName)))
     logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %(clientIP,webName))
-    appsList = AppInfo.apps.all()
-    for app in appsList:
-        print('应用名：' + app.appName + '  路径：' + app.appDir)
-    context = {'appsList': appsList}
-    return render(request, 'software/index.html', context)
+
+    # 已登录状态：
+    if request.session.get('is_login', None):
+        appsList = AppInfo.apps.filter(userName=request.session['user_name'] )  # 获取数据库所有符合筛选的用户对象
+        # appsList = AppInfo.apps.all()
+        if appsList:
+            for app in appsList:
+                print('应用名：' + app.appName + '  路径：' + app.appDir)
+            context = {'appsList': appsList}
+            return render(request, 'software/index.html', context)
+    return render(request, 'software/index.html')
+
 
 # def WeChat(request):
 #     # ShellExecute(hwnd, op, file, params, dir, bShow)
