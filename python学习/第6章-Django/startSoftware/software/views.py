@@ -94,10 +94,14 @@ def addSoftware(request):
             EnglishName = addApp_form.cleaned_data['EnglishName']
             SoftwarePath = addApp_form.cleaned_data['SoftwarePath']
             if ChineseName and EnglishName and SoftwarePath:
-                same_name_app = AppInfo.apps.filter(appName=EnglishName)
-                if same_name_app: # 应用英文名唯一
-                    message = '软件已存在！！'
-                    return render(request, 'software/addSoftware.html', locals())
+                same_name_user = AppInfo.apps.filter(userName=request.session['user_name'])  # 获取数据库所有用户对象
+                for user in same_name_user:
+                    if EnglishName == user.appName:
+                        message = "软件已存在！！"
+                        return render(request, 'software/addSoftware.html', locals())
+                    if ChineseName == user.remark:
+                        message = "中文名重复，请取新的名字！！"
+                        return render(request, 'software/addSoftware.html', locals())
                 newApp = AppInfo.apps.create()
                 newApp.userName = request.session['user_name']
                 newApp.appName = EnglishName
