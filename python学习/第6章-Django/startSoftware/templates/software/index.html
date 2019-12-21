@@ -5,19 +5,20 @@
 {% block content %}
 {% if request.session.is_login %}
     <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
-    {% else %}
-    <h1>你尚未登录，只能访问公开内容！</h1>
-    {% endif %}
-
-<hr>
-<ul>
+    <ul>
     {% for app in appsList %}
     <li id="li1"><a href={{app.appName}}?name={{app.appName}}>{{app.remark}}</a></li>
     {% endfor %}
-</ul>
+    </ul>
+
+{% else %}
+    <h1>你尚未登录，只能访问公开内容！</h1>
+{% endif %}
+
 <hr>
 <a href="user/login">进入用户登录页面</a>
 <br>
 <a href="#">跳到顶部</a>
+
 
 {% endblock %}
