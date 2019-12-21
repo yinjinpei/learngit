@@ -38,7 +38,7 @@ def login(request):
         login_form = UserForm(request.POST)
         message = "验证码错误！！"
 
-        if login_form.is_valid():
+        if login_form.is_valid():   #看seld.errors中是否值，只要有值就是flase
             # username = request.POST.get('username')
             # password = request.POST.get('password')
             # django自带获取表单方式
