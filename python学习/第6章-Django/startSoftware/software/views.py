@@ -39,6 +39,7 @@ def index(request):
     clientIP = request.META['REMOTE_ADDR']
     print(clientIP)
     webName = index.__name__
+    print((("INFO：来自：%s, 访问%s.html页面！！！") % (clientIP, webName)))
     logging.info(("INFO：来自：%s, 访问%s.html页面！！！") %(clientIP,webName))
     appsList = AppInfo.apps.all()
     for app in appsList:
