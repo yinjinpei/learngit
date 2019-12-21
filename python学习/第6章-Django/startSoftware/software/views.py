@@ -1,6 +1,6 @@
 # coding:utf-8
 import os
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.db.models import Max, F, Q
 from django.http import HttpResponse
 # from win32 import win32api
@@ -84,3 +84,28 @@ def openAppHelper(request):
     else:
         logging.error(("ERROR：来自：%s, 请求失败，请求方式不是GET！")%clientIP)
         return HttpResponse("请求失败！！")
+
+def addSoftware(request):
+    print('========添加常用软件快捷键=========')
+    if request.method == "POST":
+        addApp_form = AddSoftware(request.POST)
+        if addApp_form.is_valid():  # 看seld.errors中是否值，只要有值就是flase
+            ChineseName = addApp_form.cleaned_data['ChineseName']
+            EnglishName = addApp_form.cleaned_data['EnglishName']
+            SoftwarePath = addApp_form.cleaned_data['SoftwarePath']
+            if ChineseName and EnglishName and SoftwarePath:
+                same_name_app = AppInfo.apps.filter(appName=EnglishName)
+                if same_name_app: # 应用英文名唯一
+                    message = '软件已存在！！'
+                    return render(request, 'software/addSoftware.html', locals())
+                newApp = AppInfo.apps.create()
+                newApp.userName = request.session['user_name']
+                newApp.appName = EnglishName
+                newApp.remark = ChineseName
+                newApp.appDir = SoftwarePath
+                newApp.save()
+                message = "添加成功！"
+                print(message)
+    addApp_form = AddSoftware()
+    return render(request, 'software/addSoftware.html', locals())
+    # return redirect('/addSoftware')

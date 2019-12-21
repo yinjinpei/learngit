@@ -7,7 +7,8 @@ from . import views
 
 urlpatterns = [
     path('admin', admin.site.urls), # 访问管理页面
-    path('', views.index,name='index'),
+    re_path('addSoftware$', views.addSoftware, name='addSoftware'),
+    re_path('', views.index,name='index'),
     # re_path('^WeChat$' ,views.WeChat,name='WeChat'),
     # re_path('^navicat$' ,views.navicat,name='navicat'),
     # re_path('^YoudaoNote$' ,views.YoudaoNote,name='YoudaoNote'),
