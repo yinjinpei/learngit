@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class AppInfo(models.Model):
+    userName = models.CharField(max_length=128, default=None)
     appName = models.CharField(max_length=20)
     appDir = models.CharField(max_length=100)
     remark = models.CharField(max_length=100,default=None)
@@ -16,3 +17,5 @@ class AppInfo(models.Model):
         return self.appDir
     def showID(self):
         return self.pk
+    def showusername(self):
+        return self.userName
