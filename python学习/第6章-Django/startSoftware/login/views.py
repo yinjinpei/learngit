@@ -4,13 +4,21 @@ import os
 from django.db.models import Max, F, Q
 from django.http import HttpResponse
 from .models import *
+import logging  # 日志
+import hashlib  # 加密模块
 
-import logging
 # 生成一个以当前文件名为名字的logger实例
 logger = logging.getLogger(__name__)
 # 生成一个名为collect的logger实例
 collect_logger = logging.getLogger("collect")
 
+
+# 明文加密
+def hash_code(s, salt='mysite'):    # 加点盐
+    h = hashlib.sha256()
+    s += salt
+    h.update(s.encode())  # update方法只接收bytes类型
+    return h.hexdigest()
 
 def index(request):
     clientIP = request.META['REMOTE_ADDR']
@@ -29,9 +37,11 @@ def login(request):
     if request.method == "POST":
         login_form = UserForm(request.POST)
         message = "请检查填写的内容！"
-        # username = request.POST.get('username')
-        # password = request.POST.get('password')
+
         if login_form.is_valid():
+            # username = request.POST.get('username')
+            # password = request.POST.get('password')
+            # django自带获取表单方式
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
             if username and password:  # 确保用户名和密码都不为空
@@ -44,7 +54,7 @@ def login(request):
                 userNameList = User.userinfo.all()  # 获取数据库所有用户对象
                 for user_name in userNameList:
                     if username == user_name.name:  # 检查用户名是否存在
-                        if password == user_name.password:  # 匹配用户的密码
+                        if hash_code(password) == user_name.password:  # 匹配用户的密码
                             print(user_name.name, user_name.password)
                             print('登录密码验证成功！！')
                             logging.info(("INFO：来自：%s, 登录密码验证成功！！") % clientIP)
@@ -103,10 +113,9 @@ def register(request):
                     return render(request, 'login/register.html', locals())
 
                 # 当一切都OK的情况下，创建新用户
-
                 new_user = User.userinfo.create()
                 new_user.name = username
-                new_user.password = password1
+                new_user.password = hash_code(password1)
                 new_user.email = email
                 new_user.sex = sex
                 new_user.save()
