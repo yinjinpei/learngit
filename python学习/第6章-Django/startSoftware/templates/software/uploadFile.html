@@ -1,0 +1,29 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% block title %}主页{% endblock %}
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+    {% if request.session.is_login %}
+        <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
+    {% else %}
+        <h2>你尚未登录，只能访问公开内容！</h2>
+    {% endif %}
+</div>
+<hr>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+          <form class="form-inline" role="form"  method="post" enctype="multipart/form-data" accept-charset="utf-8">
+              <div class="form-group">
+                  <input type="file" name="file">
+              </div>
+              <div class="form-group">
+                  <input type="submit" value="上传文件">
+              </div>
+          </form>
+      </div>
+    </div>
+
+
+{% endblock %}

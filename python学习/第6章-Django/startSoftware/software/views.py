@@ -149,3 +149,7 @@ def delSoftware(request):
             message = appNameList
     delApp_form = DelSoftware()
     return render(request, 'software/delSoftware.html', locals())
+
+def uploadFile(request):
+    return render(request,'software/uploadFile.html')
+    # return redirect('/uploadFile')
