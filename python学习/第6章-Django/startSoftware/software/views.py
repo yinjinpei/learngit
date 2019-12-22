@@ -80,10 +80,10 @@ def openAppHelper(request):
             return index(request)
         else:
             logging.error(("ERROR：来自：%s, %s应用程序找不到！！！") %(clientIP,appName))
-            return HttpResponse(("not found the path for \"%s\"") % appName)
+            return HttpResponse(("not found the path for \"%s\" <hr><a href='/'>返回首页</a>") % appName)
     else:
         logging.error(("ERROR：来自：%s, 请求失败，请求方式不是GET！")%clientIP)
-        return HttpResponse("请求失败！！")
+        return HttpResponse("请求失败！！<hr><a href='/'>返回首页</a>")
 
 def addSoftware(request):
     print('========添加常用软件快捷键=========')
