@@ -113,3 +113,39 @@ def addSoftware(request):
     addApp_form = AddSoftware()
     return render(request, 'software/addSoftware.html', locals())
     # return redirect('/addSoftware')
+
+def delSoftware(request):
+    print('delApp_form')
+    if request.method == "GET":
+        same_name_user = AppInfo.apps.all()
+        print(request.session['user_name'])
+        appNameList=[]
+        for user in same_name_user:
+            if user.userName == request.session['user_name']:
+                appNameList.append(user.remark)
+        print(appNameList)
+        message=appNameList
+        delApp_form = DelSoftware()
+        return render(request, 'software/delSoftware.html', locals())
+
+    if request.method == "POST":
+        delApp_form = DelSoftware(request.POST)
+        if delApp_form.is_valid():  # 看seld.errors中是否值，只要有值就是flase
+            ChineseName = delApp_form.cleaned_data['ChineseName']
+            currentUser = request.session['user_name']
+            newApp = AppInfo.apps.filter(userName=currentUser)
+            if newApp:
+                for app in newApp:
+                    print(app)
+                    if app.remark == ChineseName:
+                        app.delete()    # 删除数据库对象
+
+            same_name_user = AppInfo.apps.all() # 获取所有对象显示到页面
+            appNameList = []
+            for user in same_name_user:
+                if user.userName == request.session['user_name']:
+                    appNameList.append(user.remark)
+            print(appNameList)
+            message = appNameList
+    delApp_form = DelSoftware()
+    return render(request, 'software/delSoftware.html', locals())

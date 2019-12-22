@@ -1,0 +1,33 @@
+{% extends 'software_base.html' %}
+
+{% block title %}添加常用应用快捷键{% endblock %}
+{% block content %}
+<h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
+<hr>
+<div class="container">
+        <div class="col-md-4 col-md-offset-4">
+            <form class='form-register' action="delSoftware" method="post">
+                <div class="alert alert-warning">
+                    {% if message %}
+                        {% for app in message %}
+                            {{ app }}
+                            <br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% csrf_token %}
+
+                <div class="form-group">
+                    {{ delApp_form.ChineseName.label_tag }}
+                    {{ delApp_form.ChineseName }}
+                </div>
+
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">删除</button>
+
+          </form>
+        </div>
+    </div> <!-- /container -->
+<hr>
+<a href="/">返回首页</a>
+{% endblock %}
