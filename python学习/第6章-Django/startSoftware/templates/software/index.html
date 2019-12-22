@@ -10,23 +10,23 @@
         <h4>常用软件：</h4>
         <ul>
         {% for app in appsList %}
-            <li id="li1"><a href={{app.appName}}?name={{app.appName}}>{{app.remark}}</a></li>
+            <li id="li1"><a href={{app.appName}}?name={{app.appName}} onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">{{app.remark}}</a></li>
         {% endfor %}
         </ul>
 
         <hr>
-        <a href="/addSoftware">添加常用软件</a>
+        <a href="/addSoftware" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">添加常用软件</a>
         <hr>
-        <a href="/delSoftware">删除常用软件</a>
+        <a href="/delSoftware" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">删除常用软件</a>
     {% else %}
         <h2>你尚未登录，只能访问公开内容！</h2>
         <hr>
         <h4 style="color: red">无法显示常用软件，请先登录！</h4>
         <hr>
-        <a href="/user/login">进入用户登录页面</a>
+        <a href="/user/login" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">进入用户登录页面</a>
     {% endif %}
     <hr>
-<a href="#">跳到顶部</a>
+<a href="#" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">跳到顶部</a>
 </div>
 
 {% endblock %}
