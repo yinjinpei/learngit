@@ -155,8 +155,41 @@ def delSoftware(request):
     return render(request, 'software/delSoftware.html', locals())
 
 
+def delFile(request):
+    message = '请选择上传文件！'
+    path = 'uploads/' + request.session['user_name'] + '/'  # 文件储存位置
+    fileList = os.listdir(path)
+    if not os.path.exists(path):  # 目录不存在则创建
+        os.makedirs(path)
+    if request.method == "POST":
+        delFile_form = DelFile(request.POST)
+        if delFile_form.is_valid(): # 如果有数据
+            FileName = delFile_form.cleaned_data['FileName']    # 获取删除的文件名
+            if os.path.exists(path+FileName):
+                os.remove(path+FileName)
+                delfile_message="删除成功！！"
+    fileList = os.listdir(path)
+    delFile_form = DelFile()
+    return render(request, 'software/uploadFile.html', locals())
+
+
 def uploadFile(request):
-    path = 'uploads/'  # 上传文件路径，相对路径，在项目根目录下
+    if not request.session.get('is_login', None):
+        uploadFile_message = "您尚未登录，使用【文件管理】请先登录！！"
+        return render(request, 'software/index.html', locals())
+
+    delFile_form = DelFile()  # 宣染删除表格，即宣染删除功能的输入框
+    path = 'uploads/'+request.session['user_name']+'/'  # 上传文件路径，相对路径，在项目根目录下
+    if not os.path.exists(path):    #目录不存在则创建
+        os.makedirs(path)
+    fileList = os.listdir(path)
+    # 判断上传是否为空
+    try:
+        request.FILES['file']
+    except:
+        message = '请选择上传文件！'
+        return render(request, 'software/uploadFile.html', locals())
+
     if request.method == 'POST':
         fileName=str(request.FILES['file']) # 上传的文件名
         file=request.FILES['file']  #上传的文件对象
@@ -164,33 +197,29 @@ def uploadFile(request):
         if os.path.exists(path+fileName):
             message='文件已存在，请重命名再上传！'
             return render(request, 'software/uploadFile.html', locals())
-        if not os.path.exists(path):
-            os.makedirs(path)
         with open(path + fileName, 'wb+')as destination:
             for chunk in file.chunks():
                 destination.write(chunk)
         message="上传成功！！"
     else:
-        fileList = os.listdir(path)
-        print(fileList)
-        for file in fileList:
-            print(path + file)
         message='请选择上传文件！'
         print(message)
+
+    fileList = os.listdir(path)
     return render(request, 'software/uploadFile.html', locals())
 
 
 def downloadFile(request):
-    path = 'uploads/'
-    filename = request.GET.get('name')
-    file = open(path+filename,'rb')
-    response = FileResponse(file)
-    response['Content-Type'] = 'application/octet-stream'
-    # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
-    response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(escape_uri_path(filename))
-        # IE浏览器，采用URLEncoder编码
-        # Opera浏览器，采用filename * 方式
-        # Safari浏览器，采用ISO编码的中文输出
-        # Chrome浏览器，采用Base64编码或ISO编码的中文输出
-        # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
-    return response
+        path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
+        filename = request.GET.get('name')
+        file = open(path+filename,'rb')
+        response = FileResponse(file)
+        response['Content-Type'] = 'application/octet-stream'
+        # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
+        response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(escape_uri_path(filename))
+            # IE浏览器，采用URLEncoder编码
+            # Opera浏览器，采用filename * 方式
+            # Safari浏览器，采用ISO编码的中文输出
+            # Chrome浏览器，采用Base64编码或ISO编码的中文输出
+            # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
+        return response

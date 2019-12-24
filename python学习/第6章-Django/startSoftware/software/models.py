@@ -32,3 +32,7 @@ class AddSoftware(forms.Form):
 
 class DelSoftware(forms.Form):
     ChineseName = forms.CharField(label="应用中文名", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+class DelFile(forms.Form):
+    FileName = forms.CharField(label="删除文件，输入文件名：", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))

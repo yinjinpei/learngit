@@ -11,6 +11,7 @@ urlpatterns = [
     re_path('delSoftware$', views.delSoftware, name='delSoftware'),
     re_path('uploadFile$', views.uploadFile, name='uploadFile'),
     re_path('downloadFile$', views.downloadFile, name='downloadFile'),
+    re_path('delFile$', views.delFile, name='delFile'),
     path('', views.index,name='index'),
     # re_path('^WeChat$' ,views.WeChat,name='WeChat'),
     # re_path('^navicat$' ,views.navicat,name='navicat'),
