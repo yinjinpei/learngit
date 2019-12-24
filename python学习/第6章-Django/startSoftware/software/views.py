@@ -73,6 +73,8 @@ def openAppHelper(request):
     print(clientIP)
     if request.method=='GET':
         appName = request.GET.get('name')  # 获取应用英文名即name参数
+        if appName is None:
+            return index(request)
         appDir = getAppDir(appName)
         logging.info("打开应用程序："+appDir)
         flag = openApp(appDir)
