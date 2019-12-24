@@ -153,5 +153,10 @@ def delSoftware(request):
     return render(request, 'software/delSoftware.html', locals())
 
 def uploadFile(request):
+    uploadFile_form = uploadFile(request.POST)
+    if uploadFile_form.is_valid():
+        if request.method == 'POST':
+            pass
+
     return render(request,'software/uploadFile.html')
     # return redirect('/uploadFile')
