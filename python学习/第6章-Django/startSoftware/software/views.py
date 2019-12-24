@@ -5,6 +5,8 @@ from django.db.models import Max, F, Q
 from django.http import HttpResponse
 # from win32 import win32api
 from .models import *
+from django.http import FileResponse
+from django.utils.encoding import escape_uri_path
 
 
 import logging
@@ -152,11 +154,43 @@ def delSoftware(request):
     delApp_form = DelSoftware()
     return render(request, 'software/delSoftware.html', locals())
 
-def uploadFile(request):
-    uploadFile_form = uploadFile(request.POST)
-    if uploadFile_form.is_valid():
-        if request.method == 'POST':
-            pass
 
-    return render(request,'software/uploadFile.html')
-    # return redirect('/uploadFile')
+def uploadFile(request):
+    path = 'uploads/'  # 上传文件路径，相对路径，在项目根目录下
+    if request.method == 'POST':
+        fileName=str(request.FILES['file']) # 上传的文件名
+        file=request.FILES['file']  #上传的文件对象
+        print(path+fileName)
+        if os.path.exists(path+fileName):
+            message='文件已存在，请重命名再上传！'
+            return render(request, 'software/uploadFile.html', locals())
+        if not os.path.exists(path):
+            os.makedirs(path)
+        with open(path + fileName, 'wb+')as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+        message="上传成功！！"
+    else:
+        fileList = os.listdir(path)
+        print(fileList)
+        for file in fileList:
+            print(path + file)
+        message='请选择上传文件！'
+        print(message)
+    return render(request, 'software/uploadFile.html', locals())
+
+
+def downloadFile(request):
+    path = 'uploads/'
+    filename = request.GET.get('name')
+    file = open(path+filename,'rb')
+    response = FileResponse(file)
+    response['Content-Type'] = 'application/octet-stream'
+    # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
+    response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(escape_uri_path(filename))
+        # IE浏览器，采用URLEncoder编码
+        # Opera浏览器，采用filename * 方式
+        # Safari浏览器，采用ISO编码的中文输出
+        # Chrome浏览器，采用Base64编码或ISO编码的中文输出
+        # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
+    return response
