@@ -142,3 +142,36 @@ def logout(request):
     return render(request, 'software/index.html')
 
 
+def modifyPassword(request):
+    print('修改密码')
+    if not request.session.get('is_login', None):
+        # 如果本来就未登录，也就没有修改一说
+        message = "请先登录！！"
+        login_form = UserForm()
+        return render(request, 'login/login.html', locals())
+
+    if request.method == "POST":
+        modifyPassword_form = ModifyPasswordForm(request.POST)
+        message = "验证码错误！！"
+        if modifyPassword_form.is_valid():  # 获取数据
+            oldPassword = modifyPassword_form.cleaned_data['oldPassword']
+            newPassword1 = modifyPassword_form.cleaned_data['newPassword1']
+            newPassword2 = modifyPassword_form.cleaned_data['newPassword2']
+            if newPassword1 != newPassword2:  # 判断两次密码是否相同
+                message = "两次输入的密码不同！"
+                return render(request, 'login/modifyPassword.html', locals())
+
+            username = request.session.get('user_name') #获取当前登录用户名
+            newPassword = hash_code(newPassword1)
+            print('新密码:'+newPassword)
+
+            user = User.userinfo.get(name=username) # 获取当前用户在数据库中的对象
+            if user.password == hash_code(oldPassword): #校验旧密码
+                user.password=newPassword   #更新密码
+                user.save() #保存
+                message = "修改密码成功！"
+            else:
+                message = "旧密码不正确！"
+
+    modifyPassword_form = ModifyPasswordForm()
+    return render(request, 'login/modifyPassword.html', locals())

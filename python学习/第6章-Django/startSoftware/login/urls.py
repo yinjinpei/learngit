@@ -11,6 +11,7 @@ urlpatterns = [
 
     re_path('login$', views.login,name='login'),
     re_path('register$', views.register,name='register'),
+    re_path('modifyPassword$', views.modifyPassword,name='modifyPassword'),
     re_path('logout$', views.logout,name='logout'),
     re_path('index$', views.index, name='index'),
     re_path('', views.index, name='index'),
