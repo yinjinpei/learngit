@@ -32,16 +32,43 @@
     </div>
 
 <!--文件列表    -->
+<!--<hr>-->
+    <!--{% if fileList %}-->
+        <!--<h3 style="color: #3e8f3e;font-weight: bold">文件列表：</h3>-->
+        <!--<ul>-->
+            <!--{% for file in fileObjectList %}-->
+                <!--<li id="li1"><a href="/downloadFile?name={{file}}" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">-->
+                    <!--{{file.downloadFileName}}</a> 大小：{{file.downloadFileSize}} 创建时间：{{file.downloadFileCreaTime}}</li>-->
+            <!--{% endfor %}-->
+        <!--</ul>-->
+    <!--{% endif %}-->
+<!--<hr>-->
+
+<!--文件列表 样式2    -->
 <hr>
-    {% if fileList %}
-        <h3 style="color: #3e8f3e;font-weight: bold">文件列表：</h3>
-        <ul>
-            {% for file in fileList %}
-                <li id="li1"><a href="/downloadFile?name={{file}}" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">{{file}}</a></li>
-            {% endfor %}
-        </ul>
+    {% if fileObjectList %}
+        <h3 style="color: #3e8f3e;font-weight: bold">文件下载列表：</h3>
+        <table border="0" width="400" height="180" cellspacing="50" style="border-collapse:separate; border-spacing:20px 8px;">
+            <tr>
+               <th>文件名</th>
+               <th>大小</th>
+               <th>创建时间</th>
+            </tr>
+                    {% for file in fileObjectList %}
+            <tr>
+                <td align="left" valign="middle"> <a href="/downloadFile?name={{file.downloadFileName}}" onmouseover="this.style.color='red';
+                    "onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">{{file.downloadFileName}}</a> </td>
+                <td align="left" valign="middle">{{file.downloadFileSize}}k</td>
+                <td align="left" valign="middle">{{file.downloadFileCreaTime}}</td>
+            </tr>
+                {% endfor %}
+
+        </table>
+
+
     {% endif %}
 <hr>
+
 
 <!--删除文件-->
 <div class="container">

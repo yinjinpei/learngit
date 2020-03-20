@@ -1,5 +1,7 @@
 # coding:utf-8
 import os
+import time
+import datetime
 from django.shortcuts import render,redirect
 from django.db.models import Max, F, Q
 from django.http import HttpResponse
@@ -168,7 +170,26 @@ def delFile(request):
             if os.path.exists(path+FileName):
                 os.remove(path+FileName)
                 delfile_message="删除成功！！"
+    fileObjectList=[]
+    class DownloadFileObject(object):
+        def __init__(self,name,size,creatTime):
+            self.downloadFileName=name
+            self.downloadFileSize=size
+            self.downloadFileCreaTime=creatTime
+
     fileList = os.listdir(path)
+    for file in fileList:
+        filepath=path+file
+        fileSize=os.path.getsize(filepath)
+        fileSize=fileSize/float(1024)
+        fileSize=round(fileSize, 2)
+
+        fileCreatTime = os.path.getctime(filepath)
+        fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
+        fileCreatTime=fileCreatTime.strftime('%x'+'_'+'%X')
+
+        fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
+        fileObjectList.append(fileObject)
     delFile_form = DelFile()
     return render(request, 'software/uploadFile.html', locals())
 
@@ -182,7 +203,28 @@ def uploadFile(request):
     path = 'uploads/'+request.session['user_name']+'/'  # 上传文件路径，相对路径，在项目根目录下
     if not os.path.exists(path):    #目录不存在则创建
         os.makedirs(path)
+
+    fileObjectList=[]
+    class DownloadFileObject(object):
+        def __init__(self,name,size,creatTime):
+            self.downloadFileName=name
+            self.downloadFileSize=size
+            self.downloadFileCreaTime=creatTime
+
     fileList = os.listdir(path)
+    for file in fileList:
+        filepath=path+file
+        fileSize=os.path.getsize(filepath)
+        fileSize=fileSize/float(1024)
+        fileSize=round(fileSize, 2)
+
+        fileCreatTime = os.path.getctime(filepath)
+        fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
+        fileCreatTime=fileCreatTime.strftime('%x'+'_'+'%X')
+
+        fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
+        fileObjectList.append(fileObject)
+
     # 判断上传是否为空
     try:
         request.FILES['file']
@@ -205,7 +247,26 @@ def uploadFile(request):
         message='请选择上传文件！'
         print(message)
 
+    fileObjectList=[]
+    class DownloadFileObject(object):
+        def __init__(self,name,size,creatTime):
+            self.downloadFileName=name
+            self.downloadFileSize=size
+            self.downloadFileCreaTime=creatTime
+
     fileList = os.listdir(path)
+    for file in fileList:
+        filepath=path+file
+        fileSize=os.path.getsize(filepath)
+        fileSize=fileSize/float(1024)
+        fileSize=round(fileSize, 2)
+
+        fileCreatTime = os.path.getctime(filepath)
+        fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
+        fileCreatTime=fileCreatTime.strftime('%x'+'_'+'%X')
+
+        fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
+        fileObjectList.append(fileObject)
     return render(request, 'software/uploadFile.html', locals())
 
 
