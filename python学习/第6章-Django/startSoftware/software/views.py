@@ -186,7 +186,7 @@ def delFile(request):
 
         fileCreatTime = os.path.getctime(filepath)
         fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
-        fileCreatTime=fileCreatTime.strftime('%x'+'_'+'%X')
+        fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
 
         fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
         fileObjectList.append(fileObject)
@@ -220,7 +220,7 @@ def uploadFile(request):
 
         fileCreatTime = os.path.getctime(filepath)
         fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
-        fileCreatTime=fileCreatTime.strftime('%x'+'_'+'%X')
+        fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
 
         fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
         fileObjectList.append(fileObject)
@@ -263,7 +263,7 @@ def uploadFile(request):
 
         fileCreatTime = os.path.getctime(filepath)
         fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
-        fileCreatTime=fileCreatTime.strftime('%x'+'_'+'%X')
+        fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
 
         fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
         fileObjectList.append(fileObject)
