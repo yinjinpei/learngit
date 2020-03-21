@@ -29,10 +29,42 @@ class AddSoftware(forms.Form):
     SoftwarePath = forms.CharField(label="应用启动路径", max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
-
 class DelSoftware(forms.Form):
     ChineseName = forms.CharField(label="应用中文名", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
 class DelFile(forms.Form):
     FileName = forms.CharField(label="删除文件，输入文件名：", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+class DateForm(forms.Form):
+    ServerIP = forms.CharField(label="服务器的IP", max_length=128, widget=forms.TextInput(attrs={'class': 'serverip'}))
+    # 实现可选的日期输入格式
+    # Date = forms.DateField(label='日期', widget=forms.DateInput(attrs={'type': 'date'}))
+    Datetime = forms.DateTimeField(label='日期和时间', input_formats=['%Y-%m-%dT%H:%M'],
+                                   widget=forms.DateTimeInput(attrs={'class': 'weui-input',
+                                                                     'type': 'datetime-local',
+                                                                     'emptyTips': '请选择时间'}))
+    ServerDatetime = forms.DateTimeField(label='日期和时间', input_formats=['%Y-%m-%dT%H:%M'],
+                                         widget=forms.DateTimeInput(attrs={'class': 'weui-input',
+                                                                           'type': 'datetime-local',
+                                                                           'emptyTips': '请选择时间'}))
+
+class TimingData(models.Model):
+    execTime = models.DateTimeField(default=None)
+    setTime = models.DateTimeField(default=None)
+    serverIP = models.CharField(max_length=20)
+    isDelete = models.BooleanField(default=False)
+    class Meta():
+        db_table='timingdata'
+
+    timers = models.Manager()
+    def showexectime(self):
+        return self.execTime
+    def showsetTime(self):
+        return self.setTime
+    def showserverIP(self):
+        return self.serverIP
+    def showID(self):
+        return self.pk
+

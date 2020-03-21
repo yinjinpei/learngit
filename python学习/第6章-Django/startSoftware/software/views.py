@@ -108,6 +108,7 @@ def addSoftware(request):
                     if ChineseName == user.remark:
                         message = "中文名重复，请取新的名字！！"
                         return render(request, 'software/addSoftware.html', locals())
+                # 如果提示某字段不能为空，请到数据库手工修改可以为空值，即把：不是null 的勾去掉
                 newApp = AppInfo.apps.create()
                 newApp.userName = request.session['user_name']
                 newApp.appName = EnglishName
@@ -284,3 +285,45 @@ def downloadFile(request):
             # Chrome浏览器，采用Base64编码或ISO编码的中文输出
             # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
         return response
+
+def setServerDate(request):
+    if not request.session.get('is_login', None):
+        uploadFile_message = "您尚未登录，使用【修改服务器时间】请先登录！！"
+        return render(request, 'software/index.html', locals())
+    print('===================')
+    # 获取数据库里的数据
+    timersList = TimingData.timers.all()
+    for timer in timersList:
+        print(timer.pk)
+        print(timer.execTime)
+        print(timer.setTime)
+        print(timer.serverIP)
+        print('===================')
+
+    message = '服务器时间定时修改'
+    if request.method == "POST":
+        date_form = DateForm(request.POST)  # DateForm 为models里对应的类名
+        print(date_form)
+        if date_form.is_valid():  # 如果有数据
+            Datetime = date_form.cleaned_data['Datetime']
+            ServerDatetime = date_form.cleaned_data['ServerDatetime']  # 获取日期和时间
+            ServerIP = date_form.cleaned_data['ServerIP']    # 获取IP
+            print(ServerIP)
+            print(Datetime.strftime("%Y-%m-%d %H:%M:%S"))
+            print(ServerDatetime.strftime("%Y-%m-%d %H:%M:%S"))
+            # 如果提示某字段不能为空，请到数据库手工修改可以为空值，即把：不是null 的勾去掉
+            print('创建数据库表实例开始----------------------------')
+            newTimer=TimingData.timers.create()
+            print('创建数据库表实例成功----------------------------')
+            newTimer.execTime = Datetime
+            print('添加执行时间成功----------------------------')
+            newTimer.setTime=ServerDatetime
+            print('添加设置成功----------------------------')
+            newTimer.serverIP=ServerIP
+            print('添加服务器IP成功----------------------------')
+            newTimer.save()
+            print('保存到数据库成功----------------------------')
+            message = '添加任务成功！！'
+
+    date_form=DateForm()
+    return render(request, 'software/setServerDate.html', locals())
