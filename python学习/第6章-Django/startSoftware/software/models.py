@@ -54,6 +54,7 @@ class TimingData(models.Model):
     execTime = models.DateTimeField(default=None)
     setTime = models.DateTimeField(default=None)
     serverIP = models.CharField(max_length=20)
+    clientJobID=models.CharField(max_length=128)
     isDelete = models.BooleanField(default=False)
     class Meta():
         db_table='timingdata'
@@ -65,6 +66,10 @@ class TimingData(models.Model):
         return self.setTime
     def showserverIP(self):
         return self.serverIP
+    def showclientJobID(self):
+        return self.clientJobID
     def showID(self):
         return self.pk
+    def showisDelete(self):
+        return self.isDelete
 

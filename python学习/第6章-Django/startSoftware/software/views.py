@@ -308,22 +308,115 @@ def setServerDate(request):
             Datetime = date_form.cleaned_data['Datetime']
             ServerDatetime = date_form.cleaned_data['ServerDatetime']  # 获取日期和时间
             ServerIP = date_form.cleaned_data['ServerIP']    # 获取IP
+            MyJobID = request.session['user_name']+'_'+datetime.datetime.now().strftime("%Y%m%d%H%M%S")
             print(ServerIP)
             print(Datetime.strftime("%Y-%m-%d %H:%M:%S"))
             print(ServerDatetime.strftime("%Y-%m-%d %H:%M:%S"))
+            print(MyJobID)
+
             # 如果提示某字段不能为空，请到数据库手工修改可以为空值，即把：不是null 的勾去掉
             print('创建数据库表实例开始----------------------------')
-            newTimer=TimingData.timers.create()
-            print('创建数据库表实例成功----------------------------')
+            newTimer = TimingData.timers.create()
+            print('添加执行时间----------------------------')
             newTimer.execTime = Datetime
-            print('添加执行时间成功----------------------------')
+            print('添加设置----------------------------')
             newTimer.setTime=ServerDatetime
-            print('添加设置成功----------------------------')
+            print('添加服务器IP----------------------------')
             newTimer.serverIP=ServerIP
-            print('添加服务器IP成功----------------------------')
+            print('添加线程my_job_id----------------------------')
+            newTimer.clientJobID=MyJobID
+            print('保存到数据库----------------------------')
             newTimer.save()
-            print('保存到数据库成功----------------------------')
-            message = '添加任务成功！！'
+
+            # s1 = TheServerHelper('192.168.0.200', 'root', '123456', 'ls -lh')
+            # s1.ssh_connectionServer()
+            # 设置服务器时间
+            def timerHelper(MyJobID):
+                __username='root'
+                __password='123456'
+                class TheServerHelper():
+                    """初始化函数构造
+                        其中commond作为执行的语句"""
+                    def __init__(self, serverIP, username, password, commond, port=22):
+                        self.serverIP = serverIP
+                        self.username = username
+                        self.password = password
+                        self.port = port
+                        self.setdatetime = commond
+                    # SSH连接服务器，用于命令执行
+                    def ssh_connectionServer(self):
+                        import paramiko
+                        try:
+                            print('创建SSH对象--------')
+                            # 创建SSH对象
+                            sf = paramiko.SSHClient()
+                            # 允许连接不在know_hosts文件中的主机
+                            sf.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                            print('开始连接服务器')
+                            # 连接服务器
+                            sf.connect(hostname=self.serverIP, port=self.port, username=self.username,
+                                       password=self.password)
+                            set_time = 'date -s "%s"' % (self.setdatetime)
+                            print('\033[33m %s \033[0m'%set_time)
+                            # 注意：依次执行多条命令时，命令之间用分号隔开
+                            stdin, stdout, stderr = sf.exec_command(set_time)
+                            result = stdout.read().decode('utf-8')
+                            time.sleep(3)
+                            stdin, stdout, stderr = sf.exec_command('ls -lh')
+                            result = stdout.read().decode('utf-8')
+                            print("\033[33m 执行成功！ %s \033[0m" % result)
+                        except:
+                            print("SSHConnection " + self.serverIP + " failed!")
+                            return False
+                        return True
+
+                # 获取数据库对面任务的信息
+                timerInfo = TimingData.timers.all()  # 获取所有对象显示到页面
+                for timer in timerInfo:
+                    clientJobID = timer.clientJobID
+                    if clientJobID == MyJobID:
+                        jobisDelete=timer.isDelete
+                        serverIP=timer.serverIP
+                        setTime=timer.setTime.strftime("%Y-%m-%d %H:%M:%S") # 获取日期 如：2020-3-23 12:11:00
+                        print('--------------')
+                        print(setTime)
+                        print('--------------')
+                        print(clientJobID,jobisDelete)
+
+                        # 判断任务是否被删除了
+                        if jobisDelete == 0:
+                            # 执行任务
+                            serverHelper=TheServerHelper(serverIP, __username, __password, setTime, port=22)
+                            serverHelper.ssh_connectionServer()
+                        break
+
+            def createTimedTasks(MyJobID,year,month,day,hour,minute,second):
+                from apscheduler.schedulers.background import BackgroundScheduler
+                sched = BackgroundScheduler()
+                # cron定时调度（某一定时时刻执行），表示2017年3月22日17时19分07秒执行该程序
+                sched.add_job(timerHelper, 'cron',id=MyJobID,
+                              year=year, month=month, day=day, hour=hour, minute=minute, second=second,args=[MyJobID])
+
+                # interval间隔调度，4个参数分别为：函数、类型、线程id、执行时间间隔
+                # sched.add_job(job, 'interval', id=job_id, seconds=1)
+
+                # date 定时调度（作业只会执行一次）
+                # The job will be executed on November 6th, 2009 at 16:30:05
+                # sched.add_job(my_job, 'date', run_date=datetime(2009, 11, 6, 16, 30, 5), args=['text'])
+
+                sched.start()
+
+
+            message = '添加定时任务成功！！'
+
+            exec_year=Datetime.strftime('%Y')
+            exec_month=Datetime.strftime('%m')
+            exec_day=Datetime.strftime('%d')
+            exec_hour=Datetime.strftime('%H')
+            exec_minute=Datetime.strftime('%M')
+            exec_second=Datetime.strftime('%S')
+            createTimedTasks(MyJobID,exec_year,exec_month,exec_day,exec_hour,exec_minute,exec_second)
+
 
     date_form=DateForm()
     return render(request, 'software/setServerDate.html', locals())
