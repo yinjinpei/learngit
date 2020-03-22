@@ -361,6 +361,7 @@ def setServerDate(request):
                             # 注意：依次执行多条命令时，命令之间用分号隔开
                             stdin, stdout, stderr = sf.exec_command(set_time)
                             result = stdout.read().decode('utf-8')
+                            print("\033[33m 执行成功！ %s \033[0m" % result)
                             time.sleep(3)
                             stdin, stdout, stderr = sf.exec_command('ls -lh')
                             result = stdout.read().decode('utf-8')
