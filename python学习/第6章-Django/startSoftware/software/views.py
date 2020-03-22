@@ -361,13 +361,14 @@ def setServerDate(request):
                             # 注意：依次执行多条命令时，命令之间用分号隔开
                             stdin, stdout, stderr = sf.exec_command(set_time)
                             result = stdout.read().decode('utf-8')
-                            print("\033[33m 执行成功！ %s \033[0m" % result)
+                            # print("\033[32m 命令执行成功！ %s \033[0m" % result)
+                            print("命令执行成功！\n结果如下：\n%s" % result)
                             time.sleep(3)
                             stdin, stdout, stderr = sf.exec_command('ls -lh')
                             result = stdout.read().decode('utf-8')
-                            print("\033[33m 执行成功！ %s \033[0m" % result)
+                            print("命令执行成功！\n结果如下：\n%s" % result)
                         except:
-                            print("SSHConnection " + self.serverIP + " failed!")
+                            print("连接服务器：" + self.serverIP + " 失败了!")
                             return False
                         return True
 
@@ -379,9 +380,6 @@ def setServerDate(request):
                         jobisDelete=timer.isDelete
                         serverIP=timer.serverIP
                         setTime=timer.setTime.strftime("%Y-%m-%d %H:%M:%S") # 获取日期 如：2020-3-23 12:11:00
-                        print('--------------')
-                        print(setTime)
-                        print('--------------')
                         print(clientJobID,jobisDelete)
 
                         # 判断任务是否被删除了
@@ -404,10 +402,7 @@ def setServerDate(request):
                 # date 定时调度（作业只会执行一次）
                 # The job will be executed on November 6th, 2009 at 16:30:05
                 # sched.add_job(my_job, 'date', run_date=datetime(2009, 11, 6, 16, 30, 5), args=['text'])
-
                 sched.start()
-
-
             message = '添加定时任务成功！！'
 
             exec_year=Datetime.strftime('%Y')
@@ -417,7 +412,6 @@ def setServerDate(request):
             exec_minute=Datetime.strftime('%M')
             exec_second=Datetime.strftime('%S')
             createTimedTasks(MyJobID,exec_year,exec_month,exec_day,exec_hour,exec_minute,exec_second)
-
 
     date_form=DateForm()
     return render(request, 'software/setServerDate.html', locals())
