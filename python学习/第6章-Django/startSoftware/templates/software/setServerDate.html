@@ -4,43 +4,76 @@
 {% block content %}
 <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
 <hr>
-{% block showTimingDate %}
-    定时任务表
 
-{% endblock %}
-<hr>
 <div class="container">
-        <div class="col-md-4 col-md-offset-4">
-            <form class='form-register' action="setServerDate" method="post">
-                <div class="alert alert-warning">
-                    {% if message %}
-                        <h3 style="color: #3c763d">{{message}}</h3>
-                    {% endif %}
-                </div>
-                {% csrf_token %}
-                <h3>执行日期和时间</h3>
-                <div class="form-group">
-                    {{ date_form.Datetime.label_tag }}
-                    {{ date_form.Datetime }}
-                </div>
-                <hr>
-                <h3>服务器信息填写</h3>
-                <div class="form-group">
-                    {{ date_form.ServerIP.label_tag }}
-                    {{ date_form.ServerIP }}
-                </div>
-
-                <div class="form-group">
-                    {{ date_form.ServerDatetime.label_tag }}
-                    {{ date_form.ServerDatetime }}
-                </div>
-
-                <button type="reset" class="btn btn-default pull-left">重置</button>
-                <button type="submit" class="btn btn-primary pull-right">提交</button>
-
-          </form>
+    <form class='form-register' action="delServerDate" method="post">
+        {% csrf_token %}
+        <div class="alert alert-warning">
+            {% if message %}
+                <h3 style="color: #3c763d">定时任务列表</h3>
+            {% endif %}
+            {% if msg %}
+                <h3 style="color: #3c763d">{{msg}}</h3>
+            {% endif %}
         </div>
-    </div> <!-- /container -->
+        <table cellspacing="50" style="border-collapse:separate; border-spacing:20px 8px;">
+            <tr  style="font-size: 16px">
+                <th>线程ID</th>
+                <th>执行时间</th>
+                <th>设置目标时间</th>
+                <th>目标服务器IP</th>
+            </tr>
+            {% for roleInfo in timersList %}
+                {% if roleInfo.isDelete %}
+                    {{continue}}
+            {% else %}
+                    <tr style="font-size: 16px">
+                        <td align="left" valign="middle">{{roleInfo.clientJobID}} </td>
+                        <td align="left" valign="middle">{{roleInfo.execTime}}:00 </td>
+                        <td align="left" valign="middle">{{roleInfo.setTime}}:00</td>
+                        <td align="left" valign="middle">{{roleInfo.serverIP}}</td>
+                        <!--<td align="left" valign="middle">-->
+                            <!--<button type="submit" class="btn btn-primary pull-right">删除</button>-->
+                        <!--</td>-->
+                    </tr>
+            {% endif %}
+                {% endfor %}
+        </table>
+        <h4 style="color: red">删除定时任务:（填写线程ID）</h4>
+        <div class="form-group" style="font-size: 18px">
+            {{ deldate_form.MyJobID.label_tag }}
+            {{ deldate_form.MyJobID }}
+            <button type="submit" class="btn btn-primary">删除</button>
+        </div>
+    </form>
+    <form class='form-register' action="setServerDate" method="post">
+        <div class="alert alert-warning">
+            {% if message %}
+            <h3 style="color: #3c763d">{{message}}</h3>
+            {% endif %}
+        </div>
+        {% csrf_token %}
+        <h3 style="color: blue">执行日期和时间:</h3>
+        <div class="form-group" style="font-size: 18px">
+            {{ date_form.Datetime.label_tag }}
+            {{ date_form.Datetime }}
+        </div>
+        <h3 style="color: blue">服务器信息填写:</h3>
+        <div class="form-group" style="font-size: 18px">
+            {{ date_form.ServerIP.label_tag }}
+            {{ date_form.ServerIP }}
+        </div>
+        <div class="form-group" style="font-size: 18px">
+            {{ date_form.ServerDatetime.label_tag }}
+            {{ date_form.ServerDatetime }}
+        </div>
+        <!--<div class="col-md-4">-->
+        <button type="reset" class="btn btn-default pull-left">重置</button>
+        <button type="submit" class="btn btn-primary pull-right">提交</button>
+        <!--</div> &lt;!&ndash; /container &ndash;&gt;-->
+    </form>
+        </div>
+
 <hr>
 <a href="/">返回首页</a>
 <hr>

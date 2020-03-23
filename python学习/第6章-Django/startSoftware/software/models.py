@@ -50,9 +50,12 @@ class DateForm(forms.Form):
                                                                            'type': 'datetime-local',
                                                                            'emptyTips': '请选择时间'}))
 
+class DelForm(forms.Form):
+    MyJobID = forms.CharField(label="线程ID", max_length=128, widget=forms.TextInput(attrs={'class': 'myjobid'}))
+
 class TimingData(models.Model):
-    execTime = models.DateTimeField(default=None)
-    setTime = models.DateTimeField(default=None)
+    execTime = models.DateTimeField()
+    setTime = models.DateTimeField()
     serverIP = models.CharField(max_length=20)
     clientJobID=models.CharField(max_length=128)
     isDelete = models.BooleanField(default=False)

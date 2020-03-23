@@ -294,13 +294,15 @@ def setServerDate(request):
     # 获取数据库里的数据
     timersList = TimingData.timers.all()
     for timer in timersList:
+        print('===================')
         print(timer.pk)
+        print(timer.clientJobID)
         print(timer.execTime)
         print(timer.setTime)
         print(timer.serverIP)
         print('===================')
 
-    message = '服务器时间定时修改'
+    message = '添加定时任务'
     if request.method == "POST":
         date_form = DateForm(request.POST)  # DateForm 为models里对应的类名
         print(date_form)
@@ -328,8 +330,6 @@ def setServerDate(request):
             print('保存到数据库----------------------------')
             newTimer.save()
 
-            # s1 = TheServerHelper('192.168.0.200', 'root', '123456', 'ls -lh')
-            # s1.ssh_connectionServer()
             # 设置服务器时间
             def timerHelper(MyJobID):
                 __username='root'
@@ -346,6 +346,13 @@ def setServerDate(request):
                     # SSH连接服务器，用于命令执行
                     def ssh_connectionServer(self):
                         import paramiko
+                        print(self.serverIP)
+                        print(self.username)
+                        print(self.password)
+                        print(self.port)
+                        set_time = 'date -s "%s"' % (self.setdatetime)
+                        print(set_time)
+
                         try:
                             print('创建SSH对象--------')
                             # 创建SSH对象
@@ -356,15 +363,14 @@ def setServerDate(request):
                             # 连接服务器
                             sf.connect(hostname=self.serverIP, port=self.port, username=self.username,
                                        password=self.password)
-                            set_time = 'date -s "%s"' % (self.setdatetime)
-                            print('\033[33m %s \033[0m'%set_time)
+                            print('连接服务器成功！')
+
                             # 注意：依次执行多条命令时，命令之间用分号隔开
                             stdin, stdout, stderr = sf.exec_command(set_time)
                             result = stdout.read().decode('utf-8')
-                            # print("\033[32m 命令执行成功！ %s \033[0m" % result)
                             print("命令执行成功！\n结果如下：\n%s" % result)
                             time.sleep(3)
-                            stdin, stdout, stderr = sf.exec_command('ls -lh')
+                            stdin, stdout, stderr = sf.exec_command('date')
                             result = stdout.read().decode('utf-8')
                             print("命令执行成功！\n结果如下：\n%s" % result)
                         except:
@@ -372,7 +378,7 @@ def setServerDate(request):
                             return False
                         return True
 
-                # 获取数据库对面任务的信息
+                # 获取数据库定时任务的信息
                 timerInfo = TimingData.timers.all()  # 获取所有对象显示到页面
                 for timer in timerInfo:
                     clientJobID = timer.clientJobID
@@ -387,6 +393,8 @@ def setServerDate(request):
                             # 执行任务
                             serverHelper=TheServerHelper(serverIP, __username, __password, setTime, port=22)
                             serverHelper.ssh_connectionServer()
+                            timerInfo = TimingData.timers.get(clientJobID=MyJobID)
+                            timerInfo.delete()
                         break
 
             def createTimedTasks(MyJobID,year,month,day,hour,minute,second):
@@ -413,5 +421,28 @@ def setServerDate(request):
             exec_second=Datetime.strftime('%S')
             createTimedTasks(MyJobID,exec_year,exec_month,exec_day,exec_hour,exec_minute,exec_second)
 
+    timersList = TimingData.timers.all()
     date_form=DateForm()
+    deldate_form=DelForm()
+    return render(request, 'software/setServerDate.html', locals())
+
+
+def delServerDate(request):
+    if request.method == "POST":
+        deldate_form = DelForm(request.POST)  # DateForm 为models里对应的类名,作为date_form.is_valid()铺垫
+
+        try:
+            if deldate_form.is_valid():  # 如果有数据，models里对应的类名,类里面有几个变量就获取几个，如果有一个报错则为空
+                MyJobID = deldate_form.cleaned_data['MyJobID']  # 获取线程ID
+                timerInfo = TimingData.timers.get(clientJobID=MyJobID)
+                timerInfo.delete()
+                msg='删除数据成功!'
+                print(msg)
+        except:
+            msg = '删除数据失败!'
+            print(msg)
+    message = '添加定时任务'
+    timersList = TimingData.timers.all()
+    date_form = DateForm()
+    deldate_form = DelForm()
     return render(request, 'software/setServerDate.html', locals())
