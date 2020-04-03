@@ -31,3 +31,8 @@ class createKey():
         print('set path is ok')
 
 regedit = createKey()
+
+
+
+
+import win32com.client
