@@ -493,7 +493,7 @@ def exec_command(request):
                 # ssh.close()  # 关闭ssh连接
                 # print('ssh连接结束！')
 
-                # break
+                break
             else:
                 request.websocket.send('小样儿，没权限!!!'.encode('utf-8'))
 

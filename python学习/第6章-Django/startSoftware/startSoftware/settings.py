@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'software',
     'login',
     'captcha',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -181,3 +182,18 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+# 这里对应刚刚创建的routing文件中的application
+ASGI_APPLICATION = 'startSoftware.routing.application'
+
+# 通道层配置
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+
+        # 不使用redis，使用内存
+        # 'CONFIG': {
+        #     "hosts": [('127.0.0.1', 6379)],
+        # },
+    },
+}
