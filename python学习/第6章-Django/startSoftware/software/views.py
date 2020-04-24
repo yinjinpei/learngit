@@ -2,7 +2,7 @@
 import os
 import time
 import datetime
-import redis
+# import redis
 from django.shortcuts import render,redirect
 from django.db.models import Max, F, Q
 from django.http import HttpResponse
@@ -10,7 +10,7 @@ from django.http import HttpResponse
 from .models import *
 from django.http import FileResponse
 from django.utils.encoding import escape_uri_path
-from dwebsocket.decorators import accept_websocket, require_websocket
+# from dwebsocket.decorators import accept_websocket, require_websocket
 import paramiko
 
 import logging
@@ -449,63 +449,63 @@ def delServerDate(request):
     return render(request, 'software/setServerDate.html', locals())
 
 
-@accept_websocket
-def exec_command(request):
-    if not request.is_websocket():  # 判断是不是websocket连接
-        try:  # 如果是普通的http方法
-            message = request.GET['message']
-            return HttpResponse(message)
-        except:
-            return render(request, 'software/exec_command.html')
-    else:
-        for message in request.websocket:
-            print(request.is_websocket)
-            print(message)
-            message = message.decode('utf-8')  # 接收前端发来的数据
-            print(message)
-            if message == 'backup_all':  # 这里根据web页面获取的值进行对应的操作
-                command = 'bash /opt/test.sh'  # 这里是要执行的命令或者脚本
-
-                # 远程连接服务器
-                hostname = '192.168.0.200'
-                username = 'root'
-                password = '123456'
-
-                ssh = paramiko.SSHClient()
-                ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                ssh.connect(hostname=hostname, username=username, password=password)
-                # 务必要加上get_pty=True,否则执行命令会没有权限
-                print('开始执行命令')
-                stdin, stdout, stderr = ssh.exec_command(command, get_pty=True)
-                message = stdout.read()  # 读取脚本输出内容
-                request.websocket.send(message)  # 发送消息到客户端
-                print(message.decode('utf-8'))
-
-                # 循环发送消息给前端页面
-                # while True:
-                #     print('开始打印')
-                #     message = stdout.readline().strip()  # 读取脚本输出内容
-                #     request.websocket.send(message)  # 发送消息到客户端
-                #     # 判断消息为空时,退出循环
-                #     print('打印结束')
-                #     if not message:
-                #         break
-                # ssh.close()  # 关闭ssh连接
-                # print('ssh连接结束！')
-
-                break
-            else:
-                request.websocket.send('小样儿，没权限!!!'.encode('utf-8'))
-
-@accept_websocket
-def websocket_test(request):
-    if not request.is_websocket():  # 判断是不是websocket连接
-        try:  # 如果是普通的http方法
-            message = request.GET['message']
-            print(message)
-            return HttpResponse(message)
-        except:
-            return render(request, 'software/websocker_test.html')
-    else:
-        for message in request.websocket:
-            request.websocket.send(message)#发送消息到客户端
+# @accept_websocket
+# def exec_command(request):
+#     if not request.is_websocket():  # 判断是不是websocket连接
+#         try:  # 如果是普通的http方法
+#             message = request.GET['message']
+#             return HttpResponse(message)
+#         except:
+#             return render(request, 'software/exec_command.html')
+#     else:
+#         for message in request.websocket:
+#             print(request.is_websocket)
+#             print(message)
+#             message = message.decode('utf-8')  # 接收前端发来的数据
+#             print(message)
+#             if message == 'backup_all':  # 这里根据web页面获取的值进行对应的操作
+#                 command = 'bash /opt/test.sh'  # 这里是要执行的命令或者脚本
+#
+#                 # 远程连接服务器
+#                 hostname = '192.168.0.200'
+#                 username = 'root'
+#                 password = '123456'
+#
+#                 ssh = paramiko.SSHClient()
+#                 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+#                 ssh.connect(hostname=hostname, username=username, password=password)
+#                 # 务必要加上get_pty=True,否则执行命令会没有权限
+#                 print('开始执行命令')
+#                 stdin, stdout, stderr = ssh.exec_command(command, get_pty=True)
+#                 message = stdout.read()  # 读取脚本输出内容
+#                 request.websocket.send(message)  # 发送消息到客户端
+#                 print(message.decode('utf-8'))
+#
+#                 # 循环发送消息给前端页面
+#                 # while True:
+#                 #     print('开始打印')
+#                 #     message = stdout.readline().strip()  # 读取脚本输出内容
+#                 #     request.websocket.send(message)  # 发送消息到客户端
+#                 #     # 判断消息为空时,退出循环
+#                 #     print('打印结束')
+#                 #     if not message:
+#                 #         break
+#                 # ssh.close()  # 关闭ssh连接
+#                 # print('ssh连接结束！')
+#
+#                 break
+#             else:
+#                 request.websocket.send('小样儿，没权限!!!'.encode('utf-8'))
+#
+# @accept_websocket
+# def websocket_test(request):
+#     if not request.is_websocket():  # 判断是不是websocket连接
+#         try:  # 如果是普通的http方法
+#             message = request.GET['message']
+#             print(message)
+#             return HttpResponse(message)
+#         except:
+#             return render(request, 'software/websocker_test.html')
+#     else:
+#         for message in request.websocket:
+#             request.websocket.send(message)#发送消息到客户端
