@@ -171,16 +171,17 @@ def delFile(request):
         print('===================----------------=======================')
         print(downloadFileName)
         print('===================----------------=======================')
-        if os.path.exists(path + downloadFileName):
-            os.remove(path + downloadFileName)
-            delfile_message = "删除成功！！"
+        if downloadFileName is not None:
+            if os.path.exists(path + downloadFileName):
+                os.remove(path + downloadFileName)
+                del_file_message = "%s 删除成功！！"%downloadFileName
 
         delFile_form = DelFile(request.POST)
         if delFile_form.is_valid(): # 如果有数据
             FileName = delFile_form.cleaned_data['FileName']    # 获取删除的文件名
             if os.path.exists(path+FileName):
                 os.remove(path+FileName)
-                delfile_message="删除成功！！"
+                delfile_message="%s 删除成功！！"%FileName
     fileObjectList=[]
     class DownloadFileObject(object):
         def __init__(self,name,size,creatTime):
@@ -267,7 +268,7 @@ def uploadFile(request):
         if len(upload_list_successful) !=0:
             upload_successful_message="成功列表：%s"%upload_list_successful
         if len(repeatFileList) != 0:
-            upload_failure_message = "部分文件重名，请重新命名再上传！  失败列表:%s"%repeatFileList
+            upload_failure_message = "%d个文件重名，请重新命名再上传！  失败列表:%s"%(len(repeatFileList),repeatFileList)
     else:
         message='请选择上传文件！'
         print(message)
