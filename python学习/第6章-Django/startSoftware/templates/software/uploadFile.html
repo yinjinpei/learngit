@@ -3,9 +3,7 @@
 {% extends 'software_base.html' %}
 {% load staticfiles %}
 
-{% block scripts %}
-
-{% endblock %}
+{% block title %}上传文件{% endblock %}
 
 {% block content %}
 <div class="col-md-8 col-md-offset-2"  style="margin-left: 30px;margin-right: 30px">
@@ -79,7 +77,7 @@
                 <td align="left" valign="middle">
                     <form class='form-register' action="delFile" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
                         {% csrf_token %}
-                        <button type="submit" style="color: red;background-color: dodgerblue" name="downloadFileName" value="{{file.downloadFileName}}">删除</button>
+                        <button type="submit" style="color: #ffffff;background-color: #2e6da4" name="downloadFileName" value="{{file.downloadFileName}}">删除</button>
                     </form>
                 </td>
             </tr>

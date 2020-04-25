@@ -34,7 +34,7 @@ class DelSoftware(forms.Form):
 
 
 class DelFile(forms.Form):
-    FileName = forms.CharField(label="输入文件名可直接删除，请输入文件名", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    FileName = forms.CharField(label="输入完整的文件名可直接删除", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
 class DateForm(forms.Form):
