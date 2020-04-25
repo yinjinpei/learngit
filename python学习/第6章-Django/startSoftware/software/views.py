@@ -182,6 +182,8 @@ def delFile(request):
             if os.path.exists(path+FileName):
                 os.remove(path+FileName)
                 delfile_message="%s 删除成功！！"%FileName
+            else:
+                delfile_message = "%s文件不存在，删除失败！！" % FileName
     fileObjectList=[]
     class DownloadFileObject(object):
         def __init__(self,name,size,creatTime):
