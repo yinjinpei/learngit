@@ -17,6 +17,7 @@ urlpatterns = [
     re_path('delServerDate$', views.delServerDate, name='delServerDate'),
     # re_path('exec_command$', views.exec_command, name='exec_command'),
     # re_path('websocket_test$', views.websocket_test, name='websocket_test'),
+    re_path('test$', views.test, name='test'),
     path('', views.index,name='index'),
     # re_path('^WeChat$' ,views.WeChat,name='WeChat'),
     # re_path('^navicat$' ,views.navicat,name='navicat'),

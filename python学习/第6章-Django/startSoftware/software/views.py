@@ -167,6 +167,14 @@ def delFile(request):
     if not os.path.exists(path):  # 目录不存在则创建
         os.makedirs(path)
     if request.method == "POST":
+        downloadFileName = request.POST.get('downloadFileName')
+        print('===================----------------=======================')
+        print(downloadFileName)
+        print('===================----------------=======================')
+        if os.path.exists(path + downloadFileName):
+            os.remove(path + downloadFileName)
+            delfile_message = "删除成功！！"
+
         delFile_form = DelFile(request.POST)
         if delFile_form.is_valid(): # 如果有数据
             FileName = delFile_form.cleaned_data['FileName']    # 获取删除的文件名
@@ -236,16 +244,30 @@ def uploadFile(request):
         return render(request, 'software/uploadFile.html', locals())
 
     if request.method == 'POST':
-        fileName=str(request.FILES['file']) # 上传的文件名
-        file=request.FILES['file']  #上传的文件对象
-        print(path+fileName)
-        if os.path.exists(path+fileName):
-            message='文件已存在，请重命名再上传！'
-            return render(request, 'software/uploadFile.html', locals())
-        with open(path + fileName, 'wb+')as destination:
-            for chunk in file.chunks():
-                destination.write(chunk)
-        message="上传成功！！"
+        uploadFileList=request.FILES.getlist('file') # 获取所有上传的文件对象
+        repeatFileList = [] # 记录重名的文件名
+        upload_list_successful=[] # 记录上传成功的文件名
+
+        repeatFileSum=0 # 重名文件的总个数
+        for file in uploadFileList:
+            fileName=str(file) # 上传的文件名
+            print("================== 文件名%s============="%file)
+            file=request.FILES['file']  #上传的文件对象
+            print(path+fileName)
+            if os.path.exists(path+fileName):
+                repeatFileList.append(fileName) # 记录重名的文件名
+                continue
+                # return render(request, 'software/uploadFile.html', locals())
+            with open(path + fileName, 'wb+')as destination:
+                for chunk in file.chunks():
+                    destination.write(chunk)
+            upload_list_successful.append(fileName) # 记录成功上传的文件名
+
+        message="%d个文件上传成功，%d个文件上传失败！！"%(len(upload_list_successful),len(repeatFileList))
+        if len(upload_list_successful) !=0:
+            upload_successful_message="成功列表：%s"%upload_list_successful
+        if len(repeatFileList) != 0:
+            upload_failure_message = "部分文件重名，请重新命名再上传！  失败列表:%s"%repeatFileList
     else:
         message='请选择上传文件！'
         print(message)
@@ -509,3 +531,7 @@ def delServerDate(request):
 #     else:
 #         for message in request.websocket:
 #             request.websocket.send(message)#发送消息到客户端
+
+
+def test(request):
+    return render(request, 'test.html', locals())

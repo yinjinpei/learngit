@@ -8,16 +8,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>{% block title %}base{% endblock %}</title>
+    <style>
+      .bar {
+        height: 18px;
+        background: green;
+      }
 
-    <script src="{% static 'jQuery-File-Upload-master/js/jquery-3.3.1.js' %}"></script>
+    </style>
 
     <![endif]-->
     {% block css %}{% endblock %}
   </head>
   <body>
 
-    {% block content %}{% endblock %}
+    <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{% static 'jQuery-File-Upload-master/js/vendor/jquery.ui.widget.js' %}"></script>
+    <script src="{% static 'jQuery-File-Upload-master/js/jquery.iframe-transport.js' %}"></script>
+    <script src="{% static 'jQuery-File-Upload-master/js/jquery.fileupload.js' %}"></script>
 
+<script>
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                $('<p/>').text(file.name).appendTo(document.body);
+            });
+        }
+    });
+});
+$('#fileupload').fileupload({
+    /* ... */
+    progressall: function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .bar').css(
+            'width',
+            progress + '%'
+        );
+    }
+});
+</script>
+
+    {% block content %}{% endblock %}
+<div id="progress">
+    <div class="bar" style="width: 0%;"></div>
+</div>
 
   </body>
 </html>
