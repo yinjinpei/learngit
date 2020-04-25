@@ -266,9 +266,9 @@ def uploadFile(request):
 
         message="%d个文件上传成功，%d个文件上传失败！！"%(len(upload_list_successful),len(repeatFileList))
         if len(upload_list_successful) !=0:
-            upload_successful_message="成功列表：%s"%upload_list_successful
+            upload_successful_message="上传成功列表：%s"%upload_list_successful
         if len(repeatFileList) != 0:
-            upload_failure_message = "%d个文件重名，请重新命名再上传！  失败列表:%s"%(len(repeatFileList),repeatFileList)
+            upload_failure_message = "【%d个文件重名，请重新命名再上传！】 上传失败列表:%s"%(len(repeatFileList),repeatFileList)
     else:
         message='请选择上传文件！'
         print(message)
