@@ -76,3 +76,56 @@ class TimingData(models.Model):
     def showisDelete(self):
         return self.isDelete
 
+# 领域
+class DomainList(models.Model):
+    # 领域名
+    domainName = models.CharField(max_length=20)
+    # 版本号
+    # version = models.CharField(max_length=10)
+    # 投产时间
+    # starttime = models.DateTimeField()
+    # 版本检查清单
+    checklist = models.BooleanField(default=True)
+    # 需要文档
+    demand_doc=models.BooleanField(default=True)
+    # 需要评审
+    demand_review=models.BooleanField(default=True)
+    # 安全评审
+    safety_review=models.BooleanField(default=True)
+    # 代码评审
+    code_review=models.BooleanField(default=True)
+    # sit测试报告
+    sit_report=models.BooleanField(default=True)
+    # uat测试报告
+    uat_report=models.BooleanField(default=True)
+    # 安全报告
+    safety_report=models.BooleanField(default=True)
+    # 代码安全扫描报告
+    code_security_scan_report=models.BooleanField(default=True)
+    # 代码质量扫描报告
+    code_quality_scan_report = models.BooleanField(default=True)
+    # SQM审核报告
+    sqm_report = models.BooleanField(default=True)
+    # DBA脚本评审报告
+    dba_review= models.BooleanField(default=True)
+    # 回归测试报告
+    regress_review = models.BooleanField(default=True)
+    # 生产验证报告
+    verification_review = models.BooleanField(default=True)
+
+    isDelete = models.BooleanField(default=False)
+    class Meta():
+        db_table='domainList'
+
+    domain = models.Manager()
+    def showID(self):
+        return self.pk
+    def showDomainName(self):
+        return self.domainName
+    # def showStarttime(self):
+    #     return self.starttime
+    # def showVersion(self):
+    #     return self.version
+    def showisDelete(self):
+        return self.isDelete
+
