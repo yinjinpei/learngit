@@ -34,8 +34,6 @@
 <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
 <hr>
 <div class="container">
-    <form class='form-register' action="delServerDate" method="post">
-        {% csrf_token %}
         <input id="btn" type="button" name="" value="切换">
         <div id="con" >隐藏窗口&显示窗口</div>
         <hr>
@@ -44,7 +42,10 @@
                 <h3 style="color: #3c763d">定时任务列表</h3>
             {% endif %}
             {% if msg %}
-                <h3 style="color: #3c763d">{{msg}}</h3>
+                <h4 style="color: #3c763d">{{successful_message}}</h4>
+            {% endif %}
+            {% if msg %}
+                <h4 style="color: #3c763d">{{failure_msg}}</h4>
             {% endif %}
         </div>
         <table cellspacing="50" style="border-collapse:separate; border-spacing:20px 8px;border:2px solid lightskyblue;">
@@ -53,6 +54,7 @@
                 <th>执行时间</th>
                 <th>设置目标时间</th>
                 <th>目标服务器IP</th>
+                <th></th>
             </tr>
             {% for roleInfo in timersList %}
                 {% if roleInfo.isDelete %}
@@ -63,20 +65,28 @@
                         <td align="left" valign="middle">{{roleInfo.execTime}}:00 </td>
                         <td align="left" valign="middle">{{roleInfo.setTime}}:00</td>
                         <td align="left" valign="middle">{{roleInfo.serverIP}}</td>
-                        <!--<td align="left" valign="middle">-->
-                            <!--<button type="submit" class="btn btn-primary pull-right">删除</button>-->
-                        <!--</td>-->
+                        <td align="left" valign="middle">
+                             <form action="delServerDate" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary pull-right" style="color: #ffffff;background-color: #2e6da4" name="clientJobID" value="{{roleInfo.clientJobID}}">删除</button>
+                    </form>
+                        </td>
+
+
                     </tr>
             {% endif %}
                 {% endfor %}
         </table>
         <h4 style="color: red">删除定时任务:（填写线程ID）</h4>
         <div class="form-group" style="font-size: 18px">
-            {{ deldate_form.MyJobID.label_tag }}
-            {{ deldate_form.MyJobID }}
+            <form class='form-register' action="delServerDate" method="post">
+                {% csrf_token %}
+                {{ deldate_form.MyJobID.label_tag }}
+                {{ deldate_form.MyJobID }}
             <button type="submit" class="btn btn-primary">删除</button>
+            </form>
         </div>
-    </form>
+
     <form class='form-register' action="setServerDate" method="post">
         <div class="alert alert-warning">
             {% if message %}

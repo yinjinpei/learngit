@@ -455,18 +455,26 @@ def setServerDate(request):
 
 def delServerDate(request):
     if request.method == "POST":
-        deldate_form = DelForm(request.POST)  # DateForm 为models里对应的类名,作为date_form.is_valid()铺垫
-
         try:
-            if deldate_form.is_valid():  # 如果有数据，models里对应的类名,类里面有几个变量就获取几个，如果有一个报错则为空
-                MyJobID = deldate_form.cleaned_data['MyJobID']  # 获取线程ID
-                timerInfo = TimingData.timers.get(clientJobID=MyJobID)
+            clientJobID=request.POST.get('clientJobID')
+            print(clientJobID)
+            if clientJobID is not None:
+                timerInfo = TimingData.timers.get(clientJobID=clientJobID)
+                print(timerInfo)
                 timerInfo.delete()
-                msg='删除数据成功!'
-                print(msg)
+                successful_message="【%s】删除成功！！"%clientJobID
+            else:
+                deldate_form = DelForm(request.POST)  # DateForm 为models里对应的类名,作为date_form.is_valid()铺垫
+                if deldate_form.is_valid():  # 如果有数据，models里对应的类名,类里面有几个变量就获取几个，如果有一个报错则为空
+                    MyJobID = deldate_form.cleaned_data['MyJobID']  # 获取线程ID
+                    failure_msg="【%s】删除失败！！"%MyJobID
+                    timerInfo = TimingData.timers.get(clientJobID=MyJobID)
+                    if MyJobID==timerInfo:
+                        timerInfo.delete()
+                        successful_message="【%s】删除成功！！"%MyJobID
+                        print(successful_message)
         except:
-            msg = '删除数据失败!'
-            print(msg)
+            pass
     message = '添加定时任务'
     timersList = TimingData.timers.all()
     date_form = DateForm()
