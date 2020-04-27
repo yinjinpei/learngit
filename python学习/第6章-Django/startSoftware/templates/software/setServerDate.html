@@ -41,11 +41,11 @@
             {% if message %}
                 <h3 style="color: #3c763d">定时任务列表</h3>
             {% endif %}
-            {% if msg %}
-                <h4 style="color: #3c763d">{{successful_message}}</h4>
+            {% if successful_message %}
+                <h4 style="color: #3c763d; text-align: center;">{{successful_message}}</h4>
             {% endif %}
-            {% if msg %}
-                <h4 style="color: #3c763d">{{failure_msg}}</h4>
+            {% if failure_msg %}
+                <h4 style="color: red; text-align: center;">{{failure_msg}}</h4>
             {% endif %}
         </div>
         <table cellspacing="50" style="border-collapse:separate; border-spacing:20px 8px;border:2px solid lightskyblue;">
