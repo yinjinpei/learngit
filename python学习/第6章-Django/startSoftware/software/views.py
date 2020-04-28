@@ -1,5 +1,6 @@
 # coding:utf-8
 import os
+import re
 import time
 import datetime
 # import redis
@@ -163,6 +164,7 @@ def delSoftware(request):
 def delFile(request):
     message = '请选择上传文件！'
     path = 'uploads/' + request.session['user_name'] + '/'  # 文件储存位置
+
     fileList = os.listdir(path)
     if not os.path.exists(path):  # 目录不存在则创建
         os.makedirs(path)
@@ -172,9 +174,16 @@ def delFile(request):
         print(downloadFileName)
         print('===================----------------=======================')
         if downloadFileName is not None:
-            if os.path.exists(path + downloadFileName):
-                os.remove(path + downloadFileName)
+            if os.path.exists(downloadFileName):
+                os.remove(downloadFileName)
                 del_file_message = "%s 删除成功！！"%downloadFileName
+
+            patten = re.compile(r'.+?/')
+            result = patten.findall(downloadFileName)
+            path = path+result[-1]
+            print(path+'9999999999999999999999')
+            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+
 
         delFile_form = DelFile(request.POST)
         if delFile_form.is_valid(): # 如果有数据
@@ -184,26 +193,40 @@ def delFile(request):
                 delfile_message="%s 删除成功！！"%FileName
             else:
                 delfile_message = "%s文件不存在，删除失败！！" % FileName
+
     fileObjectList=[]
     class DownloadFileObject(object):
-        def __init__(self,name,size,creatTime):
+        def __init__(self,name,size,creatTime,dirRoot):
             self.downloadFileName=name
             self.downloadFileSize=size
             self.downloadFileCreaTime=creatTime
+            self.downloadFileDirRoot = dirRoot
 
+    dirList=[]
     fileList = os.listdir(path)
     for file in fileList:
-        filepath=path+file
-        fileSize=os.path.getsize(filepath)
-        fileSize=fileSize/float(1024)
-        fileSize=round(fileSize, 2)
+        if os.path.isfile(path + file):
+            print('这是一个文件')
+            print(path)
+            print(file)
+            filepath = path + file
+            print(filepath)
+            fileSize = os.path.getsize(filepath)
+            fileSize = fileSize / float(1024)
+            fileSize = round(fileSize, 2)
 
-        fileCreatTime = os.path.getctime(filepath)
-        fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
-        fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
+            fileCreatTime = os.path.getctime(filepath)
+            fileCreatTime = datetime.datetime.fromtimestamp(fileCreatTime)
+            fileCreatTime = fileCreatTime.strftime('%Y-%m-%d %X')
 
-        fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
-        fileObjectList.append(fileObject)
+            fileObject = DownloadFileObject(file, fileSize, fileCreatTime,path)
+            fileObjectList.append(fileObject)
+        elif os.path.isdir(path + file):
+            print('这是一个目录')
+            dirList.append(file)
+        else:
+            print('未知文件，无法识别该文件！！')
+
     delFile_form = DelFile()
     return render(request, 'software/uploadFile.html', locals())
 
@@ -213,47 +236,50 @@ def uploadFile(request):
         uploadFile_message = "您尚未登录，使用【文件管理】请先登录！！"
         return render(request, 'software/index.html', locals())
 
+
     delFile_form = DelFile()  # 宣染删除表格，即宣染删除功能的输入框
     path = 'uploads/'+request.session['user_name']+'/'  # 上传文件路径，相对路径，在项目根目录下
-    request.session['dir_root'] = path
     if not os.path.exists(path):    #目录不存在则创建
         os.makedirs(path)
 
     dirname = request.GET.get('dirname')
-
     if dirname is not None:
-        if os.path.isdir(path + '/' + dirname):
-            path = path + dirname
-            request.session['dir_root'] = path
+        if os.path.isdir(path + dirname):
+            path = path + dirname + '/'
+            print("=========== GET 方式，当时路径：",path)
+            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
         else:
-            return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误,别瞎鸡巴乱写地址！！</h4>')
+            return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误,别瞎鸡巴乱写地址好吗？！</h4>')
 
     dirList = []
     fileList = os.listdir(path)
     fileObjectList=[]
-
     class DownloadFileObject(object):
-        def __init__(self,name,size,creatTime):
+        def __init__(self,name,size,creatTime,dirRoot):
             self.downloadFileName=name
             self.downloadFileSize=size
             self.downloadFileCreaTime=creatTime
+            self.downloadFileDirRoot = dirRoot
 
 
     for file in fileList:
-        if os.path.isfile(path +"/" + file):
+        if os.path.isfile(path + file):
             print('这是一个文件')
-            filepath=path+file
-            fileSize=os.path.getsize(filepath)
-            fileSize=fileSize/float(1024)
-            fileSize=round(fileSize, 2)
+            print(path)
+            print(file)
+            filepath = path + file
+            print(filepath)
+            fileSize = os.path.getsize(filepath)
+            fileSize = fileSize / float(1024)
+            fileSize = round(fileSize, 2)
 
             fileCreatTime = os.path.getctime(filepath)
-            fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
-            fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
+            fileCreatTime = datetime.datetime.fromtimestamp(fileCreatTime)
+            fileCreatTime = fileCreatTime.strftime('%Y-%m-%d %X')
 
-            fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
+            fileObject = DownloadFileObject(file, fileSize, fileCreatTime,path)
             fileObjectList.append(fileObject)
-        elif os.path.isdir(path +"/" + file):
+        elif os.path.isdir(path + file):
             print('这是一个目录')
             dirList.append(file)
         else:
@@ -267,17 +293,24 @@ def uploadFile(request):
         return render(request, 'software/uploadFile.html', locals())
 
     if request.method == 'POST':
+        dir_root = request.POST.get('dir_root')
+        print('--------------------------获取到的目录！！！--------------------------------------')
+        print(dir_root)
+        print('-----------------------------------------------------------------------')
+        if dir_root:
+            path = dir_root
+            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+        print("==========当前路径：",path)
         uploadFileList=request.FILES.getlist('file') # 获取所有上传的文件对象
+        print('*************************************')
+        print(uploadFileList)
+        print('*************************************')
         repeatFileList = [] # 记录重名的文件名
         upload_list_successful=[] # 记录上传成功的文件名
 
-        # if request.session['dir_root'] is not None:
-        #     if os.path.isdir(path + '/' + request.session['dir_root']):
-        #         path = path + request.session['dir_root']
-        #         request.session['dir_root'] = path
-        path = request.session['dir_root']
         repeatFileSum=0 # 重名文件的总个数
         for file in uploadFileList:
+            print(len(uploadFileList))
             fileName=str(file) # 上传的文件名
             print("================== 文件名%s============="%file)
             file=request.FILES['file']  #上传的文件对象
@@ -286,7 +319,7 @@ def uploadFile(request):
                 repeatFileList.append(fileName) # 记录重名的文件名
                 continue
                 # return render(request, 'software/uploadFile.html', locals())
-            with open(path + fileName, 'wb+')as destination:
+            with open(path + fileName, 'wb+') as destination:
                 for chunk in file.chunks():
                     destination.write(chunk)
             upload_list_successful.append(fileName) # 记录成功上传的文件名
@@ -300,26 +333,35 @@ def uploadFile(request):
         message='请选择上传文件！'
         print(message)
 
+    fileObjectList=[]
     class DownloadFileObject(object):
-        def __init__(self,name,size,creatTime):
-            self.downloadFileName=name
-            self.downloadFileSize=size
-            self.downloadFileCreaTime=creatTime
+        def __init__(self, name, size, creatTime, dirRoot):
+            self.downloadFileName = name
+            self.downloadFileSize = size
+            self.downloadFileCreaTime = creatTime
+            self.downloadFileDirRoot = dirRoot
 
+    dirList = []
+    fileList = os.listdir(path)
     for file in fileList:
-        if os.path.isfile(file):
-            filepath=path+file
-            fileSize=os.path.getsize(filepath)
-            fileSize=fileSize/float(1024)
-            fileSize=round(fileSize, 2)
+        if os.path.isfile(path + file):
+            print('这是一个文件')
+            print(path)
+            print(file)
+            filepath = path + file
+            print(filepath)
+            fileSize = os.path.getsize(filepath)
+            fileSize = fileSize / float(1024)
+            fileSize = round(fileSize, 2)
 
             fileCreatTime = os.path.getctime(filepath)
-            fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
-            fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
+            fileCreatTime = datetime.datetime.fromtimestamp(fileCreatTime)
+            fileCreatTime = fileCreatTime.strftime('%Y-%m-%d %X')
 
-            fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
+            fileObject = DownloadFileObject(file, fileSize, fileCreatTime,path)
             fileObjectList.append(fileObject)
-        elif os.path.isdir(path):
+        elif os.path.isdir(path + file):
+            print('这是一个目录')
             dirList.append(file)
         else:
             print('未知文件，无法识别该文件！！')
@@ -328,9 +370,13 @@ def uploadFile(request):
 
 
 def downloadFile(request):
-        path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
+        # path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
         filename = request.GET.get('name')
-        file = open(path+filename,'rb')
+        # file = open(path+filename,'rb')
+        print('000000000000000000000000000000000')
+        print(filename)
+        print('000000000000000000000000000000000')
+        file = open(filename,'rb')
         response = FileResponse(file)
         response['Content-Type'] = 'application/octet-stream'
         # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
@@ -346,7 +392,7 @@ def setServerDate(request):
     if not request.session.get('is_login', None):
         uploadFile_message = "您尚未登录，使用【修改服务器时间】请先登录！！"
         return render(request, 'software/index.html', locals())
-    print('===================')
+
     # 获取数据库里的数据
     timersList = TimingData.timers.all()
     for timer in timersList:
