@@ -215,29 +215,49 @@ def uploadFile(request):
 
     delFile_form = DelFile()  # 宣染删除表格，即宣染删除功能的输入框
     path = 'uploads/'+request.session['user_name']+'/'  # 上传文件路径，相对路径，在项目根目录下
+    request.session['dir_root'] = path
     if not os.path.exists(path):    #目录不存在则创建
         os.makedirs(path)
 
+    dirname = request.GET.get('dirname')
+
+    if dirname is not None:
+        if os.path.isdir(path + '/' + dirname):
+            path = path + dirname
+            request.session['dir_root'] = path
+        else:
+            return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误,别瞎鸡巴乱写地址！！</h4>')
+
+    dirList = []
+    fileList = os.listdir(path)
     fileObjectList=[]
+
     class DownloadFileObject(object):
         def __init__(self,name,size,creatTime):
             self.downloadFileName=name
             self.downloadFileSize=size
             self.downloadFileCreaTime=creatTime
 
-    fileList = os.listdir(path)
+
     for file in fileList:
-        filepath=path+file
-        fileSize=os.path.getsize(filepath)
-        fileSize=fileSize/float(1024)
-        fileSize=round(fileSize, 2)
+        if os.path.isfile(path +"/" + file):
+            print('这是一个文件')
+            filepath=path+file
+            fileSize=os.path.getsize(filepath)
+            fileSize=fileSize/float(1024)
+            fileSize=round(fileSize, 2)
 
-        fileCreatTime = os.path.getctime(filepath)
-        fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
-        fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
+            fileCreatTime = os.path.getctime(filepath)
+            fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
+            fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
 
-        fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
-        fileObjectList.append(fileObject)
+            fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
+            fileObjectList.append(fileObject)
+        elif os.path.isdir(path +"/" + file):
+            print('这是一个目录')
+            dirList.append(file)
+        else:
+            print('未知文件，无法识别该文件！！')
 
     # 判断上传是否为空
     try:
@@ -251,6 +271,11 @@ def uploadFile(request):
         repeatFileList = [] # 记录重名的文件名
         upload_list_successful=[] # 记录上传成功的文件名
 
+        # if request.session['dir_root'] is not None:
+        #     if os.path.isdir(path + '/' + request.session['dir_root']):
+        #         path = path + request.session['dir_root']
+        #         request.session['dir_root'] = path
+        path = request.session['dir_root']
         repeatFileSum=0 # 重名文件的总个数
         for file in uploadFileList:
             fileName=str(file) # 上传的文件名
@@ -275,26 +300,30 @@ def uploadFile(request):
         message='请选择上传文件！'
         print(message)
 
-    fileObjectList=[]
     class DownloadFileObject(object):
         def __init__(self,name,size,creatTime):
             self.downloadFileName=name
             self.downloadFileSize=size
             self.downloadFileCreaTime=creatTime
 
-    fileList = os.listdir(path)
     for file in fileList:
-        filepath=path+file
-        fileSize=os.path.getsize(filepath)
-        fileSize=fileSize/float(1024)
-        fileSize=round(fileSize, 2)
+        if os.path.isfile(file):
+            filepath=path+file
+            fileSize=os.path.getsize(filepath)
+            fileSize=fileSize/float(1024)
+            fileSize=round(fileSize, 2)
 
-        fileCreatTime = os.path.getctime(filepath)
-        fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
-        fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
+            fileCreatTime = os.path.getctime(filepath)
+            fileCreatTime=datetime.datetime.fromtimestamp(fileCreatTime)
+            fileCreatTime=fileCreatTime.strftime('%Y-%m-%d %X')
 
-        fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
-        fileObjectList.append(fileObject)
+            fileObject=DownloadFileObject(file,fileSize,fileCreatTime)
+            fileObjectList.append(fileObject)
+        elif os.path.isdir(path):
+            dirList.append(file)
+        else:
+            print('未知文件，无法识别该文件！！')
+
     return render(request, 'software/uploadFile.html', locals())
 
 

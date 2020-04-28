@@ -60,6 +60,16 @@
         <div class="alert alert-warning" style="text-align: center;color: red; font-size: 20px">{{ del_file_message }}</div>
     {% endif %}
     <hr>
+        <div style="border:2px solid lightskyblue;">
+            <h4 style="color: #3e8f3e;font-weight: bold">目录列表：</h4>
+
+            {% for dir in dirList %}
+            <a href="/uploadFile?dirname={{dir}}" onmouseover="this.style.color='red';
+                    "onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">{{dir}}</a><br>
+            {% endfor %}
+
+        </div>
+
     {% if fileObjectList %}
         <h3 style="color: #3e8f3e;font-weight: bold">文件下载列表：</h3>
         <table border="0" width="400" height="180" cellspacing="50" style="border-collapse:separate; border-spacing:20px 8px;">
