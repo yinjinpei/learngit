@@ -121,6 +121,13 @@
     <div class="col-md-4 col-md-offset-4">
         <form class='form-register' action="delFile" method="post">
             {% csrf_token %}
+            <label for="dir_2">上传路径：</label>
+                <select name="dir_root" id="dir_2" style="color: #9d9d9d;background-color: #EEEEEE;">
+            　　　　<option>{{path}}</option>
+                </select>
+            <br>
+            <br>
+            <br>
             <div class="form-group" style="color: red">
                 {{ delFile_form.FileName.label_tag }}
                 {{ delFile_form.FileName }}
