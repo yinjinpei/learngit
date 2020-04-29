@@ -180,9 +180,17 @@ def delFile(request):
 
             patten = re.compile(r'.+?/')
             result = patten.findall(downloadFileName)
-            path = path+result[-1]
+            print('result:',result)
+            dirRoot=''
+            for dir in result:
+                print(dir)
+                dirRoot+=dir
+            # path = path+result[:-1]
+            if dirRoot != path:
+                dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+            path=dirRoot
             print(path+'9999999999999999999999')
-            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+
 
 
         delFile_form = DelFile(request.POST)
