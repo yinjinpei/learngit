@@ -176,11 +176,12 @@ def delFile(request):
         if downloadFileName is not None:
             if os.path.exists(downloadFileName):
                 os.remove(downloadFileName)
-                del_file_message = "%s 删除成功！！"%downloadFileName
+                patten = re.compile(r'.+?/')
+                result = patten.findall(downloadFileName)
+                del_file_message = "%s 删除成功！！" % result[len(result) - 1]
 
-            patten = re.compile(r'.+?/')
-            result = patten.findall(downloadFileName)
-            path = path+result[-1]
+
+            # path = path+result[len(result)-1]
             print(path+'9999999999999999999999')
             dirList_is_not_null = '在模板显示返回上一层，仅作标志'
 

@@ -5,6 +5,19 @@
 
 {% block title %}上传文件{% endblock %}
 
+{% block scripts %}
+<script type="text/javascript">
+       function doSubmit(){
+            var file = document.getElementById('file');
+            if (file.value == "") {
+            alert("请选择您需要上传的文件！");
+            }else{
+            document.form.submit();
+            }
+                   }
+    </script>
+{% endblock %}
+
 {% block content %}
 <div class="col-md-8 col-md-offset-2"  style="margin-left: 30px;margin-right: 30px">
     {% if request.session.is_login %}
@@ -37,6 +50,17 @@
             {% endfor %}
 
     </div>
+
+    {% if dirList_is_not_null %}
+        <div style="display: block">
+    {% else %}
+            {% if request.session.user_name == "peter" %}
+                <div style="display: none">
+            {% else %}
+                <div style="display: block">
+            {% endif %}
+        <div style="display: none">
+    {% endif %}
 <!--上传文件    -->
     <hr>
     <div class="row">
@@ -54,10 +78,11 @@
             </div>
               <br>
               <div class="form-group">
-                  <input type="file" name="file" multiple="">
+                  <!--加上required 这个属性 ，就成了必填字段 。-->
+                  <input type="file" required="required" id="file" name="file" multiple="">
               </div>
               <div class="form-group">
-                  <input type="submit" value="上传文件" >
+                  <input type="submit" value="上传文件" onclick=doSubmit()>
               </div>
           </form>
       </div>
@@ -135,6 +160,8 @@
 <a href="/">返回首页</a>
 <hr>
 <a href="#">回到顶部</a>
+
+</div>
 
 </div>
 {% endblock %}
