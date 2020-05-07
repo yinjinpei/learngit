@@ -1,6 +1,15 @@
 {% extends 'software_base.html' %}
 
 {% block title %}添加常用应用快捷键{% endblock %}
+
+{% block css %}
+
+    .container a:hover,.container button:hover{
+        color:red;
+    }
+
+{% endblock %}
+
 {% block scripts %}
 <script type="text/javascript">
         window.onload = function () {
@@ -66,13 +75,11 @@
                         <td align="left" valign="middle">{{roleInfo.setTime}}:00</td>
                         <td align="left" valign="middle">{{roleInfo.serverIP}}</td>
                         <td align="left" valign="middle">
-                             <form action="delServerDate" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary pull-right" style="color: #ffffff;background-color: #2e6da4" name="clientJobID" value="{{roleInfo.clientJobID}}">删除</button>
-                    </form>
+                        <form action="delServerDate" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary pull-right"  name="clientJobID" value="{{roleInfo.clientJobID}}">删除</button>
+                        </form>
                         </td>
-
-
                     </tr>
             {% endif %}
                 {% endfor %}
@@ -83,7 +90,7 @@
                 {% csrf_token %}
                 {{ deldate_form.MyJobID.label_tag }}
                 {{ deldate_form.MyJobID }}
-            <button type="submit" class="btn btn-primary">删除</button>
+            <button type="submit" class="btn btn-primary">确认删除</button>
             </form>
         </div>
 
@@ -109,14 +116,18 @@
             {{ date_form.ServerDatetime }}
         </div>
         <!--<div class="col-md-4">-->
-        <button type="reset" class="btn btn-default pull-left">重置</button>
-        <button type="submit" class="btn btn-primary pull-right">提交</button>
+        <button type="reset" class="btn btn-default">重置</button>
+        <button type="submit" class="btn btn-primary" style="margin-left: 225px">提交</button>
         <!--</div> &lt;!&ndash; /container &ndash;&gt;-->
     </form>
-        </div>
-
-<hr>
-<a href="/">返回首页</a>
-<hr>
-<a href="#">回到顶部</a>
+        <br>
+        <br>
+        <hr>
+        <a class="btn btn-primary" href="/">返回首页</a>
+        <br>
+        <hr>
+        <a class="btn btn-primary" href="#">回到顶部</a>
+        <br>
+        <br>
+</div>
 {% endblock %}
