@@ -176,28 +176,18 @@ def delFile(request):
         if downloadFileName is not None:
             if os.path.exists(downloadFileName):
                 os.remove(downloadFileName)
-                str_list=downloadFileName.split('/')
-                del_file_message = "%s 删除成功！！"%str_list[len(str_list)-1]
+                patten = re.compile(r'.+?/')
+                result = patten.findall(downloadFileName)
+                del_file_message = "%s 删除成功！！" % result[len(result) - 1]
 
-            patten = re.compile(r'.+?/')
-            result = patten.findall(downloadFileName)
-            dirRoot=''
-            for dir in result:
-                print(dir)
-                dirRoot+=dir
 
-            if dirRoot != path:
-                dirList_is_not_null = '在模板显示返回上一层，仅作标志'
-            path=dirRoot
+            # path = path+result[len(result)-1]
+            print(path+'9999999999999999999999')
+            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+
 
         delFile_form = DelFile(request.POST)
         if delFile_form.is_valid(): # 如果有数据
-            dirRoot = request.POST.get('dir_root')
-            if dirRoot:
-                path = dirRoot
-            if dirRoot!=path:
-                dirList_is_not_null = '在模板显示返回上一层，仅作标志'
-
             FileName = delFile_form.cleaned_data['FileName']    # 获取删除的文件名
             if os.path.exists(path+FileName):
                 os.remove(path+FileName)
@@ -308,11 +298,9 @@ def uploadFile(request):
         print('--------------------------获取到的目录！！！--------------------------------------')
         print(dir_root)
         print('-----------------------------------------------------------------------')
-
         if dir_root:
-            if path != dir_root:
-                dirList_is_not_null = '在模板显示返回上一层，仅作标志'
-                path = dir_root
+            path = dir_root
+            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
         print("==========当前路径：",path)
         uploadFileList=request.FILES.getlist('file') # 获取所有上传的文件对象
         print('*************************************')
