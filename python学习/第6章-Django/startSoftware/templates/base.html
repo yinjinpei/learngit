@@ -19,10 +19,18 @@
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 
     <![endif]-->
-    {% block css %}{% endblock %}
+    <style>
+        #con_a a:hover{
+          color: red;
+        }
+
+        {% block css %}{% endblock %}
+
+    </style>
+
   </head>
   <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default"  id="con_a">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">

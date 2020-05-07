@@ -2,43 +2,88 @@
 
 {% extends 'software_base.html' %}
 {% block title %}主页{% endblock %}
+{% block css %}
+    .con_h{
+        text-align:center;
+    }
+
+    .con_h a:hover{
+        color:red;
+    }
+
+    #software_name{
+        background-color: #c0a16b;
+        margin-right:10px;
+        margin-top:5px;
+        color:#fff;
+    }
+
+    #software_name:hover{
+        color:red;
+    }
+
+    .software_title{
+        font-weight: bolder;
+        color: green;
+    }
+
+    #software_del{
+        background-color: #d9534f;
+        color:#fff;
+    }
+
+    #software_del:hover{
+        color:#c0a16b;
+    }
+
+    #software_add{
+        color: #2e6da4;
+    }
+
+    #software_add:hover{
+        color: red;
+    }
+
+{% endblock %}
+
 {% block content %}
-<div style="margin-left: 20px">
+<div class="con_h" style="margin-left: 20px">
     {% if request.session.is_login %}
         <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
         <hr>
-        <h4>常用软件：</h4>
+        <h3 class="software_title">常用软件快捷键：</h3>
+        <h5 class="software_title" style="color: red;">权限受限，此功能不可用！</h5>
         <ul>
         {% for app in appsList %}
-            <li id="li1"><a href={{app.appName}}?name={{app.appName}} onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">{{app.remark}}</a></li>
+            <a id="software_name" class="btn btn-default" href={{app.appName}}?name={{app.appName}} >{{app.remark}}</a>
         {% endfor %}
         </ul>
 
         <hr>
-        <a href="/addSoftware" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">添加常用软件</a>
+        <a class="btn btn-default" id="software_add" href="/addSoftware" >添加常用软件</a>
         <hr>
-        <a href="/delSoftware" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">删除常用软件</a>
+        <a class="btn" id="software_del" href="/delSoftware" >删除常用软件</a>
     {% else %}
         <h2>您尚未登录，只能访问公开内容！</h2>
         <hr>
         <h4 style="color: red">无法显示常用软件，请先登录！</h4>
         <hr>
-        <a href="/user/login" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">用户登录</a>
+        <a class="btn btn-primary" href="/user/login" >用户登录</a>
     {% endif %}
     <hr>
     {% if uploadFile_message %}
-        <div class="alert alert-warning" style="text-align: center">{{ uploadFile_message }}</div>
+        <div class="alert alert-warning">{{ uploadFile_message }}</div>
         <br>
     {% endif %}
-    <a href="/uploadFile" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">文件管理</a>
+    <a class="btn btn-primary" href="/uploadFile" >文件管理</a>
     <hr>
-    <a href="/setServerDate" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">服务器修改时间</a>
+    <a class="btn btn-primary" href="/setServerDate" >服务器修改时间</a>
     <hr>
-    <!--<a href="/exec_command" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">执行shell脚本</a>-->
+    <!--<a href="/exec_command" >执行shell脚本</a>-->
     <!--<hr>-->
-    <!--<a href="/websocket_test" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">websocket_test</a>-->
+    <!--<a href="/websocket_test" >websocket_test</a>-->
     <!--<hr>-->
-<a href="#" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">跳到顶部</a>
+<a class="btn btn-primary" href="#" >跳到顶部</a>
 </div>
 
 {% endblock %}
