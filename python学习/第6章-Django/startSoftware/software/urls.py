@@ -5,9 +5,11 @@ from django.contrib import admin
 from django.urls import path,re_path
 from . import views
 
-
 urlpatterns = [
     path('admin', admin.site.urls), # 访问管理页面
+    re_path('^versionManagerIndex$', views.versionManagerIndex, name='versionManagerIndex'),
+    re_path('^T8_index', views.T8_index, name='T8_index'),
+    re_path('^CDNofflink', views.CDNofflink, name='CDNofflink'),
     re_path('addSoftware$', views.addSoftware, name='addSoftware'),
     re_path('delSoftware$', views.delSoftware, name='delSoftware'),
     re_path('uploadFile$', views.uploadFile, name='uploadFile'),
@@ -15,6 +17,7 @@ urlpatterns = [
     re_path('delFile$', views.delFile, name='delFile'),
     re_path('setServerDate$', views.setServerDate, name='setServerDate'),
     re_path('delServerDate$', views.delServerDate, name='delServerDate'),
+    re_path('tdc$', views.tdc, name='tdc'),
     # re_path('exec_command$', views.exec_command, name='exec_command'),
     # re_path('websocket_test$', views.websocket_test, name='websocket_test'),
     re_path('test$', views.test, name='test'),

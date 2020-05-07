@@ -12,7 +12,7 @@
     }
 
     #software_name{
-        background-color: #c0a16b;
+        background-color: #FF8000;
         margin-right:10px;
         margin-top:5px;
         color:#fff;
@@ -38,6 +38,7 @@
 
     #software_add{
         color: #2e6da4;
+        margin-top:5px;
     }
 
     #software_add:hover{
@@ -53,15 +54,13 @@
         <hr>
         <h3 class="software_title">常用软件快捷键：</h3>
         <h5 class="software_title" style="color: red;">权限受限，此功能不可用！</h5>
-        <ul>
         {% for app in appsList %}
-            <a id="software_name" class="btn btn-default" href={{app.appName}}?name={{app.appName}} >{{app.remark}}</a>
+            <a id="software_name" class="btn" href={{app.appName}}?name={{app.appName}} >{{app.remark}}</a>
         {% endfor %}
-        </ul>
 
-        <hr>
-        <a class="btn btn-default" id="software_add" href="/addSoftware" >添加常用软件</a>
-        <hr>
+        <a class="btn btn-default" id="software_add" href="/addSoftware" >添加</a>
+        <br>
+        <br>
         <a class="btn" id="software_del" href="/delSoftware" >删除常用软件</a>
     {% else %}
         <h2>您尚未登录，只能访问公开内容！</h2>
@@ -75,6 +74,8 @@
         <div class="alert alert-warning">{{ uploadFile_message }}</div>
         <br>
     {% endif %}
+    <a class="btn btn-primary" href="/versionManagerIndex" >网址大全</a>
+    <hr>
     <a class="btn btn-primary" href="/uploadFile" >文件管理</a>
     <hr>
     <a class="btn btn-primary" href="/setServerDate" >服务器修改时间</a>

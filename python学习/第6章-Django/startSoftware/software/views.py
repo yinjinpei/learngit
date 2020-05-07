@@ -389,6 +389,31 @@ def downloadFile(request):
             # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
         return response
 
+def versionManagerIndex(request):
+    clientIP = request.META['REMOTE_ADDR']
+    webName = str(versionManagerIndex.__name__)
+    logging.info(("INFO：来自：%s, 访问software/%s.html页面！！！") % (clientIP, webName))
+    return render(request,'software/versionManagerIndex.html')
+
+def T8_index(request):
+    clientIP = request.META['REMOTE_ADDR']
+    webName = str(versionManagerIndex.__name__)
+    logging.info(("INFO：来自：%s, 访问software/%s.html页面！！！") % (clientIP, webName))
+    return render(request,'software/T8_index.html')
+
+def CDNofflink(request):
+    clientIP = request.META['REMOTE_ADDR']
+    webName = str(versionManagerIndex.__name__)
+    logging.info(("INFO：来自：%s, 访问software/%s.html页面！！！") % (clientIP, webName))
+    return render(request,'software/CDNofflink.html')
+
+def tdc(request):
+    clientIP = request.META['REMOTE_ADDR']
+    webName = str(versionManagerIndex.__name__)
+    logging.info(("INFO：来自：%s, 访问software/%s.html页面！！！") % (clientIP, webName))
+    return render(request,'software/tdc.html')
+
+
 def setServerDate(request):
     if not request.session.get('is_login', None):
         uploadFile_message = "您尚未登录，使用【修改服务器时间】请先登录！！"
