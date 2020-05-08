@@ -8,7 +8,12 @@
     }
 
     .con_h a:hover{
+        background-color: gold;
         color:red;
+    }
+
+    .software_con{
+        display: none;
     }
 
     #software_name{
@@ -44,24 +49,26 @@
     #software_add:hover{
         color: red;
     }
-
 {% endblock %}
 
 {% block content %}
-<div class="con_h" style="margin-left: 20px">
+<div class="con_h">
     {% if request.session.is_login %}
         <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
-        <hr>
-        <h3 class="software_title">常用软件快捷键：</h3>
-        <h5 class="software_title" style="color: red;">权限受限，此功能不可用！</h5>
-        {% for app in appsList %}
-            <a id="software_name" class="btn" href={{app.appName}}?name={{app.appName}} >{{app.remark}}</a>
-        {% endfor %}
 
-        <a class="btn btn-default" id="software_add" href="/addSoftware" >添加</a>
-        <br>
-        <br>
-        <a class="btn" id="software_del" href="/delSoftware" >删除常用软件</a>
+        <div class="software_con">
+            <hr>
+            <h3 class="software_title">常用软件快捷键：</h3>
+            <h5 class="software_title" style="color: red;">权限受限，此功能不可用！</h5>
+            {% for app in appsList %}
+                <a id="software_name" class="btn" href={{app.appName}}?name={{app.appName}} >{{app.remark}}</a>
+            {% endfor %}
+
+            <a class="btn btn-default" id="software_add" href="/addSoftware" >添加</a>
+            <br>
+            <br>
+            <a class="btn" id="software_del" href="/delSoftware" >删除常用软件</a>
+        </div>
     {% else %}
         <h2>您尚未登录，只能访问公开内容！</h2>
         <hr>

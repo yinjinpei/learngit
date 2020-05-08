@@ -12,6 +12,7 @@
     }
 
     #uploadFile_con a:hover{
+        background-color: gold;
         color: red;
     }
 
@@ -31,6 +32,71 @@
         background-color: #EEE;
     }
 
+    #upload_point, #dir_select{
+        font-size: 16px;
+    }
+
+    .pull-left{
+        color: #3e8f3e;
+        font-weight: bold;
+
+    }
+
+    .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #downloadFileList_title{
+        color: #3e8f3e;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .delfile_msg{
+        color:red;
+    }
+
+    .downloadFileList_table{
+        border-collapse:separate;
+        border-spacing:20px 8px;
+        margin: auto;
+    }
+
+    .downloadFile:hover{
+        text-decoration: none;
+    }
+
+    .downloadFileList_table .btn:hover,#delfile_btn:hover{
+        background-color: #FF5151;
+        color: gold;
+    }
+
+    #reset_btn{
+        margin-left: 35%;
+    }
+
+    #delfile_btn{
+        margin-right: 35%;
+     }
+
+
+    #delfile_title input{
+        background-color: #fff;
+        color: red;
+    }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .del_file_message{
+        color: red;
+        font-size: 20px;
+        margin-bottom: 20px;
+
+    }
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
@@ -44,12 +110,12 @@
 
     {% if dirList_is_not_null is none %}
         {% if request.session.user_name == 'shar' %}
-            <div class="alert alert-warning">请选择对应领域的上传目录！</div>
+            <div class="alert alert-warning" id="dir_select">请选择对应领域的上传目录！</div>
         {% endif %}
     {% endif %}
 
     {% if request.session.user_name == 'shar' %}
-            <h4 class="pull-left" style="color: #3e8f3e; font-weight: bold">目录列表</h4>
+            <h4 class="pull-left">目录列表</h4>
     {% endif %}
     <br>
     <br>
@@ -61,6 +127,7 @@
             </li>
         </ul>
     {% endif %}
+        <br>
     {% for dir in dirList %}
         <ul>
             <li><a class="btn btn-primary" href="/uploadFile?dirname={{dir}}">{{dir}}</a></li>
@@ -69,17 +136,20 @@
     </div>
     <hr>
 
+
 {% if dirList_is_not_null %}
-    <div style="display: block;"></div>
+    <div style="display: block;">
 {% else %}
     {% if request.session.user_name == 'shar' %}
-        <div style="display: none;"></div>
+        <div style="display: none;">
+    {% else %}
+        <div style="display: block;">
     {% endif %}
 {% endif %}
 
     <!--上传文件    -->
     {% if message %}
-        <div class="alert alert-warning">{{ message }}</div>
+        <div class="alert alert-warning" id="upload_point">{{ message }}</div>
     {% endif %}
 
     {% if upload_successful_message %}
@@ -114,28 +184,17 @@
       </div>
     </div>
 
-<!--文件列表    -->
-<!--<hr>-->
-    <!--{% if fileList %}-->
-        <!--<h3 style="color: #3e8f3e;font-weight: bold">文件列表：</h3>-->
-        <!--<ul>-->
-            <!--{% for file in fileObjectList %}-->
-                <!--<li id="li1"><a href="/downloadFile?name={{file}}" onmouseover="this.style.color='red';"onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">-->
-                    <!--{{file.downloadFileName}}</a> 大小：{{file.downloadFileSize}} 创建时间：{{file.downloadFileCreaTime}}</li>-->
-            <!--{% endfor %}-->
-        <!--</ul>-->
-    <!--{% endif %}-->
-<!--<hr>-->
-
-<!--文件列表 样式2    -->
+<!--文件列表-->
     <hr>
     <div class="alert alert-warning">
     {% if del_file_message %}
-        <div class="alert alert-warning">{{ del_file_message }}</div>
+        <div class="del_file_message">{{ del_file_message }}</div>
     {% endif %}
-    <h3 style="color: #3e8f3e;font-weight: bold">文件下载列表：</h3>
+
+    <div id="downloadFileList_title">文件下载列表：</div>
+    <br>
     {% if fileObjectList %}
-        <table border="0"  cellspacing="50" style="border-collapse:separate; border-spacing:20px 8px;margin: auto;">
+        <table border="0"  cellspacing="50" class="downloadFileList_table">
             <tr>
                <th>文件名</th>
                <th>大小</th>
@@ -143,14 +202,13 @@
             </tr>
             {% for file in fileObjectList %}
                 <tr>
-                    <td align="left" valign="middle"> <a href="/downloadFile?name={{file.downloadFileDirRoot}}{{file.downloadFileName}}" onmouseover="this.style.color='red';
-                        "onmouseout="this.style.color='#2e6da4';" onclick="this.style.color= 'red';">{{file.downloadFileName}}</a> </td>
+                    <td align="left" valign="middle"> <a class="downloadFile" href="/downloadFile?name={{file.downloadFileDirRoot}}{{file.downloadFileName}}">{{file.downloadFileName}}</a> </td>
                     <td align="left" valign="middle">{{file.downloadFileSize}}k</td>
                     <td align="left" valign="middle">{{file.downloadFileCreaTime}}</td>
                     <td align="left" valign="middle">
                         <form class='form-register' action="delFile" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
                             {% csrf_token %}
-                            <button type="submit" name="downloadFileName" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">删除</button>
+                            <button type="submit" class="btn btn-primary" name="downloadFileName" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">删除</button>
                         </form>
                     </td>
                 </tr>
@@ -158,51 +216,51 @@
         </table>
     {% endif %}
 
-
-{% if delfile_message %}
-    <div class="alert alert-warning" style="text-align: center;color: red; font-size: 20px">{{ delfile_message }}</div>
-{% endif %}
-
 <!--删除文件-->
 <!--<div class="container">-->
     <div class="col-md-8 col-md-offset-2">
     <!--<div class="col-md-4 col-md-offset-4">-->
+        <br>
+        <br>
+        <br>
+        {% if delfile_message %}
+    <div class="alert alert-warning delfile_msg" style="text-align: center;color: red; font-size: 20px">{{ delfile_message }}</div>
+{% endif %}
+
         <form class='form-register' action="delFile" method="post">
             {% csrf_token %}
-            <label style="display: none;" for="dir_2">删除文件路径路径：</label>
+            <label style="display: none;" for="dir_2">删除文件路径：</label>
                 <select class="btn btn-default" name="dir_root" id="dir_2" style="color: #9d9d9d;background-color: #EEE;display: none;">
             　　　　<option>{{path}}</option>
                 </select>
             <br>
             <br>
             <br>
-            <div class="form-group" style="color: red">
+            <div class="form-group" id="delfile_title">
                 {{ delFile_form.FileName.label_tag }}
                 {{ delFile_form.FileName }}
             </div>
-            <button type="reset" class="btn btn-default pull-left">重置</button>
-            <button type="submit" class="btn btn-primary pull-right">删除</button>
+            <button type="reset" class="btn btn-default pull-left" id="reset_btn">重置</button>
+            <button type="submit" class="btn btn-primary pull-right" id="delfile_btn">删除</button>
         </form>
         <br>
         <br>
         <br>
         <hr>
-        <div class="btn btn-primary pull-left">
-            <a style="color: #fff;text-decoration: none;" href="/">返回首页</a>
-        </div>
+        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
         <br>
         <br>
         <br>
         <br>
-        <div class="btn btn-primary pull-left">
-            <a style="color: #fff;text-decoration: none;" href="/">回到顶部</a>
-        </div>
+        <a class="btn btn-primary pull-left" id="link_top" href="/">回到顶部</a>
         <br>
         <br>
         <br>
         <br>
     </div>
 <!--</div> &lt;!&ndash; /container &ndash;&gt;-->
+</div>
+</div>
 </div>
 </div>
 </div>
