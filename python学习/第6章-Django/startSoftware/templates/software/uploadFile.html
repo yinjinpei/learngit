@@ -150,24 +150,23 @@
     {% endfor %}
     </div>
     <hr>
-            <br>
-            <br>
-
-            <a class="btn btn-primary pull-left" id="link_index_tag" href="/">返回首页</a>
-            <br>
-            <br>
-            <br>
-            <br>
-            <a class="btn btn-primary pull-left" id="link_top_tag" href="/">回到顶部</a>
-            <br>
-            <br>
-            <br>
-            <br>
 
 {% if dirList_is_not_null %}
     <div style="display: block;">
 {% else %}
     {% if request.session.user_name == 'shar' %}
+        <br>
+        <br>
+        <a class="btn btn-primary pull-left" id="link_index_tag" href="/">返回首页</a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a class="btn btn-primary pull-left" id="link_top_tag" href="/">回到顶部</a>
+        <br>
+        <br>
+        <br>
+        <br>
         <div style="display: none;">
     {% else %}
         <div style="display: block;">
