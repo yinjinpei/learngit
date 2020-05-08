@@ -33,7 +33,7 @@
     }
 
     #upload_point, #dir_select{
-        font-size: 16px;
+        font-size: 20px;
     }
 
     .pull-left{
@@ -86,7 +86,7 @@
         color: red;
     }
 
-    #link_index,#link_top{
+    #link_index,#link_top,#link_index_tag,#link_top_tag{
         text-decoration: none;
         color: #fff;
     }
@@ -95,8 +95,22 @@
         color: red;
         font-size: 20px;
         margin-bottom: 20px;
-
     }
+
+    #dir_name{
+        background-color: #3c763d;
+    }
+
+    #dir_list{
+        color:green;
+        background-color: gold;
+        font-size: 16px;
+    }
+
+    #dir_list:hover{
+        color:green;
+    }
+
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
@@ -115,7 +129,7 @@
     {% endif %}
 
     {% if request.session.user_name == 'shar' %}
-            <h4 class="pull-left">目录列表</h4>
+            <h4 class="btn btn-default pull-left" id="dir_list">目录列表：</h4>
     {% endif %}
     <br>
     <br>
@@ -123,6 +137,7 @@
     {% if dirList_is_not_null%}
         <ul>
             <li>
+                <br>
                 <a class="btn btn-primary" href="/uploadFile">返回上一层</a>
             </li>
         </ul>
@@ -130,12 +145,24 @@
         <br>
     {% for dir in dirList %}
         <ul>
-            <li><a class="btn btn-primary" href="/uploadFile?dirname={{dir}}">{{dir}}</a></li>
+            <li><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir}}">{{dir}}</a></li>
         </ul>
     {% endfor %}
     </div>
     <hr>
+            <br>
+            <br>
 
+            <a class="btn btn-primary pull-left" id="link_index_tag" href="/">返回首页</a>
+            <br>
+            <br>
+            <br>
+            <br>
+            <a class="btn btn-primary pull-left" id="link_top_tag" href="/">回到顶部</a>
+            <br>
+            <br>
+            <br>
+            <br>
 
 {% if dirList_is_not_null %}
     <div style="display: block;">
