@@ -162,9 +162,8 @@ def delSoftware(request):
 
 
 def delFile(request):
-    message = '请选择上传文件！'
+    message = '温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
     path = 'uploads/' + request.session['user_name'] + '/'  # 文件储存位置
-
     fileList = os.listdir(path)
     if not os.path.exists(path):  # 目录不存在则创建
         os.makedirs(path)
@@ -176,24 +175,34 @@ def delFile(request):
         if downloadFileName is not None:
             if os.path.exists(downloadFileName):
                 os.remove(downloadFileName)
-                patten = re.compile(r'.+?/')
-                result = patten.findall(downloadFileName)
-                del_file_message = "%s 删除成功！！" % result[len(result) - 1]
+                str_list = downloadFileName.split('/')
+                del_file_message = "【%s】 删除成功！！" % str_list[len(str_list) - 1]
 
 
-            # path = path+result[len(result)-1]
-            print(path+'9999999999999999999999')
-            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
-
+            patten = re.compile(r'.+?/')
+            result=patten.findall(downloadFileName)
+            dirRoot=''
+            for dir in result:
+                dirRoot+=dir
+            if dirRoot != path:
+                dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+            path=dirRoot
 
         delFile_form = DelFile(request.POST)
         if delFile_form.is_valid(): # 如果有数据
+            dirRoot=request.POST.get('dir_root')
+            print("当前路dir_root：",dirRoot)
+            if dirRoot != path:
+                dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+            if dirRoot:
+                path=dirRoot
+
             FileName = delFile_form.cleaned_data['FileName']    # 获取删除的文件名
             if os.path.exists(path+FileName):
                 os.remove(path+FileName)
-                delfile_message="%s 删除成功！！"%FileName
+                delfile_message="【%s】 删除成功！！"%FileName
             else:
-                delfile_message = "%s文件不存在，删除失败！！" % FileName
+                delfile_message = "【%s】 文件不存在，删除失败！！" % FileName
 
     fileObjectList=[]
     class DownloadFileObject(object):
@@ -207,23 +216,22 @@ def delFile(request):
     fileList = os.listdir(path)
     for file in fileList:
         if os.path.isfile(path + file):
-            print('这是一个文件')
-            print(path)
-            print(file)
+            print('【%s】:这是一个文件' % file)
             filepath = path + file
-            print(filepath)
-            fileSize = os.path.getsize(filepath)
+            print('文件完整路径：【%s】' % filepath)
+
+            fileSize = os.path.getsize(filepath)    # 获取文件大小
             fileSize = fileSize / float(1024)
             fileSize = round(fileSize, 2)
 
-            fileCreatTime = os.path.getctime(filepath)
+            fileCreatTime = os.path.getctime(filepath)  # 获取文件创建时间
             fileCreatTime = datetime.datetime.fromtimestamp(fileCreatTime)
             fileCreatTime = fileCreatTime.strftime('%Y-%m-%d %X')
 
-            fileObject = DownloadFileObject(file, fileSize, fileCreatTime,path)
-            fileObjectList.append(fileObject)
+            fileObject = DownloadFileObject(file, fileSize, fileCreatTime, path) # 创建文件对象
+            fileObjectList.append(fileObject) # 把文件对象存放到列表
         elif os.path.isdir(path + file):
-            print('这是一个目录')
+            print('【%s】：这是一个目录' % file)
             dirList.append(file)
         else:
             print('未知文件，无法识别该文件！！')
@@ -247,10 +255,9 @@ def uploadFile(request):
     if dirname is not None:
         if os.path.isdir(path + dirname):
             path = path + dirname + '/'
-            print("=========== GET 方式，当时路径：",path)
             dirList_is_not_null = '在模板显示返回上一层，仅作标志'
         else:
-            return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误,别瞎鸡巴乱写地址好吗？！</h4>')
+            return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误,访问网页不存在！</h4>')
 
     dirList = []
     fileList = os.listdir(path)
@@ -265,11 +272,10 @@ def uploadFile(request):
 
     for file in fileList:
         if os.path.isfile(path + file):
-            print('这是一个文件')
-            print(path)
-            print(file)
+            print('【%s】：这是一个目录' % file)
             filepath = path + file
-            print(filepath)
+            print('文件完整路径：【%s】' % filepath)
+
             fileSize = os.path.getsize(filepath)
             fileSize = fileSize / float(1024)
             fileSize = round(fileSize, 2)
@@ -290,32 +296,39 @@ def uploadFile(request):
     try:
         request.FILES['file']
     except:
-        message = '请选择上传文件！'
+        message = '温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
         return render(request, 'software/uploadFile.html', locals())
 
     if request.method == 'POST':
         dir_root = request.POST.get('dir_root')
-        print('--------------------------获取到的目录！！！--------------------------------------')
+        print('--------------------------获取到的目录-----------------------------')
         print(dir_root)
-        print('-----------------------------------------------------------------------')
+        print('------------------------------------------------------------------')
+
         if dir_root:
-            path = dir_root
-            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
-        print("==========当前路径：",path)
+            if path != dir_root:
+                dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+                path = dir_root
+        print('----------------------------当前路径-------------------------------')
+        print(path)
+        print('------------------------------------------------------------------')
+
         uploadFileList=request.FILES.getlist('file') # 获取所有上传的文件对象
-        print('*************************************')
+        print('************************所有上传的文件对象**************************')
         print(uploadFileList)
-        print('*************************************')
+        print('******************************************************************')
+
         repeatFileList = [] # 记录重名的文件名
         upload_list_successful=[] # 记录上传成功的文件名
-
         repeatFileSum=0 # 重名文件的总个数
+
         for file in uploadFileList:
             print(len(uploadFileList))
             fileName=str(file) # 上传的文件名
             print("================== 文件名%s============="%file)
             file=request.FILES['file']  #上传的文件对象
             print(path+fileName)
+
             if os.path.exists(path+fileName):
                 repeatFileList.append(fileName) # 记录重名的文件名
                 continue
@@ -329,12 +342,13 @@ def uploadFile(request):
         if len(upload_list_successful) !=0:
             upload_successful_message="上传成功列表：%s"%upload_list_successful
         if len(repeatFileList) != 0:
-            upload_failure_message = "【%d个文件重名，请重新命名再上传！】 上传失败列表:%s"%(len(repeatFileList),repeatFileList)
+            upload_failure_message = "【%d个文件重名，请重新命名再上传！】 失败列表:%s"%(len(repeatFileList),repeatFileList)
     else:
-        message='请选择上传文件！'
+        message='温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
         print(message)
 
     fileObjectList=[]
+
     class DownloadFileObject(object):
         def __init__(self, name, size, creatTime, dirRoot):
             self.downloadFileName = name
@@ -346,11 +360,10 @@ def uploadFile(request):
     fileList = os.listdir(path)
     for file in fileList:
         if os.path.isfile(path + file):
-            print('这是一个文件')
-            print(path)
-            print(file)
+            print('【%s】：这是一个目录' % file)
             filepath = path + file
-            print(filepath)
+            print('文件完整路径：【%s】' % filepath)
+
             fileSize = os.path.getsize(filepath)
             fileSize = fileSize / float(1024)
             fileSize = round(fileSize, 2)
@@ -362,7 +375,7 @@ def uploadFile(request):
             fileObject = DownloadFileObject(file, fileSize, fileCreatTime,path)
             fileObjectList.append(fileObject)
         elif os.path.isdir(path + file):
-            print('这是一个目录')
+            print('【%s】：这是一个目录' % file)
             dirList.append(file)
         else:
             print('未知文件，无法识别该文件！！')

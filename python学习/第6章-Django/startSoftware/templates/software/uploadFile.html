@@ -2,60 +2,71 @@
 
 {% extends 'software_base.html' %}
 {% load staticfiles %}
-
 {% block title %}文件管理{% endblock %}
 
-<!--{% block scripts %}-->
-<!--<script type="text/javascript">-->
-       <!--function doSubmit(){-->
-            <!--var file = document.getElementById('file');-->
-            <!--if (file.value == "") {-->
-            <!--alert("请选择您需要上传的文件！");-->
-            <!--}else{-->
-            <!--document.form.submit();-->
-            <!--}-->
-                   <!--}-->
-    <!--</script>-->
-<!--{% endblock %}-->
-
 {% block content %}
-<div class="col-md-8 col-md-offset-2">
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+    }
+
+    #uploadFile_con a:hover{
+        color: red;
+    }
+
+    .dir_list{
+        text-align: left;
+    }
+
+    .dir_list ul{
+        list-style-type: none;
+    }
+
+    .row label,.row select{
+        color: green;
+    }
+
+    .row select{
+        background-color: #EEE;
+    }
+
+</style>
+{% endblock %}
+<div class="col-md-8 col-md-offset-2" id="uploadFile_con">
     {% if request.session.is_login %}
-        <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
+        {% if dirList is none %}
+            <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
+        {% endif %}
     {% else %}
         <h2>你尚未登录，只能访问公开内容！</h2>
     {% endif %}
 
     {% if dirList_is_not_null is none %}
         {% if request.session.user_name == 'shar' %}
-            <div class="alert alert-warning" style="text-align:center;font-size:20px;color:green;">请选择对应领域的上传目录！</div>
+            <div class="alert alert-warning">请选择对应领域的上传目录！</div>
         {% endif %}
     {% endif %}
 
-    <div>
-        {% dirList_is_not_null is none == 'shar' %}
-            <h4 style="color: #3e8f3e; font-weight: bold">目录列表</h4>
-        {% endif %}
-
-        {% if dirList_is_not_null%}
-            <ul style="list-style-type: none">
-                <li>
-                    <a class="btn btn-primary" href="/uploadFile">返回上一层</a>
-                </li>
-            </ul>
-        {% endif %}
-
-        {% for dir in dirList %}
-            <ul style="list-style-type: none">
-                <li>
-                    <a class="btn btn-primary" href="/uploadFile?dirname={{dir}}">{{dir}}</a>
-                </li>
-            </ul>
-        {% endfor %}
-        <br>
-        <br>
+    {% if request.session.user_name == 'shar' %}
+            <h4 class="pull-left" style="color: #3e8f3e; font-weight: bold">目录列表</h4>
+    {% endif %}
+    <br>
+    <br>
+    <div class="dir_list">
+    {% if dirList_is_not_null%}
+        <ul>
+            <li>
+                <a class="btn btn-primary" href="/uploadFile">返回上一层</a>
+            </li>
+        </ul>
+    {% endif %}
+    {% for dir in dirList %}
+        <ul>
+            <li><a class="btn btn-primary" href="/uploadFile?dirname={{dir}}">{{dir}}</a></li>
+        </ul>
+    {% endfor %}
     </div>
-
     <hr>
 
 {% if dirList_is_not_null %}
@@ -68,24 +79,24 @@
 
     <!--上传文件    -->
     {% if message %}
-        <div class="alert alert-warning" style="text-align: center; font-size: 20px">{{ message }}</div>
+        <div class="alert alert-warning">{{ message }}</div>
     {% endif %}
 
     {% if upload_successful_message %}
-        <div class="alert alert-warning" style="text-align: center;color: green">{{ upload_successful_message }}</div>
+        <div class="alert alert-warning">{{ upload_successful_message }}</div>
     {% endif %}
 
     {% if upload_failure_message %}
-        <div class="alert alert-warning" style="text-align: center;color: red">{{ upload_failure_message }}</div>
+        <div class="alert alert-warning">{{ upload_failure_message }}</div>
     {% endif %}
 
-    <div class="row" style="text-align: center">
+    <div class="row">
       <div class="col-md-8 col-md-offset-2">
           <form class="form-inline" role="form" action="uploadFile" method="post" enctype="multipart/form-data" accept-charset="utf-8">
               {% csrf_token %}
               <br>
-              <label style="color: #3e8f3e;font-weight: bold" for="dir">上传路径：</label>
-              <select class="btn btn-default" name="dir_root" id="dir" style="color: #9d9d9d;background-color: #EEEEEE;">
+              <label for="dir">上传路径：</label>
+              <select class="btn btn-default" name="dir_root" id="dir">
             　   <option>{{path}}</option>
               </select>
               <br>
@@ -97,7 +108,6 @@
                   <input class="btn btn-default" type="file" required="required" id="file" name="file" multiple="">
               </div>
               <div class="form-group">
-                  <!--<input type="submit" value="上传文件" onclick=doSubmit()>-->
                   <input class="btn btn-primary pull-right" type="submit" value="上传文件">
               </div>
           </form>
@@ -119,9 +129,9 @@
 
 <!--文件列表 样式2    -->
     <hr>
-    <div class="alert alert-warning" style="text-align: center;">
+    <div class="alert alert-warning">
     {% if del_file_message %}
-        <div class="alert alert-warning" style="text-align: center;color: red; font-size: 20px">{{ del_file_message }}</div>
+        <div class="alert alert-warning">{{ del_file_message }}</div>
     {% endif %}
     <h3 style="color: #3e8f3e;font-weight: bold">文件下载列表：</h3>
     {% if fileObjectList %}
@@ -140,14 +150,14 @@
                     <td align="left" valign="middle">
                         <form class='form-register' action="delFile" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
                             {% csrf_token %}
-                            <button type="submit" style="color: #ffffff;background-color: #2e6da4" name="downloadFileName" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">删除</button>
+                            <button type="submit" name="downloadFileName" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">删除</button>
                         </form>
                     </td>
                 </tr>
             {% endfor %}
         </table>
     {% endif %}
-<hr>
+
 
 {% if delfile_message %}
     <div class="alert alert-warning" style="text-align: center;color: red; font-size: 20px">{{ delfile_message }}</div>
@@ -155,11 +165,12 @@
 
 <!--删除文件-->
 <!--<div class="container">-->
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-md-8 col-md-offset-2">
+    <!--<div class="col-md-4 col-md-offset-4">-->
         <form class='form-register' action="delFile" method="post">
             {% csrf_token %}
-            <label for="dir_2">删除文件路径路径：</label>
-                <select class="btn btn-default" name="dir_root" id="dir_2" style="color: #9d9d9d;background-color: #EEEEEE;">
+            <label style="display: none;" for="dir_2">删除文件路径路径：</label>
+                <select class="btn btn-default" name="dir_root" id="dir_2" style="color: #9d9d9d;background-color: #EEE;display: none;">
             　　　　<option>{{path}}</option>
                 </select>
             <br>
@@ -175,15 +186,24 @@
         <br>
         <br>
         <br>
-        <div class="btn btn-primary">
+        <hr>
+        <div class="btn btn-primary pull-left">
             <a style="color: #fff;text-decoration: none;" href="/">返回首页</a>
         </div>
-        <hr>
-        <div class="btn btn-primary">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="btn btn-primary pull-left">
             <a style="color: #fff;text-decoration: none;" href="/">回到顶部</a>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
 <!--</div> &lt;!&ndash; /container &ndash;&gt;-->
+</div>
 </div>
 </div>
 {% endblock %}
