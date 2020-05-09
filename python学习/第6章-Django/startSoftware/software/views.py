@@ -160,6 +160,43 @@ def delSoftware(request):
     delApp_form = DelSoftware()
     return render(request, 'software/delSoftware.html', locals())
 
+def downloadFileInfo(path):
+    dirList = []
+    fileObjectList = []
+
+    fileList = os.listdir(path)
+
+    class DownloadFileObject(object):
+        def __init__(self, name, size, creatTime, dirRoot):
+            self.downloadFileName = name
+            self.downloadFileSize = size
+            self.downloadFileCreaTime = creatTime
+            self.downloadFileDirRoot = dirRoot
+
+    for file in fileList:
+        if os.path.isfile(path + file):
+            print('【%s】:这是一个文件' % file)
+            filepath = path + file
+            print('文件完整路径：【%s】' % filepath)
+
+            fileSize = os.path.getsize(filepath)  # 获取文件大小
+            fileSize = fileSize / float(1024)
+            fileSize = round(fileSize, 2)
+
+            fileCreatTime = os.path.getctime(filepath)  # 获取文件创建时间
+            fileCreatTime = datetime.datetime.fromtimestamp(fileCreatTime)
+            fileCreatTime = fileCreatTime.strftime('%Y-%m-%d %X')
+
+            fileObject = DownloadFileObject(file, fileSize, fileCreatTime, path)  # 创建文件对象
+            fileObjectList.append(fileObject)  # 把文件对象存放到列表
+        elif os.path.isdir(path + file):
+            print('【%s】：这是一个目录' % file)
+            dirList.append(file)
+        else:
+            print('未知文件，无法识别该文件！！')
+
+    return fileObjectList,dirList
+
 
 def delFile(request):
     message = '温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
@@ -204,37 +241,7 @@ def delFile(request):
             else:
                 delfile_message = "【%s】 文件不存在，删除失败！！" % FileName
 
-    fileObjectList=[]
-    class DownloadFileObject(object):
-        def __init__(self,name,size,creatTime,dirRoot):
-            self.downloadFileName=name
-            self.downloadFileSize=size
-            self.downloadFileCreaTime=creatTime
-            self.downloadFileDirRoot = dirRoot
-
-    dirList=[]
-    fileList = os.listdir(path)
-    for file in fileList:
-        if os.path.isfile(path + file):
-            print('【%s】:这是一个文件' % file)
-            filepath = path + file
-            print('文件完整路径：【%s】' % filepath)
-
-            fileSize = os.path.getsize(filepath)    # 获取文件大小
-            fileSize = fileSize / float(1024)
-            fileSize = round(fileSize, 2)
-
-            fileCreatTime = os.path.getctime(filepath)  # 获取文件创建时间
-            fileCreatTime = datetime.datetime.fromtimestamp(fileCreatTime)
-            fileCreatTime = fileCreatTime.strftime('%Y-%m-%d %X')
-
-            fileObject = DownloadFileObject(file, fileSize, fileCreatTime, path) # 创建文件对象
-            fileObjectList.append(fileObject) # 把文件对象存放到列表
-        elif os.path.isdir(path + file):
-            print('【%s】：这是一个目录' % file)
-            dirList.append(file)
-        else:
-            print('未知文件，无法识别该文件！！')
+    fileObjectList, dirList = downloadFileInfo(path)
 
     delFile_form = DelFile()
     return render(request, 'software/uploadFile.html', locals())
@@ -259,38 +266,7 @@ def uploadFile(request):
         else:
             return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误,访问网页不存在！</h4>')
 
-    dirList = []
-    fileList = os.listdir(path)
-    fileObjectList=[]
-    class DownloadFileObject(object):
-        def __init__(self,name,size,creatTime,dirRoot):
-            self.downloadFileName=name
-            self.downloadFileSize=size
-            self.downloadFileCreaTime=creatTime
-            self.downloadFileDirRoot = dirRoot
-
-
-    for file in fileList:
-        if os.path.isfile(path + file):
-            print('【%s】：这是一个目录' % file)
-            filepath = path + file
-            print('文件完整路径：【%s】' % filepath)
-
-            fileSize = os.path.getsize(filepath)
-            fileSize = fileSize / float(1024)
-            fileSize = round(fileSize, 2)
-
-            fileCreatTime = os.path.getctime(filepath)
-            fileCreatTime = datetime.datetime.fromtimestamp(fileCreatTime)
-            fileCreatTime = fileCreatTime.strftime('%Y-%m-%d %X')
-
-            fileObject = DownloadFileObject(file, fileSize, fileCreatTime,path)
-            fileObjectList.append(fileObject)
-        elif os.path.isdir(path + file):
-            print('这是一个目录')
-            dirList.append(file)
-        else:
-            print('未知文件，无法识别该文件！！')
+    fileObjectList, dirList = downloadFileInfo(path)
 
     # 判断上传是否为空
     try:
@@ -347,38 +323,7 @@ def uploadFile(request):
         message='温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
         print(message)
 
-    fileObjectList=[]
-
-    class DownloadFileObject(object):
-        def __init__(self, name, size, creatTime, dirRoot):
-            self.downloadFileName = name
-            self.downloadFileSize = size
-            self.downloadFileCreaTime = creatTime
-            self.downloadFileDirRoot = dirRoot
-
-    dirList = []
-    fileList = os.listdir(path)
-    for file in fileList:
-        if os.path.isfile(path + file):
-            print('【%s】：这是一个目录' % file)
-            filepath = path + file
-            print('文件完整路径：【%s】' % filepath)
-
-            fileSize = os.path.getsize(filepath)
-            fileSize = fileSize / float(1024)
-            fileSize = round(fileSize, 2)
-
-            fileCreatTime = os.path.getctime(filepath)
-            fileCreatTime = datetime.datetime.fromtimestamp(fileCreatTime)
-            fileCreatTime = fileCreatTime.strftime('%Y-%m-%d %X')
-
-            fileObject = DownloadFileObject(file, fileSize, fileCreatTime,path)
-            fileObjectList.append(fileObject)
-        elif os.path.isdir(path + file):
-            print('【%s】：这是一个目录' % file)
-            dirList.append(file)
-        else:
-            print('未知文件，无法识别该文件！！')
+    fileObjectList, dirList = downloadFileInfo(path)
 
     return render(request, 'software/uploadFile.html', locals())
 
