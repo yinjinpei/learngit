@@ -115,7 +115,7 @@
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
     {% if request.session.is_login %}
-        {% if dirList is none %}
+        {% if dirObjectList is none %}
             <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
         {% endif %}
     {% else %}
@@ -138,14 +138,16 @@
         <ul>
             <li>
                 <br>
-                <a class="btn btn-primary" href="/uploadFile">返回上一层</a>
+                {% if path != 'uploads/shar/' %}
+                    <a class="btn btn-primary" href="/uploadFile?dirname={{up_one_level_path}}">返回上一层</a>
+                {% endif %}
             </li>
         </ul>
     {% endif %}
         <br>
-    {% for dir in dirList %}
+    {% for dir in dirObjectList %}
         <ul>
-            <li><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir}}">{{dir}}</a></li>
+            <li><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir.DirAbsolutePath}}">{{dir.DirName}}</a></li>
         </ul>
     {% endfor %}
     </div>

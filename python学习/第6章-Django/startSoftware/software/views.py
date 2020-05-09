@@ -161,17 +161,25 @@ def delSoftware(request):
     return render(request, 'software/delSoftware.html', locals())
 
 def downloadFileInfo(path):
-    dirList = []
-    fileObjectList = []
+    fileObjectList = [] # 存放文件对象
+    dirObjectList = []  # 存放目录对象
 
     fileList = os.listdir(path)
 
     class DownloadFileObject(object):
-        def __init__(self, name, size, creatTime, dirRoot):
+        def __init__(self, name, size, creatTime, path):
             self.downloadFileName = name
             self.downloadFileSize = size
             self.downloadFileCreaTime = creatTime
-            self.downloadFileDirRoot = dirRoot
+            self.downloadFileDirRoot = path
+
+    class AbsolutePath(object):
+        def __init__(self, name, dirpath):
+            # 目录名
+            self.DirName = name
+            # 目录完整路径
+            self.DirAbsolutePath = dirpath
+
 
     for file in fileList:
         if os.path.isfile(path + file):
@@ -189,13 +197,15 @@ def downloadFileInfo(path):
 
             fileObject = DownloadFileObject(file, fileSize, fileCreatTime, path)  # 创建文件对象
             fileObjectList.append(fileObject)  # 把文件对象存放到列表
+
         elif os.path.isdir(path + file):
             print('【%s】：这是一个目录' % file)
-            dirList.append(file)
+            dirObject=AbsolutePath(file, path + file)
+            dirObjectList.append(dirObject)
         else:
             print('未知文件，无法识别该文件！！')
 
-    return fileObjectList,dirList
+    return fileObjectList,dirObjectList
 
 
 def delFile(request):
@@ -241,7 +251,7 @@ def delFile(request):
             else:
                 delfile_message = "【%s】 文件不存在，删除失败！！" % FileName
 
-    fileObjectList, dirList = downloadFileInfo(path)
+    fileObjectList, dirObjectList= downloadFileInfo(path)
 
     delFile_form = DelFile()
     return render(request, 'software/uploadFile.html', locals())
@@ -252,21 +262,31 @@ def uploadFile(request):
         uploadFile_message = "您尚未登录，使用【文件管理】请先登录！！"
         return render(request, 'software/index.html', locals())
 
-
     delFile_form = DelFile()  # 宣染删除表格，即宣染删除功能的输入框
     path = 'uploads/'+request.session['user_name']+'/'  # 上传文件路径，相对路径，在项目根目录下
     if not os.path.exists(path):    #目录不存在则创建
         os.makedirs(path)
 
     dirname = request.GET.get('dirname')
+
+    print('#'*50+'获取到的绝对路径：',dirname)
     if dirname is not None:
-        if os.path.isdir(path + dirname):
-            path = path + dirname + '/'
+        # 上一层目录完整路径
+        up_one_level_path = ''
+        result = dirname.split('/')
+        for i in range(len(result) - 1):
+            up_one_level_path += result[i] + '/'
+        up_one_level_path = up_one_level_path[:-1]
+
+        if os.path.isdir(dirname):
+            path = dirname + '/'
+            print('=' * 50 + '获取到的绝对路径：', dirname)
             dirList_is_not_null = '在模板显示返回上一层，仅作标志'
         else:
+            print('*' * 50 + '获取到的绝对路径：', dirname)
             return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误,访问网页不存在！</h4>')
 
-    fileObjectList, dirList = downloadFileInfo(path)
+    fileObjectList, dirObjectList = downloadFileInfo(path)
 
     # 判断上传是否为空
     try:
@@ -323,7 +343,7 @@ def uploadFile(request):
         message='温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
         print(message)
 
-    fileObjectList, dirList = downloadFileInfo(path)
+    fileObjectList, dirObjectList = downloadFileInfo(path)
 
     return render(request, 'software/uploadFile.html', locals())
 
@@ -605,3 +625,7 @@ def delServerDate(request):
 
 def test(request):
     return render(request, 'test.html', locals())
+
+
+def productionMaterials(request):
+    return render(request, 'productionMaterials.html', locals())
