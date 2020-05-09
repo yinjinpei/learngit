@@ -17,7 +17,7 @@
             var oDiv = document.getElementById('con');
             // oDiv.style.width = '300px';
             oDiv.style.height = '200px';
-            oDiv.style.border = '2px solid red';
+            oDiv.style.border = '2px solid green';
             oDiv.style.fontSize = '20px';
             oDiv.style.textAlign = 'center';
 
@@ -40,11 +40,11 @@
 
 {% endblock %}
 {% block content %}
-<h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
-<hr>
+<!--<h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>-->
+<!--<hr>-->
 <div class="container">
         <input id="btn" type="button" name="" value="切换">
-        <div id="con" >隐藏窗口&显示窗口</div>
+        <div id="con" >暂不支持实时日志</div>
         <hr>
         <div class="alert alert-warning">
             {% if message %}
