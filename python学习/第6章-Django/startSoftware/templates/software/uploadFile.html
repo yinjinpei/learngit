@@ -86,7 +86,7 @@
         color: red;
     }
 
-    #link_index,#link_top,#link_index_tag,#link_top_tag{
+    #link_index,#link_top,#link_index_tag,#link_top_tag,#link_index_tag2,#link_top_tag2{
         text-decoration: none;
         color: #fff;
     }
@@ -129,7 +129,7 @@
     {% endif %}
 
     {% if request.session.user_name == 'shar' %}
-            <h4 class="btn btn-default pull-left" id="dir_list">目录列表：</h4>
+            <h4 class="btn btn-default pull-left" id="dir_list">当前文件夹路径：</h4>
     {% endif %}
     <br>
     <br>
@@ -154,22 +154,24 @@
     <hr>
 
 {% if dirList_is_not_null %}
-    <div style="display: block;">
+    {% if path == 'uploads/shar/' %}
+            <br><br>
+            <a class="btn btn-primary pull-left" id="link_index_tag" href="/">返回首页</a>
+            <br><br><br><br>
+            <a class="btn btn-primary pull-left" id="link_top_tag" href="#">回到顶部</a>
+            <br><br><br><br>
+            <div style="display: none;">
+    {% else %}
+            <div style="display: block;">
+    {% endif %}
 {% else %}
     {% if request.session.user_name == 'shar' %}
-        <br>
-        <br>
-        <a class="btn btn-primary pull-left" id="link_index_tag" href="/">返回首页</a>
-        <br>
-        <br>
-        <br>
-        <br>
-        <a class="btn btn-primary pull-left" id="link_top_tag" href="#">回到顶部</a>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div style="display: none;">
+            <br><br>
+            <a class="btn btn-primary pull-left" id="link_index_tag2" href="/">返回首页</a>
+            <br><br><br><br>
+            <a class="btn btn-primary pull-left" id="link_top_tag2" href="#">回到顶部</a>
+            <br><br><br><br>
+            <div style="display: none;">
     {% else %}
         <div style="display: block;">
     {% endif %}
