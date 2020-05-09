@@ -76,56 +76,58 @@ class TimingData(models.Model):
     def showisDelete(self):
         return self.isDelete
 
-# 领域
-class DomainList(models.Model):
+
+class VersionInfo(models.Model):
     # 领域名
-    domainName = models.CharField(max_length=20)
+    domain_name = models.CharField(max_length=128, unique=True)
     # 版本号
-    # version = models.CharField(max_length=10)
-    # 投产时间
-    # starttime = models.DateTimeField()
+    version = models.CharField(max_length=256)
+    # 投产日期
+    plan_start_date = models.DateField(auto_now_add=True)
+    # 领域负责人邮箱
+    domain_manager_email = models.EmailField(unique=True)
+    # 测试负责人邮箱
+    test_manager_email = models.EmailField(unique=True)
+    # 开发团队邮箱群
+    domain_team_email = models.EmailField(unique=True)
+    # 版本经理邮箱
+    version_manager_email = models.EmailField(unique=True)
     # 版本检查清单
-    checklist = models.BooleanField(default=True)
+    checklist = models.CharField(max_length=128, unique=True)
     # 需要文档
-    demand_doc=models.BooleanField(default=True)
+    demand_doc = models.CharField(max_length=128, unique=True)
     # 需要评审
-    demand_review=models.BooleanField(default=True)
+    demand_review = models.CharField(max_length=128, unique=True)
     # 安全评审
-    safety_review=models.BooleanField(default=True)
+    safety_review = models.CharField(max_length=128, unique=True)
     # 代码评审
-    code_review=models.BooleanField(default=True)
+    code_review = models.CharField(max_length=128, unique=True)
     # sit测试报告
-    sit_report=models.BooleanField(default=True)
+    sit_report = models.CharField(max_length=128, unique=True)
     # uat测试报告
-    uat_report=models.BooleanField(default=True)
+    uat_report = models.CharField(max_length=128, unique=True)
     # 安全报告
-    safety_report=models.BooleanField(default=True)
+    safety_report = models.CharField(max_length=128, unique=True)
     # 代码安全扫描报告
-    code_security_scan_report=models.BooleanField(default=True)
+    code_security_scan_report = models.CharField(max_length=128, unique=True)
     # 代码质量扫描报告
-    code_quality_scan_report = models.BooleanField(default=True)
+    code_quality_scan_report = models.CharField(max_length=128, unique=True)
     # SQM审核报告
-    sqm_report = models.BooleanField(default=True)
+    sqm_report = models.CharField(max_length=128, unique=True)
     # DBA脚本评审报告
-    dba_review= models.BooleanField(default=True)
+    dba_review = models.CharField(max_length=128, unique=True)
     # 回归测试报告
-    regress_review = models.BooleanField(default=True)
+    regress_review = models.CharField(max_length=128, unique=True)
     # 生产验证报告
-    verification_review = models.BooleanField(default=True)
-
+    verification_review = models.CharField(max_length=128, unique=True)
+    # 数据是否被已弃用
     isDelete = models.BooleanField(default=False)
-    class Meta():
-        db_table='domainList'
+    class Meta:
+        db_table = 'versioninfo'
 
-    domain = models.Manager()
-    def showID(self):
-        return self.pk
-    def showDomainName(self):
-        return self.domainName
-    # def showStarttime(self):
-    #     return self.starttime
-    # def showVersion(self):
-    #     return self.version
-    def showisDelete(self):
-        return self.isDelete
+    def __str__(self):
+        return self.name
+    domains = models.Manager()
 
+    def show_domain_name(self):
+        return self.domain_name
