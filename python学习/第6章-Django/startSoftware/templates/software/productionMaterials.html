@@ -5,6 +5,18 @@
 {% block title %}投产材料管理{% endblock %}
 
 {% block content %}
+
+{% block scripts %}
+<script type="text/javascript">
+    function submitForm(){
+    var form = document.getElementById("my_domain");
+    form.submit();
+}
+
+</script>
+
+{% endblock %}
+
 {% block css %}
 <style type="text/css">
     #uploadFile_con{
@@ -16,7 +28,6 @@
         color: red;
     }
 
-
     #link_index:hover,#link_top:hover{
         color:red;
         background-color: gold;
@@ -27,22 +38,69 @@
         color: #fff;
     }
 
+    .checkout_btn{
+        margin-left: 10%;
+    }
+
+    .domain_list, .version_list{
+        margin-right: 10px;
+    }
+
 </style>
 {% endblock %}
+
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
-        <br>
-        <br>
-        <br>
-        <hr>
-        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
-        <br>
-        <br>
-        <br>
-        <br>
-        <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
-        <br>
-        <br>
-        <br>
-        <br>
+    <h2>投产材料管理</h2>
+
+    <form class='form-register' action="productionMaterials?dirname={{path}}" method="get" id="my_domain">
+        {% csrf_token %}
+        <label class="btn btn-primary pull-left domain_list" for="dir_1">选择领域：</label>
+            <select class="btn btn-default pull-left" onchange="submitForm();" name="domain" id="dir_1">
+                <option>请选择领域</option>
+                {% for dir in user_dir_list %}
+            　　　　<option>{{dir}}</option>
+                {% endfor %}
+            </select>
+    </form>
+
+    <form class='form-register' action="productionMaterials?dirname={{path}}" method="post">
+        {% csrf_token %}
+        <br><br>
+        <label class="btn btn-primary pull-left version_list" for="dir_2">选择版本：</label>
+            <select class="btn btn-default pull-left" name="version" id="dir_2">
+                <option>请选择版本</option>
+                {% for dir in version_dir_list %}
+            　　　　<option>{{dir}}</option>
+                {% endfor %}
+            </select>
+
+        <div class="form-group" id="newdir">
+            {{ newDirectory_form.DirectoryName.label_tag }}
+            {{ newDirectory_form.DirectoryName }}
+        </div>
+        <br><br><br>
+        <button type="reset" class="btn btn-default pull-left reset_btn">重置</button>
+        <button type="submit" class="btn btn-primary pull-left checkout_btn">查询</button>
+    </form>
+
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <hr>
+    <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 {% endblock %}

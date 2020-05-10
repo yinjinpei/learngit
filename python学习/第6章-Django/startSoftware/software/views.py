@@ -698,4 +698,29 @@ def test(request):
 
 
 def productionMaterials(request):
-    return render(request, 'software/productionMaterials.html', locals())
+    # 访问此功能的白名单用户
+    allow_users=['shar']
+    user_dir_list=[]
+    if request.session['user_name'] in allow_users:
+        user_path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
+        for dir in os.listdir(user_path):
+            if os.path.isdir(user_path+dir):
+                user_dir_list.append(dir)
+
+    if request.method == "GET":
+        dirname=request.GET.get('domain')
+        print(dirname,'88888888888888888888')
+
+        if dirname:
+            version_dir_list=[]
+            version_path = 'uploads/' + request.session['user_name'] + '/' + dirname +'/'
+            print('当前路径：',version_path)
+            for dir in os.listdir(version_path):
+                print('当前目录：',dir)
+                if os.path.isdir(version_path+dir):
+                    version_dir_list.append(dir)
+
+
+        return render(request, 'software/productionMaterials.html', locals())
+    else:
+        return HttpResponse('<h3 style="color: red">你无权限访问此功能，请联系管理员！</h3>')
