@@ -101,7 +101,7 @@
         background-color: #3c763d;
     }
 
-    #dir_list{
+    #dir_list,#dir_list1{
         color:green;
         background-color: gold;
         font-size: 16px;
@@ -110,6 +110,14 @@
     #dir_list:hover{
         color:green;
     }
+
+    #dir_2{
+        color: #9d9d9d;
+        background-color: #EEE;
+        display: none;
+    }
+
+
 
 </style>
 {% endblock %}
@@ -128,17 +136,20 @@
         {% endif %}
     {% endif %}
 
-    {% if request.session.user_name == 'shar' %}
-            <h4 class="btn btn-default pull-left" id="dir_list">当前文件夹路径：</h4>
+    {% if dirname is none %}
+        <h4 class="btn btn-default pull-left" id="dir_list1">当前文件夹路径：uploads/shar</h4>
+    {% else %}
+        <h4 class="btn btn-default pull-left" id="dir_list">当前文件夹路径：{{dirname}}</h4>
     {% endif %}
+    <a class="btn btn-default pull-left" href="/newdir?dirname={{path}}">新建目录</a>
     <br>
     <br>
     <div class="dir_list">
-    {% if dirList_is_not_null%}
+    {% if dirList_is_not_null %}
         <ul>
             <li>
                 <br>
-                {% if path != 'uploads/shar/' %}
+                {% if path != user_home %}
                     <a class="btn btn-primary" href="/uploadFile?dirname={{up_one_level_path}}">返回上一层</a>
                 {% endif %}
             </li>
@@ -154,7 +165,7 @@
     <hr>
 
 {% if dirList_is_not_null %}
-    {% if path == 'uploads/shar/' %}
+    {% if path in shar_dir_list %}
             <br><br>
             <a class="btn btn-primary pull-left" id="link_index_tag" href="/">返回首页</a>
             <br><br><br><br>
@@ -192,11 +203,11 @@
 
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-          <form class="form-inline" role="form" action="uploadFile" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+          <form class="form-inline" role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
               {% csrf_token %}
               <br>
-              <label for="dir">上传路径：</label>
-              <select class="btn btn-default" name="dir_root" id="dir">
+              <label for="dir" id="dir_1">上传路径：</label>
+              <select class="btn btn-default" name="dirname" id="dir">
             　   <option>{{path}}</option>
               </select>
               <br>
@@ -236,7 +247,7 @@
                     <td align="left" valign="middle">{{file.downloadFileSize}}k</td>
                     <td align="left" valign="middle">{{file.downloadFileCreaTime}}</td>
                     <td align="left" valign="middle">
-                        <form class='form-register' action="delFile" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                        <form class='form-register' action="delFile?dirname={{dirname}}" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-primary" name="downloadFileName" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">删除</button>
                         </form>
@@ -260,7 +271,7 @@
         <form class='form-register' action="delFile" method="post">
             {% csrf_token %}
             <label style="display: none;" for="dir_2">删除文件路径：</label>
-                <select class="btn btn-default" name="dir_root" id="dir_2" style="color: #9d9d9d;background-color: #EEE;display: none;">
+                <select class="btn btn-default" name="dirname" id="dir_2">
             　　　　<option>{{path}}</option>
                 </select>
             <br>

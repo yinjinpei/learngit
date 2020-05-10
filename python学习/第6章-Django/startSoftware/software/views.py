@@ -160,6 +160,20 @@ def delSoftware(request):
     delApp_form = DelSoftware()
     return render(request, 'software/delSoftware.html', locals())
 
+
+def up_one_level(dirname):
+    print('上一层,dirname的值：',dirname)
+    if dirname[-1] == '/':
+        dirname = dirname[:-1]
+    # 上一层目录完整路径
+    up_one_level_path_tmp = ''
+    result = dirname.split('/')
+    for i in range(len(result) - 1):
+        up_one_level_path_tmp += result[i] + '/'
+
+    print('上一层目录为：',up_one_level_path_tmp[:-1])
+    return up_one_level_path_tmp[:-1]
+
 def downloadFileInfo(path):
     fileObjectList = [] # 存放文件对象
     dirObjectList = []  # 存放目录对象
@@ -203,18 +217,29 @@ def downloadFileInfo(path):
             dirObject=AbsolutePath(file, path + file)
             dirObjectList.append(dirObject)
         else:
+            print('path:',path)
+            print('file',file)
             print('未知文件，无法识别该文件！！')
 
     return fileObjectList,dirObjectList
 
 
 def delFile(request):
-    message = '温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
-    path = 'uploads/' + request.session['user_name'] + '/'  # 文件储存位置
-    fileList = os.listdir(path)
-    if not os.path.exists(path):  # 目录不存在则创建
-        os.makedirs(path)
+    print('删除文件')
     if request.method == "POST":
+        user_home = 'uploads/' + request.session['user_name'] + '/'
+        path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
+        print('删除文件使用POST方式')
+
+        dirname = request.GET.get('dirname')
+        if dirname:
+            if dirname[-1] == '/':
+                dirname = dirname[:-1]
+            path=dirname+'/'
+        print('~~~~~~~~~~~~~~~dirname：', dirname)
+
+        message = '温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
+
         downloadFileName = request.POST.get('downloadFileName')
         print('===================----------------=======================')
         print(downloadFileName)
@@ -225,24 +250,28 @@ def delFile(request):
                 str_list = downloadFileName.split('/')
                 del_file_message = "【%s】 删除成功！！" % str_list[len(str_list) - 1]
 
+            if dirname:
+                print('dirname不是空值：',dirname)
 
-            patten = re.compile(r'.+?/')
-            result=patten.findall(downloadFileName)
-            dirRoot=''
-            for dir in result:
-                dirRoot+=dir
-            if dirRoot != path:
+                up_one_level_path = up_one_level(dirname)
                 dirList_is_not_null = '在模板显示返回上一层，仅作标志'
-            path=dirRoot
+
+                if dirname[-1] == '/':
+                    dirname = dirname[:-1]
+                path=dirname+'/'
 
         delFile_form = DelFile(request.POST)
         if delFile_form.is_valid(): # 如果有数据
-            dirRoot=request.POST.get('dir_root')
-            print("当前路dir_root：",dirRoot)
-            if dirRoot != path:
+            print('有删除数据提交！！！')
+            dirname = request.POST.get('dirname')
+            print('dirname  POST方式的值是',dirname)
+            if dirname:
+                up_one_level_path = up_one_level(dirname)
                 dirList_is_not_null = '在模板显示返回上一层，仅作标志'
-            if dirRoot:
-                path=dirRoot
+
+                if dirname[-1] == '/':
+                    dirname = dirname[:-1]
+            path = dirname + '/'
 
             FileName = delFile_form.cleaned_data['FileName']    # 获取删除的文件名
             if os.path.exists(path+FileName):
@@ -251,16 +280,27 @@ def delFile(request):
             else:
                 delfile_message = "【%s】 文件不存在，删除失败！！" % FileName
 
-    fileObjectList, dirObjectList= downloadFileInfo(path)
+        fileObjectList, dirObjectList= downloadFileInfo(path)
 
-    delFile_form = DelFile()
-    return render(request, 'software/uploadFile.html', locals())
-
+        delFile_form = DelFile()
+        return render(request, 'software/uploadFile.html', locals())
+    else:
+        return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误！</h4>')
 
 def uploadFile(request):
     if not request.session.get('is_login', None):
         uploadFile_message = "您尚未登录，使用【文件管理】请先登录！！"
         return render(request, 'software/index.html', locals())
+
+    # 用户家目录
+    user_home ='uploads/' + request.session['user_name'] + '/'
+    if request.session['user_name'] == 'shar':
+        print('登录的用户名是：',request.session['user_name'])
+        shar_dir_list=['uploads/shar/'] # shar用户家目录的文件夹列表
+        for dir in os.listdir('uploads/shar/'):
+            if os.path.isdir('uploads/shar/'+dir):
+                shar_dir_list.append('uploads/shar/'+dir+'/')
+        print('不在这些目录下展示上传功能：',shar_dir_list)
 
     delFile_form = DelFile()  # 宣染删除表格，即宣染删除功能的输入框
     path = 'uploads/'+request.session['user_name']+'/'  # 上传文件路径，相对路径，在项目根目录下
@@ -269,22 +309,23 @@ def uploadFile(request):
 
     dirname = request.GET.get('dirname')
 
-    print('#'*50+'获取到的绝对路径：',dirname)
+    print('###############################################获取到的绝对路径dirname：',dirname)
     if dirname is not None:
-        # 上一层目录完整路径
-        up_one_level_path = ''
-        result = dirname.split('/')
-        for i in range(len(result) - 1):
-            up_one_level_path += result[i] + '/'
-        up_one_level_path = up_one_level_path[:-1]
+        if dirname[-1] == '/':
+            dirname = dirname[:-1]
+
+        up_one_level_path = up_one_level(dirname)
 
         if os.path.isdir(dirname):
             path = dirname + '/'
-            print('=' * 50 + '获取到的绝对路径：', dirname)
+            print('=' * 50 + '获取到的绝对路径path：', path)
             dirList_is_not_null = '在模板显示返回上一层，仅作标志'
         else:
             print('*' * 50 + '获取到的绝对路径：', dirname)
             return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误,访问网页不存在！</h4>')
+    else:
+        if request.session['user_name'] != 'shar':
+            dirname=path[:-1]
 
     fileObjectList, dirObjectList = downloadFileInfo(path)
 
@@ -296,18 +337,21 @@ def uploadFile(request):
         return render(request, 'software/uploadFile.html', locals())
 
     if request.method == 'POST':
-        dir_root = request.POST.get('dir_root')
+        dirname = request.POST.get('dirname')
         print('--------------------------获取到的目录-----------------------------')
-        print(dir_root)
+        print(dirname)
         print('------------------------------------------------------------------')
 
-        if dir_root:
-            if path != dir_root:
-                dirList_is_not_null = '在模板显示返回上一层，仅作标志'
-                path = dir_root
-        print('----------------------------当前路径-------------------------------')
-        print(path)
-        print('------------------------------------------------------------------')
+        if dirname:
+            if dirname[-1] == '/':
+                dirname = dirname[:-1]
+            up_one_level_path = up_one_level(dirname)
+            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+
+            path=dirname+'/'
+            print('----------------------------当前路径-------------------------------')
+            print(path)
+            print('------------------------------------------------------------------')
 
         uploadFileList=request.FILES.getlist('file') # 获取所有上传的文件对象
         print('************************所有上传的文件对象**************************')
@@ -366,6 +410,10 @@ def downloadFile(request):
             # Chrome浏览器，采用Base64编码或ISO编码的中文输出
             # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
         return response
+
+def newDirectory(request):
+    return render(request, 'software/newDirectory.html', locals())
+
 
 def versionManagerIndex(request):
     clientIP = request.META['REMOTE_ADDR']
@@ -628,4 +676,4 @@ def test(request):
 
 
 def productionMaterials(request):
-    return render(request, 'productionMaterials.html', locals())
+    return render(request, 'software/productionMaterials.html', locals())
