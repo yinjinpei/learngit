@@ -194,7 +194,6 @@ def downloadFileInfo(path):
             # 目录完整路径
             self.DirAbsolutePath = dirpath
 
-
     for file in fileList:
         if os.path.isfile(path + file):
             print('【%s】:这是一个文件' % file)
@@ -412,6 +411,26 @@ def downloadFile(request):
         return response
 
 def newDirectory(request):
+    dirname = request.GET.get('dirname')
+    path=dirname
+    print('dirname GET方式传递过来的值:',dirname)
+    up_one_level_path=up_one_level(path)
+
+    if request.method == "POST":
+        dirname = request.POST.get('dirname')
+        print('dirname POST方式传递过来的值:', dirname)
+
+        newDirectory_form = NewDirectory(request.POST)
+        if newDirectory_form.is_valid():  # 如果有数据
+            DirectoryName = newDirectory_form.cleaned_data['DirectoryName'] # 获取新建文件夹名
+            try:
+                os.makedirs(dirname+DirectoryName)
+                message="%s 创建目录成功！"%(dirname+DirectoryName)
+            except:
+                message = "%s 创建目录失败，请检查目录是否已存在！" % (dirname+DirectoryName)
+            print(message)
+
+    newDirectory_form=NewDirectory()
     return render(request, 'software/newDirectory.html', locals())
 
 

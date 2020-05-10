@@ -117,6 +117,12 @@
         display: none;
     }
 
+    #newdir{
+        color: #FFF;
+        font-size: 15px;
+        margin: 10px;
+    }
+
 
 
 </style>
@@ -141,7 +147,7 @@
     {% else %}
         <h4 class="btn btn-default pull-left" id="dir_list">当前文件夹路径：{{dirname}}</h4>
     {% endif %}
-    <a class="btn btn-default pull-left" href="/newdir?dirname={{path}}">新建目录</a>
+    <a class="btn btn-primary pull-left" id="newdir" href="/newDirectory?dirname={{path}}">新建一个目录</a>
     <br>
     <br>
     <div class="dir_list">

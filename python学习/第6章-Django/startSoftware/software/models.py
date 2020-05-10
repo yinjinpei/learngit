@@ -37,6 +37,10 @@ class DelFile(forms.Form):
     FileName = forms.CharField(label="输入完整的文件名可直接删除", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
+class NewDirectory(forms.Form):
+    DirectoryName = forms.CharField(label="请输入文件夹名", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
 class DateForm(forms.Form):
     ServerIP = forms.CharField(label="服务器的IP", max_length=128, widget=forms.TextInput(attrs={'class': 'serverip'}))
     # 实现可选的日期输入格式
