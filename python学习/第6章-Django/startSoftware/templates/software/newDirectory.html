@@ -1,0 +1,170 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}文件管理{% endblock %}
+
+{% block content %}
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .dir_list{
+        text-align: left;
+    }
+
+    .dir_list ul{
+        list-style-type: none;
+    }
+
+    .row label,.row select{
+        color: green;
+    }
+
+    .row select{
+        background-color: #EEE;
+    }
+
+    #upload_point, #dir_select{
+        font-size: 18px;
+    }
+
+    .pull-left{
+        color: #3e8f3e;
+        font-weight: bold;
+
+    }
+
+    .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #downloadFileList_title{
+        color: #3e8f3e;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .delfile_msg{
+        color:red;
+    }
+
+    .downloadFileList_table{
+        border-collapse:separate;
+        border-spacing:20px 8px;
+        margin: auto;
+    }
+
+    .downloadFile:hover{
+        text-decoration: none;
+    }
+
+    .downloadFileList_table .btn:hover,#delfile_btn:hover{
+        background-color: #FF5151;
+        color: gold;
+    }
+
+    #reset_btn{
+        margin-left: 35%;
+    }
+
+    #delfile_btn{
+        margin-right: 35%;
+     }
+
+
+    #delfile_title input{
+        background-color: #fff;
+        color: red;
+    }
+
+    #link_index,#link_top,#link_index_tag,#link_top_tag,#link_index_tag2,#link_top_tag2{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .del_file_message{
+        color: red;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    #dir_name{
+        background-color: #3c763d;
+    }
+
+    #dir_list,#dir_list1{
+        color:green;
+        background-color: gold;
+        font-size: 16px;
+    }
+
+    #dir_list:hover{
+        color:green;
+    }
+
+    #dir_2{
+        color: #9d9d9d;
+        background-color: #EEE;
+        display: none;
+    }
+
+    #back_btn{
+        color: #FFF;
+    }
+
+
+</style>
+{% endblock %}
+<div class="col-md-8 col-md-offset-2" id="uploadFile_con">
+    {% if request.session.is_login %}
+        {% if dirObjectList is none %}
+            <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
+        {% endif %}
+    {% else %}
+        <h2>你尚未登录，只能访问公开内容！</h2>
+    {% endif %}
+
+
+    <h4 class="btn btn-default pull-left" id="dir_list">当前文件夹路径：{{path}}</h4>
+
+
+    <div class="col-md-8 col-md-offset-2">
+    {% if message %}
+        <div class="alert alert-warning delfile_msg" style="text-align: center;color: red; font-size: 20px">{{ message }}</div>
+    {% endif %}
+        <form class='form-register' action="newDirectory?dirname={{path}}" method="post">
+            {% csrf_token %}
+            <label for="dir_2">创建目录路径：</label>
+                <select class="btn btn-default" name="dirname" id="dir_2">
+            　　　　<option>{{path}}</option>
+                </select>
+            <br><br><br>
+            <div class="form-group" id="delfile_title">
+                {{ newDirectory_form.DirectoryName.label_tag }}
+                {{ newDirectory_form.DirectoryName }}
+            </div>
+            <button type="reset" class="btn btn-default pull-left" id="reset_btn">重置</button>
+            <button type="submit" class="btn btn-primary pull-right" id="delfile_btn">创建</button>
+        </form>
+
+
+        <br><br><br><hr>
+        <a class="btn btn-primary pull-left" id="back_btn" href="/uploadFile?dirname={{path}}">返回上传文件页面</a>
+        <br><br><br>
+        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+        <br><br><br><br>
+        <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+        <br><br><br><br>
+    </div>
+
+</div>
+{% endblock %}
