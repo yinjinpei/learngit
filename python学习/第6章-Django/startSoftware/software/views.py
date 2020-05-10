@@ -398,7 +398,10 @@ def downloadFile(request):
         print('000000000000000000000000000000000')
         print(filename)
         print('000000000000000000000000000000000')
-        file = open(filename,'rb')
+        try:
+            file = open(filename,'rb')
+        except:
+            return HttpResponse('下载文件名有错，请联系管理员！  文件名：%s'%filename)
         response = FileResponse(file)
         response['Content-Type'] = 'application/octet-stream'
         # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
