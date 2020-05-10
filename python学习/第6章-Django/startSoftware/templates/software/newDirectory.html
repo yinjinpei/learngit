@@ -16,10 +16,6 @@
         color: red;
     }
 
-    .dir_list{
-        text-align: left;
-    }
-
     .dir_list ul{
         list-style-type: none;
     }
@@ -32,14 +28,14 @@
         background-color: #EEE;
     }
 
-    #upload_point, #dir_select{
-        font-size: 18px;
-    }
-
     .pull-left{
         color: #3e8f3e;
         font-weight: bold;
 
+    }
+    .form-group{
+        color: green;
+        font-size: 16px;
     }
 
     .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover{
@@ -47,25 +43,10 @@
         background-color: gold;
     }
 
-    #downloadFileList_title{
-        color: #3e8f3e;
-        font-weight: bold;
-        font-size: 18px;
-    }
-
     .delfile_msg{
         color:red;
     }
 
-    .downloadFileList_table{
-        border-collapse:separate;
-        border-spacing:20px 8px;
-        margin: auto;
-    }
-
-    .downloadFile:hover{
-        text-decoration: none;
-    }
 
     .downloadFileList_table .btn:hover,#delfile_btn:hover{
         background-color: #FF5151;
@@ -80,28 +61,17 @@
         margin-right: 35%;
      }
 
-
-    #delfile_title input{
+    #newdir input{
         background-color: #fff;
         color: red;
     }
 
-    #link_index,#link_top,#link_index_tag,#link_top_tag,#link_index_tag2,#link_top_tag2{
+    #link_index,#link_top{
         text-decoration: none;
         color: #fff;
     }
 
-    .del_file_message{
-        color: red;
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-
-    #dir_name{
-        background-color: #3c763d;
-    }
-
-    #dir_list,#dir_list1{
+    #dir_list{
         color:green;
         background-color: gold;
         font-size: 16px;
@@ -121,34 +91,36 @@
         color: #FFF;
     }
 
+    .titel{
+        color: green;
+    }
 
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
     {% if request.session.is_login %}
         {% if dirObjectList is none %}
-            <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
+            <!--<h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>-->
+            <h1 class="titel">创建目录</h1>
         {% endif %}
     {% else %}
         <h2>你尚未登录，只能访问公开内容！</h2>
     {% endif %}
 
-
-    <h4 class="btn btn-default pull-left" id="dir_list">当前文件夹路径：{{path}}</h4>
-
-
     <div class="col-md-8 col-md-offset-2">
+    <h4 class="btn btn-default" id="dir_list">当前文件夹路径：{{path}}</h4>
+    <br><br>
     {% if message %}
         <div class="alert alert-warning delfile_msg" style="text-align: center;color: red; font-size: 20px">{{ message }}</div>
     {% endif %}
         <form class='form-register' action="newDirectory?dirname={{path}}" method="post">
             {% csrf_token %}
-            <label for="dir_2">创建目录路径：</label>
+            <label style="display: none;" for="dir_2">创建文件夹路径：</label>
                 <select class="btn btn-default" name="dirname" id="dir_2">
             　　　　<option>{{path}}</option>
                 </select>
-            <br><br><br>
-            <div class="form-group" id="delfile_title">
+
+            <div class="form-group" id="newdir">
                 {{ newDirectory_form.DirectoryName.label_tag }}
                 {{ newDirectory_form.DirectoryName }}
             </div>
@@ -158,8 +130,8 @@
 
 
         <br><br><br><hr>
-        <a class="btn btn-primary pull-left" id="back_btn" href="/uploadFile?dirname={{path}}">返回上传文件页面</a>
-        <br><br><br>
+        <a class="btn btn-primary pull-left" id="back_btn" href="/uploadFile?dirname={{path}}">返回上一层</a>
+        <br><br><br><br>
         <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
         <br><br><br><br>
         <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>

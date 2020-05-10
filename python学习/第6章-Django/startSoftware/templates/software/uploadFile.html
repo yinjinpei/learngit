@@ -119,8 +119,7 @@
 
     #newdir{
         color: #FFF;
-        font-size: 15px;
-        margin: 10px;
+        background-color: #ce8483;
     }
 
 
@@ -147,21 +146,26 @@
     {% else %}
         <h4 class="btn btn-default pull-left" id="dir_list">当前文件夹路径：{{dirname}}</h4>
     {% endif %}
-    <a class="btn btn-primary pull-left" id="newdir" href="/newDirectory?dirname={{path}}">新建一个目录</a>
+    <br>
     <br>
     <br>
     <div class="dir_list">
     {% if dirList_is_not_null %}
         <ul>
             <li>
-                <br>
+
                 {% if path != user_home %}
                     <a class="btn btn-primary" href="/uploadFile?dirname={{up_one_level_path}}">返回上一层</a>
                 {% endif %}
             </li>
         </ul>
     {% endif %}
-        <br>
+    <ul>
+        <li>
+            <a class="btn btn-primary pull-left" id="newdir" href="/newDirectory?dirname={{path}}">新建一个目录</a>
+        </li>
+    </ul>
+        <br><br><br>
     {% for dir in dirObjectList %}
         <ul>
             <li><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir.DirAbsolutePath}}">{{dir.DirName}}</a></li>

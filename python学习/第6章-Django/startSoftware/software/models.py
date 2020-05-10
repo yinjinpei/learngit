@@ -38,7 +38,7 @@ class DelFile(forms.Form):
 
 
 class NewDirectory(forms.Form):
-    DirectoryName = forms.CharField(label="请输入文件夹名", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    DirectoryName = forms.CharField(label="请输入目录名称", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
 class DateForm(forms.Form):
