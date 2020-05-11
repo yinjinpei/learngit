@@ -122,7 +122,15 @@
         background-color: #ce8483;
     }
 
+    .file_form .btn{
+        background-color: #fcf8e3;
+    }
 
+    .file_form .btn:hover{
+        background-color: gold;
+        color: red;
+
+    }
 
 </style>
 {% endblock %}
@@ -253,7 +261,19 @@
             </tr>
             {% for file in fileObjectList %}
                 <tr>
-                    <td align="left" valign="middle"> <a class="downloadFile" href="/downloadFile?name={{file.downloadFileDirRoot}}{{file.downloadFileName}}">{{file.downloadFileName}}</a> </td>
+                    <td align="left" valign="middle">
+                        <!--使用POST方式，文件名没有限制。-->
+                        <form class="file_form" id="{{file.downloadFileName}}" method="post" action="downloadFile">
+                            {% csrf_token %}
+                            <!--方法一-->
+                            <!--<input  type="hidden" name="name" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">-->
+                            <!--<a onclick="document.getElementById('{{file.downloadFileName}}').submit();">{{file.downloadFileName}}</a>-->
+                            <!--方法二-->
+                            <button type="submit" class="btn" name="name" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">{{file.downloadFileName}}</button>
+                        </form>
+                        <!--使用GET方式，文件名后台获取文件名时，特殊符号会被转义-->
+                        <!--<a class="downloadFile" href="/downloadFile?name={{file.downloadFileDirRoot}}{{file.downloadFileName}}">{{file.downloadFileName}}</a>-->
+                    </td>
                     <td align="left" valign="middle">{{file.downloadFileSize}}k</td>
                     <td align="left" valign="middle">{{file.downloadFileCreaTime}}</td>
                     <td align="left" valign="middle">

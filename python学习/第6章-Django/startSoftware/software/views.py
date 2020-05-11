@@ -392,16 +392,22 @@ def uploadFile(request):
 
 
 def downloadFile(request):
-        # path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
-        filename = request.GET.get('name')
+        # 获取上传文件路径和文件名
+        fileObject = request.POST.get('name')
+
+        # 提取文件名
+        tmp_list =fileObject.split('/')
+        filename = tmp_list[-1]
+
         # file = open(path+filename,'rb')
         print('000000000000000000000000000000000')
-        print(filename)
+        print('文件名：',filename)
+        print('完整的路径：',fileObject)
         print('000000000000000000000000000000000')
         try:
-            file = open(filename,'rb')
+            file = open(fileObject,'rb')
         except:
-            return HttpResponse('下载文件名有错，请联系管理员！  文件名：%s'%filename)
+            return HttpResponse('下载文件名有错，请联系管理员！  文件名：%s'%fileObject)
         response = FileResponse(file)
         response['Content-Type'] = 'application/octet-stream'
         # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
