@@ -20,6 +20,7 @@ urlpatterns = [
     re_path('productionMaterials', views.productionMaterials, name='productionMaterials'),
     re_path('tdc$', views.tdc, name='tdc'),
     re_path('newDirectory$', views.newDirectory, name='newDirectory'),
+    re_path('allFileDownload$', views.allFileDownload, name='allFileDownload'),
     # re_path('exec_command$', views.exec_command, name='exec_command'),
     # re_path('websocket_test$', views.websocket_test, name='websocket_test'),
     re_path('test$', views.test, name='test'),

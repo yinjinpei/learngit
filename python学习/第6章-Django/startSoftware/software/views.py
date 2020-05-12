@@ -1,5 +1,6 @@
 # coding:utf-8
 import os
+import zipfile
 import re
 import time
 import datetime
@@ -13,6 +14,7 @@ from django.http import FileResponse
 from django.utils.encoding import escape_uri_path
 # from dwebsocket.decorators import accept_websocket, require_websocket
 import paramiko
+from django.core.files.temp import NamedTemporaryFile
 
 import logging
 # 生成一个以当前文件名为名字的logger实例
@@ -223,6 +225,18 @@ def downloadFileInfo(path):
     return fileObjectList,dirObjectList
 
 
+#打包目录为zip文件（未压缩）
+def make_zip(source_dir, output_dir,output_filename):
+  zipf = zipfile.ZipFile(output_dir+'/'+output_filename, 'w')
+  pre_len = len(os.path.dirname(source_dir))
+  for parent, dirnames, filenames in os.walk(source_dir):
+    for filename in filenames:
+      pathfile = os.path.join(parent, filename)
+      arcname = pathfile[pre_len:].strip(os.path.sep)   #相对路径
+      zipf.write(pathfile, arcname)
+  zipf.close()
+
+
 def delFile(request):
     print('删除文件')
     if request.method == "POST":
@@ -291,7 +305,11 @@ def uploadFile(request):
         uploadFile_message = "您尚未登录，使用【文件管理】请先登录！！"
         return render(request, 'software/index.html', locals())
 
-    versionManagerUsers = ['shar', 'tdc']
+    path = 'uploads/' + request.session['user_name'] + '/'  # 上传文件路径，相对路径，在项目根目录下
+    if not os.path.exists(path):  # 目录不存在则创建
+        os.makedirs(path)
+
+    versionManagerUsers = ['shar', 'tdc', 'igmh']
 
     # 用户家目录
     user_home ='uploads/' + request.session['user_name'] + '/'
@@ -308,9 +326,6 @@ def uploadFile(request):
         print('不在这些目录下展示上传功能：', shar_dir_list)
 
     delFile_form = DelFile()  # 宣染删除表格，即宣染删除功能的输入框
-    path = 'uploads/'+request.session['user_name']+'/'  # 上传文件路径，相对路径，在项目根目录下
-    if not os.path.exists(path):    #目录不存在则创建
-        os.makedirs(path)
 
     dirname = request.GET.get('dirname')
 
@@ -397,33 +412,63 @@ def uploadFile(request):
     return render(request, 'software/uploadFile.html', locals())
 
 
-def downloadFile(request):
+# def downloadFile(request,fileObject=None):
+#     if fileObject is None:
+#         # 获取上传文件路径和文件名
+#         fileObject = request.POST.get('name')
+#
+#     # 提取文件名
+#     tmp_list =fileObject.split('/')
+#     filename = tmp_list[-1]
+#
+#     # file = open(path+filename,'rb')
+#     print('000000000000000000000000000000000')
+#     print('文件名：',filename)
+#     print('完整的路径：',fileObject)
+#     print('000000000000000000000000000000000')
+#     try:
+#         file = open(fileObject,'rb')
+#     except:
+#         return HttpResponse('下载文件名有错，请联系管理员！  文件名：%s'%fileObject)
+#     response = FileResponse(file)
+#     response['Content-Type'] = 'application/octet-stream'
+#     # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
+#     response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(escape_uri_path(filename))
+#         # IE浏览器，采用URLEncoder编码
+#         # Opera浏览器，采用filename * 方式
+#         # Safari浏览器，采用ISO编码的中文输出
+#         # Chrome浏览器，采用Base64编码或ISO编码的中文输出
+#         # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
+#     return response
+
+
+def downloadFile(request,fileObject=None,filename=None):
+    if fileObject is None:
         # 获取上传文件路径和文件名
         fileObject = request.POST.get('name')
-
         # 提取文件名
         tmp_list =fileObject.split('/')
         filename = tmp_list[-1]
 
-        # file = open(path+filename,'rb')
-        print('000000000000000000000000000000000')
-        print('文件名：',filename)
-        print('完整的路径：',fileObject)
-        print('000000000000000000000000000000000')
-        try:
-            file = open(fileObject,'rb')
-        except:
-            return HttpResponse('下载文件名有错，请联系管理员！  文件名：%s'%fileObject)
-        response = FileResponse(file)
-        response['Content-Type'] = 'application/octet-stream'
-        # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
-        response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(escape_uri_path(filename))
-            # IE浏览器，采用URLEncoder编码
-            # Opera浏览器，采用filename * 方式
-            # Safari浏览器，采用ISO编码的中文输出
-            # Chrome浏览器，采用Base64编码或ISO编码的中文输出
-            # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
-        return response
+    print('000000000000000000000000000000000')
+    print('文件名：',filename)
+    print('完整的路径：',fileObject)
+    print('000000000000000000000000000000000')
+    try:
+        file = open(fileObject,'rb')
+    except:
+        return HttpResponse('下载文件名有错，请联系管理员！  文件名：%s'%fileObject)
+    response = FileResponse(file)
+    response['Content-Type'] = 'application/octet-stream'
+    # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
+    response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(escape_uri_path(filename))
+        # IE浏览器，采用URLEncoder编码
+        # Opera浏览器，采用filename * 方式
+        # Safari浏览器，采用ISO编码的中文输出
+        # Chrome浏览器，采用Base64编码或ISO编码的中文输出
+        # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
+    return response
+
 
 def newDirectory(request):
     dirname = request.GET.get('dirname')
@@ -447,6 +492,79 @@ def newDirectory(request):
 
     newDirectory_form=NewDirectory()
     return render(request, 'software/newDirectory.html', locals())
+
+
+# def allFileDownload(request):
+#     # 获取文件原路径
+#     source_dir = request.GET.get('source_dir')
+#     print('source_dir GET方式传递过来的值:', source_dir)
+#     if source_dir[-1] == '/':
+#         source_dir = source_dir[:-1]
+#     # 生成临时目录作为打zip包目录，用户下载完成后会自动删除
+#     output_filename = source_dir.split('/')[-1]+'.zip'
+#     print('目录作为打zip包名：', output_filename)
+#     output_dir = 'uploads/'+ 'temp_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+#     print('存放zip包临时目录：', output_dir)
+#     # 临时目录不存在则创建
+#     if not os.path.exists(output_dir):
+#         os.makedirs(output_dir)
+#     # 打包zip包
+#     make_zip(source_dir, output_dir, output_filename)
+#     print('打包完成！！！')
+#     return downloadFile(request,output_dir+'/'+output_filename)
+
+
+def mycopy(src_file, dst_file):
+    """此函数的功以实现复制文件
+    src_file : 源文件名
+    dst_file : 目标文件名
+    """
+    try:
+        with open(src_file, "rb") as fr,open(dst_file, 'wb') as fw:  # fr读文件
+            while True:
+                data = fr.read(4096)
+                if not data:
+                    break
+                fw.write(data)
+    except OSError:
+        print("打开读文件失败")
+        return False
+    except:
+        print("读写中断了！")
+    return True
+
+
+def allFileDownload(request):
+    # 获取文件原路径
+    source_dir = request.GET.get('source_dir')
+    print('source_dir GET方式传递过来的值:', source_dir)
+    if source_dir[-1] == '/':
+        source_dir = source_dir[:-1]
+    # 生成临时目录作为打zip包目录，用户下载完成后会自动删除
+    output_filename = datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f")+'_'+source_dir.split('/')[-1]+'.zip'
+
+    print('zip包名：', output_filename)
+    output_dir = 'uploads/'+ 'temp'
+    print('存放zip包临时目录：', output_dir)
+    # 临时目录不存在则创建
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    # 打包zip包
+    make_zip(source_dir, output_dir, output_filename)
+    print('打包完成！！！')
+
+    newfile = NamedTemporaryFile()
+    print('NamedTemporaryFile临时文件名：',newfile.name)
+
+    mycopy(output_dir+'/'+output_filename,newfile.name)
+    print('将数据拷贝到临时文件完成：',newfile.name)
+
+    try:
+        os.remove(output_dir+'/'+output_filename)
+    except:
+        print('删除临时zip包失败！',output_dir+'/'+output_filename)
+
+    return downloadFile(request,newfile.name,output_filename)
 
 
 def versionManagerIndex(request):

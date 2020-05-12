@@ -149,6 +149,13 @@
         color: red;
     }
 
+    #allFileDownload_btn{
+        /*margin-left: 50%;*/
+        color: #fff;
+    }
+
+
+
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
@@ -318,7 +325,10 @@
                         </td>
                     </tr>
                 {% endfor %}
+                <tr><td></td></tr>
+                <tr><td><a class="btn btn-primary pull-left" id="allFileDownload_btn" href="/allFileDownload?source_dir={{path}}">全部下载</a></td></tr>
             </table>
+        <br>
         {% endif %}
 
         <br><br><br><br>
