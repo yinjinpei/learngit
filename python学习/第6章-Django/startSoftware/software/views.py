@@ -291,15 +291,21 @@ def uploadFile(request):
         uploadFile_message = "您尚未登录，使用【文件管理】请先登录！！"
         return render(request, 'software/index.html', locals())
 
+    versionManagerUsers = ['shar', 'tdc']
+
     # 用户家目录
     user_home ='uploads/' + request.session['user_name'] + '/'
-    if request.session['user_name'] == 'shar':
-        print('登录的用户名是：',request.session['user_name'])
-        shar_dir_list=['uploads/shar/'] # shar用户家目录的文件夹列表
-        for dir in os.listdir('uploads/shar/'):
-            if os.path.isdir('uploads/shar/'+dir):
-                shar_dir_list.append('uploads/shar/'+dir+'/')
-        print('不在这些目录下展示上传功能：',shar_dir_list)
+    if request.session['user_name'] in versionManagerUsers:
+        print('登录的用户名是：', request.session['user_name'])
+        shar_dir_list = []  # shar用户家目录的文件夹列表
+
+        for user in versionManagerUsers:
+            shar_dir_list.append('uploads/' + user + '/')
+
+        for dir in os.listdir(user_home):
+            if os.path.isdir(user_home + dir):
+                shar_dir_list.append(user_home + dir + '/')
+        print('不在这些目录下展示上传功能：', shar_dir_list)
 
     delFile_form = DelFile()  # 宣染删除表格，即宣染删除功能的输入框
     path = 'uploads/'+request.session['user_name']+'/'  # 上传文件路径，相对路径，在项目根目录下
