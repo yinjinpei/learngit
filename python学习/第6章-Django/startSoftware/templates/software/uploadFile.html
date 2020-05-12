@@ -212,7 +212,7 @@
     {% endif %}
 {% else %}
 
-    {% if aasdccc in versionManagerUsers %}
+    {% if request.session.user_name in versionManagerUsers %}
             <br><br>
             <a class="btn btn-primary pull-left" id="link_index_tag2" href="/">返回首页</a>
             <br><br><br><br>
