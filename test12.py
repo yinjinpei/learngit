@@ -29,5 +29,15 @@ def test(a=None):
     else:
         print('a不是空值',a)
 
-
 test('123')
+
+
+aList=['a.zip','b.zip','c.log','d.propers','dasdfe']
+str='.zip'
+for filename in aList:
+    if str in filename:
+        print(str,filename)
+    else:
+        print('文件不存在！！')
+
+
