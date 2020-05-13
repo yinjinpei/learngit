@@ -82,7 +82,7 @@ class TimingData(models.Model):
 
 
 class VersionInfo(models.Model):
-    # 领域名
+    # 领域名,unique为不允许重复
     domain_name = models.CharField(max_length=128, unique=True)
     # 版本号
     version = models.CharField(max_length=256)
@@ -130,8 +130,95 @@ class VersionInfo(models.Model):
         db_table = 'versioninfo'
 
     def __str__(self):
-        return self.name
+        return self.domain_name
     domains = models.Manager()
 
     def show_domain_name(self):
         return self.domain_name
+
+
+
+class UnblockedVersionInfo(models.Model):
+    # 月份
+    month = models.CharField(max_length=128)
+    # 团队
+    team = models.CharField(max_length=128)
+    # 版本号
+    version_number = models.CharField(max_length=128)
+    # 子系统名称
+    subsystem = models.CharField(max_length=128)
+    # 版本名称
+    version_name = models.CharField(max_length=128)
+    # 版本内容
+    content = models.CharField(max_length=256)
+    # 版本编制人
+    version_compiler =models.CharField(max_length=128)
+    # 开发负责人
+    version_leader = models.CharField(max_length=128)
+    # 测试负责人
+    test_leader = models.CharField(max_length=128)
+    # 所属开发组
+    development_team = models.CharField(max_length=128)
+    # 版本类型
+    version_type = models.CharField(max_length=128)
+    # 申请解封时间
+    unblocked_datetime = models.CharField(max_length=128)
+    # 确认封版时间
+    blocked_datetime = models.CharField(max_length=128)
+    # 解封版类别
+    unblocked_type= models.CharField(max_length=128)
+    # 解封版说明及根因分析
+    unblocked_reason = models.CharField(max_length=256)
+    # 数据是否被已弃用
+    isDelete = models.BooleanField(default=False)
+    class Meta:
+        db_table = 'unblockedversionInfo'
+
+    unblockedversion = models.Manager()
+    def show_ID(self):
+        return self.pk
+
+    def show_month(self):
+        return self.month
+
+    def show_team(self):
+        return self.team
+
+    def show_version_number(self):
+        return self.version_number
+
+    def show_subsystem(self):
+        return self.subsystem
+
+    def show_version_name(self):
+        return self.version_name
+
+    def show_content(self):
+        return self.content
+
+    def show_version_compiler(self):
+        return self.version_compiler
+
+    def show_version_leader(self):
+        return self.version_leader
+
+    def show_test_leader(self):
+        return self.test_leader
+
+    def show_version_type(self):
+        return self.version_type
+
+    def show_unblocked_datetime(self):
+        return self.unblocked_datetime
+
+    def show_blocked_datetime(self):
+        return self.blocked_datetime
+
+    def show_unblocked_type(self):
+        return self.unblocked_type
+
+    def show_unblocked_reason(self):
+        return self.unblocked_reason
+
+    def show_isDelete(self):
+        return self.isDelete

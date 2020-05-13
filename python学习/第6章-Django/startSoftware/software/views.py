@@ -852,8 +852,32 @@ def productionMaterials(request):
                 print('当前目录：',dir)
                 if os.path.isdir(version_path+dir):
                     version_dir_list.append(dir)
-
-
         return render(request, 'software/productionMaterials.html', locals())
     else:
         return HttpResponse('<h3 style="color: red">你无权限访问此功能，请联系管理员！</h3>')
+
+
+def unblockedVersion(request):
+    if request.method == "POST":
+        newUnblocked_version=UnblockedVersionInfo.unblockedversion.create()
+        newUnblocked_version.month=request.POST.get('month')
+        newUnblocked_version.team=request.POST.get('team')
+        newUnblocked_version.version_number=request.POST.get('version_number')
+        newUnblocked_version.subsystem=request.POST.get('subsystem')
+        newUnblocked_version.version_name=request.POST.get('version_name')
+        newUnblocked_version.content=request.POST.get('content')
+        newUnblocked_version.version_compiler=request.POST.get('version_compiler')
+        newUnblocked_version.version_leader=request.POST.get('version_leader')
+        newUnblocked_version.test_leader=request.POST.get('test_leader')
+        newUnblocked_version.development_team=request.POST.get('development_team')
+        newUnblocked_version.version_type=request.POST.get('version_type')
+        newUnblocked_version.unblocked_datetime=request.POST.get('unblocked_datetime')
+        newUnblocked_version.blocked_datetime=request.POST.get('blocked_datetime')
+        newUnblocked_version.unblocked_type=request.POST.get('unblocked_type')
+        newUnblocked_version.unblocked_reason=request.POST.get('unblocked_reason')
+        newUnblocked_version.save()
+
+
+    unblocked_versionInfo_list = UnblockedVersionInfo.unblockedversion.all()
+    return render(request, 'software/unblockedVersion.html', locals())
+
