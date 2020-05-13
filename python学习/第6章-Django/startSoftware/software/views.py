@@ -525,6 +525,7 @@ def allFileDownload(request):
         source_dir = source_dir[:-1]
     # 生成临时目录作为打zip包目录，用户下载完成后会自动删除
     output_filename = datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f")+'_'+source_dir.split('/')[-1]+'.zip'
+    filename = output_filename.split('_')[-1]
     print('zip包名：', output_filename)
     output_dir = 'uploads/'+ 'temp'
     print('存放zip包临时目录：', output_dir)
@@ -534,7 +535,7 @@ def allFileDownload(request):
     # 打包zip包
     make_zip(source_dir, output_dir, output_filename)
     print('打包完成！！！')
-    newfile = NamedTemporaryFile()
+    newfile = NamedTemporaryFile(suffix='.django.tmp',dir=output_dir)
     print('NamedTemporaryFile临时文件名：',newfile.name)
     mycopy(output_dir+'/'+output_filename,newfile.name)
     print('将数据拷贝到临时文件完成：',newfile.name)
@@ -543,7 +544,7 @@ def allFileDownload(request):
     except:
         print('删除临时zip包失败！',output_dir+'/'+output_filename)
 
-    return downloadFile(request,newfile.name,output_filename)
+    return downloadFile(request,newfile.name,filename)
 
 
 # def allFileDownload(request):
