@@ -860,6 +860,7 @@ def productionMaterials(request):
 def unblockedVersion(request):
     if request.method == "POST":
         newUnblocked_version=UnblockedVersionInfo.unblockedversion.create()
+        newUnblocked_version.username=request.session['user_name']
         newUnblocked_version.month=request.POST.get('month')
         newUnblocked_version.team=request.POST.get('team')
         newUnblocked_version.version_number=request.POST.get('version_number')
