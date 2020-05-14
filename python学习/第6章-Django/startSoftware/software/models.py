@@ -139,6 +139,8 @@ class VersionInfo(models.Model):
 
 
 class UnblockedVersionInfo(models.Model):
+    # 登录用户名
+    username = models.CharField(max_length=128)
     # 月份
     month = models.CharField(max_length=128)
     # 团队
@@ -177,6 +179,9 @@ class UnblockedVersionInfo(models.Model):
     unblockedversion = models.Manager()
     def show_ID(self):
         return self.pk
+
+    def show_username(self):
+        return self.username
 
     def show_month(self):
         return self.month

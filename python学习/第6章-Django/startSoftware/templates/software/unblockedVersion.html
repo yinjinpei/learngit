@@ -61,7 +61,6 @@
     .unblockedVersion_table{
         text-align: center;
         background-color: #f6ffff;
-
     }
 
     .table_title{
@@ -127,25 +126,27 @@
 
                 {% for versionInfo in unblocked_versionInfo_list %}
                     {% if versionInfo.isDelete is not none %}
-                        <tr>
-                            <th class="table_data">{{versionInfo.pk}}</th>
-                            <th class="table_data">{{versionInfo.month}}</th>
-                            <th class="table_data">{{versionInfo.team}}</th>
-                            <th class="table_data">{{versionInfo.version_number}}</th>
-                            <th class="table_data">{{versionInfo.subsystem}}</th>
-                            <th class="table_data">{{versionInfo.version_name}}</th>
-                            <th class="table_data">{{versionInfo.content}}</th>
-                            <th class="table_data">{{versionInfo.version_compiler}}</th>
-                            <th class="table_data">{{versionInfo.version_leader}}</th>
-                            <th class="table_data">{{versionInfo.test_leader}}</th>
-                            <th class="table_data">{{versionInfo.development_team}}</th>
-                            <th class="table_data">{{versionInfo.version_type}}</th>
-                            <th class="table_data">{{versionInfo.unblocked_datetime}}</th>
-                            <th class="table_data">{{versionInfo.blocked_datetime}}</th>
-                            <th class="table_data">{{versionInfo.unblocked_type}}</th>
-                            <th class="table_data">{{versionInfo.unblocked_reason}}</th>
+                        {% if versionInfo.username == request.session.user_name %}
+                            <tr>
+                                <th class="table_data">{{versionInfo.pk}}</th>
+                                <th class="table_data">{{versionInfo.month}}</th>
+                                <th class="table_data">{{versionInfo.team}}</th>
+                                <th class="table_data">{{versionInfo.version_number}}</th>
+                                <th class="table_data">{{versionInfo.subsystem}}</th>
+                                <th class="table_data">{{versionInfo.version_name}}</th>
+                                <th class="table_data">{{versionInfo.content}}</th>
+                                <th class="table_data">{{versionInfo.version_compiler}}</th>
+                                <th class="table_data">{{versionInfo.version_leader}}</th>
+                                <th class="table_data">{{versionInfo.test_leader}}</th>
+                                <th class="table_data">{{versionInfo.development_team}}</th>
+                                <th class="table_data">{{versionInfo.version_type}}</th>
+                                <th class="table_data">{{versionInfo.unblocked_datetime}}</th>
+                                <th class="table_data">{{versionInfo.blocked_datetime}}</th>
+                                <th class="table_data">{{versionInfo.unblocked_type}}</th>
+                                <th class="table_data">{{versionInfo.unblocked_reason}}</th>
+                            </tr>
                         {% endif %}
-                    </tr>
+                    {% endif %}
                 {% endfor %}
 
                 <tr>
