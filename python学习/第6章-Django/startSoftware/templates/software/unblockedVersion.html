@@ -104,7 +104,7 @@
             {% csrf_token %}
             <table border="1"  cellspacing="50" class="unblockedVersion_table">
                 <tr>
-                    <th class="table_title"><div class="table_title_content">序号</div></th>
+                    <!--<th class="table_title"><div class="table_title_content">序号</div></th>-->
                     <th class="table_title"><div class="table_title_content">月份</div></th>
                     <th class="table_title"><div class="table_title_content">团队</div></th>
                     <th class="table_title"><div class="table_title_content">版本号</div></th>
@@ -126,7 +126,7 @@
                     {% if versionInfo.isDelete is not none %}
                         {% if versionInfo.username == request.session.user_name %}
                             <tr>
-                                <th class="table_data">{{versionInfo.pk}}</th>
+                                <!--<th class="table_data">{{versionInfo.pk}}</th>-->
                                 <th class="table_data">{{versionInfo.month}}</th>
                                 <th class="table_data">{{versionInfo.team}}</th>
                                 <th class="table_data">{{versionInfo.version_number}}</th>
@@ -148,22 +148,22 @@
                 {% endfor %}
 
                 <tr>
-                    <th class="table_th" ><textarea class="table_text" name='id'  required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='month'  required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='team'  required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='version_number'  required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='subsystem'  required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='version_name'  required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='content'  required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='version_compiler'  required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='version_leader'  required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='test_leader' required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='development_team' required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='version_type' required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='unblocked_datetime' required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='blocked_datetime' required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='unblocked_type' required></textarea></th>
-                    <th class="table_th" ><textarea class="table_text" name='unblocked_reason' required></textarea></th>
+                    <!--<th class="table_th"><textarea class="table_text" name='id'  required></textarea></th>-->
+                    <th class="table_th"><textarea class="table_text" name='month'  required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='team'  required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='version_number'  required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='subsystem'  required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='version_name'  required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='content'  required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='version_compiler'  required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='version_leader'  required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='test_leader' required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='development_team' required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='version_type' required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='unblocked_datetime' required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='blocked_datetime' required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='unblocked_type' required></textarea></th>
+                    <th class="table_th"><textarea class="table_text" name='unblocked_reason' required></textarea></th>
                 </tr>
             </table>
             <br><br><br>
