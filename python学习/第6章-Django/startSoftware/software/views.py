@@ -596,6 +596,12 @@ def tdc(request):
     logging.info(("INFO：来自：%s, 访问software/%s.html页面！！！") % (clientIP, webName))
     return render(request,'software/tdc.html')
 
+def extranetAddress(request):
+    clientIP = request.META['REMOTE_ADDR']
+    webName = str(versionManagerIndex.__name__)
+    logging.info(("INFO：来自：%s, 访问software/%s.html页面！！！") % (clientIP, webName))
+    return render(request,'software/extranetAddress.html')
+
 
 def setServerDate(request):
     if not request.session.get('is_login', None):
