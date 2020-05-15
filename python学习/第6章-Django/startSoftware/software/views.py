@@ -878,7 +878,7 @@ def unblockedVersion(request):
         newUnblocked_version.unblocked_reason=request.POST.get('unblocked_reason')
         newUnblocked_version.save()
 
-
-    unblocked_versionInfo_list = UnblockedVersionInfo.unblockedversion.all()
+    # 从数据库中查询当前登录用户的解封版所收集的信息
+    unblocked_versionInfo_list = UnblockedVersionInfo.unblockedversion.filter(username=request.session['user_name'])
     return render(request, 'software/unblockedVersion.html', locals())
 
