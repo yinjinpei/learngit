@@ -15,6 +15,8 @@ from django.utils.encoding import escape_uri_path
 # from dwebsocket.decorators import accept_websocket, require_websocket
 import paramiko
 from django.core.files.temp import NamedTemporaryFile
+# Django不支持range函数
+from django.template.defaulttags import register
 
 import logging
 # 生成一个以当前文件名为名字的logger实例
@@ -877,6 +879,10 @@ def unblockedVersion(request):
         newUnblocked_version.unblocked_type=request.POST.get('unblocked_type')
         newUnblocked_version.unblocked_reason=request.POST.get('unblocked_reason')
         newUnblocked_version.save()
+
+    # @register.filter
+    # def get_range(value):
+    #     return range(value)
 
     # 从数据库中查询当前登录用户的解封版所收集的信息
     unblocked_versionInfo_list = UnblockedVersionInfo.unblockedversion.filter(username=request.session['user_name'])
