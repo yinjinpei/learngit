@@ -8,6 +8,12 @@
 
 {% block scripts %}
 <script type="text/javascript">
+
+        function submitForm(){
+               var form = document.getElementById("my_domain");
+                form.submit();
+        }
+
         window.onload = function () {
 
             var oDiv = document.getElementById('con');
