@@ -53,6 +53,11 @@
         color: red;
     }
 
+    .title_h2{
+        color: green;
+        font-weight: bold;
+    }
+
     #link_index:hover,#link_top:hover{
         color:red;
         background-color: gold;
@@ -87,11 +92,18 @@
         color: #fff;
     }
 
-    .table_th{
+    .table_th_green{
         height: 50px;
         text-align: center;
+        color: green;
     }
 
+    .table_th_red{
+        height: 50px;
+        text-align: center;
+        background-color: red;
+        color: #FFF;
+    }   
 
     .show_window{
         text-align: left;
@@ -110,11 +122,11 @@
 {% endblock %}
 
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
-    <h2>投产材料管理</h2>
+    <h2 class="title_h2">投产材料管理</h2>
     <div class="title_con">
     <form class='form-register' action="productionMaterials?dirname={{path}}" method="get" id="my_domain">
         {% csrf_token %}
-        <h3 class="title_h3">单独查询一个领域收集投产材料情况：</h3>
+        <h3 class="title_h3">查询版本投产材料的收集情况：</h3>
         <label class="btn btn-primary pull-left domain_list" for="dir_1">选择领域：</label>
             <select class="btn btn-default pull-left" onchange="submitForm();" name="domain" id="dir_1">
                 {% if dirname %}
@@ -151,41 +163,23 @@
 
     <br><br>
     <hr>
-    {% if newversion_dict %}
+    {% if title_list %}
         <h3>当前查询的版本：{{domain_path}}</h3>
         <table border="1"  cellspacing="50" class="unblockedVersion_table">
                     <tr>
-                        <th class="table_title"><div class="table_title_content">领域名称</div></th>
-                        <th class="table_title"><div class="table_title_content">发版检查单</div></th>
-                        <th class="table_title"><div class="table_title_content">需求说明书</div></th>
-                        <th class="table_title"><div class="table_title_content">需求评审</div></th>
-                        <th class="table_title"><div class="table_title_content">安全评审</div></th>
-                        <th class="table_title"><div class="table_title_content">代码评审</div></th>
-                        <th class="table_title"><div class="table_title_content">SIT测试报告</div></th>
-                        <th class="table_title"><div class="table_title_content">UAT测试报告</div></th>
-                        <th class="table_title"><div class="table_title_content">安全测试报告</div></th>
-                        <th class="table_title"><div class="table_title_content">代码安全扫描报告</div></th>
-                        <th class="table_title"><div class="table_title_content">代码质量扫描报告</div></th>
-                        <th class="table_title"><div class="table_title_content">SQM审核报告</div></th>
-                        <th class="table_title"><div class="table_title_content">DBA评审报告</div></th>
-                        <th class="table_title"><div class="table_title_content">回归测试报告</div></th>
+                        {% for title in title_list %}
+                            <th class="table_title"><div class="table_title_content">{{title}}</div></th>
+                        {% endfor %}
                     </tr>
 
                     <tr>
-                        <th class="table_th">{{domain_name}}</th>
-                        <th class="table_th">{{newversion_dict.checklist}}</th>
-                        <th class="table_th">{{newversion_dict.demand_doc}}</th>
-                        <th class="table_th">{{newversion_dict.demand_review}}</th>
-                        <th class="table_th">{{newversion_dict.safety_review}}</th>
-                        <th class="table_th">{{newversion_dict.code_review}}</th>
-                        <th class="table_th">{{newversion_dict.sit_report}}</th>
-                        <th class="table_th">{{newversion_dict.uat_report}}</th>
-                        <th class="table_th">{{newversion_dict.safety_report}}</th>
-                        <th class="table_th">{{newversion_dict.code_security_scan_report}}</th>
-                        <th class="table_th">{{newversion_dict.code_quality_scan_report}}</th>
-                        <th class="table_th">{{newversion_dict.sqm_report}}</th>
-                        <th class="table_th">{{newversion_dict.dba_review}}</th>
-                        <th class="table_th">{{newversion_dict.regress_review}}</th>
+                        {% for value in value_list %}
+                            {% if value == "X" %}
+                                <th class="table_th_red">{{value}}</th>
+                            {% else %}
+                                <th class="table_th_green">{{value}}</th>
+                            {% endif %}
+                        {% endfor %}
                     </tr>
         </table>
     {% endif %}

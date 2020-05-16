@@ -256,6 +256,13 @@ def match_productionMaterials(user_name,domain_name,file_path):
     print(type(version_data_dict))
     print(version_data_dict)
 
+    # 获取所有values
+    title_list=[]
+    for title in version_data_dict.values():
+        title_list.append(title)
+    print('**************************************************')
+    print(title_list)
+    print('**************************************************')
     # 获取所有key,即测试报告类型，如需求说明书的key:demand_doc，发布检查单的key:checklist
     version_data_dict_key_list = version_data_dict.keys()
     key_list = []
@@ -277,15 +284,10 @@ def match_productionMaterials(user_name,domain_name,file_path):
         value_list.append(file_exist)
         key_list.append(report_type)
 
-    print(len(key_list))
-    print(len(value_list))
+    print(key_list)
+    print(value_list)
 
-    newversion_dict = {}
-    for i in range(len(key_list)):
-        newversion_dict[key_list[i]] = value_list[i]
-    print(newversion_dict)
-
-    return newversion_dict
+    return title_list,value_list
 
 def delFile(request):
     print('删除文件')
@@ -938,7 +940,9 @@ def productionMaterials(request):
             print("文件路径：",file_path)
             print('-------------------test1---------------------------')
 
-            newversion_dict=match_productionMaterials(request.session['user_name'],domain_name,file_path)
+            # title_list=['发版检查单','需求说明书','需求评审','安全评审','代码评审','SIT测试报告','UAT测试报告',
+            #             '安全测试报告','代码安全扫描报告','代码质量扫描报告','SQM审核报告','DBA评审报告','回归测试报告']
+            title_list,value_list=match_productionMaterials(request.session['user_name'],domain_name,file_path)
 
             return render(request, 'software/productionMaterials.html', locals())
 
