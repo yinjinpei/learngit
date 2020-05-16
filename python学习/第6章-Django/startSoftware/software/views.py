@@ -24,6 +24,11 @@ logger = logging.getLogger(__name__)
 # 生成一个名为collect的logger实例
 collect_logger = logging.getLogger("collect")
 
+# 黑名单目录下不显示上传功能
+black_user_list=['shar', 'tdc', 'igmh']
+
+#白名单可访问投产材料管理页面
+allow_users_list=['shar', 'tdc',]
 
 # 获取应用程序路径
 def getAppDir(appName):
@@ -250,7 +255,11 @@ def match_productionMaterials(user_name,domain_name,file_path):
     file_list = os.listdir(file_path)
     # 获取数据库领域所有数据，理论上数据库只有一条，返回的值是列表形式
     domainInfo_list = DomainInfo.domains.filter(user_name=user_name,isDelete=False, domain_name=domain_name)
-
+    print('------------------------------------------------')
+    print(domainInfo_list)
+    print('------------------------------------------------')
+    if len(domainInfo_list) == 0:
+        return False
     # 存放相关测试报告项，且需要字符串转成字典，使用 ast模块
     version_data_dict = ast.literal_eval(domainInfo_list[0].version_data)
     print(type(version_data_dict))
@@ -290,6 +299,7 @@ def match_productionMaterials(user_name,domain_name,file_path):
     return title_list,value_list
 
 def delFile(request):
+    versionManagerUsers = black_user_list
     print('删除文件')
     if request.method == "POST":
         user_home = 'uploads/' + request.session['user_name'] + '/'
@@ -300,6 +310,7 @@ def delFile(request):
         if dirname:
             if dirname[-1] == '/':
                 dirname = dirname[:-1]
+
             path=dirname+'/'
         print('~~~~~~~~~~~~~~~dirname：', dirname)
 
@@ -317,6 +328,17 @@ def delFile(request):
 
             if dirname:
                 print('dirname不是空值：',dirname)
+
+                if request.session['user_name'] in versionManagerUsers:
+                    if len(dirname.split('/')) == 4:
+                        print('******************** 不是空值 ********************')
+                        domain_name = dirname.split('/')[2]
+                        file_path = dirname
+                        try:
+                            title_list, value_list = match_productionMaterials(request.session['user_name'],
+                                                                               domain_name, file_path)
+                        except:
+                            pass
 
                 up_one_level_path = up_one_level(dirname)
                 dirList_is_not_null = '在模板显示返回上一层，仅作标志'
@@ -336,6 +358,18 @@ def delFile(request):
 
                 if dirname[-1] == '/':
                     dirname = dirname[:-1]
+
+                    if request.session['user_name'] in versionManagerUsers:
+                        if len(dirname.split('/')) == 4:
+                            print('******************** 不是空值 ********************')
+                            domain_name = dirname.split('/')[2]
+                            file_path = dirname
+                            try:
+                                title_list, value_list = match_productionMaterials(request.session['user_name'],
+                                                                                   domain_name, file_path)
+                            except:
+                                pass
+
             path = dirname + '/'
 
             FileName = delFile_form.cleaned_data['FileName']    # 获取删除的文件名
@@ -350,7 +384,40 @@ def delFile(request):
         delFile_form = DelFile()
         return render(request, 'software/uploadFile.html', locals())
     else:
-        return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误！</h4>')
+        # return HttpResponse('<h4 style="color: red;font-weight: bold">删除文件后请勿刷新，回退一步或重新打开即可！</h4>')
+        user_home = 'uploads/' + request.session['user_name'] + '/'
+        path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
+        print('删除文件使用POST方式')
+
+        dirname = request.GET.get('dirname')
+
+        if dirname:
+            up_one_level_path = up_one_level(dirname)
+            dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+
+        if dirname:
+            if dirname[-1] == '/':
+                dirname = dirname[:-1]
+
+            if request.session['user_name'] in versionManagerUsers:
+                if len(dirname.split('/')) == 4:
+                    print('******************** 不是空值 ********************')
+                    domain_name = dirname.split('/')[2]
+                    file_path = dirname
+                    try:
+                        title_list, value_list = match_productionMaterials(request.session['user_name'],
+                                                                           domain_name, file_path)
+                    except:
+                        pass
+
+            path = dirname + '/'
+        print('~~~~~~~~~~~~~~~dirname：', dirname)
+
+        message = '温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
+        fileObjectList, dirObjectList = downloadFileInfo(path)
+
+        delFile_form = DelFile()
+        return render(request, 'software/uploadFile.html', locals())
 
 def uploadFile(request):
     if not request.session.get('is_login', None):
@@ -361,7 +428,8 @@ def uploadFile(request):
     if not os.path.exists(path):  # 目录不存在则创建
         os.makedirs(path)
 
-    versionManagerUsers = ['shar', 'tdc', 'igmh']
+    # 版本管理用户
+    versionManagerUsers = black_user_list
 
     # 用户家目录
     user_home ='uploads/' + request.session['user_name'] + '/'
@@ -385,6 +453,15 @@ def uploadFile(request):
     if dirname is not None:
         if dirname[-1] == '/':
             dirname = dirname[:-1]
+
+        if request.session['user_name'] in versionManagerUsers:
+            if len(dirname.split('/')) == 4:
+                domain_name=dirname.split('/')[2]
+                file_path=dirname
+                try:
+                    title_list, value_list=match_productionMaterials(request.session['user_name'],domain_name,file_path)
+                except:
+                    pass
 
         up_one_level_path = up_one_level(dirname)
 
@@ -890,7 +967,7 @@ def test(request):
 
 def productionMaterials(request):
     # 访问此功能的白名单用户
-    allow_users=['shar']
+    allow_users=allow_users_list
     user_dir_list=[]
     if request.session['user_name'] in allow_users:
         user_path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
@@ -947,7 +1024,8 @@ def productionMaterials(request):
             return render(request, 'software/productionMaterials.html', locals())
 
     else:
-        return HttpResponse('<h3 style="color: red">你无权限访问此功能，请联系管理员！</h3>')
+        # return HttpResponse('<h3 style="color: red">你无权限访问此功能，请联系管理员！</h3>')
+        return render(request, 'software/ERROR.html')
 
 
 
