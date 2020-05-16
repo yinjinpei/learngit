@@ -1,0 +1,18 @@
+insert into domaininfo(domain_name,
+                       domain_manager_email,
+                       test_manager_email,
+                       domain_team_email,
+                       version_manager_email,
+                       user_name,
+                       version_data,
+											 isDelete)
+      values ("UBDC",
+              "111111111111098@pingan.com.cn",
+              "222222222222@pingan.com.cn",
+              "33333333333333@pingan.com.cn",
+              "ex-yinjinpei001@pingan.com.cn;chenguizhou355@pingan.com.cn;ex_wljr_chenminghui@pingan.com.cn",
+              "shar",
+              '{"checklist":"发布检查单","demand_doc":"需求说明书","demand_review":"需求评审","safety_review":"安全评审",
+              "code_review":"代码评审","sit_report":"SIT测试报告","uat_report":"UAT测试报告",
+              "safety_report":"安全测试报告","regress_review":"回归测试报告"}',
+							 FALSE);

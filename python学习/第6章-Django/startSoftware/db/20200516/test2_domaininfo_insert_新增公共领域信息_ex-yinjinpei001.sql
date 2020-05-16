@@ -1,0 +1,20 @@
+insert into domaininfo(domain_name,
+                       domain_manager_email,
+                       test_manager_email,
+                       domain_team_email,
+                       version_manager_email,
+                       user_name,
+                       version_data,
+											 isDelete)
+      values ("BRON",
+              "panzhimin098@pingan.com.cn",
+              "liuguihe378@pingan.com.cn",
+              "ML_pab4698@pingan.com.cn",
+              "ex-yinjinpei001@pingan.com.cn;chenguizhou355@pingan.com.cn;ex_wljr_chenminghui@pingan.com.cn",
+              "shar",
+              '{"checklist":"发布检查单","demand_doc":"需求说明书","demand_review":"需求评审","safety_review":"安全评审",
+               "code_review":"代码评审","sit_report":"SIT测试报告","uat_report":"UAT测试报告","safety_report":"安全测试报告",
+               "code_security_scan_report":"代码安全扫描报告","code_quality_scan_report":"代码质量扫描报告",
+               "sqm_report":"SQM脚本审核报告","dba_review":"DBA脚本评审","regress_review":"回归测试报告"
+               }',
+							 FALSE);

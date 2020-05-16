@@ -71,7 +71,38 @@
         margin-right: 10px;
     }
 
+
+    .unblockedVersion_table{
+        text-align: center;
+        background-color: #f6ffff;
+    }
+
+    .table_title{
+        background-color: #2e6da4;
+        text-align: center;
+    }
+
+    .table_title_content{
+        margin: 10px;
+        color: #fff;
+    }
+
+    .table_th{
+        height: 50px;
+        text-align: center;
+    }
+
+
     .show_window{
+        text-align: left;
+    }
+
+    .title_con{
+        border: 2px solid #9acfea;
+        padding: 0 10px;
+    }
+
+    .title_h3{
         text-align: left;
     }
 
@@ -80,9 +111,10 @@
 
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
     <h2>投产材料管理</h2>
-
+    <div class="title_con">
     <form class='form-register' action="productionMaterials?dirname={{path}}" method="get" id="my_domain">
         {% csrf_token %}
+        <h3 class="title_h3">单独查询一个领域收集投产材料情况：</h3>
         <label class="btn btn-primary pull-left domain_list" for="dir_1">选择领域：</label>
             <select class="btn btn-default pull-left" onchange="submitForm();" name="domain" id="dir_1">
                 {% if dirname %}
@@ -100,10 +132,10 @@
         {% csrf_token %}
         <br><br>
         <label class="btn btn-primary pull-left version_list" for="dir_2">选择版本：</label>
-            <select class="btn btn-default pull-left" name="version" id="dir_2">
+            <select class="btn btn-default pull-left" name="version_name" id="dir_2">
                 <option>请选择版本</option>
                 {% for dir in version_dir_list %}
-            　　　　<option>{{dir}}</option>
+            　　　　<option value="{{dirname}}/{{dir}}">{{dir}}</option>
                 {% endfor %}
             </select>
 
@@ -116,7 +148,52 @@
         <button type="submit" class="btn btn-primary pull-left checkout_btn">查询</button>
     </form>
 
-    <br><br><hr>
+
+    <br><br>
+    <hr>
+    {% if newversion_dict %}
+        <h2>当前查询的版本：{{domain_path}}</h2>
+        <table border="1"  cellspacing="50" class="unblockedVersion_table">
+                    <tr>
+                        <th class="table_title"><div class="table_title_content">领域名称</div></th>
+                        <th class="table_title"><div class="table_title_content">发版检查单</div></th>
+                        <th class="table_title"><div class="table_title_content">需求说明书</div></th>
+                        <th class="table_title"><div class="table_title_content">需求评审</div></th>
+                        <th class="table_title"><div class="table_title_content">安全评审</div></th>
+                        <th class="table_title"><div class="table_title_content">代码评审</div></th>
+                        <th class="table_title"><div class="table_title_content">SIT测试报告</div></th>
+                        <th class="table_title"><div class="table_title_content">UAT测试报告</div></th>
+                        <th class="table_title"><div class="table_title_content">安全测试报告</div></th>
+                        <th class="table_title"><div class="table_title_content">代码安全扫描报告</div></th>
+                        <th class="table_title"><div class="table_title_content">代码质量扫描报告</div></th>
+                        <th class="table_title"><div class="table_title_content">SQM审核报告</div></th>
+                        <th class="table_title"><div class="table_title_content">DBA评审报告</div></th>
+                        <th class="table_title"><div class="table_title_content">回归测试报告</div></th>
+                    </tr>
+
+                    <tr>
+                        <th class="table_th">{{domain_name}}</th>
+                        <th class="table_th">{{newversion_dict.checklist}}</th>
+                        <th class="table_th">{{newversion_dict.demand_doc}}</th>
+                        <th class="table_th">{{newversion_dict.demand_review}}</th>
+                        <th class="table_th">{{newversion_dict.safety_review}}</th>
+                        <th class="table_th">{{newversion_dict.code_review}}</th>
+                        <th class="table_th">{{newversion_dict.sit_report}}</th>
+                        <th class="table_th">{{newversion_dict.uat_report}}</th>
+                        <th class="table_th">{{newversion_dict.safety_report}}</th>
+                        <th class="table_th">{{newversion_dict.code_security_scan_report}}</th>
+                        <th class="table_th">{{newversion_dict.code_quality_scan_report}}</th>
+                        <th class="table_th">{{newversion_dict.sqm_report}}</th>
+                        <th class="table_th">{{newversion_dict.dba_review}}</th>
+                        <th class="table_th">{{newversion_dict.regress_review}}</th>
+                    </tr>
+        </table>
+    {% endif %}
+    <br>
+    </div>
+
+    <br>
+    <hr>
     <div class="show_window">
     <input id="btn" type="button" name="" value="切换">
         <div id="con" >暂不支持实时日志</div>

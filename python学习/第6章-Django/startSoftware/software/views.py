@@ -17,7 +17,7 @@ import paramiko
 from django.core.files.temp import NamedTemporaryFile
 # Django不支持range函数
 from django.template.defaulttags import register
-
+import ast
 import logging
 # 生成一个以当前文件名为名字的logger实例
 logger = logging.getLogger(__name__)
@@ -238,6 +238,54 @@ def make_zip(source_dir, output_dir,output_filename):
       zipf.write(pathfile, arcname)
   zipf.close()
 
+
+def match_productionMaterials(user_name,domain_name,file_path):
+    '''
+    :param user_name: 登录用户名
+    :param domain_name: 领域名
+    :param file_path: 文件的完整路径
+    :return: 返回字典
+    '''
+    # 获取所有文件名
+    file_list = os.listdir(file_path)
+    # 获取数据库领域所有数据，理论上数据库只有一条，返回的值是列表形式
+    domainInfo_list = DomainInfo.domains.filter(user_name=user_name,isDelete=False, domain_name=domain_name)
+
+    # 存放相关测试报告项，且需要字符串转成字典，使用 ast模块
+    version_data_dict = ast.literal_eval(domainInfo_list[0].version_data)
+    print(type(version_data_dict))
+    print(version_data_dict)
+
+    # 获取所有key,即测试报告类型，如需求说明书的key:demand_doc，发布检查单的key:checklist
+    version_data_dict_key_list = version_data_dict.keys()
+    key_list = []
+    value_list = []
+    for report_type in version_data_dict_key_list:
+        print('-----------------------------------')
+        print(report_type)
+        print(version_data_dict[report_type])
+        print('-----------------------------------')
+        file_exist = ('X')
+        for file_name in file_list:
+            try:
+                matchStr = re.match("(.*)%s(.*)" % version_data_dict[report_type], str(file_name), re.M | re.I)
+                print("存在的材料：", matchStr.group())
+                file_exist = '✔'
+                break
+            except:
+                continue
+        value_list.append(file_exist)
+        key_list.append(report_type)
+
+    print(len(key_list))
+    print(len(value_list))
+
+    newversion_dict = {}
+    for i in range(len(key_list)):
+        newversion_dict[key_list[i]] = value_list[i]
+    print(newversion_dict)
+
+    return newversion_dict
 
 def delFile(request):
     print('删除文件')
@@ -848,21 +896,55 @@ def productionMaterials(request):
             if os.path.isdir(user_path+dir):
                 user_dir_list.append(dir)
 
-    if request.method == "GET":
-        dirname=request.GET.get('domain')
-        print(dirname,'88888888888888888888')
+        if request.method == "GET":
+            dirname=request.GET.get('domain')
+            print(dirname,'88888888888888888888')
 
-        if dirname:
-            version_dir_list=[]
-            version_path = 'uploads/' + request.session['user_name'] + '/' + dirname +'/'
-            print('当前路径：',version_path)
-            for dir in os.listdir(version_path):
-                print('当前目录：',dir)
-                if os.path.isdir(version_path+dir):
-                    version_dir_list.append(dir)
-        return render(request, 'software/productionMaterials.html', locals())
+            if dirname:
+                version_dir_list=[]
+                version_path = 'uploads/' + request.session['user_name'] + '/' + dirname +'/'
+                print('当前路径：',version_path)
+                for dir in os.listdir(version_path):
+                    print('当前目录：',dir)
+                    if os.path.isdir(version_path+dir):
+                        version_dir_list.append(dir)
+            return render(request, 'software/productionMaterials.html', locals())
+
+        if request.method == "POST":
+            # 获取目录，如：BCOS-MNGT/BCOS-MNGT1.1.0（2020-05-10）
+            version_name=request.POST.get('version_name')
+            # 获取领域名
+            domain_name = version_name.split('/')[0]
+            # 获取完整路径，如：uploads/shar/BCOS-MNGT/BCOS-MNGT1.1.0（2020-05-10）
+            file_path = user_path+version_name
+            # 获取文件目录名,如：BCOS-MNT1.1.0（2020-05-14）
+            domain_path=version_name.split('/')[1]
+            # # 获取领域+版本号，如：BCOS-MNT1.1.0
+            # dir_name = version_name.split('（')[0]
+            # # 大升级号,如BCOS-MNGT1 ;常规号,如1; 紧急号,如0
+            # dig_upgrade_number,conventional_number, emergency_number = dir_name.split('.')
+            # # 把字母和数据分离，并取字符串末的数字，如BCOS-MNGT1，取的值为:1
+            # span=re.search('\d{1,2}$',dig_upgrade_number)
+            # dig_upgrade_number=dig_upgrade_number[span.start():span.end()]
+            # print('大升级号:',dig_upgrade_number )
+            # print('常规号:',conventional_number )
+            # print('紧急号:',emergency_number )
+            #
+            # version=dig_upgrade_number+'.'+conventional_number+'.'+emergency_number
+            # print('版本号为：',version)
+            print('-------------------test1---------------------------')
+            print("领域名：", domain_name)
+            print("当前目录名：",domain_name)
+            print("文件路径：",file_path)
+            print('-------------------test1---------------------------')
+
+            newversion_dict=match_productionMaterials(request.session['user_name'],domain_name,file_path)
+
+            return render(request, 'software/productionMaterials.html', locals())
+
     else:
         return HttpResponse('<h3 style="color: red">你无权限访问此功能，请联系管理员！</h3>')
+
 
 
 def unblockedVersion(request):
