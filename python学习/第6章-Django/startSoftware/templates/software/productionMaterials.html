@@ -128,11 +128,11 @@
         {% csrf_token %}
         <h3 class="title_h3">查询版本投产材料的收集情况：</h3>
         <label class="btn btn-primary pull-left domain_list" for="dir_1">选择领域：</label>
-            <select class="btn btn-default pull-left" onchange="submitForm();" name="domain" id="dir_1">
+            <select class="btn btn-default pull-left" onchange="submitForm();" name="domain" id="dir_1" required>
                 {% if dirname %}
                     <option>{{dirname}}</option>
                 {% else %}
-                    <option>请选择领域</option>
+                    <option value="">请选择领域</option>
                 {% endif %}
                 {% for dir in user_dir_list %}
             　　　　<option>{{dir}}</option>
@@ -144,8 +144,8 @@
         {% csrf_token %}
         <br><br>
         <label class="btn btn-primary pull-left version_list" for="dir_2">选择版本：</label>
-            <select class="btn btn-default pull-left" name="version_name" id="dir_2">
-                <option>请选择版本</option>
+            <select class="btn btn-default pull-left" name="version_name" id="dir_2" required>
+                <option value="">请选择版本</option>
                 {% for dir in version_dir_list %}
             　　　　<option value="{{dirname}}/{{dir}}">{{dir}}</option>
                 {% endfor %}
