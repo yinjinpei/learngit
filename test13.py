@@ -86,4 +86,10 @@ for i in c:
     dit[i[0]] = i[1]
 print(dit)
 
-print()
+
+a=[1,2]
+
+c,d=a
+
+print(c)
+print(d)

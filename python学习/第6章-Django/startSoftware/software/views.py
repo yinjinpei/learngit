@@ -296,6 +296,7 @@ def match_productionMaterials(user_name,domain_name,file_path):
     print(key_list)
     print(value_list)
 
+    # 返回投产材料检查后的结果，检查名和其值（存在：✔  不存在：X ）
     return title_list,value_list
 
 def delFile(request):
@@ -972,8 +973,11 @@ def productionMaterials(request):
     if request.session['user_name'] in allow_users:
         user_path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
         for dir in os.listdir(user_path):
+            print(dir)
+            print(user_path+dir)
             if os.path.isdir(user_path+dir):
                 user_dir_list.append(dir)
+        print(user_dir_list)
 
         if request.method == "GET":
             dirname=request.GET.get('domain')
@@ -987,7 +991,6 @@ def productionMaterials(request):
                     print('当前目录：',dir)
                     if os.path.isdir(version_path+dir):
                         version_dir_list.append(dir)
-            return render(request, 'software/productionMaterials.html', locals())
 
         if request.method == "POST":
             # 获取目录，如：BCOS-MNGT/BCOS-MNGT1.1.0（2020-05-10）
@@ -1021,10 +1024,28 @@ def productionMaterials(request):
             #             '安全测试报告','代码安全扫描报告','代码质量扫描报告','SQM审核报告','DBA评审报告','回归测试报告']
             title_list,value_list=match_productionMaterials(request.session['user_name'],domain_name,file_path)
 
-            return render(request, 'software/productionMaterials.html', locals())
+        # 存放所有领域版本投产资料收集情况
+        domain_values_list=[]
 
+        # 遍历用户下面所有领域，并检查投产材料收集情况
+        for domain in user_dir_list:
+            print(domain)
+            for dir in os.listdir(user_path+domain): # 获取用户下所有领域目录和文件
+                if os.path.isdir(user_path+domain+'/'+dir):
+                    if os.path.isdir(user_path + domain + '/' + dir):
+                        title, values=match_productionMaterials(request.session['user_name'],
+                                                domain,
+                                                user_path+domain+'/'+dir)
+                        print('当前获取的文件完整路径：',user_path+domain+'/'+dir)
+                        # 获取版本号目录
+                        version_dir_name=dir.split('（')[0]
+                        info=[version_dir_name, title, values]
+                        domain_values_list.append(info)
+        print('所有领域版本投产资料收集情况：',domain_values_list)
+
+
+        return render(request, 'software/productionMaterials.html', locals())
     else:
-        # return HttpResponse('<h3 style="color: red">你无权限访问此功能，请联系管理员！</h3>')
         return render(request, 'software/ERROR.html')
 
 
