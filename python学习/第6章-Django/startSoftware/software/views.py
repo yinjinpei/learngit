@@ -312,6 +312,17 @@ def delFile(request):
             if dirname[-1] == '/':
                 dirname = dirname[:-1]
 
+            if request.session['user_name'] in versionManagerUsers:
+                if len(dirname.split('/')) == 4:
+                    domain_name = dirname.split('/')[2]
+                    temp_domain_name = domain_name.split('（')[0]
+                    file_path = dirname
+                    try:
+                        title_list, value_list = match_productionMaterials(request.session['user_name'],
+                                                                           temp_domain_name, file_path)
+                    except:
+                        pass
+
             path=dirname+'/'
         print('~~~~~~~~~~~~~~~dirname：', dirname)
 
@@ -402,6 +413,17 @@ def delFile(request):
 
             if request.session['user_name'] in versionManagerUsers:
                 if len(dirname.split('/')) == 4:
+                    domain_name = dirname.split('/')[2]
+                    temp_domain_name = domain_name.split('（')[0]
+                    file_path = dirname
+                    try:
+                        title_list, value_list = match_productionMaterials(request.session['user_name'],
+                                                                           temp_domain_name, file_path)
+                    except:
+                        pass
+
+            if request.session['user_name'] in versionManagerUsers:
+                if len(dirname.split('/')) == 4:
                     print('******************** 不是空值 ********************')
                     domain_name = dirname.split('/')[2]
                     file_path = dirname
@@ -458,9 +480,10 @@ def uploadFile(request):
         if request.session['user_name'] in versionManagerUsers:
             if len(dirname.split('/')) == 4:
                 domain_name=dirname.split('/')[2]
+                temp_domain_name=domain_name.split('（')[0]
                 file_path=dirname
                 try:
-                    title_list, value_list=match_productionMaterials(request.session['user_name'],domain_name,file_path)
+                    title_list, value_list=match_productionMaterials(request.session['user_name'],temp_domain_name,file_path)
                 except:
                     pass
 
