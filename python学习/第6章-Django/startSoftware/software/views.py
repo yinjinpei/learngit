@@ -976,7 +976,8 @@ def productionMaterials(request):
             print(dir)
             print(user_path+dir)
             if os.path.isdir(user_path+dir):
-                user_dir_list.append(dir)
+                temp_domain_name=dir.split('（')
+                user_dir_list.append(temp_domain_name)
         print(user_dir_list)
 
         if request.method == "GET":
