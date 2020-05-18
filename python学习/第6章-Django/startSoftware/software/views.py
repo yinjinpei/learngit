@@ -993,11 +993,12 @@ def productionMaterials(request):
                         version_dir_list.append(dir)
 
         if request.method == "POST":
-            # 获取目录，如：BCOS-MNGT/BCOS-MNGT1.1.0（2020-05-10）
+            # 获取目录，如：BCOS-MNGT（渠道作业管理系统）/BCOS-MNGT1.1.0（2020-05-10）
             version_name=request.POST.get('version_name')
             # 获取领域名
             domain_name = version_name.split('/')[0]
-            # 获取完整路径，如：uploads/shar/BCOS-MNGT/BCOS-MNGT1.1.0（2020-05-10）
+            temp_domain_name=domain_name.split('（')
+            # 获取完整路径，如：uploads/shar/BCOS-MNGT（渠道作业管理系统）/BCOS-MNGT1.1.0（2020-05-10）
             file_path = user_path+version_name
             # 获取文件目录名,如：BCOS-MNT1.1.0（2020-05-14）
             domain_path=version_name.split('/')[1]
@@ -1015,7 +1016,7 @@ def productionMaterials(request):
             # version=dig_upgrade_number+'.'+conventional_number+'.'+emergency_number
             # print('版本号为：',version)
             print('-------------------test1---------------------------')
-            print("领域名：", domain_name)
+            print("领域名：", temp_domain_name)
             print("当前目录名：",domain_name)
             print("文件路径：",file_path)
             print('-------------------test1---------------------------')
@@ -1023,7 +1024,7 @@ def productionMaterials(request):
             # title_list=['发版检查单','需求说明书','需求评审','安全评审','代码评审','SIT测试报告','UAT测试报告',
             #             '安全测试报告','代码安全扫描报告','代码质量扫描报告','SQM审核报告','DBA评审报告','回归测试报告']
             try:
-                title_list,value_list=match_productionMaterials(request.session['user_name'],domain_name,file_path)
+                title_list,value_list=match_productionMaterials(request.session['user_name'],temp_domain_name,file_path)
             except:
                 print('数据库中没有对应领域数据！')
         # 存放所有领域版本投产资料收集情况
@@ -1031,12 +1032,12 @@ def productionMaterials(request):
 
         # 遍历用户下面所有领域，并检查投产材料收集情况
         for domain in user_dir_list:
-            print(domain)
+            temp_domain_name=domain.split('（')[0]
             for dir in os.listdir(user_path+domain): # 获取用户下所有领域目录和文件
                 if os.path.isdir(user_path + domain + '/' + dir):
                     try:
                         title, values=match_productionMaterials(request.session['user_name'],
-                                                domain,
+                                                temp_domain_name,
                                                 user_path+domain+'/'+dir)
                         print('当前获取的文件完整路径：',user_path+domain+'/'+dir)
                         # 获取版本号目录
