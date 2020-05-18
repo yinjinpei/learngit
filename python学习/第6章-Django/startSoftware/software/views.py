@@ -526,6 +526,7 @@ def uploadFile(request):
             print(path)
             print('------------------------------------------------------------------')
 
+        # file = request.FILES['file']  # 获取单个上传的文件对象，如果上传了多个，只取最后一个
         uploadFileList=request.FILES.getlist('file') # 获取所有上传的文件对象
         print('************************所有上传的文件对象**************************')
         print(uploadFileList)
@@ -538,8 +539,7 @@ def uploadFile(request):
         for file in uploadFileList:
             print(len(uploadFileList))
             fileName=str(file) # 上传的文件名
-            print("================== 文件名%s============="%file)
-            file=request.FILES['file']  #上传的文件对象
+            print("================== 文件名%s============="%fileName)
             print(path+fileName)
 
             if os.path.exists(path+fileName):
