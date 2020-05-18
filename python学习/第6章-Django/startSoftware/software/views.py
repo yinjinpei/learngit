@@ -1022,8 +1022,10 @@ def productionMaterials(request):
 
             # title_list=['发版检查单','需求说明书','需求评审','安全评审','代码评审','SIT测试报告','UAT测试报告',
             #             '安全测试报告','代码安全扫描报告','代码质量扫描报告','SQM审核报告','DBA评审报告','回归测试报告']
-            title_list,value_list=match_productionMaterials(request.session['user_name'],domain_name,file_path)
-
+            try:
+                title_list,value_list=match_productionMaterials(request.session['user_name'],domain_name,file_path)
+            except:
+                print('数据库中没有对应领域数据！')
         # 存放所有领域版本投产资料收集情况
         domain_values_list=[]
 
@@ -1031,8 +1033,8 @@ def productionMaterials(request):
         for domain in user_dir_list:
             print(domain)
             for dir in os.listdir(user_path+domain): # 获取用户下所有领域目录和文件
-                if os.path.isdir(user_path+domain+'/'+dir):
-                    if os.path.isdir(user_path + domain + '/' + dir):
+                if os.path.isdir(user_path + domain + '/' + dir):
+                    try:
                         title, values=match_productionMaterials(request.session['user_name'],
                                                 domain,
                                                 user_path+domain+'/'+dir)
@@ -1041,6 +1043,8 @@ def productionMaterials(request):
                         version_dir_name=dir.split('（')[0]
                         info=[version_dir_name, title, values]
                         domain_values_list.append(info)
+                    except:
+                        print('数据库中没有对应领域数据！')
         print('所有领域版本投产资料收集情况：',domain_values_list)
 
 

@@ -203,11 +203,11 @@
     <br>
     </div>
 
+    {% if domain_values_list %}
     <br><br><br>
     <div class="show_window">
         <input id="btn" type="button" name="" value="切换">
         <div id="con">
-            {% if domain_values_list %}
                 <h3 class="title_h2">所有版本投产材料的收集情况</h3>
                 <br>
                 {% for domain,title_list,value_list in domain_values_list %}
@@ -230,9 +230,10 @@
                         </tr>
                     </table>
                 {% endfor %}
-            {% endif %}
         </div>
     </div>
+    {% endif %}
+
     <br><br>
     <hr>
     <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
