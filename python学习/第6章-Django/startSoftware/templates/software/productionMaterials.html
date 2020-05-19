@@ -90,6 +90,7 @@
         text-align: center;
         background-color: #f6ffff;
         margin-bottom: 25px;
+        border-collapse:collapse
     }
 
     .table_th_domain_name{
@@ -103,7 +104,7 @@
     }
 
     .table_title_content{
-        margin: 10px;
+        margin: 15px;
         color: #fff;
     }
 
@@ -212,7 +213,7 @@
         <div id="con">
             <h3 class="title_h2">所有版本投产材料的收集情况</h3>
             <br>
-            <table border="1"  cellspacing="50" class="unblockedVersion_table_2">
+            <table border="1" cellpadding=0 cellspacing="50" class="unblockedVersion_table_2">
                 <tr>
                     {% for title in table_title %}
                     <th class="table_title"><div class="table_title_content">{{title}}</div></th>

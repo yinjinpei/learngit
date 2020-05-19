@@ -289,6 +289,8 @@ def match_productionMaterials(user_name,domain_name,file_path):
     # 把字符串(配置)转换为列表
     all_check_report = all_check_report.split(',')
 
+    all_check_report.insert(0,'版本号')
+
     # 初始化，把所有检查的报告都初始化为X，类型为字典，key为报告类型名、value为X
     all_check_report_dict = {}
     for report in all_check_report:
@@ -1104,6 +1106,7 @@ def productionMaterials(request):
         table_title = table_title.strip()
         # 把字符串(配置)转换为列表
         table_title = table_title.split(',')
+        table_title.insert(0, '版本号')
         return render(request, 'software/productionMaterials.html', locals())
     else:
         return render(request, 'software/ERROR.html')
