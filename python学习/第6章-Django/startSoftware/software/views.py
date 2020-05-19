@@ -14,11 +14,15 @@ from django.http import FileResponse
 from django.utils.encoding import escape_uri_path
 # from dwebsocket.decorators import accept_websocket, require_websocket
 import paramiko
+# 使用临时文件
 from django.core.files.temp import NamedTemporaryFile
 # Django不支持range函数
 from django.template.defaulttags import register
 import ast
 import logging
+import configparser
+
+
 # 生成一个以当前文件名为名字的logger实例
 logger = logging.getLogger(__name__)
 # 生成一个名为collect的logger实例
@@ -255,9 +259,9 @@ def match_productionMaterials(user_name,domain_name,file_path):
     file_list = os.listdir(file_path)
     # 获取数据库领域所有数据，理论上数据库只有一条，返回的值是列表形式
     domainInfo_list = DomainInfo.domains.filter(user_name=user_name,isDelete=False, domain_name=domain_name)
-    print('------------------------------------------------')
-    print(domainInfo_list)
-    print('------------------------------------------------')
+    # print('------------------------------------------------')
+    # print(domainInfo_list)
+    # print('------------------------------------------------')
     if len(domainInfo_list) == 0:
         return False
     # 存放相关测试报告项，且需要字符串转成字典，使用 ast模块
@@ -269,18 +273,18 @@ def match_productionMaterials(user_name,domain_name,file_path):
     title_list=[]
     for title in version_data_dict.values():
         title_list.append(title)
-    print('**************************************************')
-    print(title_list)
-    print('**************************************************')
+    # print('**************************************************')
+    # print(title_list)
+    # print('**************************************************')
     # 获取所有key,即测试报告类型，如需求说明书的key:demand_doc，发布检查单的key:checklist
     version_data_dict_key_list = version_data_dict.keys()
     key_list = []
     value_list = []
     for report_type in version_data_dict_key_list:
-        print('-----------------------------------')
-        print(report_type)
-        print(version_data_dict[report_type])
-        print('-----------------------------------')
+        # print('-----------------------------------')
+        # print(report_type)
+        # print(version_data_dict[report_type])
+        # print('-----------------------------------')
         file_exist = ('X')
         for file_name in file_list:
             try:
@@ -293,8 +297,8 @@ def match_productionMaterials(user_name,domain_name,file_path):
         value_list.append(file_exist)
         key_list.append(report_type)
 
-    print(key_list)
-    print(value_list)
+    # print(key_list)
+    # print(value_list)
 
     # 返回投产材料检查后的结果，检查名和其值（存在：✔  不存在：X ）
     return title_list,value_list
@@ -472,7 +476,6 @@ def uploadFile(request):
 
     dirname = request.GET.get('dirname')
 
-    print('###############################################获取到的绝对路径dirname：',dirname)
     if dirname is not None:
         if dirname[-1] == '/':
             dirname = dirname[:-1]
@@ -986,6 +989,26 @@ def delServerDate(request):
 
 
 def test(request):
+    config=configparser.ConfigParser()
+    config.read('config\\software_config\\report_check_list_config.ini', encoding='GB18030')
+
+    # -sections得到所有的section，并以列表的形式返回，即分组名
+    print('sections:', ' ', config.sections())
+
+    # -options(section)得到该section的所有option,即变量名
+    print('options:', ' ', config.options('report_check_list'))
+
+    # -items（section）得到该section的所有键值对，即变量名和值
+    print('items:', ' ', config.items('report_check_list'))
+
+    # -get(section,option)得到section中option的值，返回为string类型，即值
+    print('get:', ' ', config.get('report_check_list', 'bron_report'))
+
+    # -getint(section,option)得到section中的option的值，返回为int类型
+    # print('getint:', ' ', config.getint('cmd', 'id'))
+    # print('getfloat:', ' ', config.getfloat('cmd', 'weight'))
+    # print('getboolean:', '  ', config.getboolean('cmd', 'isChoice'))
+
     return render(request, 'test.html', locals())
 
 
@@ -1063,6 +1086,14 @@ def productionMaterials(request):
                                                 temp_domain_name,
                                                 user_path+domain+'/'+dir)
                         print('当前获取的文件完整路径：',user_path+domain+'/'+dir)
+
+                        print('-' * 100)
+                        print('title_list:', title)
+                        print('-' * 100)
+                        print('=' * 100)
+                        print('value_list:', values )
+                        print('=' * 100)
+
                         # 获取版本号目录
                         version_dir_name=dir.split('（')[0]
                         info=[version_dir_name, title, values]
