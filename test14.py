@@ -6,3 +6,9 @@ title=     ['发布检查单', '需求说明书', '需求评审', '安全评审'
 
 BRON_title_list=['发布检查单', '需求说明书', '需求评审', '安全评审', '代码评审', 'SIT测试报告', 'UAT测试报告', '安全测试报告', '回归测试报告']
 
+
+a_dict={}
+for ti in title:
+    a_dict[ti]='X'
+
+print(a_dict)

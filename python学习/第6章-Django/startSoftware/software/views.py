@@ -247,7 +247,6 @@ def make_zip(source_dir, output_dir,output_filename):
       zipf.write(pathfile, arcname)
   zipf.close()
 
-
 def match_productionMaterials(user_name,domain_name,file_path):
     '''
     :param user_name: 登录用户名
@@ -255,53 +254,67 @@ def match_productionMaterials(user_name,domain_name,file_path):
     :param file_path: 文件的完整路径
     :return: 返回字典
     '''
+
+    # 获取版本号
+    version=file_path.split('/')[-1].split('（')[0]
+    if version is None:
+        version=domain_name
+
+
     # 获取所有文件名
     file_list = os.listdir(file_path)
-    # 获取数据库领域所有数据，理论上数据库只有一条，返回的值是列表形式
-    domainInfo_list = DomainInfo.domains.filter(user_name=user_name,isDelete=False, domain_name=domain_name)
-    # print('------------------------------------------------')
-    # print(domainInfo_list)
-    # print('------------------------------------------------')
-    if len(domainInfo_list) == 0:
+    if len(file_list) == 0:
         return False
-    # 存放相关测试报告项，且需要字符串转成字典，使用 ast模块
-    version_data_dict = ast.literal_eval(domainInfo_list[0].version_data)
-    print(type(version_data_dict))
-    print(version_data_dict)
 
-    # 获取所有values
-    title_list=[]
-    for title in version_data_dict.values():
-        title_list.append(title)
-    # print('**************************************************')
-    # print(title_list)
-    # print('**************************************************')
-    # 获取所有key,即测试报告类型，如需求说明书的key:demand_doc，发布检查单的key:checklist
-    version_data_dict_key_list = version_data_dict.keys()
-    key_list = []
-    value_list = []
-    for report_type in version_data_dict_key_list:
-        # print('-----------------------------------')
-        # print(report_type)
-        # print(version_data_dict[report_type])
-        # print('-----------------------------------')
-        file_exist = ('X')
-        for file_name in file_list:
+    report_config = configparser.ConfigParser()
+    report_config.read('config\\software_config\\report_check_list_config.ini', encoding='GB18030')
+
+    # 获取领域所需要检查的报告
+    check_report = report_config.get('report_check_list', domain_name)
+    if len(check_report) == 0:
+        return False
+    # 去空格
+    check_report=check_report.strip()
+    # 把字符串(配置)转换为列表
+    check_report=check_report.split(',')
+
+    print('---------------------------------------------------')
+    print('%s检查报告列表：%s' % (domain_name, check_report))
+    print('---------------------------------------------------')
+
+    # 获取所有检查报告，不分前后端
+    all_check_report=report_config.get('report_check_list', 'ALL')
+    # 去空格
+    all_check_report = all_check_report.strip()
+    # 把字符串(配置)转换为列表
+    all_check_report = all_check_report.split(',')
+
+    # 初始化，把所有检查的报告都初始化为X，类型为字典，key为报告类型名、value为X
+    all_check_report_dict = {}
+    for report in all_check_report:
+        all_check_report_dict[report]='X'
+
+    # 筛选出不涉及的相关测试报告
+    uncheck_report=list(set(all_check_report).difference(check_report))
+    for report in uncheck_report:
+        all_check_report_dict[report]='不涉及'
+    print('uncheck_report 数据类型：',type(uncheck_report))
+    print('不涉及的相关测试报告：', uncheck_report)
+
+    for report in all_check_report:
+        for file in file_list:
             try:
-                matchStr = re.match("(.*)%s(.*)" % version_data_dict[report_type], str(file_name), re.M | re.I)
-                print("存在的材料：", matchStr.group())
-                file_exist = '✔'
+                matchStr = re.match("(.*)%s(.*)" % report, str(file), re.M | re.I)
+                print('【%s】 报告已上传！！'%matchStr.group())
+                all_check_report_dict[report]='✔'
                 break
             except:
                 continue
-        value_list.append(file_exist)
-        key_list.append(report_type)
+    all_check_report_dict['版本号']=version
+    print('%s 领域收集投产材料情况：%s'%(version, all_check_report_dict))
 
-    # print(key_list)
-    # print(value_list)
+    return all_check_report_dict
 
-    # 返回投产材料检查后的结果，检查名和其值（存在：✔  不存在：X ）
-    return title_list,value_list
 
 def delFile(request):
     versionManagerUsers = black_user_list
@@ -322,7 +335,7 @@ def delFile(request):
                     temp_domain_name = domain_name.split('（')[0]
                     file_path = dirname
                     try:
-                        title_list, value_list = match_productionMaterials(request.session['user_name'],
+                        all_check_report_dict = match_productionMaterials(request.session['user_name'],
                                                                            temp_domain_name, file_path)
                     except:
                         pass
@@ -351,7 +364,7 @@ def delFile(request):
                         domain_name = dirname.split('/')[2]
                         file_path = dirname
                         try:
-                            title_list, value_list = match_productionMaterials(request.session['user_name'],
+                            all_check_report_dict = match_productionMaterials(request.session['user_name'],
                                                                                domain_name, file_path)
                         except:
                             pass
@@ -381,7 +394,7 @@ def delFile(request):
                             domain_name = dirname.split('/')[2]
                             file_path = dirname
                             try:
-                                title_list, value_list = match_productionMaterials(request.session['user_name'],
+                                all_check_report_dict = match_productionMaterials(request.session['user_name'],
                                                                                    domain_name, file_path)
                             except:
                                 pass
@@ -421,7 +434,7 @@ def delFile(request):
                     temp_domain_name = domain_name.split('（')[0]
                     file_path = dirname
                     try:
-                        title_list, value_list = match_productionMaterials(request.session['user_name'],
+                        all_check_report_dict = match_productionMaterials(request.session['user_name'],
                                                                            temp_domain_name, file_path)
                     except:
                         pass
@@ -432,7 +445,7 @@ def delFile(request):
                     domain_name = dirname.split('/')[2]
                     file_path = dirname
                     try:
-                        title_list, value_list = match_productionMaterials(request.session['user_name'],
+                        all_check_report_dict = match_productionMaterials(request.session['user_name'],
                                                                            domain_name, file_path)
                     except:
                         pass
@@ -486,7 +499,7 @@ def uploadFile(request):
                 temp_domain_name=domain_name.split('（')[0]
                 file_path=dirname
                 try:
-                    title_list, value_list=match_productionMaterials(request.session['user_name'],temp_domain_name,file_path)
+                    all_check_report_dict=match_productionMaterials(request.session['user_name'],temp_domain_name,file_path)
                 except:
                     pass
 
@@ -506,11 +519,11 @@ def uploadFile(request):
     fileObjectList, dirObjectList = downloadFileInfo(path)
 
     # 判断上传是否为空
-    try:
-        request.FILES['file']
-    except:
-        message = '温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
-        return render(request, 'software/uploadFile.html', locals())
+    # try:
+    #     request.FILES['file']
+    # except:
+    #     message = '温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
+    #     return render(request, 'software/uploadFile.html', locals())
 
     if request.method == 'POST':
         dirname = request.POST.get('dirname')
@@ -988,30 +1001,6 @@ def delServerDate(request):
 #             request.websocket.send(message)#发送消息到客户端
 
 
-def test(request):
-    config=configparser.ConfigParser()
-    config.read('config\\software_config\\report_check_list_config.ini', encoding='GB18030')
-
-    # -sections得到所有的section，并以列表的形式返回，即分组名
-    print('sections:', ' ', config.sections())
-
-    # -options(section)得到该section的所有option,即变量名
-    print('options:', ' ', config.options('report_check_list'))
-
-    # -items（section）得到该section的所有键值对，即变量名和值
-    print('items:', ' ', config.items('report_check_list'))
-
-    # -get(section,option)得到section中option的值，返回为string类型，即值
-    print('get:', ' ', config.get('report_check_list', 'bron_report'))
-
-    # -getint(section,option)得到section中的option的值，返回为int类型
-    # print('getint:', ' ', config.getint('cmd', 'id'))
-    # print('getfloat:', ' ', config.getfloat('cmd', 'weight'))
-    # print('getboolean:', '  ', config.getboolean('cmd', 'isChoice'))
-
-    return render(request, 'test.html', locals())
-
-
 def productionMaterials(request):
     # 访问此功能的白名单用户
     allow_users=allow_users_list
@@ -1023,11 +1012,11 @@ def productionMaterials(request):
             print(user_path+dir)
             if os.path.isdir(user_path+dir):
                 user_dir_list.append(dir)
-        print(user_dir_list)
+        print('用户下所有目录名：',user_dir_list) #['BCOS-MNGT', 'BRON', 'BRON-CLSS', 'BRON-CRMP', 'BRON-LPSS']
 
         if request.method == "GET":
             dirname=request.GET.get('domain')
-            print(dirname,'88888888888888888888')
+            print('GET方式获取到的dirname：',dirname)
 
             if dirname:
                 version_dir_list=[]
@@ -1041,13 +1030,18 @@ def productionMaterials(request):
         if request.method == "POST":
             # 获取目录，如：BCOS-MNGT（渠道作业管理系统）/BCOS-MNGT1.1.0（2020-05-10）
             version_name=request.POST.get('version_name')
+            print('获取目录version_name：',version_name)
             # 获取领域名
             domain_name = version_name.split('/')[0]
-            temp_domain_name=domain_name.split('（')
+            print('获取领域名domain_name：',domain_name)
+            temp_domain_name=domain_name.split('（')[0]
+            print('temp_domain_name：',temp_domain_name)
             # 获取完整路径，如：uploads/shar/BCOS-MNGT（渠道作业管理系统）/BCOS-MNGT1.1.0（2020-05-10）
             file_path = user_path+version_name
+            print('获取完整路径file_path：',file_path)
             # 获取文件目录名,如：BCOS-MNT1.1.0（2020-05-14）
             domain_path=version_name.split('/')[1]
+            print('获取文件目录名domain_path：',domain_path)
             # # 获取领域+版本号，如：BCOS-MNT1.1.0
             # dir_name = version_name.split('（')[0]
             # # 大升级号,如BCOS-MNGT1 ;常规号,如1; 紧急号,如0
@@ -1062,47 +1056,54 @@ def productionMaterials(request):
             # version=dig_upgrade_number+'.'+conventional_number+'.'+emergency_number
             # print('版本号为：',version)
             print('-------------------test1---------------------------')
-            print("领域名：", temp_domain_name)
-            print("当前目录名：",domain_name)
-            print("文件路径：",file_path)
+            print("当前目录名domain_name：", domain_name)
+            print("领域名temp_domain_name：", temp_domain_name)
+            print("文件路径file_path：",file_path)
             print('-------------------test1---------------------------')
 
-            # title_list=['发版检查单','需求说明书','需求评审','安全评审','代码评审','SIT测试报告','UAT测试报告',
-            #             '安全测试报告','代码安全扫描报告','代码质量扫描报告','SQM审核报告','DBA评审报告','回归测试报告']
             try:
-                title_list,value_list=match_productionMaterials(request.session['user_name'],temp_domain_name,file_path)
+                one_check_report_dict=match_productionMaterials(request.session['user_name'],temp_domain_name,file_path)
+                print('查询的领域收集投产材料情况：', one_check_report_dict)
             except:
-                print('数据库中没有对应领域数据！')
-        # 存放所有领域版本投产资料收集情况
-        domain_values_list=[]
+                print('查询单个领域收集投产材料情况失败，配置中没有对应领域数据！')
 
+        # 存放所有领域版本投产资料收集情况
+        all_check_report_list=[]
         # 遍历用户下面所有领域，并检查投产材料收集情况
         for domain in user_dir_list:
             temp_domain_name=domain.split('（')[0]
+            print('temp_domain_name: ',temp_domain_name)
             for dir in os.listdir(user_path+domain): # 获取用户下所有领域目录和文件
+                print('dir: ',dir)
                 if os.path.isdir(user_path + domain + '/' + dir):
+                    print('当前获取的文件完整路径：', user_path + domain + '/' + dir)
+
+                    print('-------------------test2---------------------------')
+                    print("领域名temp_domain_name：", temp_domain_name)
+                    print("文件路径file_path：", user_path+domain+'/'+dir)
+                    print('-------------------test2---------------------------')
+
                     try:
-                        title, values=match_productionMaterials(request.session['user_name'],
+                        # 存放单个领域版本投产资料收集情况
+                        all_check_report_dict=match_productionMaterials(request.session['user_name'],
                                                 temp_domain_name,
                                                 user_path+domain+'/'+dir)
-                        print('当前获取的文件完整路径：',user_path+domain+'/'+dir)
-
-                        print('-' * 100)
-                        print('title_list:', title)
-                        print('-' * 100)
-                        print('=' * 100)
-                        print('value_list:', values )
-                        print('=' * 100)
-
-                        # 获取版本号目录
-                        version_dir_name=dir.split('（')[0]
-                        info=[version_dir_name, title, values]
-                        domain_values_list.append(info)
+                        print('所有领域版本投产资料收集情况：', all_check_report_dict)
                     except:
-                        print('数据库中没有对应领域数据！')
-        print('所有领域版本投产资料收集情况：',domain_values_list)
+                        print('所有领域版本投产资料收集情况，配置中没有对应领域数据！')
+                        continue
 
+                    all_check_report_list.append(all_check_report_dict)
 
+        # 读配置
+        report_config = configparser.ConfigParser()
+        report_config.read('config\\software_config\\report_check_list_config.ini', encoding='GB18030')
+        # 获取所有检查报告，不分前后端
+        table_title = report_config.get('report_check_list', 'ALL')
+        # 去空格
+        table_title = table_title.strip()
+        # 把字符串(配置)转换为列表
+        table_title = table_title.split(',')
         return render(request, 'software/productionMaterials.html', locals())
     else:
         return render(request, 'software/ERROR.html')
@@ -1138,3 +1139,27 @@ def unblockedVersion(request):
     unblocked_versionInfo_list = UnblockedVersionInfo.unblockedversion.filter(username=request.session['user_name'])
     return render(request, 'software/unblockedVersion.html', locals())
 
+
+
+def test(request):
+    config=configparser.ConfigParser()
+    config.read('config\\software_config\\report_check_list_config.ini', encoding='GB18030')
+
+    # -sections得到所有的section，并以列表的形式返回，即分组名
+    print('sections:', ' ', config.sections())
+
+    # -options(section)得到该section的所有option,即变量名
+    print('options:', ' ', config.options('report_check_list'))
+
+    # -items（section）得到该section的所有键值对，即变量名和值
+    print('items:', ' ', config.items('report_check_list'))
+
+    # -get(section,option)得到section中option的值，返回为string类型，即值
+    print('get:', ' ', config.get('report_check_list', 'BRON'))
+
+    # -getint(section,option)得到section中的option的值，返回为int类型
+    # print('getint:', ' ', config.getint('cmd', 'id'))
+    # print('getfloat:', ' ', config.getfloat('cmd', 'weight'))
+    # print('getboolean:', '  ', config.getboolean('cmd', 'isChoice'))
+
+    return render(request, 'test.html', locals())

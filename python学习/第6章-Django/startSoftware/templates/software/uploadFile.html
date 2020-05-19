@@ -179,7 +179,7 @@
     .table_th_red{
         height: 50px;
         text-align: center;
-        background-color: red;
+        background-color: #d9534f;
         color: #FFF;
     }
 
@@ -236,17 +236,17 @@
     {% endfor %}
     </div>
     <hr>
-    {% if title_list %}
+    {% if all_check_report_dict %}
         <h3>当前版本材料收集情况如下：</h3>
         <table border="1"  cellspacing="50" class="unblockedVersion_table">
                     <tr>
-                        {% for title in title_list %}
+                        {% for title,value in all_check_report_dict.items %}
                             <th class="table_title"><div class="table_title_content">{{title}}</div></th>
                         {% endfor %}
                     </tr>
 
                     <tr>
-                        {% for value in value_list %}
+                        {% for title,value in all_check_report_dict.items %}
                             {% if value == "X" %}
                                 <th class="table_th_red">{{value}}</th>
                             {% else %}

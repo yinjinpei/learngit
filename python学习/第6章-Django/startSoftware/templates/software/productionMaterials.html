@@ -180,56 +180,59 @@
 
     <br><br>
     <hr>
-    {% if title_list %}
-        <h3>当前查询的版本：{{domain_path}}</h3>
+    {% if one_check_report_dict %}
+        <h3>当前版本材料收集情况如下：</h3>
         <table border="1"  cellspacing="50" class="unblockedVersion_table">
-            <tr>
-                {% for title in title_list %}
-                    <th class="table_title"><div class="table_title_content">{{title}}</div></th>
-                {% endfor %}
-            </tr>
+                    <tr>
+                        {% for title,value in one_check_report_dict.items %}
+                            <th class="table_title"><div class="table_title_content">{{title}}</div></th>
+                        {% endfor %}
+                    </tr>
 
-            <tr>
-                {% for value in value_list %}
-                    {% if value == "X" %}
-                        <th class="table_th_red">{{value}}</th>
-                    {% else %}
-                        <th class="table_th_green">{{value}}</th>
-                    {% endif %}
-                {% endfor %}
-            </tr>
+                    <tr>
+                        {% for title,value in one_check_report_dict.items %}
+                            {% if value == "X" %}
+                                <th class="table_th_red">{{value}}</th>
+                            {% else %}
+                                <th class="table_th_green">{{value}}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
         </table>
     {% endif %}
+
+
     <br>
     </div>
 
-    {% if domain_values_list %}
+    {% if all_check_report_list %}
     <br><br><br>
     <div class="show_window">
         <input id="btn" type="button" name="" value="切换">
         <div id="con">
-                <h3 class="title_h2">所有版本投产材料的收集情况</h3>
-                <br>
-                {% for domain,title_list,value_list in domain_values_list %}
-                    <table border="1"  cellspacing="50" class="unblockedVersion_table_2">
-                        <tr>
-                            <th class="table_title"><div class="table_title_content">版本号</div></th>
-                            {% for title in title_list %}
-                                <th class="table_title"><div class="table_title_content">{{title}}</div></th>
-                            {% endfor %}
-                        </tr>
+            <h3 class="title_h2">所有版本投产材料的收集情况</h3>
+            <br>
+            <table border="1"  cellspacing="50" class="unblockedVersion_table_2">
+                <tr>
+                    {% for title in table_title %}
+                    <th class="table_title"><div class="table_title_content">{{title}}</div></th>
+                    {% endfor %}
+                </tr>
 
-                        <tr><th class="table_th_domain_name">{{domain}}</th>
-                            {% for value in value_list %}
-                                {% if value == "X" %}
-                                    <th class="table_th_red">{{value}}</th>
-                                {% else %}
-                                    <th class="table_th_green">{{value}}</th>
-                                {% endif %}
-                            {% endfor %}
-                        </tr>
-                    </table>
+
+                {% for all_check_report_dict in all_check_report_list %}
+                    <tr>
+                        {% for title,value in all_check_report_dict.items %}
+                            {% if value == "X" %}
+                                <th class="table_th_red">{{value}}</th>
+                            {% else %}
+                                <th class="table_th_green">{{value}}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
                 {% endfor %}
+
+            </table>
         </div>
     </div>
     {% endif %}
