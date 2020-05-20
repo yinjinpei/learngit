@@ -296,13 +296,6 @@ def match_productionMaterials(user_name,domain_name,file_path):
     for report in all_check_report:
         all_check_report_dict[report]='X'
 
-    # 筛选出不涉及的相关测试报告
-    uncheck_report=list(set(all_check_report).difference(check_report))
-    for report in uncheck_report:
-        all_check_report_dict[report]='不涉及'
-    print('uncheck_report 数据类型：',type(uncheck_report))
-    print('不涉及的相关测试报告：', uncheck_report)
-
     for report in all_check_report:
         for file in file_list:
             try:
@@ -312,6 +305,14 @@ def match_productionMaterials(user_name,domain_name,file_path):
                 break
             except:
                 continue
+
+    # 筛选出不涉及的相关测试报告
+    uncheck_report = list(set(all_check_report).difference(check_report))
+    for report in uncheck_report:
+        all_check_report_dict[report] = '不涉及'
+    print('uncheck_report 数据类型：', type(uncheck_report))
+    print('不涉及的相关测试报告：', uncheck_report)
+
     all_check_report_dict['版本号']=version
     print('%s 领域收集投产材料情况：%s'%(version, all_check_report_dict))
 
