@@ -267,7 +267,7 @@ def match_productionMaterials(user_name,domain_name,file_path):
         return False
 
     report_config = configparser.ConfigParser()
-    report_config.read('config\\software_config\\report_check_list_config.ini', encoding='GB18030')
+    report_config.read('config\\software_config\\report_check_list_config.ini', encoding='UTF-8')
 
     # 获取领域所需要检查的报告
     check_report = report_config.get('report_check_list', domain_name)
@@ -1099,7 +1099,7 @@ def productionMaterials(request):
 
         # 读配置
         report_config = configparser.ConfigParser()
-        report_config.read('config\\software_config\\report_check_list_config.ini', encoding='GB18030')
+        report_config.read('config\\software_config\\report_check_list_config.ini', encoding='UTF-8')
         # 获取所有检查报告，不分前后端
         table_title = report_config.get('report_check_list', 'ALL')
         # 去空格
@@ -1146,7 +1146,7 @@ def unblockedVersion(request):
 
 def test(request):
     config=configparser.ConfigParser()
-    config.read('config\\software_config\\report_check_list_config.ini', encoding='GB18030')
+    config.read('config\\software_config\\report_check_list_config.ini', encoding='UTF-8')
 
     # -sections得到所有的section，并以列表的形式返回，即分组名
     print('sections:', ' ', config.sections())
