@@ -217,7 +217,7 @@ def downloadFileInfo(path):
             fileSize = fileSize / float(1024)
             fileSize = round(fileSize, 2)
 
-            fileCreatTime = os.path.getctime(filepath)  # 获取文件创建时间
+            fileCreatTime = os.path.getmtime(filepath)  # 获取文件修改时间
             fileCreatTime = datetime.datetime.fromtimestamp(fileCreatTime)
             fileCreatTime = fileCreatTime.strftime('%Y-%m-%d %X')
 
