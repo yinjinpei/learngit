@@ -34,6 +34,20 @@ black_user_list=['shar', 'tdc', 'igmh']
 #白名单可访问投产材料管理页面
 allow_users_list=['shar', 'tdc',]
 
+
+def getConfig():
+    # 读配置
+    report_config = configparser.ConfigParser()
+    report_config.read('config\\software_config\\report_check_list_config.ini', encoding='UTF-8')
+    # 获取所有检查报告，不分前后端
+    table_title = report_config.get('report_check_list', 'ALL')
+    # 去空格
+    table_title = table_title.strip()
+    # 把字符串(配置)转换为列表
+    table_title = table_title.split(',')
+    table_title.insert(0, '版本号')
+
+
 # 获取应用程序路径
 def getAppDir(appName):
     appsList = AppInfo.apps.all()
@@ -520,13 +534,6 @@ def uploadFile(request):
             dirname=path[:-1]
 
     fileObjectList, dirObjectList = downloadFileInfo(path)
-
-    # 判断上传是否为空
-    # try:
-    #     request.FILES['file']
-    # except:
-    #     message = '温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
-    #     return render(request, 'software/uploadFile.html', locals())
 
     if request.method == 'POST':
         dirname = request.POST.get('dirname')
