@@ -35,17 +35,41 @@ black_user_list=['shar', 'tdc', 'igmh']
 allow_users_list=['shar', 'tdc',]
 
 
-def getConfig():
-    # 读配置
-    report_config = configparser.ConfigParser()
-    report_config.read('config\\software_config\\report_check_list_config.ini', encoding='UTF-8')
-    # 获取所有检查报告，不分前后端
-    table_title = report_config.get('report_check_list', 'ALL')
-    # 去空格
-    table_title = table_title.strip()
-    # 把字符串(配置)转换为列表
-    table_title = table_title.split(',')
-    table_title.insert(0, '版本号')
+# 获取配置
+class getConfig(object):
+    def __init__(self,path,section=None,key=None):
+        '''
+        :param section: 节点名
+        :param path: 配置文件路径
+        :param key: 变量名
+        '''
+        self.section = section
+        self.path = path
+        self.key = key
+        self.config = configparser.ConfigParser()   # 读配置
+        self.config.read(self.path, encoding='UTF-8')
+
+    # 获取所有 sections , 注意会过滤掉[DEFAULT], 以列表形式返回
+    def get_section(self):
+        return self.config.sections()
+    # 获取指定 section 的 keys
+    def get_keys(self):
+        return self.config.options(self.section)
+    # 获取指定 key 的 value,以字符串形式串返回
+    def get_value(self):
+        return self.config.get(self.section,self.key)
+    # 获取指定 key 的 value(value必须是整数类型),返回为int类型
+    def getint_value(self):
+        return self.config.getint(self.section, self.key)
+    # 获取指定 key 的 value(value必须是浮点数类型),返回为float类型
+    def getfloat_value(self):
+        return self.config.getfloat(self.section, self.key)
+    # 获取指定 key 的 value(value必须是布尔数类型),返回为boolean类型
+    def getboolean_value(self):
+        return self.config.getboolean(self.section, self.key)
+    # 获取指定 section 的 keys & values
+    def get_items(self):
+        return self.config.items(self.section)  # 注意items()返回的字符串会全变成小写
 
 
 # 获取应用程序路径
@@ -1172,5 +1196,10 @@ def test(request):
     # print('getint:', ' ', config.getint('cmd', 'id'))
     # print('getfloat:', ' ', config.getfloat('cmd', 'weight'))
     # print('getboolean:', '  ', config.getboolean('cmd', 'isChoice'))
+    path='config\\software_config\\report_check_list_config.ini'
+    config_1=getConfig(path,'report_check_list','ALL')
+    print('-----------------------------------------------------------------')
+    print(config_1.get_items())
+    print('-----------------------------------------------------------------')
 
     return render(request, 'test.html', locals())
