@@ -37,15 +37,14 @@ allow_users_list=['shar', 'tdc',]
 
 # 获取配置
 class getConfig(object):
-    def __init__(self,path,section=None,key=None):
+    def __init__(self,path):
         '''
         :param section: 节点名
         :param path: 配置文件路径
         :param key: 变量名
+        :param value: key值
         '''
-        self.section = section
         self.path = path
-        self.key = key
         self.config = configparser.ConfigParser()   # 读配置
         self.config.read(self.path, encoding='UTF-8')
 
@@ -53,23 +52,33 @@ class getConfig(object):
     def get_section(self):
         return self.config.sections()
     # 获取指定 section 的 keys
-    def get_keys(self):
-        return self.config.options(self.section)
+    def get_keys(self,section):
+        return self.config.options(section)
     # 获取指定 key 的 value,以字符串形式串返回
-    def get_value(self):
-        return self.config.get(self.section,self.key)
+    def get_value(self,section,key):
+        return self.config.get(section,key)
     # 获取指定 key 的 value(value必须是整数类型),返回为int类型
-    def getint_value(self):
-        return self.config.getint(self.section, self.key)
+    def getint_value(self,section,key):
+        return self.config.getint(section,key)
     # 获取指定 key 的 value(value必须是浮点数类型),返回为float类型
-    def getfloat_value(self):
-        return self.config.getfloat(self.section, self.key)
+    def getfloat_value(self,section,key):
+        return self.config.getfloat(section,key)
     # 获取指定 key 的 value(value必须是布尔数类型),返回为boolean类型
-    def getboolean_value(self):
-        return self.config.getboolean(self.section, self.key)
+    def getboolean_value(self,section,key):
+        return self.config.getboolean(section,key)
     # 获取指定 section 的 keys & values
-    def get_items(self):
-        return self.config.items(self.section)  # 注意items()返回的字符串会全变成小写
+    def get_items(self,section):
+        return self.config.items(section)  # 注意items()返回的字符串会全变成小写
+
+    # 检查section（节点）是否存在
+    def check_section(self,section):
+        return section in self.config
+    # 检查section（节点）下的key 是否存在
+    def check_key(self,section,key):
+        return key in self.config[section]
+        # 检查section（节点）下的key的value值是否包含self.value，类似字符串匹配
+    def check_value(self,section,key,value):
+        return value in self.config[section][key]
 
 
 # 获取应用程序路径
@@ -1202,9 +1211,14 @@ def test(request):
     # print('getfloat:', ' ', config.getfloat('cmd', 'weight'))
     # print('getboolean:', '  ', config.getboolean('cmd', 'isChoice'))
     path='config\\software_config\\report_check_list_config.ini'
-    config_1=getConfig(path,'report_check_list','ALL')
-    print('-----------------------------------------------------------------')
-    print(config_1.get_items())
-    print('-----------------------------------------------------------------')
-
+    config_1=getConfig(path)
+    print('-----------------------------------------------------------------1')
+    print(config_1.get_items('report_check_list'))
+    print('-----------------------------------------------------------------2')
+    print(config_1.check_section('report_check_list'))
+    print('-----------------------------------------------------------------3')
+    print(config_1.check_key('report_check_list','ALL'))
+    print('-----------------------------------------------------------------4')
+    print(config_1.check_value('report_check_list','ALL','发布检查单qwe'))
+    print('-----------------------------------------------------------------5')
     return render(request, 'test.html', locals())
