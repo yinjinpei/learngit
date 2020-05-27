@@ -531,6 +531,11 @@ def uploadFile(request):
     dirname = request.GET.get('dirname')
 
     if dirname is not None:
+        userRootPath = dirname.split('/')[1]
+        print('当前获取的用户家目录：', userRootPath)
+        if request.session['user_name'] != userRootPath:
+            return render(request, 'software/ERROR.html')
+
         if dirname[-1] == '/':
             dirname = dirname[:-1]
 
