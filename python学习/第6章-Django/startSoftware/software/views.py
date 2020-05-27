@@ -45,7 +45,7 @@ class getConfig(object):
         :param value: key值
         '''
         self.path = path
-        self.config = configparser.ConfigParser()   # 读配置
+        self.config = configparser.ConfigParser()  # 读配置
         self.config.read(self.path, encoding='UTF-8')
 
     # 获取所有 sections , 注意会过滤掉[DEFAULT], 以列表形式返回
@@ -79,6 +79,39 @@ class getConfig(object):
         # 检查section（节点）下的key的value值是否包含self.value，类似字符串匹配
     def check_value(self,section,key,value):
         return value in self.config[section][key]
+
+    # 添加节点
+    def add_section(self, section):
+        try:
+            self.config.add_section(section)
+            self.config.write(open(self.path, 'w', encoding='UTF-8'))
+            return True
+        except:
+            return False
+    # 添加 key 和 value
+    def set_section(self, section, key, value):
+        try:
+            self.config.set(section,key,value)
+            self.config.write(open(self.path, 'w', encoding='UTF-8'))
+            return True
+        except:
+            return False
+
+    # 删除节点
+    def remove_section(self,section):
+        return self.config.remove_section(section)
+    # 删除节点中的key和value
+    def remove_key(self, section, key, ):
+        return self.config.remove_option(section, key)
+    # 清空除[DEFAULT]之外所有内容
+    def clear(self,path):
+        try:
+            self.config.clear()
+            self.config.write(open(path, 'w', encoding='UTF-8'))
+            return True
+        except:
+            return False
+
 
 
 # 获取应用程序路径
@@ -1191,34 +1224,53 @@ def unblockedVersion(request):
 
 
 def test(request):
-    config=configparser.ConfigParser()
-    config.read('config\\software_config\\report_check_list_config.ini', encoding='UTF-8')
-
-    # -sections得到所有的section，并以列表的形式返回，即分组名
-    print('sections:', ' ', config.sections())
-
-    # -options(section)得到该section的所有option,即变量名
-    print('options:', ' ', config.options('report_check_list'))
-
-    # -items（section）得到该section的所有键值对，即变量名和值
-    print('items:', ' ', config.items('report_check_list'))
-
-    # -get(section,option)得到section中option的值，返回为string类型，即值
-    print('get:', ' ', config.get('report_check_list', 'BRON'))
+    # path2='config\\software_config\\report_check_list_config2.ini'
+    # config=configparser.ConfigParser()
+    # config.read(path2, encoding='UTF-8')
+    #
+    # # -sections得到所有的section，并以列表的形式返回，即分组名
+    # print('sections:', ' ', config.sections())
+    #
+    # # -options(section)得到该section的所有option,即变量名
+    # print('options:', ' ', config.options('report_check_list'))
+    #
+    # # -items（section）得到该section的所有键值对，即变量名和值
+    # print('items:', ' ', config.items('report_check_list'))
+    #
+    # # -get(section,option)得到section中option的值，返回为string类型，即值
+    # print('get:', ' ', config.get('report_check_list', 'BRON'))
 
     # -getint(section,option)得到section中的option的值，返回为int类型
     # print('getint:', ' ', config.getint('cmd', 'id'))
     # print('getfloat:', ' ', config.getfloat('cmd', 'weight'))
     # print('getboolean:', '  ', config.getboolean('cmd', 'isChoice'))
-    path='config\\software_config\\report_check_list_config.ini'
-    config_1=getConfig(path)
-    print('-----------------------------------------------------------------1')
-    print(config_1.get_items('report_check_list'))
-    print('-----------------------------------------------------------------2')
-    print(config_1.check_section('report_check_list'))
-    print('-----------------------------------------------------------------3')
-    print(config_1.check_key('report_check_list','ALL'))
-    print('-----------------------------------------------------------------4')
-    print(config_1.check_value('report_check_list','ALL','发布检查单qwe'))
-    print('-----------------------------------------------------------------5')
+
+    path = 'config\\software_config\\report_check_list_config2.ini'
+    try:
+        config_1=getConfig(path)
+        print('-----------------------------------------------------------------1')
+        print(config_1.get_items('report_check_list'))
+        print('-----------------------------------------------------------------2')
+        print(config_1.check_section('report_check_list'))
+        print('-----------------------------------------------------------------3')
+        print(config_1.check_key('report_check_list','ALL'))
+        print('-----------------------------------------------------------------4')
+        print(config_1.check_value('report_check_list','ALL','发布检查单qwe'))
+        print('-----------------------------------------------------------------5')
+        print(config_1.add_section('user'))
+        print('-----------------------------------------------------------------6')
+        print(config_1.set_section('user','b','2'))
+        print(config_1.set_section('user', 'c', '4'))
+        print('-----------------------------------------------------------------7')
+        print(config_1.remove_section('user'))
+        print('-----------------------------------------------------------------8')
+        print('-----------------------------------------------------------------9')
+        print('-----------------------------------------------------------------10')
+        print('-----------------------------------------------------------------11')
+        print('-----------------------------------------------------------------12')
+        print('-----------------------------------------------------------------13')
+        print('-----------------------------------------------------------------14')
+        print('-----------------------------------------------------------------15')
+    except:
+        print('路径有问题！')
     return render(request, 'test.html', locals())
