@@ -12,3 +12,16 @@ for ti in title:
     a_dict[ti]='X'
 
 print(a_dict)
+
+import re
+text = 'This string1 is an example for match string2'
+text= text.replace(' ','')   #去空格
+print(text)
+str=r'string5|string3|an|mat'
+
+result = re.findall(str,text)   #分别匹配两种模式
+if result:
+    print(result)
+else:
+    print('空空如也')
+

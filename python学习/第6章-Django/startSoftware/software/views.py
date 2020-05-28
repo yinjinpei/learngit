@@ -84,7 +84,6 @@ class getConfig(object):
     def add_section(self, section):
         try:
             self.config.add_section(section)
-            self.config.write(open(self.path, 'w', encoding='UTF-8'))
             return True
         except:
             return False
@@ -92,26 +91,39 @@ class getConfig(object):
     def set_section(self, section, key, value):
         try:
             self.config.set(section,key,value)
-            self.config.write(open(self.path, 'w', encoding='UTF-8'))
             return True
         except:
             return False
 
     # 删除节点
     def remove_section(self,section):
-        return self.config.remove_section(section)
-    # 删除节点中的key和value
-    def remove_key(self, section, key, ):
-        return self.config.remove_option(section, key)
-    # 清空除[DEFAULT]之外所有内容
-    def clear(self,path):
         try:
-            self.config.clear()
-            self.config.write(open(path, 'w', encoding='UTF-8'))
+            self.config.remove_section(section)
             return True
         except:
             return False
 
+    # 删除节点中的key和value
+    def remove_key(self, section, key):
+        try:
+            self.config.remove_option(section, key)
+            return True
+        except:
+            return False
+    # 清空除[DEFAULT]之外所有内容
+    def clear(self):
+        try:
+            self.config.clear()
+            return True
+        except:
+            return False
+    # 保存并写入数据到配置文件中
+    def save(self):
+        try:
+            self.config.write(open(self.path, 'w', encoding='UTF-8'))
+            return True
+        except:
+            return False
 
 
 # 获取应用程序路径
@@ -363,7 +375,7 @@ def match_productionMaterials(user_name,domain_name,file_path):
     print('---------------------------------------------------')
 
     # 获取所有检查报告，不分前后端
-    all_check_report=report_config.get('report_check_list', 'ALL')
+    all_check_report=report_config.get('report_check_list', 'all')
     # 去空格
     all_check_report = all_check_report.strip()
     # 把字符串(配置)转换为列表
@@ -377,14 +389,63 @@ def match_productionMaterials(user_name,domain_name,file_path):
         all_check_report_dict[report]='X'
 
     for report in all_check_report:
+        if report == '发布检查单':
+            findStr = r'发布检查单|发布检查清单|检查单|检查清单|投产检查单|投产检查清单'
+
+        elif report == '需求说明书':
+            findStr = r'需求说明书|需求说明文档|需求文档'
+
+        elif report == '需求评审':
+            findStr = r'需求评审'
+
+        elif report == '安全评审':
+            findStr = r'安全评审'
+
+        elif report == '代码评审':
+            findStr = r'代码评审'
+
+        elif report == 'SIT测试报告':
+            findStr = r'SIT测试报告|系统测试报告|系统测试计划报告|SIT报告'
+
+        elif report == 'UAT测试报告':
+            findStr = r'UAT测试报告|业务测试报告|业务报告|UAT报告'
+
+        elif report == '安全测试报告':
+            findStr = r'安全测试报告|安全测试'
+
+        elif report == '回归测试报告':
+            findStr = r'回归测试报告|回归测试|回归报告|回归测试计划报告|回归计划报告'
+
+        elif report == '代码安全扫描报告':
+            findStr = r'代码安全扫描报告|安全扫描报告|代码安全扫描|安全扫描'
+
+        elif report == '代码质量扫描报告':
+            findStr = r'代码质量扫描报告|质量扫描报告|代码质量扫描|质量扫描'
+
+        elif report == 'SQM审核报告':
+            findStr = r'SQM审核报告|脚本审核|SQM审核|DB审核'
+
+        elif report == 'DB脚本评审':
+            findStr = r'DB脚本评审|脚本评审|DB评审|SQL评审'
+        else:
+            print('本次匹配没有匹配到对应的报告类型！')
+            continue
+
         for file in file_list:
-            try:
-                matchStr = re.match("(.*)%s(.*)" % report, str(file), re.M | re.I)
-                print('【%s】 报告已上传！！'%matchStr.group())
-                all_check_report_dict[report]='✔'
-                break
-            except:
+            matchStr = re.findall(findStr, str(file), re.M | re.I | re.S)
+            if matchStr:
+                print('【%s】:【%s】 报告已上传！！' % (report,file))
+                all_check_report_dict[report] = '✔'
+            else:
                 continue
+
+            # try:
+            #     matchStr = re.match("(.*)%s(.*)" % report, str(file), re.M | re.I | re.S)
+            #     print('【%s】 报告已上传！！'%matchStr.group())
+            #     all_check_report_dict[report]='✔'
+            #     break
+            # except:
+            #     continue
 
     # 筛选出不涉及的相关测试报告
     uncheck_report = list(set(all_check_report).difference(check_report))
@@ -1262,8 +1323,10 @@ def test(request):
         print(config_1.set_section('user','b','2'))
         print(config_1.set_section('user', 'c', '4'))
         print('-----------------------------------------------------------------7')
-        print(config_1.remove_section('user'))
+        print(config_1.remove_key('user','b'))
+        print(config_1.save())
         print('-----------------------------------------------------------------8')
+        # print(config_1.clear())
         print('-----------------------------------------------------------------9')
         print('-----------------------------------------------------------------10')
         print('-----------------------------------------------------------------11')
