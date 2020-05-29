@@ -913,7 +913,7 @@ def extranetAddress(request):
 
 def setServerDate(request):
     if not request.session.get('is_login', None):
-        uploadFile_message = "您尚未登录，使用【修改服务器时间】请先登录！！"
+        uploadFile_message = "您尚未登录，使用【服务器时间管理】请先登录！！"
         return render(request, 'software/index.html', locals())
 
     # 获取数据库里的数据
@@ -1143,6 +1143,10 @@ def delServerDate(request):
 
 
 def productionMaterials(request):
+    if not request.session.get('is_login', None):
+        uploadFile_message = "您尚未登录，使用【投产材料管理】请先登录！！"
+        return render(request, 'software/index.html', locals())
+
     # 访问此功能的白名单用户
     allow_users=allow_users_list
     user_dir_list=[]
@@ -1253,6 +1257,10 @@ def productionMaterials(request):
 
 
 def unblockedVersion(request):
+    if not request.session.get('is_login', None):
+        uploadFile_message = "您尚未登录，使用【解封版信息收集】请先登录！！"
+        return render(request, 'software/index.html', locals())
+
     if request.method == "POST":
         newUnblocked_version=UnblockedVersionInfo.unblockedversion.create()
         newUnblocked_version.username=request.session['user_name']
