@@ -436,8 +436,7 @@ def match_productionMaterials(user_name,domain_name,file_path):
             if matchStr:
                 print('【%s】:【%s】 报告已上传！！' % (report,file))
                 all_check_report_dict[report] = '✔'
-            else:
-                continue
+                break
 
             # try:
             #     matchStr = re.match("(.*)%s(.*)" % report, str(file), re.M | re.I | re.S)
