@@ -393,10 +393,10 @@ def match_productionMaterials(user_name,domain_name,file_path):
             findStr = r'发布检查单|发布检查清单|检查单|检查清单|投产检查单|投产检查清单'
 
         elif report == '需求说明书':
-            findStr = r'需求说明书|需求说明文档|需求文档'
+            findStr = r'需求说明书|需求说明文档|需求文档|需求记录'
 
         elif report == '需求评审':
-            findStr = r'需求评审'
+            findStr = r'需求评审|需求文档评审|需求说明评审||需求说明书评审'
 
         elif report == '安全评审':
             findStr = r'安全评审'
@@ -423,7 +423,7 @@ def match_productionMaterials(user_name,domain_name,file_path):
             findStr = r'代码质量扫描报告|质量扫描报告|代码质量扫描|质量扫描'
 
         elif report == 'SQM审核报告':
-            findStr = r'SQM审核报告|脚本审核|SQM审核|DB审核'
+            findStr = r'SQM审核报告|SQM审核'
 
         elif report == 'DB脚本评审':
             findStr = r'DB脚本评审|脚本评审|DB评审|SQL评审'
