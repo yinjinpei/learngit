@@ -962,20 +962,24 @@ def setServerDate(request):
                 class TheServerHelper():
                     """初始化函数构造
                         其中commond作为执行的语句"""
-                    def __init__(self, serverIP, username, password, commond, port=22):
-                        self.serverIP = serverIP
+                    def __init__(self, clientIP, username, password, date, port=22):
+                        self.serverIP = '192.168.43.100'
+                        self.clientIP = clientIP
                         self.username = username
                         self.password = password
                         self.port = port
-                        self.setdatetime = commond
+                        self.date = date
                     # SSH连接服务器，用于命令执行
                     def ssh_connectionServer(self):
+                        import paramiko
                         print(self.serverIP)
+                        print(self.clientIP)
                         print(self.username)
                         print(self.password)
                         print(self.port)
-                        set_time = 'date -s "%s"' % (self.setdatetime)
+                        set_time = 'date -s "%s"' % (self.date)
                         print(set_time)
+                        cmds=['pwd','ls -lh','hostname -i','date']
 
                         try:
                             print('创建SSH对象--------')
@@ -983,24 +987,52 @@ def setServerDate(request):
                             sf = paramiko.SSHClient()
                             # 允许连接不在know_hosts文件中的主机
                             sf.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                            print('开始连接服务器')
+                            print('开始连接堡垒机服务器：%s'%self.serverIP)
                             # 连接服务器
                             sf.connect(hostname=self.serverIP, port=self.port, username=self.username,
                                        password=self.password)
-                            print('连接服务器成功！')
+                            print('连接堡垒机服务器成功！')
 
-                            # 注意：依次执行多条命令时，命令之间用分号隔开
-                            stdin, stdout, stderr = sf.exec_command(set_time)
-                            result = stdout.read().decode('utf-8')
-                            print("命令执行成功！\n结果如下：\n%s" % result)
-                            time.sleep(3)
-                            stdin, stdout, stderr = sf.exec_command('date')
-                            result = stdout.read().decode('utf-8')
-                            print("命令执行成功！\n结果如下：\n%s" % result)
-                        except:
-                            print("连接服务器：" + self.serverIP + " 失败了!")
-                            return False
+                            print('激活连接的终端！')
+                            channel = sf.invoke_shell()
+                            print('设置读、写操作超时时间')
+                            channel.settimeout(10)
+                            print('发送命令行：%s'%cmds)
+                            time.sleep(0.5)
+
+                            for command in cmds:
+                                channel.send(command + '\n')
+                                time.sleep(0.5)
+                                try:
+                                    # command_res = channel.recv(65533).decode('utf-8')
+                                    command_res = channel.recv(65533)
+                                    print('-' * 30)
+                                    print(command_res)
+                                    print('-' * 30)
+                                except Exception as e:
+                                    print('*' * 30)
+                                    print(e)
+                                    print('*' * 30)
+                                    break
+                            channel.close()
+                            sf.close()
+                        except Exception as e:
+                            print('=' * 30)
+                            print(e)
+                            print('=' * 30)
                         return True
+
+                        #     # 注意：依次执行多条命令时，命令之间用分号隔开
+                        #     stdin, stdout, stderr = sf.exec_command(set_time)
+                        #     result = stdout.read().decode('utf-8')
+                        #     print("命令执行成功！\n结果如下：\n%s" % result)
+                        #     time.sleep(3)
+                        #     stdin, stdout, stderr = sf.exec_command('date')
+                        #     result = stdout.read().decode('utf-8')
+                        #     print("命令执行成功！\n结果如下：\n%s" % result)
+                        # except:
+                        #     print("连接服务器：" + self.serverIP + " 失败了!")
+                        #     return False
 
                 # 获取数据库定时任务的信息
                 timerInfo = TimingData.timers.all()  # 获取所有对象显示到页面
