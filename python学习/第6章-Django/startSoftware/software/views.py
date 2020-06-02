@@ -979,7 +979,8 @@ def setServerDate(request):
                         print(self.port)
                         set_time = 'date -s "%s"' % (self.date)
                         print(set_time)
-                        cmds=['pwd','ls -lh','hostname -i','date']
+                        cmds=['export LANG=zh_CN.UTF-8','echo $LANG','pwd','ls -lh','hostname -i','date']
+                        cmds.insert(0,set_time)
 
                         try:
                             print('创建SSH对象--------')
@@ -1004,8 +1005,7 @@ def setServerDate(request):
                                 channel.send(command + '\n')
                                 time.sleep(0.5)
                                 try:
-                                    # command_res = channel.recv(65533).decode('utf-8')
-                                    command_res = channel.recv(65533)
+                                    command_res = channel.recv(65533).decode('utf-8')
                                     print('-' * 30)
                                     print(command_res)
                                     print('-' * 30)

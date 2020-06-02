@@ -1,4 +1,5 @@
 import logging
+import time
 from django.contrib import admin
 from django.urls import path
 
@@ -12,20 +13,6 @@ import paramiko
 logger = logging.getLogger(__name__)
 # 生成一个名为collect的logger实例
 collect_logger = logging.getLogger("collect")
-print('这是一个好东西11111!')
-
-# def exec_command(comm):
-#     hostname = '192.168.0.162'
-#     username = 'root'
-#     password = 'root'
-#
-#     ssh = paramiko.SSHClient()
-#     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-#     ssh.connect(hostname=hostname, username=username, password=password)
-#     stdin, stdout, stderr = ssh.exec_command(comm,get_pty=True)
-#     result = stdout.read()
-#     ssh.close()
-#     yield result
 
 
 @accept_websocket
@@ -52,7 +39,6 @@ def echo_once(request):
                 ssh = paramiko.SSHClient()
                 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
                 ssh.connect(hostname=hostname, username=username, password=password)
-                print(type(ssh),'1111111111111111111111')
                 # 务必要加上get_pty=True,否则执行命令会没有权限
                 stdin, stdout, stderr = ssh.exec_command(command, get_pty=True)
                 # result = stdout.read()
@@ -60,7 +46,6 @@ def echo_once(request):
                 print('循环发送消息给前端页面!!')
                 while True:
                     nextline = stdout.readline().strip()  # 读取脚本输出内容
-                    # print(nextline.strip())
                     request.websocket.send(nextline.encode('utf-8'))  # 发送消息到客户端
                     print(nextline)
                     # 判断消息为空时,退出循环

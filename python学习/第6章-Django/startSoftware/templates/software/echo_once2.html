@@ -1,0 +1,264 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}投产材料管理{% endblock %}
+
+{% block content %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+        function submitForm(){
+               var form = document.getElementById("my_domain");
+                form.submit();
+        }
+
+        $(function () {
+            $('#backup_all').click(function () {
+                var socket = new WebSocket("ws://" + window.location.host + "/echo_once");
+                console.log(socket);
+                socket.onopen = function () {
+                    console.log('WebSocket open');//成功连接上Websocket
+                    socket.send($('#backup_all').val());//发送数据到服务端
+                };
+                socket.onmessage = function (e) {
+                    console.log('message: ' + e.data);//打印服务端返回的数据
+                    $('#messagecontainer').append(e.data+'<br/>');
+                };
+            });
+        });
+
+        window.onload = function () {
+
+            var oDiv = document.getElementById('con');
+            // oDiv.style.width = '300px';
+            // oDiv.style.height = '200px';
+            oDiv.style.border = '2px solid green';
+            oDiv.style.fontSize = '20px';
+            oDiv.style.textAlign = 'center';
+
+            var oBtn = document.getElementById('btn');
+            oBtn.value = '隐藏收集情况';
+            oBtn.onclick = changeWindow;
+
+            function changeWindow() {
+                if(oDiv.style.display=='none'){
+                    oDiv.style.display = 'block';
+                    oBtn.value = '隐藏收集情况';
+                }
+                else{
+                    oDiv.style.display = 'none';
+                    oBtn.value = '显示收集情况';
+                }
+            }
+        }
+
+</script>
+
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+        margin: 50px 100px;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .title_h2{
+        color: green;
+        font-weight: bold;
+    }
+
+    #link_index:hover,#link_top:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .checkout_btn{
+        margin-left: 10%;
+    }
+
+    .domain_list, .version_list{
+        margin-right: 10px;
+    }
+
+
+    .unblockedVersion_table{
+        width: 100%;
+        text-align: center;
+        background-color: #f6ffff;
+    }
+
+    .unblockedVersion_table_2{
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        background-color: #f6ffff;
+        margin-bottom: 25px;
+        border-collapse:collapse
+    }
+
+    .table_th_domain_name{
+        text-align: center;
+        background-color: #9acfea;
+    }
+
+    .table_title{
+        background-color: #2e6da4;
+        text-align: center;
+    }
+
+    .table_title_content{
+        margin: 15px;
+        color: #fff;
+    }
+
+    .table_th_green{
+        height: 50px;
+        text-align: center;
+        color: green;
+    }
+
+    .table_th_red{
+        height: 50px;
+        text-align: center;
+        background-color: #d9534f;
+        color: #FFF;
+    }
+
+    .show_window{
+        text-align: left;
+    }
+
+    .title_con{
+        border: 2px solid #9acfea;
+        padding: 0 10px;
+    }
+
+    .title_h3{
+        text-align: left;
+    }
+
+    #con{
+        padding: 10px;
+    }
+</style>
+{% endblock %}
+
+<div id="uploadFile_con">
+    <div class="title_con">
+    <form class='form-register' action="productionMaterials?dirname={{path}}" method="get" id="my_domain">
+        {% csrf_token %}
+        <h3 class="title_h3">查询版本投产材料的收集情况：</h3>
+        <label class="btn btn-primary pull-left domain_list" for="dir_1">选择领域：</label>
+            <select class="btn btn-default pull-left" onchange="submitForm();" name="domain" id="dir_1" required>
+                {% if dirname %}
+                    <option>{{dirname}}</option>
+                {% else %}
+                    <option value="">请选择领域</option>
+                {% endif %}
+                {% for dir in user_dir_list %}
+            　　　　<option>{{dir}}</option>
+                {% endfor %}
+            </select>
+    </form>
+
+    <form class='form-register' action="productionMaterials?dirname={{path}}" method="post">
+        {% csrf_token %}
+        <br><br>
+        <label class="btn btn-primary pull-left version_list" for="dir_2">选择版本：</label>
+            <select class="btn btn-default pull-left" name="version_name" id="dir_2" required>
+                <option value="">请选择版本</option>
+                {% for dir in version_dir_list %}
+            　　　　<option value="{{dirname}}/{{dir}}">{{dir}}</option>
+                {% endfor %}
+            </select>
+
+        <div class="form-group" id="newdir">
+            {{ newDirectory_form.DirectoryName.label_tag }}
+            {{ newDirectory_form.DirectoryName }}
+        </div>
+        <br><br>
+        <button type="reset" class="btn btn-default pull-left reset_btn">重置</button>
+        <button type="submit" class="btn btn-primary pull-left checkout_btn">查询</button>
+    </form>
+
+
+    <br><br>
+    <hr>
+    {% if one_check_report_dict %}
+        <h3>当前版本材料收集情况如下：</h3>
+        <table border="1"  cellspacing="50" class="unblockedVersion_table">
+                    <tr>
+                        {% for title,value in one_check_report_dict.items %}
+                            <th class="table_title"><div class="table_title_content">{{title}}</div></th>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        {% for title,value in one_check_report_dict.items %}
+                            {% if value == "X" %}
+                                <th class="table_th_red">{{value}}</th>
+                            {% else %}
+                                <th class="table_th_green">{{value}}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+        </table>
+    {% endif %}
+
+
+    <br>
+    </div>
+
+    {% if all_check_report_list %}
+    <br><br><br>
+    <div class="show_window">
+        <input id="btn" type="button" name="" value="切换">
+        <div id="con">
+            <h3 class="title_h2">所有版本投产材料的收集情况</h3>
+            <br>
+            <table border="1" cellpadding=0 cellspacing="50" class="unblockedVersion_table_2">
+                <tr>
+                    {% for title in table_title %}
+                    <th class="table_title"><div class="table_title_content">{{title}}</div></th>
+                    {% endfor %}
+                </tr>
+
+
+                {% for all_check_report_dict in all_check_report_list %}
+                    <tr>
+                        {% for title,value in all_check_report_dict.items %}
+                            {% if value == "X" %}
+                                <th class="table_th_red">{{value}}</th>
+                            {% else %}
+                                <th class="table_th_green">{{value}}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    <br><br>
+    <hr>
+    <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+    <br><br><br><br>
+    <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+    <br><br><br><br>
+</div>
+{% endblock %}
