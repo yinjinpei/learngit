@@ -164,17 +164,6 @@ class DomainInfo(models.Model):
         return self.isDelete
 
 
-
-
-
-
-
-
-
-
-
-
-
 class UnblockedVersionInfo(models.Model):
     # 登录用户名
     username = models.CharField(max_length=128)
@@ -264,3 +253,20 @@ class UnblockedVersionInfo(models.Model):
 
     def show_isDelete(self):
         return self.isDelete
+
+
+class ManagerForm(forms.Form):
+    password = forms.CharField(label="密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+
+class ManagerDate(models.Model):
+    user = models.CharField(max_length=128)
+    password = models.CharField(max_length=128)
+    class Meta():
+        db_table='managerdate'
+
+    managers = models.Manager()
+    def showUser(self):
+        return self.user
+    def showPassword(self):
+        return self.password

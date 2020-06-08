@@ -57,3 +57,7 @@ def echo_once(request):
                 ssh.close()  # 关闭ssh连接
             else:
                 request.websocket.send('小样儿，没权限!!!'.encode('utf-8'))
+
+
+def manager_login(requestl):
+    pass
