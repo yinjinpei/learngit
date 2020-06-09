@@ -256,7 +256,7 @@ class UnblockedVersionInfo(models.Model):
 
 
 class ManagerForm(forms.Form):
-    password = forms.CharField(label="密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(label="超级密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 
 class ManagerDate(models.Model):

@@ -2,6 +2,7 @@ import logging
 import time
 from django.contrib import admin
 from django.urls import path
+from ..models import *
 
 from django.shortcuts import render
 from dwebsocket.decorators import accept_websocket, require_websocket
@@ -17,13 +18,20 @@ collect_logger = logging.getLogger("collect")
 
 @accept_websocket
 def echo_once(request):
+    print(request.session['user_name'])
+    manager = ManagerForm()
+    managers = ManagerDate.managers.filter(user=request.session['user_name'])  # 获取数据库所有符合筛选的用户对象
+    if managers:
+        for user in managers:
+            print(user.password)
+
     print('这是一个好东西!')
     if not request.is_websocket():  # 判断是不是websocket连接
         try:  # 如果是普通的http方法
             message = request.GET['message']
             return HttpResponse(message)
         except:
-            return render(request, 'software/echo_once.html')
+            return render(request, 'software/echo_once.html', locals())
     else:
         for message in request.websocket:
             message = message.decode('utf-8')  # 接收前端发来的数据
@@ -59,5 +67,6 @@ def echo_once(request):
                 request.websocket.send('小样儿，没权限!!!'.encode('utf-8'))
 
 
-def manager_login(requestl):
-    pass
+def manager_login(request):
+    manager=ManagerForm()
+    return render(request, 'software/echo_once.html', locals())

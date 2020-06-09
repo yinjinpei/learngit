@@ -1,6 +1,5 @@
 {% extends 'software_base.html' %}
 {% block title %}CMDB系统{% endblock %}
-
 {% block scripts %}
     <script src="/static/js/jquery-3.3.1.js"></script>
     <script type="text/javascript">
@@ -31,13 +30,29 @@
         #messagecontainer{
             margin: 20px;
         }
-
+        .form-group{
+            width: 15%;
+        }
+        .form-login{
+            font-size: 20px;
+            font-weight: bold;
+            color: #0b97c4;
+            text-align: center;
+        }
     </style>
 
     <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
     <hr>
+<div class="form-group" id="form-group">
+    <form class='form-login' action="echo_once.html" method="post">
+    {{manager.password.label}}
+    {{manager.password}}
+    <br>
+    <button type="reset" class="btn btn-default pull-left">重置</button>
+    <button type="submit" class="btn btn-primary pull-right">提交</button>
+    </form>
+</div>
     <h1>exec_command</h1>
-
     <button type="button" id="backup_all" value="backup_all">
         执行Shell脚本
     </button>
