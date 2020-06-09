@@ -31,6 +31,7 @@ def echo_once(request):
         print('manager_islogin值：',request.session.get('manager_islogin', None))
         manager_islogin = True
     else:
+        # 如果用户的超级密码在数据库中有数据了就不是首次登录
         try:
             managers = ManagerDate.managers.get(user=request.session['user_name'])
             first_login = False
@@ -48,6 +49,7 @@ def echo_once(request):
                         manager_islogin = True
                         request.session['manager_islogin'] = True
             except:
+                # 首次登录时，要求用户设置超级密码并写入数据库中
                 first_login = True
                 setpassword_from = SetPasswordForm(request.POST)
                 if setpassword_from.is_valid():
