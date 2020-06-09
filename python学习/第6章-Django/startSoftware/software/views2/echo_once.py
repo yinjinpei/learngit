@@ -16,14 +16,49 @@ logger = logging.getLogger(__name__)
 collect_logger = logging.getLogger("collect")
 
 
+
+
+
 @accept_websocket
 def echo_once(request):
-    print(request.session['user_name'])
+    if not request.session.get('is_login', None):
+        return render(request, 'software/index.html')
+
     manager = ManagerForm()
-    managers = ManagerDate.managers.filter(user=request.session['user_name'])  # 获取数据库所有符合筛选的用户对象
-    if managers:
-        for user in managers:
-            print(user.password)
+    setpassword = SetPasswordForm()
+
+    if request.session.get('manager_islogin', None):
+        print('manager_islogin值：',request.session.get('manager_islogin', None))
+        manager_islogin = True
+    else:
+        try:
+            managers = ManagerDate.managers.get(user=request.session['user_name'])
+            first_login = False
+        except:
+            first_login = True
+
+        # 要求用户输入超级密码并处理，保存至cokie
+        if request.method == "POST":
+            manager_islogin = False
+            try:
+                managers = ManagerDate.managers.get(user=request.session['user_name'])
+                manager_from = ManagerForm(request.POST)
+                if manager_from.is_valid():
+                    if managers.password == manager_from.cleaned_data['password']:
+                        manager_islogin = True
+                        request.session['manager_islogin'] = True
+            except:
+                first_login = True
+                setpassword_from = SetPasswordForm(request.POST)
+                if setpassword_from.is_valid():
+                    newManager = ManagerDate.managers.create()
+                    newManager.user = request.session['user_name']
+                    if setpassword_from.cleaned_data['password1'] == setpassword_from.cleaned_data['password2']:
+                        newManager.password = setpassword_from.cleaned_data['password1']
+                        newManager.save()
+                        first_login = False
+
+        return render(request, 'software/echo_once.html', locals())
 
     print('这是一个好东西!')
     if not request.is_websocket():  # 判断是不是websocket连接

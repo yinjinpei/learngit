@@ -34,7 +34,7 @@
             width: 15%;
         }
         .form-login{
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #0b97c4;
             text-align: center;
@@ -42,25 +42,45 @@
     </style>
 
     <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
-    <hr>
-<div class="form-group" id="form-group">
-    <form class='form-login' action="echo_once.html" method="post">
-    {{manager.password.label}}
-    {{manager.password}}
+
+    {% if manager_islogin != True %}
+        {% if first_login == True %}
+            <div class="form-group">
+                <form class='form-login' action="echo_once" method="post">
+                    {% csrf_token %}
+                    {{setpassword.password1.label}}
+                    {{setpassword.password1}}
+                    {{setpassword.password2.label}}
+                    {{setpassword.password2}}
+                    <br>
+                    <button type="reset" class="btn btn-default pull-left">重置</button>
+                    <button type="submit" class="btn btn-primary pull-right">提交</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="form-group" id="form-group">
+                <form class='form-login' action="echo_once" method="post">
+                    {% csrf_token %}
+                    {{manager.password.label}}
+                    {{manager.password}}
+                    <br>
+                    <button type="reset" class="btn btn-default pull-left">重置</button>
+                    <button type="submit" class="btn btn-primary pull-right">提交</button>
+                </form>
+            </div>
+        {% endif %}
+    {% else %}
+        <h1>exec_command</h1>
+        <button type="button" id="backup_all" value="backup_all">
+            执行Shell脚本
+        </button>
+
+        <h3 style="margin: 20px;">脚本执行结果:</h3>
+        <div id="messagecontainer">
+        </div>
+    {% endif %}
     <br>
-    <button type="reset" class="btn btn-default pull-left">重置</button>
-    <button type="submit" class="btn btn-primary pull-right">提交</button>
-    </form>
-</div>
-    <h1>exec_command</h1>
-    <button type="button" id="backup_all" value="backup_all">
-        执行Shell脚本
-    </button>
-
-    <h3 style="margin: 20px;">脚本执行结果:</h3>
-    <div id="messagecontainer">
-    </div>
-
+    <br>
     <hr>
     <a href="/">返回首页</a>
     <hr>

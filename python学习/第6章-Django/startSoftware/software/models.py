@@ -258,6 +258,10 @@ class UnblockedVersionInfo(models.Model):
 class ManagerForm(forms.Form):
     password = forms.CharField(label="超级密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
+class SetPasswordForm(forms.Form):
+    password1 = forms.CharField(label="首次登录，设置超级密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label="再次输入，确认超级密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
 
 class ManagerDate(models.Model):
     user = models.CharField(max_length=128)
