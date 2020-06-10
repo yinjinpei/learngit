@@ -46,7 +46,7 @@
     {% if manager_islogin != True %}
         {% if first_login == True %}
             <div class="form-group">
-                <form class='form-login' action="echo_once" method="post">
+                <form class='form-login' action="restart_tomcat" method="post">
                     {% csrf_token %}
                     {{setpassword.password1.label}}
                     {{setpassword.password1}}
@@ -59,7 +59,7 @@
             </div>
         {% else %}
             <div class="form-group" id="form-group">
-                <form class='form-login' action="echo_once" method="post">
+                <form class='form-login' action="restart_tomcat" method="post">
                     {% csrf_token %}
                     {{manager.password.label}}
                     {{manager.password}}

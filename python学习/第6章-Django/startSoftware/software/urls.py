@@ -4,7 +4,7 @@
 from django.contrib import admin
 from django.urls import path,re_path
 from . import views
-from .views2 import echo_once
+from .views2 import restart_tomcat
 
 
 urlpatterns = [
@@ -25,7 +25,7 @@ urlpatterns = [
     re_path('allFileDownload$', views.allFileDownload, name='allFileDownload'),
     re_path('unblockedVersion$', views.unblockedVersion, name='unblockedVersion'),
     re_path('extranetAddress$', views.extranetAddress, name='extranetAddress'),
-    re_path('echo_once$', echo_once.echo_once),
+    re_path('restart_tomcat$', restart_tomcat.restart_tomcat),
     # re_path('exec_command$', views.exec_command, name='exec_command'),
     # re_path('websocket_test$', views.websocket_test, name='websocket_test'),
     re_path('test$', views.test, name='test'),

@@ -20,7 +20,7 @@ collect_logger = logging.getLogger("collect")
 
 
 @accept_websocket
-def echo_once(request):
+def restart_tomcat(request):
     if not request.session.get('is_login', None):
         return render(request, 'software/index.html')
 
@@ -60,7 +60,7 @@ def echo_once(request):
                         newManager.save()
                         first_login = False
 
-        return render(request, 'software/echo_once.html', locals())
+        return render(request, 'software/restart_tomcat.html', locals())
 
     print('这是一个好东西!')
     if not request.is_websocket():  # 判断是不是websocket连接
@@ -68,7 +68,7 @@ def echo_once(request):
             message = request.GET['message']
             return HttpResponse(message)
         except:
-            return render(request, 'software/echo_once.html', locals())
+            return render(request, 'software/restart_tomcat.html', locals())
     else:
         for message in request.websocket:
             message = message.decode('utf-8')  # 接收前端发来的数据
@@ -106,4 +106,4 @@ def echo_once(request):
 
 def manager_login(request):
     manager=ManagerForm()
-    return render(request, 'software/echo_once.html', locals())
+    return render(request, 'software/restart_tomcat.html', locals())
