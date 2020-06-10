@@ -16,9 +16,6 @@ logger = logging.getLogger(__name__)
 collect_logger = logging.getLogger("collect")
 
 
-
-
-
 @accept_websocket
 def restart_tomcat(request):
     if not request.session.get('is_login', None):
@@ -97,9 +94,8 @@ def restart_tomcat(request):
                     if not nextline:
                         print('判断消息为空时,退出循环')
                         break
-
-                print('关闭ssh连接')
                 ssh.close()  # 关闭ssh连接
+                print('关闭ssh连接')
             else:
                 request.websocket.send('小样儿，没权限!!!'.encode('utf-8'))
 
