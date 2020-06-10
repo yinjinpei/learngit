@@ -390,7 +390,7 @@ def match_productionMaterials(user_name,domain_name,file_path):
 
     for report in all_check_report:
         if report == '发布检查单':
-            findStr = r'发布检查单|发布检查清单|检查单|检查清单|投产检查单|投产检查清单'
+            findStr = r'发布检查单|发布检查清单|检查单|检查清单|投产检查单|投产检查清单|发布方案'
 
         elif report == '需求说明书':
             findStr = r'需求说明书|需求说明文档|需求文档|需求记录'
