@@ -137,6 +137,16 @@
     #con{
         padding: 10px;
     }
+
+    #reset_btn{
+        color: green;
+    }
+
+    #reset_btn:hover,#checkout_btn:hover{
+        color: red;
+        background-color: gold;
+    }
+
 </style>
 {% endblock %}
 
@@ -174,8 +184,8 @@
             {{ newDirectory_form.DirectoryName }}
         </div>
         <br><br>
-        <button type="reset" class="btn btn-default pull-left reset_btn">重置</button>
-        <button type="submit" class="btn btn-primary pull-left checkout_btn">查询</button>
+        <button type="reset" class="btn btn-default pull-left reset_btn" id="reset_btn">重置</button>
+        <button type="submit" class="btn btn-primary pull-left checkout_btn" id="checkout_btn">查询</button>
     </form>
 
 
