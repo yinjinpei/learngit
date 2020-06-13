@@ -8,7 +8,7 @@ from django.shortcuts import render
 from dwebsocket.decorators import accept_websocket, require_websocket
 from django.http import HttpResponse
 import paramiko
-
+from .. import views
 
 # 生成一个以当前文件名为名字的logger实例
 logger = logging.getLogger(__name__)
@@ -74,9 +74,11 @@ def restart_tomcat(request):
                 command = 'sh /opt/test.sh'  # 这里是要执行的命令或者脚本
 
                 # 远程连接服务器
-                hostname = '192.168.43.100'
-                username = 'root'
-                password = '123456'
+                server_config=views.getConfig('config\\software_config\\restart_tomcat.ini')
+                hostname=server_config.get_value('shar_server_config','hostname')
+                username=server_config.get_value('shar_server_config','username')
+                password=server_config.get_value('shar_server_config','password')
+                print('hostname,username,password: ',hostname,username,password)
 
                 ssh = paramiko.SSHClient()
                 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())

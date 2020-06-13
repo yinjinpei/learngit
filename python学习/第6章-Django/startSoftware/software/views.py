@@ -28,12 +28,6 @@ logger = logging.getLogger(__name__)
 # 生成一个名为collect的logger实例
 collect_logger = logging.getLogger("collect")
 
-# 黑名单目录下不显示上传功能
-black_user_list=['shar', 'tdc', 'igmh']
-
-#白名单可访问投产材料管理页面
-allow_users_list=['shar', 'tdc',]
-
 
 # 获取配置
 class getConfig(object):
@@ -460,7 +454,9 @@ def match_productionMaterials(user_name,domain_name,file_path):
 
 
 def delFile(request):
-    versionManagerUsers = black_user_list
+    user_management_config = getConfig('config\\software_config\\user_management_config.ini')
+    # 黑名单目录下不显示上传功能
+    versionManagerUsers = user_management_config.get_value('user_list', 'black_user_list').split(',')
     print('删除文件')
     if request.method == "POST":
         user_home = 'uploads/' + request.session['user_name'] + '/'
@@ -611,8 +607,9 @@ def uploadFile(request):
     if not os.path.exists(path):  # 目录不存在则创建
         os.makedirs(path)
 
-    # 版本管理用户
-    versionManagerUsers = black_user_list
+    user_management_config = getConfig('config\\software_config\\user_management_config.ini')
+    # 版本管理用户,黑名单目录下不显示上传功能
+    versionManagerUsers = user_management_config.get_value('user_list', 'black_user_list').split(',')
 
     # 用户家目录
     user_home ='uploads/' + request.session['user_name'] + '/'
@@ -721,35 +718,6 @@ def uploadFile(request):
 
     return render(request, 'software/uploadFile.html', locals())
 
-
-# def downloadFile(request,fileObject=None,filename=None):
-#
-#     # 用于全部文件下载功能
-#     if fileObject is None and filename is None:
-#         # 获取上传文件路径和文件名
-#         fileObject = request.POST.get('name')
-#         # 提取文件名
-#         tmp_list =fileObject.split('/')
-#         filename = tmp_list[-1]
-#
-#     print('000000000000000000000000000000000')
-#     print('文件名：',filename)
-#     print('完整的路径：',fileObject)
-#     print('000000000000000000000000000000000')
-#     try:
-#         file = open(fileObject,'rb')
-#     except:
-#         return HttpResponse('下载文件名有错，请联系管理员！  文件名：%s'%fileObject)
-#     response = FileResponse(file)
-#     response['Content-Type'] = 'application/octet-stream'
-#     # response['Content-Disposition'] = "attachment;filename=%s"%filename #下载带中文文件名时会有乱码，解决如下：
-#     response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(escape_uri_path(filename))
-#         # IE浏览器，采用URLEncoder编码
-#         # Opera浏览器，采用filename * 方式
-#         # Safari浏览器，采用ISO编码的中文输出
-#         # Chrome浏览器，采用Base64编码或ISO编码的中文输出
-#         # FireFox浏览器，采用Base64或filename * 或ISO编码的中文输出
-#     return response
 
 
 def downloadFile(request,fileObject=None):
@@ -1112,75 +1080,15 @@ def delServerDate(request):
     return render(request, 'software/setServerDate.html', locals())
 
 
-# @accept_websocket
-# def exec_command(request):
-#     if not request.is_websocket():  # 判断是不是websocket连接
-#         try:  # 如果是普通的http方法
-#             message = request.GET['message']
-#             return HttpResponse(message)
-#         except:
-#             return render(request, 'software/exec_command.html')
-#     else:
-#         for message in request.websocket:
-#             print(request.is_websocket)
-#             print(message)
-#             message = message.decode('utf-8')  # 接收前端发来的数据
-#             print(message)
-#             if message == 'backup_all':  # 这里根据web页面获取的值进行对应的操作
-#                 command = 'bash /opt/test.sh'  # 这里是要执行的命令或者脚本
-#
-#                 # 远程连接服务器
-#                 hostname = '192.168.0.200'
-#                 username = 'root'
-#                 password = '123456'
-#
-#                 ssh = paramiko.SSHClient()
-#                 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-#                 ssh.connect(hostname=hostname, username=username, password=password)
-#                 # 务必要加上get_pty=True,否则执行命令会没有权限
-#                 print('开始执行命令')
-#                 stdin, stdout, stderr = ssh.exec_command(command, get_pty=True)
-#                 message = stdout.read()  # 读取脚本输出内容
-#                 request.websocket.send(message)  # 发送消息到客户端
-#                 print(message.decode('utf-8'))
-#
-#                 # 循环发送消息给前端页面
-#                 # while True:
-#                 #     print('开始打印')
-#                 #     message = stdout.readline().strip()  # 读取脚本输出内容
-#                 #     request.websocket.send(message)  # 发送消息到客户端
-#                 #     # 判断消息为空时,退出循环
-#                 #     print('打印结束')
-#                 #     if not message:
-#                 #         break
-#                 # ssh.close()  # 关闭ssh连接
-#                 # print('ssh连接结束！')
-#
-#                 break
-#             else:
-#                 request.websocket.send('小样儿，没权限!!!'.encode('utf-8'))
-#
-# @accept_websocket
-# def websocket_test(request):
-#     if not request.is_websocket():  # 判断是不是websocket连接
-#         try:  # 如果是普通的http方法
-#             message = request.GET['message']
-#             print(message)
-#             return HttpResponse(message)
-#         except:
-#             return render(request, 'software/websocker_test.html')
-#     else:
-#         for message in request.websocket:
-#             request.websocket.send(message)#发送消息到客户端
-
-
 def productionMaterials(request):
     if not request.session.get('is_login', None):
         uploadFile_message = "您尚未登录，使用【投产材料管理】请先登录！！"
         return render(request, 'software/index.html', locals())
 
-    # 访问此功能的白名单用户
-    allow_users=allow_users_list
+    user_management_config = getConfig('config\\software_config\\user_management_config.ini')
+    # 访问此功能的白名单用户, 白名单可访问投产材料管理页面
+    allow_users=user_management_config.get_value('user_list', 'allow_users_list').split(',')
+
     user_dir_list=[]
     if request.session['user_name'] in allow_users:
         user_path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
@@ -1324,27 +1232,6 @@ def unblockedVersion(request):
 
 
 def test(request):
-    # path2='config\\software_config\\report_check_list_config2.ini'
-    # config=configparser.ConfigParser()
-    # config.read(path2, encoding='UTF-8')
-    #
-    # # -sections得到所有的section，并以列表的形式返回，即分组名
-    # print('sections:', ' ', config.sections())
-    #
-    # # -options(section)得到该section的所有option,即变量名
-    # print('options:', ' ', config.options('report_check_list'))
-    #
-    # # -items（section）得到该section的所有键值对，即变量名和值
-    # print('items:', ' ', config.items('report_check_list'))
-    #
-    # # -get(section,option)得到section中option的值，返回为string类型，即值
-    # print('get:', ' ', config.get('report_check_list', 'BRON'))
-
-    # -getint(section,option)得到section中的option的值，返回为int类型
-    # print('getint:', ' ', config.getint('cmd', 'id'))
-    # print('getfloat:', ' ', config.getfloat('cmd', 'weight'))
-    # print('getboolean:', '  ', config.getboolean('cmd', 'isChoice'))
-
     path = 'config\\software_config\\report_check_list_config2.ini'
     try:
         config_1=getConfig(path)
