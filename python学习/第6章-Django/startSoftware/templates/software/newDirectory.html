@@ -36,6 +36,7 @@
     .form-group{
         color: green;
         font-size: 16px;
+        text-align: left;
     }
 
     .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover,#delfile_btn:hover{
@@ -62,9 +63,9 @@
         margin-right: 35%;
      }
 
-    #newdir input{
+    #newdir,#newdir2 input{
         background-color: #fff;
-        color: red;
+        color: dodgerblue;
     }
 
     #link_index,#link_top{
@@ -96,6 +97,11 @@
         color: green;
     }
 
+    .createVerionDirectorylable{
+        color: #9d9d9d;
+        font-size: 15px;
+    }
+
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
@@ -120,11 +126,25 @@
                 <select class="btn btn-default" name="dirname" id="dir_2">
             　　　　<option>{{path}}</option>
                 </select>
+            {% if black_user %}
+                <div class="form-group" id="newdir2">
+                    {{ CreateVersionDirectory_form.VersionName.label_tag }}
+                    <label for="" class="createVerionDirectorylable">提示：{{domainName}} + 数字， 如：{{domainName}}1.2.0</label>
+                    {{ CreateVersionDirectory_form.VersionName }}
+                    <br>
+                    {{ CreateVersionDirectory_form.Date.label_tag }}
+                    <br>
+                    {{ CreateVersionDirectory_form.Date }}
+                </div>
+            {% else %}
+                <div class="form-group" id="newdir">
+                    {{ newDirectory_form.DirectoryName.label_tag }}
+                    {{ newDirectory_form.DirectoryName }}
+                </div>
+            {% endif %}
 
-            <div class="form-group" id="newdir">
-                {{ newDirectory_form.DirectoryName.label_tag }}
-                {{ newDirectory_form.DirectoryName }}
-            </div>
+
+
             <button type="reset" class="btn btn-default pull-left" id="reset_btn">重置</button>
             <button type="submit" class="btn btn-primary pull-right" id="delfile_btn">创建</button>
         </form>

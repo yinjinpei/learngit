@@ -757,6 +757,18 @@ def newDirectory(request):
     print('dirname GET方式传递过来的值:',dirname)
     up_one_level_path=up_one_level(path)
 
+    # 获取领域名
+    domainName = dirname.split('/')[2]
+    domainName = domainName.split('（')[0]
+
+    config=getConfig('config\\software_config\\user_management_config.ini')
+
+    # 如果是创建版本号目录则按版本目录规则创建目录
+    if request.session['user_name'] in config.get_value('user_list','black_user_list'):
+        print(request.session['user_name'])
+        if up_one_level_path == 'uploads/shar':
+            black_user=True
+
     if request.method == "POST":
         dirname = request.POST.get('dirname')
         print('dirname POST方式传递过来的值:', dirname)
@@ -766,12 +778,41 @@ def newDirectory(request):
             DirectoryName = newDirectory_form.cleaned_data['DirectoryName'] # 获取新建文件夹名
             try:
                 os.makedirs(dirname+DirectoryName)
-                message="%s 创建目录成功！"%(dirname+DirectoryName)
+                message="%s 创建目录成功！"%(DirectoryName)
             except:
-                message = "%s 创建目录失败，请检查目录是否已存在！" % (dirname+DirectoryName)
+                message = "%s 创建目录失败，请检查目录是否已存在！" % (DirectoryName)
+            print(message)
+
+        CreateVersionDirectory_form=CreateVersionDirectory(request.POST)
+        if CreateVersionDirectory_form.is_valid():  # 如果有数据
+            VersionName = CreateVersionDirectory_form.cleaned_data['VersionName']  # 获取新建文件夹名,版本号
+            Date = str(CreateVersionDirectory_form.cleaned_data['Date'])  # 获取投产日期
+
+            name = VersionName[:len(domainName)]
+            number=VersionName[len(domainName):]
+            try:
+                number_1,number_2,number_3 = number.split('.')
+                print('number_1,number_2,number_3: ',number_1,number_2,number_3)
+
+                #如果以下能转换成功说明全是数字，如果不能则报错
+                number_1=int(number_1)
+                number_2=int(number_2)
+                number_3=int(number_3)
+
+                if name == domainName:
+                    try:
+                        os.makedirs(dirname + VersionName + '（' + Date + '）')
+                        message = "%s 创建目录成功！" % (VersionName + '（' + Date + '）')
+                    except:
+                        message = "%s 创建目录失败，请检查目录是否已存在！" % (VersionName + '（' + Date + '）')
+                else:
+                    message = "%s 创建目录失败，目录格式错误！！" % (VersionName + '（' + Date + '）')
+            except:
+                message = "%s 创建目录失败，目录格式错误！！" % (VersionName + '（' + Date + '）')
             print(message)
 
     newDirectory_form=NewDirectory()
+    CreateVersionDirectory_form=CreateVersionDirectory()
     return render(request, 'software/newDirectory.html', locals())
 
 
