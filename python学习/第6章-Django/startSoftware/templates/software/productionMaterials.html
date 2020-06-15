@@ -14,6 +14,11 @@
                 form.submit();
         }
 
+        function submit2Form(){
+               var form = document.getElementById("my_checkoutDate");
+                form.submit();
+        }
+
         window.onload = function () {
 
             var oDiv = document.getElementById('con');
@@ -223,6 +228,28 @@
         <div id="con">
             <h3 class="title_h2">所有版本投产材料的收集情况</h3>
             <br>
+            <form class='form-register' action="productionMaterials?dirname={{path}}" method="get" id="my_checkoutDate">
+            {% csrf_token %}
+            <h3 class="title_h3">查询版本投产材料的收集情况：</h3>
+            <label class="btn btn-primary pull-left domain_list" for="checkoutDate">选择领域：</label>
+                <select class="btn btn-default pull-left" onchange="submit2Form();" name="checkoutDate" id="checkoutDate" required>
+                    {% if checkoutDate %}
+                        <option>{{checkoutDate}}</option>
+                    {% else %}
+                        <option value="">所有版本</option>
+                    {% endif %}
+
+                    {% if date_list %}
+                        {% for date in date_list %}
+                    　　　　<option>{{date}}</option>
+                        {% endfor %}
+                        <option value="">所有版本</option>
+                    {% endif %}
+                </select>
+            </form>
+
+            <br>
+            <hr>
             <table border="1" cellpadding=0 cellspacing="50" class="unblockedVersion_table_2">
                 <tr>
                     {% for title in table_title %}

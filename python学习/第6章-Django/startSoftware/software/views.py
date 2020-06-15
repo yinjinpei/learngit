@@ -1152,6 +1152,12 @@ def productionMaterials(request):
             except:
                 print('查询单个领域收集投产材料情况失败，配置中没有对应领域数据！')
 
+        # 投产日期集合
+        date_list=[]
+        # 获取前端传过来的日期，只查询筛选的日期版本
+        checkoutDate=request.GET.get('checkoutDate')
+        print('checkoutDate',checkoutDate)
+
         # 存放所有领域版本投产资料收集情况
         all_check_report_list=[]
         # 遍历用户下面所有领域，并检查投产材料收集情况
@@ -1160,6 +1166,30 @@ def productionMaterials(request):
             print('temp_domain_name: ',temp_domain_name)
             for dir in os.listdir(user_path+domain): # 获取用户下所有领域目录和文件
                 print('dir: ',dir)
+                # 获取所有投产日期
+                try:
+                    temp_date=dir.split('（')[1]
+                    temp_date=temp_date.split('）')[0]
+                    if temp_date not in date_list:
+                        date_list.append(temp_date) # 给到前端显示
+
+                    # 只查询筛选的日期版本
+                    if checkoutDate:
+                        if checkoutDate in dir:
+                            print('只查询筛选的日期版本checkoutDate:%s, temp_date:%s, dir:%s'%(checkoutDate,temp_date,dir))
+                        else:
+                            print('checkoutDate: ',checkoutDate)
+                            continue
+                except:
+                    print('目录格式不对！！')
+                    # 只查询筛选的日期版本
+                    if checkoutDate:
+                        print('只查询筛选的日期版本')
+                        print('checkoutDate: ',checkoutDate)
+                finally:
+                    print('date_list: ',date_list)
+
+                print('=======================*********************++++++++++++++++++++++++++++')
                 if os.path.isdir(user_path + domain + '/' + dir):
                     print('当前获取的文件完整路径：', user_path + domain + '/' + dir)
 
