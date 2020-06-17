@@ -230,8 +230,7 @@
             <br>
             <form class='form-register' action="productionMaterials?dirname={{path}}" method="get" id="my_checkoutDate">
             {% csrf_token %}
-            <h3 class="title_h3">查询版本投产材料的收集情况：</h3>
-            <label class="btn btn-primary pull-left domain_list" for="checkoutDate">选择领域：</label>
+            <label class="btn btn-primary pull-left domain_list" for="checkoutDate">投产日期：</label>
                 <select class="btn btn-default pull-left" onchange="submit2Form();" name="checkoutDate" id="checkoutDate" required>
                     {% if checkoutDate %}
                         <option>{{checkoutDate}}</option>
