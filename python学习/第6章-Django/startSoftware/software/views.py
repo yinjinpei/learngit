@@ -1138,6 +1138,7 @@ def productionMaterials(request):
             print(user_path+dir)
             if os.path.isdir(user_path+dir):
                 user_dir_list.append(dir)
+        user_dir_list=sorted(user_dir_list)
         print('用户下所有目录名：',user_dir_list) #['BCOS-MNGT', 'BRON', 'BRON-CLSS', 'BRON-CRMP', 'BRON-LPSS']
 
         if request.method == "GET":
@@ -1152,7 +1153,8 @@ def productionMaterials(request):
                     print('当前目录：',dir)
                     if os.path.isdir(version_path+dir):
                         version_dir_list.append(dir)
-
+                version_dir_list=sorted(version_dir_list)
+                print('当前所有版本：',version_dir_list)
         if request.method == "POST":
             # 获取目录，如：BCOS-MNGT（渠道作业管理系统）/BCOS-MNGT1.1.0（2020-05-10）
             version_name=request.POST.get('version_name')
@@ -1251,6 +1253,8 @@ def productionMaterials(request):
 
                     all_check_report_list.append(all_check_report_dict)
 
+        date_list=sorted(date_list)
+        print('当前所有投产日期：',date_list)
         # 读配置
         report_config = configparser.ConfigParser()
         report_config.read('config\\software_config\\report_check_list_config.ini', encoding='UTF-8')
