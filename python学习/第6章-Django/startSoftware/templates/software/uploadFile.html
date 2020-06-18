@@ -187,6 +187,11 @@
         text-align: center;
     }
 
+    .table_td{
+        max-width:700px;
+        overflow:hidden;
+    }
+
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
@@ -353,7 +358,7 @@
                 </tr>
                 {% for file in fileObjectList %}
                     <tr>
-                        <td align="left" valign="middle">
+                        <td align="left" valign="middle" class="table_td">
                             <!--使用POST方式，文件名没有限制。-->
                             <form class="file_form" id="{{file.downloadFileName}}" method="post" action="downloadFile">
                                 {% csrf_token %}
@@ -361,7 +366,7 @@
                                 <!--<input  type="hidden" name="name" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">-->
                                 <!--<a onclick="document.getElementById('{{file.downloadFileName}}').submit();">{{file.downloadFileName}}</a>-->
                                 <!--方法二-->
-                                <button type="submit" class="btn" title="点击下载" name="name" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">{{file.downloadFileName}}</button>
+                                <button type="submit" class="btn" title="点击下载： {{file.downloadFileName}}" name="name" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">{{file.downloadFileName}}</button>
                             </form>
                             <!--使用GET方式，文件名后台获取文件名时，特殊符号会被转义-->
                             <!--<a class="downloadFile" href="/downloadFile?name={{file.downloadFileDirRoot}}{{file.downloadFileName}}">{{file.downloadFileName}}</a>-->
