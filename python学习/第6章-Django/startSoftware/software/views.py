@@ -799,14 +799,17 @@ def newDirectory(request):
                 number_2=int(number_2)
                 number_3=int(number_3)
 
+                new_name = VersionName + '（' + Date + '）'
+                new_name = new_name.replace(" ", "")
+
                 if name == domainName:
                     try:
-                        os.makedirs(dirname + VersionName + '（' + Date + '）')
-                        message = "%s 创建目录成功！" % (VersionName + '（' + Date + '）')
+                        os.makedirs(dirname + new_name)
+                        message = "%s 创建目录成功！" % (new_name)
                     except:
-                        message = "%s 创建目录失败，请检查目录是否已存在！" % (VersionName + '（' + Date + '）')
+                        message = "%s 创建目录失败，请检查目录是否已存在！" % (new_name)
                 else:
-                    message = "%s 创建目录失败，目录格式错误！！" % (VersionName + '（' + Date + '）')
+                    message = "%s 创建目录失败，目录格式错误！！" % (new_name)
             except:
                 message = "%s 创建目录失败，目录格式错误！！" % (VersionName + '（' + Date + '）')
             print(message)
