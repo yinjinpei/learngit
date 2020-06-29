@@ -762,12 +762,16 @@ def newDirectory(request):
     domainName = domainName.split('（')[0]
 
     config=getConfig('config\\software_config\\user_management_config.ini')
+    user_list=config.get_value('user_list','black_user_list')
+    user_list2=user_list.split(',')
 
     # 如果是创建版本号目录则按版本目录规则创建目录
-    if request.session['user_name'] in config.get_value('user_list','black_user_list'):
+    if request.session['user_name'] in user_list2:
         print(request.session['user_name'])
-        if up_one_level_path == 'uploads/shar':
-            black_user=True
+        for username in user_list2:
+            if up_one_level_path == 'uploads/'+username:
+                black_user=True
+                break
 
     if request.method == "POST":
         dirname = request.POST.get('dirname')
