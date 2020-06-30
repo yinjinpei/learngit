@@ -768,12 +768,12 @@ def newDirectory(request):
     # 如果是创建版本号目录则按版本目录规则创建目录
     if request.session['user_name'] in user_list2:
         print(request.session['user_name'])
+        if path != 'uploads/' + request.session['user_name'] + '/1-版本检查单（收集）/':
+            limit = True
         for username in user_list2:
             if up_one_level_path == 'uploads/'+username:
                 black_user=True
                 break
-    if path != 'uploads/'+request.session['user_name']+'/1-版本检查单（收集）/':
-        limit=True
 
     if request.method == "POST":
         dirname = request.POST.get('dirname')
