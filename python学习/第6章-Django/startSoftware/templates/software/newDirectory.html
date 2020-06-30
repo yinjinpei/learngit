@@ -127,7 +127,7 @@
                 <select class="btn btn-default" name="dirname" id="dir_2">
             　　　　<option>{{path}}</option>
                 </select>
-            {% if black_user and path != 'uploads/shar/1-版本检查单（收集）/' %}
+            {% if black_user and limit %}
                 <div class="form-group" id="newdir2">
                     {{ CreateVersionDirectory_form.VersionName.label_tag }}
                     <label for="" class="createVerionDirectorylable"> {{domainName}} + 数字， 如：{{domainName}}1.2.0</label>

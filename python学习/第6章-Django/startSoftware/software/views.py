@@ -772,6 +772,8 @@ def newDirectory(request):
             if up_one_level_path == 'uploads/'+username:
                 black_user=True
                 break
+    if path != 'uploads/'+request.session['user_name']+'/1-版本检查单（收集）/':
+        limit=True
 
     if request.method == "POST":
         dirname = request.POST.get('dirname')
