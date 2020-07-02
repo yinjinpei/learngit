@@ -22,6 +22,7 @@ urlpatterns = [
     re_path('productionMaterials', views.productionMaterials, name='productionMaterials'),
     re_path('tdc$', views.tdc, name='tdc'),
     re_path('newDirectory$', views.newDirectory, name='newDirectory'),
+    re_path('rename_directory$', views.rename_directory, name='rename_directory'),
     re_path('allFileDownload$', views.allFileDownload, name='allFileDownload'),
     re_path('unblockedVersion$', views.unblockedVersion, name='unblockedVersion'),
     re_path('extranetAddress$', views.extranetAddress, name='extranetAddress'),

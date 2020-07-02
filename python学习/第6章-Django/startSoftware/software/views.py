@@ -479,6 +479,7 @@ def delFile(request):
 
         dirname = request.GET.get('dirname')
         if dirname:
+            print('dirname确实存在！！！！！！！！',dirname)
             if dirname[-1] == '/':
                 dirname = dirname[:-1]
 
@@ -537,7 +538,7 @@ def delFile(request):
             if os.path.exists(path+deleted_dir_name):
                 shutil.rmtree(path=path+deleted_dir_name)
 
-            if dirname:
+            if dirname != 'None':
                 print('dirname不是空值：',dirname)
 
                 if request.session['user_name'] in versionManagerUsers:
@@ -701,8 +702,7 @@ def uploadFile(request):
             print('*' * 50 + '获取到的绝对路径：', dirname)
             return HttpResponse('<h4 style="color: red;font-weight: bold">访问错误,访问网页不存在！</h4>')
     else:
-        if request.session['user_name'] != 'shar':
-            dirname=path[:-1]
+        dirname=path[:-1]
 
     fileObjectList, dirObjectList = downloadFileInfo(path)
 
@@ -866,6 +866,90 @@ def newDirectory(request):
     newDirectory_form=NewDirectory()
     CreateVersionDirectory_form=CreateVersionDirectory()
     return render(request, 'software/newDirectory.html', locals())
+
+
+def rename_directory(request):
+    dirname = request.GET.get('dirname')
+    path=dirname
+    print('dirname GET方式传递过来的值:',dirname)
+    up_one_level_path=up_one_level(path)
+
+    if dirname:
+        if dirname[-1] == '/':
+            dirname = dirname[:-1]
+
+    old_dir_name=dirname.split('/')[-1]
+    print('旧目录名：',old_dir_name)
+    print('上级目录名：',up_one_level_path)
+
+
+    # 获取领域名
+    domainName = dirname.split('/')[2]
+    domainName = domainName.split('（')[0]
+
+    config=getConfig('config\\software_config\\user_management_config.ini')
+    user_list=config.get_value('user_list','black_user_list')
+    user_list2=user_list.split(',')
+
+    # 如果是创建版本号目录则按版本目录规则创建目录
+    if request.session['user_name'] in user_list2:
+        print(request.session['user_name'])
+        if path != 'uploads/' + request.session['user_name'] + '/1-版本检查单（收集）/':
+            limit = True
+        for username in user_list2:
+            if up_one_level_path == 'uploads/'+username:
+                black_user=True
+                break
+
+    if request.method == "POST":
+        dirname = request.POST.get('dirname')
+        print('dirname POST方式传递过来的值:', dirname)
+
+        newDirectory_form = NewDirectory(request.POST)
+        if newDirectory_form.is_valid():  # 如果有数据
+            DirectoryName = newDirectory_form.cleaned_data['DirectoryName'] # 获取新建文件夹名
+            try:
+                os.rename(dirname+old_dir_name,dirname+DirectoryName)
+                message="%s 创建目录成功！"%(DirectoryName)
+            except:
+                message = "%s 创建目录失败，请检查目录是否已存在！" % (DirectoryName)
+            print(message)
+
+        CreateVersionDirectory_form=CreateVersionDirectory(request.POST)
+        if CreateVersionDirectory_form.is_valid():  # 如果有数据
+            VersionName = CreateVersionDirectory_form.cleaned_data['VersionName']  # 获取新建文件夹名,版本号
+            Date = str(CreateVersionDirectory_form.cleaned_data['Date'])  # 获取投产日期
+
+            name = VersionName[:len(domainName)]
+            number=VersionName[len(domainName):]
+            try:
+                number_1,number_2,number_3 = number.split('.')
+                print('number_1,number_2,number_3: ',number_1,number_2,number_3)
+
+                #如果以下能转换成功说明全是数字，如果不能则报错
+                number_1=int(number_1)
+                number_2=int(number_2)
+                number_3=int(number_3)
+
+                new_name = VersionName + '（' + Date + '）'
+                new_name = new_name.replace(" ", "")
+
+                if name == domainName:
+                    try:
+                        os.rename(dirname + old_dir_name,dirname + new_name)
+                        message = "%s 修改成功！" % (new_name)
+                    except:
+                        message = "%s 修改失败，请检查目录是否已存在！" % (new_name)
+                else:
+                    message = "%s 修改失败，目录格式错误！！" % (new_name)
+            except:
+                message = "%s 修改失败，目录格式错误！！" % (VersionName + '（' + Date + '）')
+            print(message)
+
+    newDirectory_form=NewDirectory()
+    CreateVersionDirectory_form=CreateVersionDirectory()
+    return render(request, 'software/rename_directory.html', locals())
+
 
 
 def mycopy(src_file, dst_file):

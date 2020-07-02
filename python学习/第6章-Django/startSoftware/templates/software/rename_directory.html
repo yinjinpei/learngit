@@ -1,0 +1,164 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}文件管理{% endblock %}
+
+{% block content %}
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .dir_list ul{
+        list-style-type: none;
+    }
+
+    .row label,.row select{
+        color: green;
+    }
+
+    .row select{
+        background-color: #EEE;
+    }
+
+    .pull-left{
+        color: #3e8f3e;
+        font-weight: bold;
+
+    }
+    .form-group{
+        color: green;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover,#modify_btn:hover{
+        color:red;
+        background-color: gold;
+    }
+
+
+    .delfile_msg{
+        color:red;
+    }
+
+
+    .downloadFileList_table .btn:hover{
+        background-color: #FF5151;
+        color: gold;
+    }
+
+    #reset_btn{
+        margin-left: 35%;
+    }
+
+    #modify_btn{
+        margin-right: 35%;
+     }
+
+    #newdir,#newdir2 input{
+        background-color: #fff;
+        color: dodgerblue;
+    }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    #dir_list{
+        color:green;
+        background-color: gold;
+        font-size: 16px;
+    }
+
+    #dir_list:hover{
+        color:green;
+    }
+
+    #dir_2{
+        color: #9d9d9d;
+        background-color: #EEE;
+        display: none;
+    }
+
+    #back_btn{
+        color: #FFF;
+    }
+
+    .titel{
+        color: green;
+    }
+
+    .createVerionDirectorylable{
+        color: #9d9d9d;
+        font-size: 15px;
+        font-weight: normal;
+    }
+
+</style>
+{% endblock %}
+<div class="col-md-8 col-md-offset-2" id="uploadFile_con">
+    {% if request.session.is_login %}
+        {% if dirObjectList is none %}
+            <!--<h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>-->
+            <h1 class="titel">目录重命名</h1>
+        {% endif %}
+    {% else %}
+        <h2>你尚未登录，只能访问公开内容！</h2>
+    {% endif %}
+
+    <div class="col-md-8 col-md-offset-2">
+    <h4 class="btn btn-default" id="dir_list">当前文件夹路径：{{path}}</h4>
+    <br><br>
+    {% if message %}
+        <div class="alert alert-warning delfile_msg" style="text-align: center;color: red; font-size: 20px">{{ message }}</div>
+    {% endif %}
+        <form class='form-register' action="rename_directory?dirname={{path}}" method="post">
+            {% csrf_token %}
+            <label style="display: none;" for="dir_2">创建文件夹路径：</label>
+                <select class="btn btn-default" name="dirname" id="dir_2">
+            　　　　<option>{{path}}</option>
+                </select>
+            {% if black_user and limit %}
+                <div class="form-group" id="newdir2">
+                    {{ CreateVersionDirectory_form.VersionName.label_tag }}
+                    <label for="" class="createVerionDirectorylable"> {{domainName}} + 数字， 如：{{domainName}}1.2.0</label>
+                    {{ CreateVersionDirectory_form.VersionName }}
+                    <br>
+                    {{ CreateVersionDirectory_form.Date.label_tag }}
+                    <br>
+                    {{ CreateVersionDirectory_form.Date }}
+                </div>
+            {% else %}
+                <div class="form-group" id="newdir">
+                    {{ newDirectory_form.DirectoryName.label_tag }}
+                    {{ newDirectory_form.DirectoryName }}
+                </div>
+            {% endif %}
+
+
+
+            <button type="reset" class="btn btn-default pull-left" id="reset_btn">重置</button>
+            <button type="submit" class="btn btn-primary pull-right" id="modify_btn">修改</button>
+        </form>
+
+
+        <br><br><br><hr>
+        <a class="btn btn-primary pull-left" id="back_btn" href="/uploadFile?dirname={{path}}">返回上一层</a>
+        <br><br><br><br>
+        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+        <br><br><br><br>
+        <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+        <br><br><br><br>
+    </div>
+
+</div>
+{% endblock %}
