@@ -72,6 +72,7 @@ def restart_tomcat(request):
             print(message)
             if message == 'backup_all':  # 这里根据web页面获取的值进行对应的操作
                 command = 'sh /opt/test.sh'  # 这里是要执行的命令或者脚本
+                cmds=['export LANG=zh_CN.UTF-8','echo $LANG','pwd','dir -lh','hostname -i','date']
 
                 # 远程连接服务器
                 server_config=views.getConfig('config\\software_config\\restart_tomcat.ini')
@@ -83,23 +84,47 @@ def restart_tomcat(request):
                 ssh = paramiko.SSHClient()
                 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
                 ssh.connect(hostname=hostname, username=username, password=password)
-                # 务必要加上get_pty=True,否则执行命令会没有权限
-                stdin, stdout, stderr = ssh.exec_command(command, get_pty=True)
-                # result = stdout.read()
-                # 循环发送消息给前端页面
-                print('循环发送消息给前端页面!!')
-                while True:
-                    nextline = stdout.readline().strip()  # 读取脚本输出内容
-                    request.websocket.send(nextline.encode('utf-8'))  # 发送消息到客户端
-                    print(nextline)
-                    # 判断消息为空时,退出循环
-                    if not nextline:
-                        print('判断消息为空时,退出循环')
-                        break
-                ssh.close()  # 关闭ssh连接
-                print('关闭ssh连接')
-            else:
-                request.websocket.send('小样儿，没权限!!!'.encode('utf-8'))
+
+                print('激活连接的终端！')
+                channel = ssh.invoke_shell()
+                print('设置读、写操作超时时间')
+                channel.settimeout(10)
+                time.sleep(0.5)
+
+                print('发送命令行：%s' % cmds)
+                for command in cmds:
+                    channel.send(command + '\n')
+                    time.sleep(0.5)
+                    try:
+                        command_res = channel.recv(65533).decode('utf-8')
+                        print('-' * 30)
+                        print(command_res)
+                        request.websocket.send(command_res.encode('utf-8'))  # 发送消息到客户端
+                    except Exception as e:
+                        print('*' * 30)
+                        print(e)
+                        continue
+
+                channel.close()
+                ssh.close()
+
+            #     # 务必要加上get_pty=True,否则执行命令会没有权限
+            #     stdin, stdout, stderr = ssh.exec_command(command, get_pty=True)
+            #     # result = stdout.read()
+            #     # 循环发送消息给前端页面
+            #     print('循环发送消息给前端页面!!')
+            #     while True:
+            #         nextline = stdout.readline().strip()  # 读取脚本输出内容
+            #         request.websocket.send(nextline.encode('utf-8'))  # 发送消息到客户端
+            #         print(nextline)
+            #         # 判断消息为空时,退出循环
+            #         if not nextline:
+            #             print('判断消息为空时,退出循环')
+            #             break
+            #     ssh.close()  # 关闭ssh连接
+            #     print('关闭ssh连接')
+            # else:
+            #     request.websocket.send('小样儿，没权限!!!'.encode('utf-8'))
 
 
 def manager_login(request):
