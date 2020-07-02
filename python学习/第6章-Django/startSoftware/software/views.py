@@ -21,7 +21,7 @@ from django.template.defaulttags import register
 import ast
 import logging
 import configparser
-
+import shutil
 
 # 生成一个以当前文件名为名字的logger实例
 logger = logging.getLogger(__name__)
@@ -458,6 +458,20 @@ def delFile(request):
     # 黑名单目录下不显示上传功能
     versionManagerUsers = user_management_config.get_value('user_list', 'black_user_list').split(',')
     print('删除文件')
+
+    user_home = 'uploads/' + request.session['user_name'] + '/'
+    if request.session['user_name'] in versionManagerUsers:
+        print('登录的用户名是：', request.session['user_name'])
+        shar_dir_list = []  # shar用户家目录的文件夹列表
+
+        for user in versionManagerUsers:
+            shar_dir_list.append('uploads/' + user + '/')
+
+        for dir in os.listdir(user_home):
+            if os.path.isdir(user_home + dir):
+                shar_dir_list.append(user_home + dir + '/')
+        print('不在这些目录下展示上传功能：', shar_dir_list)
+
     if request.method == "POST":
         user_home = 'uploads/' + request.session['user_name'] + '/'
         path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
@@ -493,6 +507,35 @@ def delFile(request):
                 os.remove(downloadFileName)
                 str_list = downloadFileName.split('/')
                 del_file_message = "【%s】 删除成功！！" % str_list[len(str_list) - 1]
+
+            if dirname:
+                print('dirname不是空值：',dirname)
+
+                if request.session['user_name'] in versionManagerUsers:
+                    if len(dirname.split('/')) == 4:
+                        print('******************** 不是空值 ********************')
+                        domain_name = dirname.split('/')[2]
+                        file_path = dirname
+                        try:
+                            all_check_report_dict = match_productionMaterials(request.session['user_name'],
+                                                                               domain_name, file_path)
+                        except:
+                            pass
+
+                up_one_level_path = up_one_level(dirname)
+                dirList_is_not_null = '在模板显示返回上一层，仅作标志'
+
+                if dirname[-1] == '/':
+                    dirname = dirname[:-1]
+                path=dirname+'/'
+
+        deleted_dir_name = request.POST.get('deleted_dir_name')
+        print('===================----------------=======================')
+        print(deleted_dir_name)
+        print('===================----------------=======================')
+        if deleted_dir_name is not None:
+            if os.path.exists(path+deleted_dir_name):
+                shutil.rmtree(path=path+deleted_dir_name)
 
             if dirname:
                 print('dirname不是空值：',dirname)

@@ -192,6 +192,28 @@
         overflow:hidden;
     }
 
+    #rename{
+        background-color: #c4e3f3;
+        margin-left: 10px;
+        color: #FFF;
+    }
+
+    #rename:hover{
+        background-color: #337ab7;
+        color: gold;
+    }
+
+    #delete{
+        background-color: #e7c3c3;
+        margin-left: 2px;
+        color: #FFF;
+    }
+
+    #delete:hover{
+        background-color: #d9534f;
+        color: gold;
+    }
+
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
@@ -235,9 +257,28 @@
     </ul>
         <br><br><br>
     {% for dir in dirObjectList %}
+        <!--<ul>-->
+            <!--<li><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir.DirAbsolutePath}}">{{dir.DirName}}</a></li>-->
+        <!--</ul>-->
         <ul>
-            <li><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir.DirAbsolutePath}}">{{dir.DirName}}</a></li>
+            <li>
+                <table border="0"  cellspacing="50">
+            <tr>
+                <td><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir.DirAbsolutePath}}">{{dir.DirName}}</a></td>
+                <td class="btn" id="rename">重命名</td>
+
+                <td>
+                    <form class='form-register' action="delFile?dirname={{dirname}}" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn" id="delete" name="deleted_dir_name" value="{{dir.DirName}}">删除</button>
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+            </li>
         </ul>
+
     {% endfor %}
     </div>
     <hr>
