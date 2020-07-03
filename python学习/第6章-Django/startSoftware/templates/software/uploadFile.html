@@ -199,8 +199,8 @@
     }
 
     #rename:hover{
-        background-color: #337ab7;
-        color: gold;
+        background-color: #337ab7 !important;
+        color: gold !important;
     }
 
     #delete{
@@ -265,7 +265,7 @@
                 <table border="0"  cellspacing="50">
             <tr>
                 <td><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir.DirAbsolutePath}}">{{dir.DirName}}</a></td>
-                <td><a class="btn" id="rename" href="/rename_directory?dirname={{path}}">重命名</a></td>
+                <td><a class="btn" id="rename" href="/rename_directory?dirname={{dir.DirAbsolutePath}}">重命名</a></td>
                 <td>
                     <form class='form-register' action="delFile?dirname={{path}}" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
                         {% csrf_token %}

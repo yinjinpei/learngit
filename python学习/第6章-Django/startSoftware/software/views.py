@@ -873,6 +873,7 @@ def rename_directory(request):
     path=dirname
     print('dirname GET方式传递过来的值:',dirname)
     up_one_level_path=up_one_level(path)
+    up_two_level_path = up_one_level(up_one_level_path)
 
     if dirname:
         if dirname[-1] == '/':
@@ -880,7 +881,8 @@ def rename_directory(request):
 
     old_dir_name=dirname.split('/')[-1]
     print('旧目录名：',old_dir_name)
-    print('上级目录名：',up_one_level_path)
+    print('上一级目录名：',up_one_level_path)
+    print('上二级目录名：',up_two_level_path)
 
 
     # 获取领域名
@@ -897,7 +899,7 @@ def rename_directory(request):
         if path != 'uploads/' + request.session['user_name'] + '/1-版本检查单（收集）/':
             limit = True
         for username in user_list2:
-            if up_one_level_path == 'uploads/'+username:
+            if up_two_level_path == 'uploads/'+username:
                 black_user=True
                 break
 
@@ -908,8 +910,11 @@ def rename_directory(request):
         newDirectory_form = NewDirectory(request.POST)
         if newDirectory_form.is_valid():  # 如果有数据
             DirectoryName = newDirectory_form.cleaned_data['DirectoryName'] # 获取新建文件夹名
+            print('获取新的目录名：',DirectoryName)
+            print('旧的完整名：',up_one_level_path+'/'+old_dir_name)
+            print('新的完整名：',up_one_level_path+'/'+DirectoryName)
             try:
-                os.rename(dirname+old_dir_name,dirname+DirectoryName)
+                os.rename(up_one_level_path+'/'+old_dir_name,up_one_level_path+'/'+DirectoryName)
                 message="%s 创建目录成功！"%(DirectoryName)
             except:
                 message = "%s 创建目录失败，请检查目录是否已存在！" % (DirectoryName)
@@ -936,7 +941,7 @@ def rename_directory(request):
 
                 if name == domainName:
                     try:
-                        os.rename(dirname + old_dir_name,dirname + new_name)
+                        os.rename(up_one_level_path+'/'+old_dir_name,up_one_level_path+'/'+new_name)
                         message = "%s 修改成功！" % (new_name)
                     except:
                         message = "%s 修改失败，请检查目录是否已存在！" % (new_name)

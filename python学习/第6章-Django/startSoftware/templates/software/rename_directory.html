@@ -103,6 +103,12 @@
         font-weight: normal;
     }
 
+    #old_dir_name{
+        color: #1b6d85;
+        font-size: 20px;
+
+    }
+
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
@@ -123,6 +129,7 @@
     {% endif %}
         <form class='form-register' action="rename_directory?dirname={{path}}" method="post">
             {% csrf_token %}
+            <div class="alert" id="old_dir_name">旧目录名：{{old_dir_name}}</div>
             <label style="display: none;" for="dir_2">创建文件夹路径：</label>
                 <select class="btn btn-default" name="dirname" id="dir_2">
             　　　　<option>{{path}}</option>
@@ -152,7 +159,7 @@
 
 
         <br><br><br><hr>
-        <a class="btn btn-primary pull-left" id="back_btn" href="/uploadFile?dirname={{path}}">返回上一层</a>
+        <a class="btn btn-primary pull-left" id="back_btn" href="/uploadFile?dirname={{up_one_level_path}}">返回上一层</a>
         <br><br><br><br>
         <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
         <br><br><br><br>
