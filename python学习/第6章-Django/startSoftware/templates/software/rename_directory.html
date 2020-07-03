@@ -122,14 +122,14 @@
     {% endif %}
 
     <div class="col-md-8 col-md-offset-2">
-    <h4 class="btn btn-default" id="dir_list">当前文件夹路径：{{path}}</h4>
+    <h4 class="btn btn-default" id="dir_list">当前路径：{{up_one_level_path}}</h4>
     <br><br>
     {% if message %}
         <div class="alert alert-warning delfile_msg" style="text-align: center;color: red; font-size: 20px">{{ message }}</div>
     {% endif %}
         <form class='form-register' action="rename_directory?dirname={{path}}" method="post">
             {% csrf_token %}
-            <div class="alert" id="old_dir_name">旧目录名：{{old_dir_name}}</div>
+            <div class="alert" id="old_dir_name">原目录名：{{old_dir_name}}</div>
             <label style="display: none;" for="dir_2">创建文件夹路径：</label>
                 <select class="btn btn-default" name="dirname" id="dir_2">
             　　　　<option>{{path}}</option>
