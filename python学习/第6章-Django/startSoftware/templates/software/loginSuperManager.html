@@ -1,0 +1,60 @@
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}CMDB系统{% endblock %}
+
+
+{% block content %}
+    <style type="text/css">
+        #backup_all{
+            background-color: green;
+        }
+        #messagecontainer{
+            margin: 20px;
+        }
+        .form-group{
+            width: 15%;
+        }
+        .form-login{
+            font-size: 18px;
+            font-weight: bold;
+            color: #0b97c4;
+            text-align: center;
+        }
+    </style>
+<div class="container">
+    {% if manager_islogin != True %}
+        {% if first_login == True %}
+            <div class="form-group">
+                <form class='form-login' action="restart_tomcat" method="post">
+                    {% csrf_token %}
+                    {{setpassword.password1.label}}
+                    {{setpassword.password1}}
+                    {{setpassword.password2.label}}
+                    {{setpassword.password2}}
+                    <br>
+                    <button type="reset" class="btn btn-default pull-left">重置</button>
+                    <button type="submit" class="btn btn-primary pull-right">提交</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="form-group" id="form-group">
+                <form class='form-login' action="restart_tomcat" method="post">
+                    {% csrf_token %}
+                    {{manager.password.label}}
+                    {{manager.password}}
+                    <br>
+                    <button type="reset" class="btn btn-default pull-left">重置</button>
+                    <button type="submit" class="btn btn-primary pull-right">提交</button>
+                </form>
+            </div>
+        {% endif %}
+    {% else %}
+
+    {% endif %}
+    <br><br><br><hr>
+    <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+    <br><br><br><br>
+    <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+    <br><br><br><br>
+</div>
+{% endblock %}

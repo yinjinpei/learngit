@@ -119,6 +119,47 @@ class getConfig(object):
         except:
             return False
 
+# 检查是否登录超级管理用户
+def loginSuperManager(request):
+    manager = ManagerForm()
+    setpassword = SetPasswordForm()
+
+    if request.session.get('manager_islogin', None):
+        print('manager_islogin值：',request.session.get('manager_islogin', None))
+        manager_islogin = True
+    else:
+        # 如果用户的超级密码在数据库中有数据了就不是首次登录
+        try:
+            managers = ManagerDate.managers.get(user=request.session['user_name'])
+            first_login = False
+        except:
+            first_login = True
+
+        # 要求用户输入超级密码并处理，保存至cokie
+        if request.method == "POST":
+            manager_islogin = False
+            try:
+                managers = ManagerDate.managers.get(user=request.session['user_name'])
+                manager_from = ManagerForm(request.POST)
+                if manager_from.is_valid():
+                    if managers.password == manager_from.cleaned_data['password']:
+                        manager_islogin = True
+                        request.session['manager_islogin'] = True
+            except:
+                # 首次登录时，要求用户设置超级密码并写入数据库中
+                first_login = True
+                setpassword_from = SetPasswordForm(request.POST)
+                if setpassword_from.is_valid():
+                    newManager = ManagerDate.managers.create()
+                    newManager.user = request.session['user_name']
+                    if setpassword_from.cleaned_data['password1'] == setpassword_from.cleaned_data['password2']:
+                        newManager.password = setpassword_from.cleaned_data['password1']
+                        newManager.save()
+                        first_login = False
+
+        return render(request, 'software/loginSuperManager.html', locals())
+    return True
+
 
 # 获取应用程序路径
 def getAppDir(appName):
