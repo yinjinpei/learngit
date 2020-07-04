@@ -1,60 +1,120 @@
+{#login/templates/login/index.html#}
+
 {% extends 'software_base.html' %}
 {% load staticfiles %}
-{% block title %}CMDB系统{% endblock %}
-
+{% block title %}超级用户登录{% endblock %}
 
 {% block content %}
-    <style type="text/css">
-        #backup_all{
-            background-color: green;
-        }
-        #messagecontainer{
-            margin: 20px;
-        }
-        .form-group{
-            width: 15%;
-        }
-        .form-login{
-            font-size: 18px;
-            font-weight: bold;
-            color: #0b97c4;
-            text-align: center;
-        }
-    </style>
-<div class="container">
-    {% if manager_islogin != True %}
-        {% if first_login == True %}
-            <div class="form-group">
-                <form class='form-login' action="restart_tomcat" method="post">
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .dir_list ul{
+        list-style-type: none;
+    }
+
+    .row label,.row select{
+        color: green;
+    }
+
+    .row select{
+        background-color: #EEE;
+    }
+
+    .pull-left{
+        color: #3e8f3e;
+        font-weight: bold;
+
+    }
+
+    .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover,#delfile_btn:hover,#delfile_btn2:hover,#reset_btn2:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    .delfile_msg{
+        color:red;
+    }
+
+
+    .downloadFileList_table .btn:hover{
+        background-color: #FF5151;
+        color: gold;
+    }
+
+    #reset_btn,#reset_btn2{
+        margin-left: 35%;
+    }
+
+    #delfile_btn,#delfile_btn2{
+        margin-right: 35%;
+     }
+
+    #newdir,#newdir2 input{
+        background-color: #fff;
+        color: dodgerblue;
+    }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+    .form-register input,.form-login input{
+        text-align: center;
+    }
+
+    .form-register,.form-login{
+        font-size: 18px;
+        color: #28a4c9;
+    }
+
+</style>
+{% endblock %}
+<div class="col-md-8 col-md-offset-2" id="uploadFile_con">
+    <div class="col-md-8 col-md-offset-2">
+
+        {% if message %}
+            <div class="alert alert-warning delfile_msg" style="text-align: center;color: #8a6d3b; font-size: 20px">{{ message }}</div>
+        {% endif %}
+
+        {% if manager_islogin != True %}
+            {% if first_login == True %}
+                <form class='form-register' action="{{function_name}}" method="post">
                     {% csrf_token %}
                     {{setpassword.password1.label}}
                     {{setpassword.password1}}
+                    <br>
                     {{setpassword.password2.label}}
                     {{setpassword.password2}}
                     <br>
-                    <button type="reset" class="btn btn-default pull-left">重置</button>
-                    <button type="submit" class="btn btn-primary pull-right">提交</button>
+                    <button type="reset" class="btn btn-default pull-left" id="reset_btn">重置</button>
+                    <button type="submit" class="btn btn-primary pull-right" id="delfile_btn">提交</button>
                 </form>
-            </div>
-        {% else %}
-            <div class="form-group" id="form-group">
-                <form class='form-login' action="restart_tomcat" method="post">
+            {% else %}
+                 <form class='form-login' action="{{function_name}}" method="post">
                     {% csrf_token %}
                     {{manager.password.label}}
                     {{manager.password}}
                     <br>
-                    <button type="reset" class="btn btn-default pull-left">重置</button>
-                    <button type="submit" class="btn btn-primary pull-right">提交</button>
-                </form>
-            </div>
-        {% endif %}
-    {% else %}
+                    <button type="reset" class="btn btn-default pull-left" id="reset_btn2">重置</button>
+                    <button type="submit" class="btn btn-primary pull-right" id="delfile_btn2">提交</button>
+                  </form>
+             {% endif %}
 
-    {% endif %}
-    <br><br><br><hr>
-    <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
-    <br><br><br><br>
-    <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
-    <br><br><br><br>
+            <br><br><br><br>
+            <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+            <br><br><br><br>
+            <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+            <br><br><br><br>
+        {% endif %}
+    </div>
+
 </div>
 {% endblock %}

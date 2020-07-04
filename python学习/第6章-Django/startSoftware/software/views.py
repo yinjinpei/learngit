@@ -1,5 +1,6 @@
 # coding:utf-8
 import os
+import sys
 import zipfile
 import re
 import time
@@ -119,6 +120,12 @@ class getConfig(object):
         except:
             return False
 
+
+def logoutSuperManager(request):
+    del request.session['manager_islogin']
+    return render(request, 'software/index.html')
+
+
 # 检查是否登录超级管理用户
 def loginSuperManager(request):
     manager = ManagerForm()
@@ -129,14 +136,20 @@ def loginSuperManager(request):
         manager_islogin = True
     else:
         # 如果用户的超级密码在数据库中有数据了就不是首次登录
+        print('如果用户的超级密码在数据库中有数据了就不是首次登录')
         try:
             managers = ManagerDate.managers.get(user=request.session['user_name'])
+            print('不是首次登录！')
+            message = '请输入超级密码！'
             first_login = False
         except:
+            message='首次登录，请设置超级密码！'
+            print('是首次登录！')
             first_login = True
 
         # 要求用户输入超级密码并处理，保存至cokie
         if request.method == "POST":
+            print('要求用户输入超级密码并处理，保存至cokie')
             manager_islogin = False
             try:
                 managers = ManagerDate.managers.get(user=request.session['user_name'])
@@ -145,8 +158,12 @@ def loginSuperManager(request):
                     if managers.password == manager_from.cleaned_data['password']:
                         manager_islogin = True
                         request.session['manager_islogin'] = True
+                        return render(request, 'software/index.html')
+                    else:
+                        message = '密码错误！'
             except:
                 # 首次登录时，要求用户设置超级密码并写入数据库中
+                print('首次登录时，要求用户设置超级密码并写入数据库中')
                 first_login = True
                 setpassword_from = SetPasswordForm(request.POST)
                 if setpassword_from.is_valid():
@@ -156,9 +173,11 @@ def loginSuperManager(request):
                         newManager.password = setpassword_from.cleaned_data['password1']
                         newManager.save()
                         first_login = False
+                    else:
+                        message = '两次密码不一致！'
 
         return render(request, 'software/loginSuperManager.html', locals())
-    return True
+    return render(request, 'software/index.html')
 
 
 # 获取应用程序路径
@@ -910,6 +929,13 @@ def newDirectory(request):
 
 
 def rename_directory(request):
+    if not request.session.get('manager_islogin', None):
+        uploadFile_message = "您尚未登录超级用户，请先登录！！"
+        return render(request, 'software/index.html', locals())
+
+    # 获取当前函数名
+    function_name=sys._getframe().f_code.co_name
+
     dirname = request.GET.get('dirname')
     path=dirname
     print('dirname GET方式传递过来的值:',dirname)
@@ -956,9 +982,9 @@ def rename_directory(request):
             print('新的完整名：',up_one_level_path+'/'+DirectoryName)
             try:
                 os.rename(up_one_level_path+'/'+old_dir_name,up_one_level_path+'/'+DirectoryName)
-                message="%s 创建目录成功！"%(DirectoryName)
+                message="%s 修改目录成功！"%(DirectoryName)
             except:
-                message = "%s 创建目录失败，请检查目录是否已存在！" % (DirectoryName)
+                message = "%s 修改目录失败，请检查目录是否已存在！" % (DirectoryName)
             print(message)
 
         CreateVersionDirectory_form=CreateVersionDirectory(request.POST)
@@ -995,7 +1021,6 @@ def rename_directory(request):
     newDirectory_form=NewDirectory()
     CreateVersionDirectory_form=CreateVersionDirectory()
     return render(request, 'software/rename_directory.html', locals())
-
 
 
 def mycopy(src_file, dst_file):

@@ -39,6 +39,16 @@
             color: green;
         }
 
+        .svip_flag{
+            color: orange !important;
+        }
+
+        .svip_icon{
+            width: 40px;
+            height: 20px;
+            margin-top: 15px;
+        }
+
         {% block css %}{% endblock %}
 
     </style>
@@ -64,6 +74,12 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if request.session.is_login %}
+                {% if request.session.manager_islogin %}
+                    <li><img class="svip_icon" src="../static/images/icon/vip2.png"></li>
+                    <li><a class="svip_flag" href="logoutSuperManager" title="点击：切换普通用户">【超级用户】</a></li>
+                {% else %}
+                    <li><a style="color: #2e6da4" href="loginSuperManager" title="点击：切换超级用户">【普通用户】</a></li>
+                {% endif %}
                   <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
                   <li><a href="/user/modifyPassword">修改密码</a></li>
                   <li><a href="/user/logout">退出</a></li>

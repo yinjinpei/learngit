@@ -26,6 +26,8 @@ urlpatterns = [
     re_path('allFileDownload$', views.allFileDownload, name='allFileDownload'),
     re_path('unblockedVersion$', views.unblockedVersion, name='unblockedVersion'),
     re_path('extranetAddress$', views.extranetAddress, name='extranetAddress'),
+    re_path('loginSuperManager$', views.loginSuperManager, name='loginSuperManager'),
+    re_path('logoutSuperManager$', views.logoutSuperManager, name='logoutSuperManager'),
     re_path('restart_tomcat$', restart_tomcat.restart_tomcat),
     # re_path('exec_command$', views.exec_command, name='exec_command'),
     # re_path('websocket_test$', views.websocket_test, name='websocket_test'),
