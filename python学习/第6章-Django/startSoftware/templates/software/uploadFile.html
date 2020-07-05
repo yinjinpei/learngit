@@ -268,7 +268,7 @@
                 {% if request.session.manager_islogin %}
                     <td><a class="btn" id="rename" href="/rename_directory?dirname={{dir.DirAbsolutePath}}">重命名</a></td>
                     <td>
-                        <form class='form-register' action="delFile?dirname={{path}}" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                        <form class='form-register' action="delFile?dirname={{path}}" onclick="if(confirm('将删除目录及其下所有文件且不可恢复，确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
                             {% csrf_token %}
                             <button type="submit" class="btn" id="delete" name="deleted_dir_name" value="{{dir.DirName}}">删除</button>
                         </form>
