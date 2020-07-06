@@ -214,6 +214,10 @@
         color: gold;
     }
 
+    #dir{
+        display: none;
+    }
+
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
@@ -356,7 +360,7 @@
           <form class="form-inline" role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
               {% csrf_token %}
               <br>
-              <label for="dir" id="dir_1">上传路径：</label>
+              <!--<label for="dir" id="dir_1">上传路径：</label>-->
               <select class="btn btn-default" name="dirname" id="dir">
             　   <option>{{path}}</option>
               </select>
