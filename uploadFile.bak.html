@@ -1,0 +1,491 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}文件管理{% endblock %}
+
+{% block content %}
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .dir_list{
+        text-align: left;
+    }
+
+    .dir_list ul{
+        list-style-type: none;
+    }
+
+    .row label,.row select{
+        color: green;
+    }
+
+    .row select{
+        background-color: #EEE;
+    }
+
+    #upload_point, #dir_select{
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .pull-left{
+        color: #3e8f3e;
+        font-weight: bold;
+
+    }
+
+    .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #downloadFileList_title{
+        color: #3e8f3e;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .delfile_msg{
+        color:red;
+        text-align: center;
+        font-size: 16px;;
+    }
+
+    .downloadFileList_table{
+        border-collapse:separate;
+        border-spacing:20px 8px;
+        margin: auto;
+    }
+
+    .downloadFile:hover{
+        text-decoration: none;
+    }
+
+    .downloadFileList_table .btn:hover,#delfile_btn:hover{
+        background-color: #FF5151;
+        color: gold;
+    }
+
+    #reset_btn{
+        margin-left: 35%;
+    }
+
+    #delfile_btn{
+        margin-right: 35%;
+     }
+
+
+    #delfile_title input{
+        background-color: #fff;
+        color: red;
+        width: 60%;
+        margin-left: 20%;
+    }
+
+    #link_index,#link_top,#link_index_tag,#link_top_tag,#link_index_tag2,#link_top_tag2{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .del_file_message{
+        color: red;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    #dir_name{
+        background-color: #3c763d;
+    }
+
+    #dir_list,#dir_list1{
+        color:green;
+        background-color: gold;
+        font-size: 16px;
+    }
+
+    #dir_list:hover{
+        color:green;
+    }
+
+    #dir_2{
+        color: #9d9d9d;
+        background-color: #EEE;
+        display: none;
+    }
+
+    #newdir{
+        color: #FFF;
+        background-color: #ce8483;
+    }
+
+    .file_form .btn{
+        background-color: rgba(255,255,255,0.2);
+    }
+
+    .file_form .btn:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    #upload_point #message{
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    #upload_successful_message{
+        color: green;
+    }
+
+    #upload_failure_message{
+        color: red;
+    }
+
+    #allFileDownload_btn{
+        /*margin-left: 50%;*/
+        color: #fff;
+    }
+
+    .unblockedVersion_table{
+        width: 100%;
+        text-align: center;
+        background-color: #f6ffff;
+    }
+
+    .table_title{
+            background-color: #2e6da4;
+        text-align: center;
+    }
+
+    .table_title_content{
+        margin: 10px;
+        color: #fff;
+    }
+
+    .table_th_green{
+        height: 50px;
+        text-align: center;
+        color: green;
+    }
+
+    .table_th_red{
+        height: 50px;
+        text-align: center;
+        background-color: #d9534f;
+        color: #FFF;
+    }
+
+    .version_info_table{
+        text-align: center;
+    }
+
+    .table_td{
+        max-width:700px;
+        overflow:hidden;
+    }
+
+    #rename{
+        background-color: #c4e3f3;
+        margin-left: 10px;
+        color: #FFF;
+    }
+
+    #rename:hover{
+        background-color: #337ab7 !important;
+        color: gold !important;
+    }
+
+    #delete{
+        background-color: #e7c3c3;
+        margin-left: 2px;
+        color: #FFF;
+    }
+
+    #delete:hover{
+        background-color: #d9534f;
+        color: gold;
+    }
+
+    #dir{
+        display: none;
+    }
+
+    .form-inline{
+        text-align: center;
+    }
+
+    #file{
+        width: 100%;
+        height: 200px !important;
+        text-indent:-9999px;
+        overflow:hidden;
+        border: 2px dashed #28a4c9;
+    }
+
+    #uploadfile_btn{
+        width: 90%;
+        height: 40px;
+        margin-top: 1px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    #uploadfile_btn:hover{
+        background-color: gold;
+        color: red;
+        font-weight: bold;
+    }
+
+
+</style>
+{% endblock %}
+<div class="col-md-8 col-md-offset-2" id="uploadFile_con">
+    {% if request.session.is_login %}
+        {% if dirObjectList is none %}
+            <h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>
+        {% endif %}
+    {% else %}
+        <h2>你尚未登录，只能访问公开内容！</h2>
+    {% endif %}
+
+    {% if dirList_is_not_null is none %}
+        {% if request.session.user_name in versionManagerUsers %}
+            <div class="alert alert-warning" id="dir_select">请选择对应领域的上传目录！</div>
+        {% endif %}
+    {% endif %}
+
+    {% if dirname is none %}
+        <h4 class="btn btn-default pull-left" id="dir_list1">当前文件夹路径：uploads/{{ request.session.user_name }}</h4>
+    {% else %}
+        <h4 class="btn btn-default pull-left" id="dir_list">当前文件夹路径：{{dirname}}</h4>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <div class="dir_list">
+    {% if dirList_is_not_null %}
+        <ul>
+            <li>
+
+                {% if path != user_home %}
+                    <a class="btn btn-primary" href="/uploadFile?dirname={{up_one_level_path}}">返回上一层</a>
+                {% endif %}
+            </li>
+        </ul>
+    {% endif %}
+    <ul>
+        <li>
+            <a class="btn btn-primary pull-left" id="newdir" href="/newDirectory?dirname={{path}}">新建一个目录</a>
+        </li>
+    </ul>
+        <br><br><br>
+    {% for dir in dirObjectList %}
+        <!--<ul>-->
+            <!--<li><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir.DirAbsolutePath}}">{{dir.DirName}}</a></li>-->
+        <!--</ul>-->
+        <ul>
+            <li>
+                <table border="0"  cellspacing="50">
+            <tr>
+                <td><a class="btn btn-primary" id="dir_name" href="/uploadFile?dirname={{dir.DirAbsolutePath}}">{{dir.DirName}}</a></td>
+                {% if request.session.manager_islogin %}
+                    <td><a class="btn" id="rename" href="/rename_directory?dirname={{dir.DirAbsolutePath}}">重命名</a></td>
+                    <td>
+                        <form class='form-register' action="delFile?dirname={{path}}" onclick="if(confirm('将删除目录及其下所有文件且不可恢复，确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn" id="delete" name="deleted_dir_name" value="{{dir.DirName}}">删除</button>
+                        </form>
+                    </td>
+                {% endif %}
+            </tr>
+
+        </table>
+            </li>
+        </ul>
+
+    {% endfor %}
+    </div>
+    <hr>
+    {% if all_check_report_dict %}
+        <h3>当前版本材料收集情况如下：</h3>
+        <table border="1"  cellspacing="50" class="unblockedVersion_table">
+                    <tr>
+                        {% for title,value in all_check_report_dict.items %}
+                            <th class="table_title"><div class="table_title_content">{{title}}</div></th>
+                        {% endfor %}
+                    </tr>
+
+                    <tr>
+                        {% for title,value in all_check_report_dict.items %}
+                            {% if value == "X" %}
+                                <th class="table_th_red">{{value}}</th>
+                            {% else %}
+                                <th class="table_th_green">{{value}}</th>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+        </table>
+    {% endif %}
+    <hr>
+{% if dirList_is_not_null %}
+    {% if path in shar_dir_list %}
+            <br><br>
+            <a class="btn btn-primary pull-left" id="link_index_tag" href="/">返回首页</a>
+            <br><br><br><br>
+            <a class="btn btn-primary pull-left" id="link_top_tag" href="#">回到顶部</a>
+            <br><br><br><br>
+            <div style="display: none;">
+    {% else %}
+            <div style="display: block;">
+    {% endif %}
+{% else %}
+
+    {% if request.session.user_name in versionManagerUsers %}
+            <br><br>
+            <a class="btn btn-primary pull-left" id="link_index_tag2" href="/">返回首页</a>
+            <br><br><br><br>
+            <a class="btn btn-primary pull-left" id="link_top_tag2" href="#">回到顶部</a>
+            <br><br><br><br>
+            <div style="display: none;">
+    {% else %}
+        <div style="display: block;">
+    {% endif %}
+{% endif %}
+
+    <div class="alert alert-warning" id="upload_point">
+        <!--上传文件    -->
+        <div id="message">
+            {% if message %}
+                {{ message }}
+            {% endif %}
+        </div>
+        <div id="upload_successful_message">
+            {% if upload_successful_message %}
+                <hr>
+                {{ upload_successful_message }}
+            {% endif %}
+        </div>
+
+        <div id="upload_failure_message">
+            {% if upload_failure_message %}
+            <hr>
+                {{ upload_failure_message }}
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="row">
+      <div>
+          <form class="form-inline" role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+              {% csrf_token %}
+              <!--<br>-->
+              <!--<label for="dir" id="dir_1">上传路径：</label>-->
+              <select class="btn btn-default" name="dirname" id="dir">
+            　   <option>{{path}}</option>
+              </select>
+              <!--<br>-->
+              <!--<br>-->
+
+              <!--<br>-->
+
+                  <!--加上required 这个属性 ，就成了必填字段 。-->
+              <div style="padding-left: 5%;padding-right: 5%">
+                  <input class="btn btn-default" type="file" required="required" id="file" name="file" multiple="" >
+              </div>
+
+              <!--<hr>-->
+              <!--<div class="form-group">-->
+                  <!--<input class="btn btn-primary pull-right" type="submit" value="上传文件">-->
+                  <input class="btn btn-primary" id="uploadfile_btn" type="submit" value="确 定 上 传">
+              <!--</div>-->
+          </form>
+      </div>
+    </div>
+
+<!--文件列表-->
+    <hr>
+    <div class="alert alert-warning">
+        <br>
+        {% if delfile_message %}
+            <div class="delfile_msg">{{ delfile_message }}</div>
+        {% endif %}
+
+        {% if del_file_message %}
+            <div class="del_file_message">{{ del_file_message }}</div>
+        {% else %}
+            <br><br>
+        {% endif %}
+
+        <div id="downloadFileList_title">文件下载列表：</div>
+        <br>
+        {% if fileObjectList %}
+            <table border="0"  cellspacing="50" class="downloadFileList_table">
+                <tr>
+                   <th>文件名</th>
+                   <th>大小</th>
+                   <th>上传时间</th>
+                </tr>
+                {% for file in fileObjectList %}
+                    <tr>
+                        <td align="left" valign="middle" class="table_td">
+                            <!--使用POST方式，文件名没有限制。-->
+                            <form class="file_form" id="{{file.downloadFileName}}" method="post" action="downloadFile">
+                                {% csrf_token %}
+                                <!--方法一-->
+                                <!--<input  type="hidden" name="name" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">-->
+                                <!--<a onclick="document.getElementById('{{file.downloadFileName}}').submit();">{{file.downloadFileName}}</a>-->
+                                <!--方法二-->
+                                <button type="submit" class="btn" title="点击下载： {{file.downloadFileName}}" name="name" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">{{file.downloadFileName}}</button>
+                            </form>
+                            <!--使用GET方式，文件名后台获取文件名时，特殊符号会被转义-->
+                            <!--<a class="downloadFile" href="/downloadFile?name={{file.downloadFileDirRoot}}{{file.downloadFileName}}">{{file.downloadFileName}}</a>-->
+                        </td>
+                        <td align="left" valign="middle">{{file.downloadFileSize}}k</td>
+                        <td align="left" valign="middle">{{file.downloadFileCreaTime}}</td>
+                        <td align="left" valign="middle">
+                            <form class='form-register' action="delFile?dirname={{dirname}}" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary" name="downloadFileName" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">删除</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr><td></td></tr>
+                <tr><td><a class="btn btn-primary pull-left" id="allFileDownload_btn" href="/allFileDownload?source_dir={{path}}">全部下载</a></td></tr>
+            </table>
+        <br>
+        {% endif %}
+
+        <br><br><br><br>
+
+        <!--删除文件-->
+        <form class='form-register' action="delFile" method="post">
+            {% csrf_token %}
+            <label style="display: none;" for="dir_2">删除文件路径：</label>
+                <select class="btn btn-default" name="dirname" id="dir_2">
+            　　　　<option>{{path}}</option>
+                </select>
+
+            <div class="form-group" id="delfile_title">
+                {{ delFile_form.FileName.label_tag }}
+                {{ delFile_form.FileName }}
+            </div>
+            <button type="reset" class="btn btn-default pull-left" id="reset_btn">重置</button>
+            <button type="submit" class="btn btn-primary pull-right" id="delfile_btn">删除</button>
+        </form>
+        <br><br>
+    </div>
+        <hr><br><br>
+        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+        <br><br><br><br>
+        <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+        <br><br><br><br>
+{% endblock %}
