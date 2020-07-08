@@ -481,6 +481,9 @@ def match_productionMaterials(user_name,domain_name,file_path):
 
         elif report == 'DB脚本评审':
             findStr = r'DB脚本评审|脚本评审|DB评审|SQL评审'
+
+        elif report == '冒烟测试报告':
+            findStr = r'冒烟'
         else:
             print('本次匹配没有匹配到对应的报告类型！')
             continue
