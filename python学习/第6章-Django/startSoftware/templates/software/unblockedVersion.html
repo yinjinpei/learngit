@@ -69,6 +69,7 @@
 
     .table_data{
         text-align: center;
+        max-width:1000px;
     }
 
     .table_text{
@@ -149,21 +150,21 @@
 
                 <tr>
                     <!--<th class="table_th"><textarea class="table_text" name='id'  required></textarea></th>-->
-                    <th class="table_th"><textarea class="table_text" name='month'  required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='team'  required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='version_number'  required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='subsystem'  required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='version_name'  required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='content'  required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='version_compiler'  required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='version_leader'  required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='test_leader' required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='development_team' required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='version_type' required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='unblocked_datetime' required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='blocked_datetime' required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='unblocked_type' required></textarea></th>
-                    <th class="table_th"><textarea class="table_text" name='unblocked_reason' required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='month'  required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='team'  required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_number'  required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='subsystem'  required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_name'  required></textarea></th>
+                    <th class="table_th"><textarea maxlength="512" class="table_text" name='content'  required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_compiler'  required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_leader'  required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='test_leader' required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='development_team' required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_type' required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='unblocked_datetime' required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='blocked_datetime' required></textarea></th>
+                    <th class="table_th"><textarea maxlength="128" class="table_text" name='unblocked_type' required></textarea></th>
+                    <th class="table_th"><textarea maxlength="1024" placeholder="不能超出1024个字！" class="table_text" name='unblocked_reason' required></textarea></th>
                 </tr>
             </table>
             <br><br><br>

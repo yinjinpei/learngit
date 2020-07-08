@@ -181,7 +181,7 @@ class UnblockedVersionInfo(models.Model):
     # 版本名称
     version_name = models.CharField(max_length=128)
     # 版本内容
-    content = models.CharField(max_length=256)
+    content = models.CharField(max_length=512)
     # 版本编制人
     version_compiler =models.CharField(max_length=128)
     # 开发负责人
@@ -199,7 +199,7 @@ class UnblockedVersionInfo(models.Model):
     # 解封版类别
     unblocked_type= models.CharField(max_length=128)
     # 解封版说明及根因分析
-    unblocked_reason = models.CharField(max_length=256)
+    unblocked_reason = models.CharField(max_length=1024)
     # 数据是否被已弃用
     isDelete = models.BooleanField(default=False)
     class Meta:
