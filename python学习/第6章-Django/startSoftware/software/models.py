@@ -202,6 +202,7 @@ class UnblockedVersionInfo(models.Model):
     unblocked_reason = models.CharField(max_length=1024)
     # 数据是否被已弃用
     isDelete = models.BooleanField(default=False)
+
     class Meta:
         db_table = 'unblockedversionInfo'
 
