@@ -73,9 +73,13 @@
             <a class="btn" id="software_del" href="/delSoftware" >删除常用软件</a>
         </div>
     {% else %}
-        <h2>您尚未登录，只能访问公开内容！</h2>
+        <h1 style="font-weight:bold ">版 本 管 理 系 统</h1>
+        <h4>Version Management System</h4>
+        内测版
         <hr>
-        <h4 style="color: red">无法显示常用软件，请先登录！</h4>
+        <h3 style="color: red;">您尚未登录，只能访问公开内容！</h3>
+        <!--<hr>-->
+        <!--<h4 style="color: red">无法显示常用软件，请先登录！</h4>-->
         <hr>
         <a class="btn btn-primary" href="/user/login" >用户登录</a>
     {% endif %}
