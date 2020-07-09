@@ -257,7 +257,7 @@
     <ul>
         <li>
             {% if islock %}
-                <a class="btn btn-primary pull-left" id="newdir2" href="/newDirectory?dirname={{path}}" disabled="disabled">新建一个目录</a>
+                <a class="btn btn-primary pull-left" id="newdir2" href="javascript:;" disabled="disabled">新建一个目录</a>
             {% else %}
                 <a class="btn btn-primary pull-left" id="newdir" href="/newDirectory?dirname={{path}}">新建一个目录</a>
             {% endif %}
@@ -338,7 +338,11 @@
 {% endif %}
     {% if islock %}
         <div style="text-align: left">
-          <form role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+            {% if request.session.manager_islogin %}
+                <form role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+            {% else %}
+                <form role="form" action="javascript:;" method="post">
+            {% endif %}
               {% csrf_token %}
               <br>
               <!--<label for="dir" id="dir_1">上传路径：</label>-->
@@ -361,7 +365,11 @@
       </div>
     {% else %}
      <div style="text-align: left">
-          <form role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+          {% if request.session.manager_islogin %}
+                <form role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+            {% else %}
+                <form role="form" action="javascript:;" method="post">
+            {% endif %}
               {% csrf_token %}
               <br>
               <!--<label for="dir" id="dir_1">上传路径：</label>-->
@@ -409,7 +417,7 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
           {% if islock %}
-              <form class="form-inline" role="form" action="#" method="post">
+              <form class="form-inline" role="form" action="javascript:;" method="post">
           {% else %}
               <form class="form-inline" role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
           {% endif %}
@@ -486,7 +494,7 @@
                         <td align="left" valign="middle">{{file.downloadFileCreaTime}}</td>
                         <td align="left" valign="middle">
                             {% if islock %}
-                                <form class='form-register' action="#" method="post">
+                                <form class='form-register' action="javascript:;" method="post">
                             {% else %}
                                 <form class='form-register' action="delFile?dirname={{dirname}}" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
                             {% endif %}
@@ -510,7 +518,7 @@
 
         <!--删除文件-->
         {% if islock %}
-            <form class='form-register' action="#" method="post">
+            <form class='form-register' action="javascript:;" method="post">
         {% else %}
             <form class='form-register' action="delFile" method="post">
         {% endif %}
