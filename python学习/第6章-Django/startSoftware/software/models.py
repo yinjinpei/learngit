@@ -278,3 +278,13 @@ class ManagerDate(models.Model):
         return self.user
     def showPassword(self):
         return self.password
+
+
+class LockBaseInfo(models.Model):
+    userName= models.CharField(max_length=20, default=None)
+    pathName = models.CharField(max_length=128)
+    islock = models.BooleanField(default=False)
+    isDelete = models.BooleanField(default=False)
+    class Meta():
+        db_table='lockbaseinfo'
+    lockbase = models.Manager()

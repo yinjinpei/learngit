@@ -792,34 +792,80 @@ def uploadFile(request):
         print(uploadFileList)
         print('******************************************************************')
 
+        islock_base = request.POST.get('lock_base')  # 获取所有上传的文件对象
+        print('************************是否被锁库**************************')
+        print(islock_base)
+        print('******************************************************************')
+
+        if islock_base:
+            print('islock_base')
+            if islock_base == 'lock_base':
+                lockbaseinfo = LockBaseInfo.lockbase.filter(pathName=dirname)
+                if lockbaseinfo:
+                    if lockbaseinfo[0].islock:
+                        message='已经是被锁库状态！'
+                    else:
+                        lockbaseinfo[0].islock=True
+                        lockbaseinfo[0].save()
+                        message = '锁库成功！'
+                else:
+                    try:
+                        # 添加锁库状态到数据库
+                        newlockbaseinfo = LockBaseInfo.lockbase.create()
+                        newlockbaseinfo.userName = request.session['user_name']
+                        newlockbaseinfo.patchName = dirname
+                        newlockbaseinfo.islock = True
+                        newlockbaseinfo.save()
+                        message = '锁库成功！'
+                    except:
+                        message = '锁库失败！'
+            elif islock_base == 'unlock_base':
+                try:
+                    lockbaseinfo = LockBaseInfo.lockbase.get(pathName=dirname)
+                    lockbaseinfo.islock = False
+                    lockbaseinfo.save()
+                    message = '解封库成功！'
+                except:
+                    message = '没有被锁库，不需要操作！'
+            else:
+                message = '操作失败！'
+            print(message)
+
         repeatFileList = [] # 记录重名的文件名
         upload_list_successful=[] # 记录上传成功的文件名
         repeatFileSum=0 # 重名文件的总个数
 
-        for file in uploadFileList:
-            print(len(uploadFileList))
-            fileName=str(file) # 上传的文件名
-            print("================== 文件名%s============="%fileName)
-            print(path+fileName)
+        if uploadFileList:
+            for file in uploadFileList:
+                print(len(uploadFileList))
+                fileName=str(file) # 上传的文件名
+                print("================== 文件名%s============="%fileName)
+                print(path+fileName)
 
-            if os.path.exists(path+fileName):
-                repeatFileList.append(fileName) # 记录重名的文件名
-                continue
-                # return render(request, 'software/uploadFile.html', locals())
-            with open(path + fileName, 'wb+') as destination:
-                for chunk in file.chunks():
-                    destination.write(chunk)
-            upload_list_successful.append(fileName) # 记录成功上传的文件名
+                if os.path.exists(path+fileName):
+                    repeatFileList.append(fileName) # 记录重名的文件名
+                    continue
+                    # return render(request, 'software/uploadFile.html', locals())
+                with open(path + fileName, 'wb+') as destination:
+                    for chunk in file.chunks():
+                        destination.write(chunk)
+                upload_list_successful.append(fileName) # 记录成功上传的文件名
 
-        message="%d个文件上传成功，%d个文件上传失败！！"%(len(upload_list_successful),len(repeatFileList))
-        if len(upload_list_successful) !=0:
-            upload_successful_message="上传成功列表：%s"%upload_list_successful
-        if len(repeatFileList) != 0:
-            upload_failure_message = "【%d个文件重名，请重新命名再上传！】 失败列表:%s"%(len(repeatFileList),repeatFileList)
+            message="%d个文件上传成功，%d个文件上传失败！！"%(len(upload_list_successful),len(repeatFileList))
+            if len(upload_list_successful) !=0:
+                upload_successful_message="上传成功列表：%s"%upload_list_successful
+            if len(repeatFileList) != 0:
+                upload_failure_message = "【%d个文件重名，请重新命名再上传！】 失败列表:%s"%(len(repeatFileList),repeatFileList)
     else:
         message='温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
         print(message)
 
+    lockbaseinfo = LockBaseInfo.lockbase.filter(pathName=dirname)
+    if lockbaseinfo:
+        islock = lockbaseinfo[0].islock
+        print('islock', islock)
+    else:
+        islock = False
     fileObjectList, dirObjectList = downloadFileInfo(path)
 
     return render(request, 'software/uploadFile.html', locals())

@@ -70,7 +70,7 @@
         text-decoration: none;
     }
 
-    .downloadFileList_table .btn:hover,#delfile_btn:hover{
+    .downloadFileList_table .btn:hover,#delfile_btn:hover,#delfile_btn2:hover{
         background-color: #FF5151;
         color: gold;
     }
@@ -79,7 +79,7 @@
         margin-left: 35%;
     }
 
-    #delfile_btn{
+    #delfile_btn,#delfile_btn2{
         margin-right: 35%;
      }
 
@@ -122,7 +122,7 @@
         display: none;
     }
 
-    #newdir{
+    #newdir,#newdir2{
         color: #FFF;
         background-color: #ce8483;
     }
@@ -256,7 +256,11 @@
     {% endif %}
     <ul>
         <li>
-            <a class="btn btn-primary pull-left" id="newdir" href="/newDirectory?dirname={{path}}">新建一个目录</a>
+            {% if islock %}
+                <a class="btn btn-primary pull-left" id="newdir2" href="/newDirectory?dirname={{path}}" disabled="disabled">新建一个目录</a>
+            {% else %}
+                <a class="btn btn-primary pull-left" id="newdir" href="/newDirectory?dirname={{path}}">新建一个目录</a>
+            {% endif %}
         </li>
     </ul>
         <br><br><br>
@@ -332,6 +336,53 @@
         <div style="display: block;">
     {% endif %}
 {% endif %}
+    {% if islock %}
+        <div style="text-align: left">
+          <form role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+              {% csrf_token %}
+              <br>
+              <!--<label for="dir" id="dir_1">上传路径：</label>-->
+              <select style="display: none" name="dirname">
+            　   <option>{{path}}</option>
+              </select>
+              <div class="form-group">
+                  <!--加上required 这个属性 ，就成了必填字段 。-->
+                  <input type="text" style="display: none" required="required" name="lock_base" value="unlock_base">
+              </div>
+              <div class="form-group">
+                  {% if request.session.manager_islogin %}
+                      <input class="btn btn-primary" type="submit" value="解封库">
+                  {% else %}
+                    <input class="btn btn-primary" type="submit" value="解封库" disabled="disabled">
+                  {% endif %}
+              </div>
+          </form>
+          <br>
+      </div>
+    {% else %}
+     <div style="text-align: left">
+          <form role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
+              {% csrf_token %}
+              <br>
+              <!--<label for="dir" id="dir_1">上传路径：</label>-->
+              <select style="display: none" name="dirname">
+            　   <option>{{path}}</option>
+              </select>
+              <div class="form-group">
+                  <!--加上required 这个属性 ，就成了必填字段 。-->
+                  <input type="text" style="display: none" required="required" name="lock_base" value="lock_base">
+              </div>
+              <div class="form-group">
+                  {% if request.session.manager_islogin %}
+                      <input class="btn btn-primary" type="submit" value="锁库">
+                  {% else %}
+                    <input class="btn btn-primary" type="submit" value="锁库" disabled="disabled">
+                  {% endif %}
+              </div>
+          </form>
+          <br>
+      </div>
+    {% endif %}
 
     <div class="alert alert-warning" id="upload_point">
         <!--上传文件    -->
@@ -368,13 +419,23 @@
               <br>
 
               <br>
-              <div class="form-group">
-                  <!--加上required 这个属性 ，就成了必填字段 。-->
-                  <input class="btn btn-default" type="file" required="required" id="file" name="file" multiple="">
-              </div>
-              <div class="form-group">
-                  <input class="btn btn-primary pull-right" type="submit" value="上传文件">
-              </div>
+              {% if islock %}
+                   <div class="form-group">
+                      <!--加上required 这个属性 ，就成了必填字段 。-->
+                      <input class="btn btn-default" type="file" required="required" id="file2" name="file" multiple="" disabled="disabled">
+                  </div>
+                  <div class="form-group">
+                      <input class="btn btn-primary pull-right" type="submit" value="上传文件" disabled="disabled">
+                  </div>
+              {% else %}
+                  <div class="form-group">
+                      <!--加上required 这个属性 ，就成了必填字段 。-->
+                      <input class="btn btn-default" type="file" required="required" id="file" name="file" multiple="">
+                  </div>
+                  <div class="form-group">
+                      <input class="btn btn-primary pull-right" type="submit" value="上传文件">
+                  </div>
+              {% endif %}
           </form>
       </div>
     </div>
@@ -422,7 +483,11 @@
                         <td align="left" valign="middle">
                             <form class='form-register' action="delFile?dirname={{dirname}}" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-primary" name="downloadFileName" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">删除</button>
+                                {% if islock %}
+                                    <button type="submit" class="btn btn-primary" name="downloadFileName" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}" disabled="disabled">删除</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-primary" name="downloadFileName" value="{{file.downloadFileDirRoot}}{{file.downloadFileName}}">删除</button>
+                                {% endif %}
                             </form>
                         </td>
                     </tr>
@@ -443,12 +508,17 @@
             　　　　<option>{{path}}</option>
                 </select>
 
-            <div class="form-group" id="delfile_title">
-                {{ delFile_form.FileName.label_tag }}
-                {{ delFile_form.FileName }}
-            </div>
+                <div class="form-group" id="delfile_title">
+                    {{ delFile_form.FileName.label_tag }}
+                    {{ delFile_form.FileName }}
+                </div>
+
             <button type="reset" class="btn btn-default pull-left" id="reset_btn">重置</button>
-            <button type="submit" class="btn btn-primary pull-right" id="delfile_btn">删除</button>
+            {% if islock %}
+                <button type="submit" class="btn btn-primary pull-right" id="delfile_btn2" disabled="disabled">删除</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary pull-right" id="delfile_btn">删除</button>
+            {% endif %}
         </form>
         <br><br>
     </div>
