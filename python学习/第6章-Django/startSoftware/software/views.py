@@ -813,7 +813,7 @@ def uploadFile(request):
                         # 添加锁库状态到数据库
                         newlockbaseinfo = LockBaseInfo.lockbase.create()
                         newlockbaseinfo.userName = request.session['user_name']
-                        newlockbaseinfo.patchName = dirname
+                        newlockbaseinfo.pathName = dirname
                         newlockbaseinfo.islock = True
                         newlockbaseinfo.save()
                         message = '锁库成功！'
