@@ -362,9 +362,9 @@
               </div>
               <div class="form-group">
                   {% if request.session.manager_islogin %}
-                      <input class="btn btn-primary" style="position: relative;z-index: 10;" type="submit" value="解封库">
+                      <input class="btn btn-primary" style="position: relative;z-index: 10;" type="submit" value="解封版">
                   {% else %}
-                    <input class="btn btn-primary" style="position: relative;z-index: 10;" type="submit" value="解封库" disabled="disabled">
+                    <input class="btn btn-primary" style="position: relative;z-index: 10;" type="submit" value="已封版" disabled="disabled">
                   {% endif %}
                   <img id="lock_base_icon" style="z-index: -1;" src="../../static/images/icon/lock.png">
               </div>
@@ -390,9 +390,9 @@
               </div>
               <div class="form-group">
                   {% if request.session.manager_islogin %}
-                      <input class="btn btn-primary" type="submit" value="锁库">
+                      <input class="btn btn-primary" type="submit" value="封版">
                   {% else %}
-                    <input class="btn btn-primary" type="submit" value="锁库" disabled="disabled">
+                    <input class="btn btn-primary" type="submit" value="封版" disabled="disabled">
                   {% endif %}
               </div>
           </form>
