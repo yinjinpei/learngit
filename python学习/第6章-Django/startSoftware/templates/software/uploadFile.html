@@ -218,6 +218,13 @@
         display: none;
     }
 
+    #lock_base_icon{
+        position: relative;
+        opacity:0.4;
+        right: 25px;
+        bottom: 76px;
+    }
+
 </style>
 {% endblock %}
 <div class="col-md-8 col-md-offset-2" id="uploadFile_con">
@@ -337,7 +344,7 @@
     {% endif %}
 {% endif %}
     {% if islock %}
-        <div style="text-align: left">
+        <div style="text-align: left;width: 120px;height: 120px;">
             {% if request.session.manager_islogin %}
                 <form role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
             {% else %}
@@ -355,16 +362,17 @@
               </div>
               <div class="form-group">
                   {% if request.session.manager_islogin %}
-                      <input class="btn btn-primary" type="submit" value="解封库">
+                      <input class="btn btn-primary" style="position: relative;z-index: 10;" type="submit" value="解封库">
                   {% else %}
-                    <input class="btn btn-primary" type="submit" value="解封库" disabled="disabled">
+                    <input class="btn btn-primary" style="position: relative;z-index: 10;" type="submit" value="解封库" disabled="disabled">
                   {% endif %}
+                  <img id="lock_base_icon" style="z-index: -1;" src="../../static/images/icon/lock.png">
               </div>
           </form>
           <br>
       </div>
     {% else %}
-     <div style="text-align: left">
+     <div style="text-align: left;width: 120px;height: 120px;">
           {% if request.session.manager_islogin %}
                 <form role="form" action="uploadFile?dirname={{path}}" method="post" enctype="multipart/form-data" accept-charset="utf-8">
             {% else %}
