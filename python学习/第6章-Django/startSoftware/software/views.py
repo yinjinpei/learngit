@@ -450,7 +450,7 @@ def match_productionMaterials(user_name,domain_name,file_path):
             findStr = r'需求说明书|需求说明文档|需求文档|需求记录'
 
         elif report == '需求评审':
-            findStr = r'需求评审|需求文档评审|需求说明评审|需求说明书评审'
+            findStr = r'需求评审|需求说明评审'
 
         elif report == '安全评审':
             findStr = r'安全评审'
