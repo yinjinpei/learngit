@@ -1182,7 +1182,7 @@ def setServerDate(request):
         return render(request, 'software/index.html', locals())
 
     if not request.session.get('manager_islogin', None):
-        uploadFile_message = "您不是超级用户，无法使用【服务器时间管理】此功能！！"
+        uploadFile_message = "您不是超级用户，无法使用【服务器时间管理】功能！！"
         return render(request, 'software/index.html', locals())
 
     # 获取数据库里的数据
