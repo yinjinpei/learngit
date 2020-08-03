@@ -266,6 +266,10 @@ class SetPasswordForm(forms.Form):
     password1 = forms.CharField(label="首次登录，设置二级密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label="再次输入，确认二级密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
+class ModifySuperPWDForm(forms.Form):
+    password = forms.CharField(label="输入原有密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label="设置新的二级密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label="再次输入，确认新的二级密码", max_length=128, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
 class ManagerDate(models.Model):
     user = models.CharField(max_length=128)

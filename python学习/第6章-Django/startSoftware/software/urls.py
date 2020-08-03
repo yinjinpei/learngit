@@ -29,6 +29,7 @@ urlpatterns = [
     re_path('loginSuperManager$', views.loginSuperManager, name='loginSuperManager'),
     re_path('logoutSuperManager$', views.logoutSuperManager, name='logoutSuperManager'),
     re_path('restart_tomcat$', restart_tomcat.restart_tomcat),
+    re_path('modifySuperPWD$', views.modifySuperPWD,name='modifySuperPWD'),
     # re_path('exec_command$', views.exec_command, name='exec_command'),
     # re_path('websocket_test$', views.websocket_test, name='websocket_test'),
     re_path('test$', views.test, name='test'),

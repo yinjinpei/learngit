@@ -1565,6 +1565,37 @@ def unblockedVersion(request):
     return render(request, 'software/unblockedVersion.html', locals())
 
 
+def modifySuperPWD(request):
+    #修改二级密码
+    if not request.session.get('is_login', None):
+        return HttpResponse('<h4 style="color: red;font-weight: bold">您尚未登录普通用户，请先登录！！</h4>')
+
+    modifyPassword = ModifySuperPWDForm()
+    message = "修改二级密码"
+
+    if request.method == "POST":
+        username = request.session['user_name']
+        #从数据库获取用户对象信息
+        managers = ManagerDate.managers.get(user=request.session['user_name'])
+
+        passwd_from=ModifySuperPWDForm(request.POST)
+        if passwd_from.is_valid():
+            print(passwd_from.cleaned_data['password'])
+            print(passwd_from.cleaned_data['password1'])
+            print(passwd_from.cleaned_data['password2'])
+            if passwd_from.cleaned_data['password1'] != passwd_from.cleaned_data['password2']:
+                message = "输入新密码不一致！"
+                return render(request, 'software/modifySuperPWD.html', locals())
+
+            if managers.password == passwd_from.cleaned_data['password']:
+                managers.password = passwd_from.cleaned_data['password1']
+                managers.save()
+                message = "修改成功"
+            else:
+                message = "原密码错误！"
+                return render(request, 'software/modifySuperPWD.html', locals())
+
+    return render(request, 'software/modifySuperPWD.html', locals())
 
 def test(request):
     path = 'config\\software_config\\report_check_list_config2.ini'

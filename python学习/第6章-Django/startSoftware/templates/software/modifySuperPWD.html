@@ -1,0 +1,108 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}超级用户登录{% endblock %}
+
+{% block content %}
+{% block css %}
+<style type="text/css">
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .dir_list ul{
+        list-style-type: none;
+    }
+
+    .row label,.row select{
+        color: green;
+    }
+
+    .row select{
+        background-color: #EEE;
+    }
+
+    .pull-left{
+        color: #3e8f3e;
+        font-weight: bold;
+
+    }
+
+    .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover,#delfile_btn:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    .delfile_msg{
+        color:red;
+    }
+
+
+    .downloadFileList_table .btn:hover{
+        background-color: #FF5151;
+        color: gold;
+    }
+
+    #reset_btn{
+        margin-left: 35%;
+    }
+
+    #delfile_btn{
+        margin-right: 35%;
+     }
+
+    #newdir2 input{
+        background-color: #fff;
+        color: dodgerblue;
+    }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+    .form-register input,.form-login input{
+        text-align: center;
+    }
+
+    .form-register{
+        font-size: 18px;
+        color: #28a4c9;
+    }
+
+</style>
+{% endblock %}
+<div class="col-md-8 col-md-offset-2" id="uploadFile_con">
+    <div class="col-md-8 col-md-offset-2">
+
+        {% if message %}
+            <div class="alert alert-warning delfile_msg" style="text-align: center;color: #8a6d3b; font-size: 20px">{{ message }}</div>
+        {% endif %}
+
+        <form class='form-register' action="modifySuperPWD" method="post">
+            {% csrf_token %}
+            {{modifyPassword.password.label}}
+            {{modifyPassword.password}}
+            <br>
+            {{modifyPassword.password1.label}}
+            {{modifyPassword.password1}}
+            <br>
+            {{modifyPassword.password2.label}}
+            {{modifyPassword.password2}}
+            <br>
+            <button type="reset" class="btn btn-default pull-left" id="reset_btn">重置</button>
+            <button type="submit" class="btn btn-primary pull-right" id="delfile_btn">提交</button>
+        </form>
+
+        <br><br><br><br>
+        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+        <br><br><br><br>
+        <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+        <br><br><br><br>
+
+    </div>
+
+</div>
+{% endblock %}
