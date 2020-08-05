@@ -72,7 +72,8 @@ def restart_tomcat(request):
             print(message)
             if message == 'backup_all':  # 这里根据web页面获取的值进行对应的操作
                 command = 'sh /opt/test.sh'  # 这里是要执行的命令或者脚本
-                cmds=['export LANG=zh_CN.UTF-8','echo $LANG','pwd','dir -lh','hostname -i','date']
+                # cmds=['export LANG=zh_CN.UTF-8','echo $LANG','pwd','dir -lh','hostname -i','date']
+                cmds=['w','date','sh /opt/test.sh']
 
                 # 远程连接服务器
                 server_config=views.getConfig('config\\software_config\\restart_tomcat.ini')
@@ -83,7 +84,31 @@ def restart_tomcat(request):
 
                 ssh = paramiko.SSHClient()
                 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                ssh.connect(hostname=hostname, username=username, password=password)
+                ssh.connect(hostname=hostname, username=username, password=password,timeout=60)
+
+                # # 实例化一个transport对象
+                # transport = paramiko.Transport(hostname, 22)
+                # # 建立连接
+                # transport.connect(username=username, password=password)
+                # # 将sshclient的对象的transport指定为以上的transport
+                # ssh = paramiko.SSHClient()
+                # ssh._transport = transport
+                # for command in cmds:
+                #     # 执行命令，和传统方法一样
+                #     stdin, stdout, stderr = ssh.exec_command('cd /opt;./test.sh')
+                #     # print(stdout.read().decode())
+                #     while True:
+                #         nextline = stdout.readline().strip() # 读取脚本输出内容
+                #         request.websocket.send(nextline.encode('utf-8'))  # 发送消息到客户端
+                #         print(nextline)
+                #         # 判断消息为空时,退出循环
+                #         if not nextline:
+                #             print('判断消息为空时,退出循环')
+                #             break
+                # # 关闭连接
+                # transport.close()
+                # ssh.close()
+
 
                 print('激活连接的终端！')
                 channel = ssh.invoke_shell()
@@ -97,8 +122,18 @@ def restart_tomcat(request):
                     time.sleep(0.5)
                     try:
                         command_res = channel.recv(65533).decode('utf-8')
-                        print('-' * 30)
+                        print('--' * 30)
+                        print(type(command_res))
                         print(command_res)
+                        print('==' * 30)
+                        while True:
+                            nextline = command_res.readline().strip()  # 读取脚本输出内容
+                            request.websocket.send(nextline.encode('utf-8'))  # 发送消息到客户端
+                            print(nextline)
+                            # 判断消息为空时,退出循环
+                            if not nextline:
+                                print('判断消息为空时,退出循环')
+                                break
                         request.websocket.send(command_res.encode('utf-8'))  # 发送消息到客户端
                     except Exception as e:
                         print('*' * 30)
@@ -111,10 +146,14 @@ def restart_tomcat(request):
             #     # 务必要加上get_pty=True,否则执行命令会没有权限
             #     stdin, stdout, stderr = ssh.exec_command(command, get_pty=True)
             #     # result = stdout.read()
+            #     print('stdin:',stdin)
+            #     print('stdout:',stdout)
+            #     print('stderr:',stderr)
+            #
             #     # 循环发送消息给前端页面
             #     print('循环发送消息给前端页面!!')
             #     while True:
-            #         nextline = stdout.readline().strip()  # 读取脚本输出内容
+                #         nextline = stdout.readline().strip()  # 读取脚本输出内容
             #         request.websocket.send(nextline.encode('utf-8'))  # 发送消息到客户端
             #         print(nextline)
             #         # 判断消息为空时,退出循环
