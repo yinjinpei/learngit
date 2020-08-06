@@ -9,9 +9,6 @@
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>{% block title %}base{% endblock %}</title>
 
-    <!--显示从服务器里传来的日志数据-->
-    {% block scripts %}{% endblock %}
-
     <!-- Bootstrap -->
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -32,6 +29,8 @@
                 window.history.replaceState( null, null, window.location.href );
             }
     </script>
+
+    {% block scripts %}{% endblock %}
 
     <style type="text/css">
         #con_a a:hover{
