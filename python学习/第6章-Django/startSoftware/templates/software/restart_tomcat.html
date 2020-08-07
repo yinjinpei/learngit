@@ -32,7 +32,8 @@
                 console.log(socket);
                 socket.onopen = function () {
                     console.log('WebSocket open');//成功连接上Websocket
-                    socket.send($('#backup_all').val());//发送数据到服务端
+                    socket.send($('#serverIP').val());//发送数据到服务端
+                    // socket.send($('#backup_all').val());//发送数据到服务端
 
                 };
                 socket.onmessage = function (e) {
@@ -97,20 +98,32 @@
                 </div>
             {% endif %}
         {% else %}
-
+            {{message}}
             <select class='my-chosen-select w-country' id="serverIP" data-placeholder='请选择国家' multiple >
-              <optgroup label="Swedish Cars">
-              <option value=""></option>
-              <option value="China">中国</option>
-              </optgroup>
-              <optgroup label="Swedish Cars">
-              <option value="US">US</option>
-              <option value="England">英国</option>
-              </optgroup>
-              <optgroup label="Swedish Cars">
-              <option value="Canada">加拿大</option>
-              <option value="Cube">古巴</option>
-              </optgroup>
+
+                {% if lotus_ip_list %}
+                   <optgroup label="lotus服务器">
+                       {% for ip in lotus_ip_list %}
+                            <option value={{ip}}></option>
+                       {% endfor %}
+                    </optgroup>
+                {% endif %}
+
+                {% if pafa5_ip_list %}
+                   <optgroup label="tomcat服务器">
+                       {% for ip in pafa5_ip_list %}
+                            <option value={{ip}}></option>
+                       {% endfor %}
+                    </optgroup>
+                {% endif %}
+
+                {% if pafa3_ip_list %}
+                   <optgroup label="weblogic服务器">
+                       {% for ip in pafa3_ip_list %}
+                            <option value={{ip}}></option>
+                       {% endfor %}
+                    </optgroup>
+                {% endif %}
             </select>
 
             <button type="button" class="btn btn-primary" id="backup_all" value="backup_all">
