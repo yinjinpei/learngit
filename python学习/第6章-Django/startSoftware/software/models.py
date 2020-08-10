@@ -40,6 +40,11 @@ class DelFile(forms.Form):
 class NewDirectory(forms.Form):
     DirectoryName = forms.CharField(label="目录名", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
 
+class CreateDirectory(forms.Form):
+    englishName = forms.CharField(label="英文简称", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    chineseName = forms.CharField(label="中文名称", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
 class CreateVersionDirectory(forms.Form):
     VersionName = forms.CharField(label="版本号", max_length=128,widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'输入版本号'}))
     Date = forms.DateField(label='投产日期', widget=forms.DateInput(attrs={'class': 'weui-input','type': 'date'}))

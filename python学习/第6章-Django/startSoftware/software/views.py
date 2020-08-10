@@ -922,15 +922,37 @@ def newDirectory(request):
         print(request.session['user_name'])
         if path != 'uploads/' + request.session['user_name'] + '/1-版本检查单（收集）/':
             limit = True
+            print('limit：',limit)
+
+        # 新增领域文件目录时，使用领域命名格式如:BCES-SECU（网银安全子系统）
+        if path == 'uploads/' + request.session['user_name']+'/':
+            domain_naming=True
+            print('domain_naming：', domain_naming)
+
         for username in user_list2:
             if up_one_level_path == 'uploads/'+username:
                 black_user=True
+                print('black_user：', black_user)
                 break
 
     if request.method == "POST":
         dirname = request.POST.get('dirname')
         print('dirname POST方式传递过来的值:', dirname)
 
+        # 创建领域目录
+        createDirectory_from = CreateDirectory(request.POST)
+        if createDirectory_from.is_valid():
+            engilistName=createDirectory_from.cleaned_data['englishName']
+            chineseName=createDirectory_from.cleaned_data['chineseName']
+            try:
+                os.makedirs(dirname+engilistName+'（'+chineseName+'）')
+                message="%s 创建目录成功！"%(engilistName+'（'+chineseName+'）')
+            except:
+                message = "%s 创建目录失败，请检查目录是否已存在！" % (engilistName+'（'+chineseName+'）')
+            print(message)
+
+
+        # 创建普通目录
         newDirectory_form = NewDirectory(request.POST)
         if newDirectory_form.is_valid():  # 如果有数据
             DirectoryName = newDirectory_form.cleaned_data['DirectoryName'] # 获取新建文件夹名
@@ -941,6 +963,7 @@ def newDirectory(request):
                 message = "%s 创建目录失败，请检查目录是否已存在！" % (DirectoryName)
             print(message)
 
+        # 创建版本目录
         CreateVersionDirectory_form=CreateVersionDirectory(request.POST)
         if CreateVersionDirectory_form.is_valid():  # 如果有数据
             VersionName = CreateVersionDirectory_form.cleaned_data['VersionName']  # 获取新建文件夹名,版本号
@@ -972,6 +995,7 @@ def newDirectory(request):
                 message = "%s 创建目录失败，目录格式错误！！" % (VersionName + '（' + Date + '）')
             print(message)
 
+    createDirectory_from=CreateDirectory()
     newDirectory_form=NewDirectory()
     CreateVersionDirectory_form=CreateVersionDirectory()
     return render(request, 'software/newDirectory.html', locals())
@@ -1014,6 +1038,11 @@ def rename_directory(request):
         print(request.session['user_name'])
         if up_one_level_path != 'uploads/' + request.session['user_name'] + '/1-版本检查单（收集）':
             limit = True
+
+        if up_one_level_path == 'uploads/' + request.session['user_name']:
+            domain_naming=True
+            print('domain_naming：', domain_naming)
+
         for username in user_list2:
             if up_two_level_path == 'uploads/'+username:
                 black_user=True
@@ -1022,6 +1051,17 @@ def rename_directory(request):
     if request.method == "POST":
         dirname = request.POST.get('dirname')
         print('dirname POST方式传递过来的值:', dirname)
+
+        createDirectory_from = CreateDirectory(request.POST)
+        if createDirectory_from.is_valid():
+            engilistName = createDirectory_from.cleaned_data['englishName']
+            chineseName = createDirectory_from.cleaned_data['chineseName']
+            try:
+                os.rename(up_one_level_path + '/' + old_dir_name, up_one_level_path + '/' + engilistName + '（' + chineseName + '）')
+                message = "%s 修改目录成功！" % (engilistName + '（' + chineseName + '）')
+            except:
+                message = "%s 修改目录失败，请检查目录是否已存在！" % (engilistName + '（' + chineseName + '）')
+            print(message)
 
         newDirectory_form = NewDirectory(request.POST)
         if newDirectory_form.is_valid():  # 如果有数据
@@ -1067,6 +1107,7 @@ def rename_directory(request):
                 message = "%s 修改失败，目录格式错误！！" % (VersionName + '（' + Date + '）')
             print(message)
 
+    createDirectory_from=CreateDirectory()
     newDirectory_form=NewDirectory()
     CreateVersionDirectory_form=CreateVersionDirectory()
     return render(request, 'software/rename_directory.html', locals())
