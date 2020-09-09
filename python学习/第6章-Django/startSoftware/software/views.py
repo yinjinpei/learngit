@@ -333,11 +333,24 @@ def up_one_level(dirname):
     print('上一层目录为：',up_one_level_path_tmp[:-1])
     return up_one_level_path_tmp[:-1]
 
+def get_file_list(file_path):
+    dir_list = os.listdir(file_path)
+    if dir_list:
+        # 注意，这里使用lambda表达式，将文件按照最后修改时间顺序升序排列
+        # os.path.getmtime() 函数是获取文件最后修改时间
+        # os.path.getctime() 函数是获取文件最后创建时间
+        dir_list = sorted(dir_list, key=lambda x: os.path.getmtime(os.path.join(file_path, x)))
+    # print('dir_list:',dir_list)
+    return dir_list
+
 def downloadFileInfo(path):
     fileObjectList = [] # 存放文件对象
     dirObjectList = []  # 存放目录对象
 
     fileList = os.listdir(path)
+
+    # 获取的文件或目录按照最后修改时间顺序升序排列
+    fileList2 = get_file_list(path)
 
     class DownloadFileObject(object):
         def __init__(self, name, size, creatTime, path):
@@ -356,6 +369,18 @@ def downloadFileInfo(path):
     for file in fileList:
         if os.path.isfile(path + file):
             print('【%s】:这是一个文件' % file)
+        elif os.path.isdir(path + file):
+            print('【%s】：这是一个目录' % file)
+            dirObject=AbsolutePath(file, path + file)
+            dirObjectList.append(dirObject)
+        else:
+            print('path:',path)
+            print('file',file)
+            print('未知文件，无法识别该文件！！')
+
+    for file in fileList2:
+        if os.path.isfile(path + file):
+            print('【%s】:这是一个文件' % file)
             filepath = path + file
             print('文件完整路径：【%s】' % filepath)
 
@@ -372,12 +397,11 @@ def downloadFileInfo(path):
 
         elif os.path.isdir(path + file):
             print('【%s】：这是一个目录' % file)
-            dirObject=AbsolutePath(file, path + file)
-            dirObjectList.append(dirObject)
         else:
             print('path:',path)
             print('file',file)
             print('未知文件，无法识别该文件！！')
+
 
     return fileObjectList,dirObjectList
 
