@@ -2,7 +2,14 @@
 
 {% extends 'software_base.html' %}
 {% block title %}主页{% endblock %}
+
+{% block scripts %}
+    <script src="/static/js/modernizr.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css" media="screen" type="text/css" />
+{% endblock %}
+
 {% block css %}
+
     .con_h{
         text-align:center;
     }
@@ -105,6 +112,16 @@
     <!--<a href="/websocket_test" >websocket_test</a>-->
     <!--<hr>-->
 <a class="btn btn-primary" href="#" >跳到顶部</a>
+</div>
+
+<div id="pig">
+    <div class="ear right"></div>
+    <div class="ear left"></div>
+    <div class="eye right"></div>
+    <div class="eye left"></div>
+    <div class="nose"></div>
+</div>
+<div style="text-align:center;clear:both;margin-top:30px">
 </div>
 
 {% endblock %}
