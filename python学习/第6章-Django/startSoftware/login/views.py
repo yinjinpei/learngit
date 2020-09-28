@@ -65,6 +65,18 @@ def login(request):
                             request.session['is_login'] = True
                             request.session['user_id'] = user_name.id
                             request.session['user_name'] = user_name.name
+
+                            # 存在则不设置
+                            # request.session.setdefault('k1', 123)
+
+                            # 设置超时时间 (Cookie和Session数据的)
+                            request.session.set_expiry(None)
+                            # request.session.set_expiry(value):
+                            # *如果value是个整数，session会在些秒数后失效。
+                            # *如果value是个datatime或timedelta，session就会在这个时间后失效。
+                            # *如果value是0, 用户关闭浏览器session就会失效。
+                            # *如果value是None, session会依赖全局session失效策略。
+
                             return redirect('/')
                             # return HttpResponse('<h1>登录成功！！</h1>') # for test
                             # return render(request, '/software/index.html', {"message": user_name.name})
