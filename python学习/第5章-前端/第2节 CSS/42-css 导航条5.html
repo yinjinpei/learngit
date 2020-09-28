@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>庄稼汉</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+    li {
+        list-style-type: none;
+    }
+    .nav{
+        height: 50px;
+        width: 400px;
+        background-color: #0173DD;
+    }
+    .nav ul {
+        width: 100%;
+        height: 100%;
+    }
+    .nav ul li {
+        float: left;
+        width: 80px;
+        height: 100%;
+        text-align: center;
+        line-height: 50px;
+        margin-left: 10px;
+    }
+    .nav ul li a{
+        color: #fff;
+    }
+    .nav ul li div {
+        overflow: hidden;
+        position: absolute;
+        width: 80px;
+        height: 0;
+        background-color: #fff;
+        /*border: 1px solid rgb(189, 189, 189);*/
+        border-radius: 10px;
+        transition: height 0.2s ,border 0.2s linear;
+        -moz-transition:height 0.2s ,border 0.2s linear;
+        /* Safari and Chrome */
+        -webkit-transition:height 0.2s ,border 0.2s linear;
+        /* Opera */
+        -o-transition:height 0.2s ,border 0.2s linear;
+    }
+    .nav ul li:hover div {
+        height: 130px;
+        border: 1px solid rgb(189, 189, 189);
+        z-index: 10;
+    }
+    .nav ul li div ul {
+        width: 100%;
+        height: 200px;
+    }
+    .nav ul li div ul li {
+        margin: 10px 3px 0 3px;
+        width: 74px;
+        height: 30px;
+        line-height: 30px;
+    }
+    .nav ul li div ul li a{
+        display: block;     /*填充li*/
+        color: #0173DD;
+    }
+    </style>
+</head>
+<body>
+<div class="nav">
+  <ul>
+    <li>
+      <a href="">一级目录</a>
+      <div>
+        <ul>
+        <li><a href="">二级目录</a></li>
+        <li><a href="">二级目录</a></li>
+        <li><a href="">二级目录</a></li>
+        </ul>
+      </div>
+   </li>
+     <li><a href="">一级目录</a></li>
+     <li><a href="">一级目录</a></li>
+     <li><a href="">一级目录</a></li>
+  </ul>
+ </div>
+ <div>
+   <img src="../img/1.jpg" alt="">
+ </div>
+</body>
+</html>

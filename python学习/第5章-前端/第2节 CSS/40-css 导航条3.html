@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+*{
+margin: 0;
+padding: 0;
+}
+#nav{
+background-color: #EEEEEE;
+height: 40px;
+width: 600px;
+margin: auto;
+text-align: center;
+}
+ul{
+list-style:none;
+}
+ul li{
+position:relative;
+float: left;
+line-height: 40px;
+text-align: center;
+}
+ul li:hover ul{
+display: block;
+}
+a{
+text-decoration: none;
+color: black;
+display: block;
+padding: 0 10px;
+}
+a:hover{
+color:white;
+background-color: gray;
+
+}
+ul li ul li{
+float: none;
+background-color: #EEEEEE;
+margin-top: 2px;
+}
+ul li ul{
+position:absolute;
+left: o ;
+top:40px;
+display: none;
+}
+</style>
+</head>
+<body>
+<div id="nav">
+<ul>
+<li><a href=""> 首&nbsp;页 </a></li>
+<li><a href="">课程大厅</a>
+<ul>
+<li><a href="">JavaScript</a></li>
+<li><a href="">JQuery</a></li>
+</ul>
+</li>
+<li><a href="">学习中心</a>
+<ul>
+<li><a href="">JavaScript</a></li>
+<li><a href="">JQuery</a></li>
+<li><a href="">JavaScript</a></li>
+<li><a href="">JQuery</a></li>
+</ul>
+</li>
+<li><a href="">经典案例</a></li>
+<li><a href="">关于我们</a></li>
+
+</ul>
+</div>
+</body>
+</html>
+
+
+
+2.使用JavaScript实现下拉菜单的效果
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+*{
+margin: 0;
+padding: 0;
+}
+#nav{
+background-color: #EEEEEE;
+height: 40px;
+width: 600px;
+margin: auto;
+text-align: center;
+}
+ul{
+list-style:none;
+}
+ul li{
+position:relative;
+float: left;
+line-height: 40px;
+text-align: center;
+}
+/*ul li:hover ul{
+display: block;
+}*/
+a{
+text-decoration: none;
+color: black;
+display: block;
+padding: 0 10px;
+}
+a:hover{
+color:white;
+background-color: gray;
+
+}
+ul li ul li{
+float: none;
+background-color: #EEEEEE;
+margin-top: 2px;
+}
+ul li ul{
+position:absolute;
+left: o ;
+top:40px;
+display: none;
+}
+
+</style>
+<script type="text/javascript">
+function showsubmenu(li){
+var sub =li.getElementsByTagName("ul")[0];
+sub.style.display="block";
+}
+function hide(li){
+var submenu=li.getElementsByTagName('ul')[0];
+submenu.style.display="none";
+}
+</script>
+</head>
+<body>
+<div id="nav">
+<ul>
+<li><a href=""> 首&nbsp;页 </a></li>
+<li οnmοuseοver="showsubmenu(this)" οnmοuseοut="hide(this)"><a href="">课程大厅</a>
+<ul>
+<li><a href="">JavaScript</a></li>
+<li><a href="">JQuery</a></li>
+</ul>
+</li>
+<li οnmοuseοver="showsubmenu(this)" οnmοuseοut="hide(this)"><a href="">学习中心</a>
+<ul>
+<li><a href="">JavaScript</a></li>
+<li><a href="">JQuery</a></li>
+<li><a href="">JavaScript</a></li>
+<li><a href="">JQuery</a></li>
+</ul>
+</li>
+<li><a href="">经典案例</a></li>
+<li><a href="">关于我们</a></li>
+
+</ul>
+</div>
+</body>
+</html>
+
+3.通过JQuery方法实现的下拉菜单的炫酷效果
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+*{
+margin: 0;
+padding: 0;
+}
+#nav{
+background-color: #EEEEEE;
+height: 40px;
+width: 600px;
+margin: auto;
+text-align: center;
+}
+ul{
+list-style:none;
+}
+ul li{
+position:relative;
+float: left;
+line-height: 40px;
+text-align: center;
+}
+/*ul li:hover ul{
+display: block;
+}*/
+a{
+text-decoration: none;
+color: black;
+display: block;
+padding: 0 10px;
+}
+a:hover{
+color:white;
+background-color: gray;
+
+}
+ul li ul li{
+float: none;
+background-color: #EEEEEE;
+margin-top: 2px;
+}
+ul li ul{
+position:absolute;
+left: o ;
+top:40px;
+display: none;
+}
+
+</style>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+<script type="text/javascript">
+$(function(){
+$('.navmenu').mouseover(function(){
+$(this).children('ul').show();
+});
+$('.navmenu').mouseout(function(){
+$(this).children('ul').hide();
+});
+})
+
+</script>
+</head>
+<body>
+<div id="nav">
+<ul>
+<li><a href=""> 首&nbsp;页 </a></li>
+<li class="navmenu"><a href="">课程大厅</a>
+<ul>
+<li><a href="">JavaScript</a></li>
+<li><a href="">JQuery</a></li>
+</ul>
+</li>
+<li class="navmenu"><a href="">学习中心</a>
+<ul>
+<li><a href="">JavaScript</a></li>
+<li><a href="">JQuery</a></li>
+<li><a href="">JavaScript</a></li>
+<li><a href="">JQuery</a></li>
+</ul>
+</li>
+<li><a href="">经典案例</a></li>
+<li><a href="">关于我们</a></li>
+
+</ul>
+</div>
+</body>
+</html>
+
