@@ -1,59 +1,30 @@
+{#login/templates/login/index.html#}
 
-<!DOCTYPE html>
+{% extends 'software_base.html' %}
 {% load staticfiles %}
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>{% block title %}base{% endblock %}</title>
-    <style>
-      .bar {
-        height: 18px;
-        background: green;
-      }
+{% block title %}投产材料管理{% endblock %}
+{% block content %}
+    {% block scripts %}
+	  <!--<link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.css' %}"/>-->
+      <link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.min.css' %}"/>
+      <!--<script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.js' %}"></script>-->
+      <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.min.js' %}"></script>
 
-    </style>
+    {% endblock %}
 
-    <![endif]-->
-    {% block css %}{% endblock %}
-  </head>
-  <body>
 
-    <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="{% static 'jQuery-File-Upload-master/js/vendor/jquery.ui.widget.js' %}"></script>
-    <script src="{% static 'jQuery-File-Upload-master/js/jquery.iframe-transport.js' %}"></script>
-    <script src="{% static 'jQuery-File-Upload-master/js/jquery.fileupload.js' %}"></script>
 
-<script>
-$(function () {
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo(document.body);
-            });
-        }
-    });
-});
-$('#fileupload').fileupload({
-    /* ... */
-    progressall: function (e, data) {
-        var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#progress .bar').css(
-            'width',
-            progress + '%'
-        );
-    }
-});
-</script>
+    <label class="btn btn-primary pull-left">选择卡片：</label>
+    <select class="selectpicker" data-style="selectpicker" multiple="multiple">
+	    <option value="0">请选择...</option>
+	    <option value="北京">北京</option>
+	    <option value="天津">天津</option>
+	    <option value="河北省">河北省</option>
+	    <option value="山西省">山西省</option>
+	    <option value="内蒙古自治区">内蒙古自治区</option>
+	    <option value="辽宁省">辽宁省</option>
+	    <option value="吉林省">吉林省</option>
+	    <option value="黑龙江省">黑龙江省</option>
+	</select>
 
-    {% block content %}{% endblock %}
-<div id="progress">
-    <div class="bar" style="width: 0%;"></div>
-</div>
-
-  </body>
-</html>
+{% endblock %}
