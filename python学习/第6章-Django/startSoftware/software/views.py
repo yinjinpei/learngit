@@ -1669,6 +1669,50 @@ def modifySuperPWD(request):
 
     return render(request, 'software/modifySuperPWD.html', locals())
 
+
+def modifyCardStatus(request):
+    domain_list=['BRON','BRON-CLSS','BRON-CASS','BRON-CRMP','Python','jQuery','SQL','Bootstrap','Node.js','中文分类']
+
+    # 获取领域名
+    domain_name='BRON-CLSS'
+    print('domain: ',request.GET.get('domain_name'))
+    if request.GET.get('domain_name'):
+        domain_name=request.GET.get('domain_name')
+
+    if request.GET.get('waird'):
+        domain_name=request.GET.get('waird')
+    sync_domain_by_waird = request.GET.get('waird')
+    print('sync_domain_by_waird: ', sync_domain_by_waird)
+
+    branch_list=['BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0']
+    date_form = ModifyCard()
+    deldate_form = ModifyCard()
+
+    # 获取停留在哪个功能页面
+    myMenu = request.GET.get('feature')
+    print('myMenu: ',myMenu)
+    if myMenu == 'myMenu0':
+        myMenu0='select'
+    elif myMenu == 'myMenu1':
+        myMenu1 = 'select'
+    elif myMenu == 'myMenu2':
+        myMenu2 = 'select'
+    elif myMenu == 'myMenu3':
+        myMenu3 = 'select'
+    elif myMenu == 'myMenu4':
+        myMenu4 = 'select'
+    elif myMenu == 'myMenu5':
+        myMenu5 = 'select'
+    else:
+        myMenu5 = 'select'
+
+    cardID = request.GET.getlist('cardID')
+    print('cardID: ',cardID)
+
+    return render(request, 'software/modifyCardStatus.html', locals())
+
+
+
 def test(request):
     path = 'config\\software_config\\report_check_list_config2.ini'
     try:

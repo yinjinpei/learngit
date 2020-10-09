@@ -1,0 +1,1109 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}投产材料管理{% endblock %}
+
+{% block content %}
+    {% block scripts %}
+    <link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.min.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap/defaults-zh_CN.min.js' %}"></script>
+    <script type="text/javascript">
+        function $(id) {
+            return typeof id==='string'?document.getElementById(id):id;
+        }
+
+        function myFunction0() {
+            var input, filter, ul, li, a, i;
+            // 获得输入内容
+            input = document.getElementById("mySearch0");
+            // 把输入的字母全部更改为大写
+            filter = input.value.toUpperCase();
+            // 获得导航菜单
+            ul = document.getElementById("myMenu0");
+            // 根据标签名称获得 li 标签
+            li = ul.getElementsByTagName("li");
+            // 遍历搜索分类
+            for (i = 0; i < li.length; i++) {
+                // 在li 标签的基础上根据标签名称获得 a 标签
+                a = li[i].getElementsByTagName("a")[0];
+                // 导航 a 标签中的字符串是否包含 filter 子串
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else {
+                        li[i].style.display = "none";
+                }
+            }
+        }
+
+        function myFunction1() {
+            var input, filter, ul, li, a, i;
+            // 获得输入内容
+            input = document.getElementById("mySearch1");
+            // 把输入的字母全部更改为大写
+            filter = input.value.toUpperCase();
+            // 获得导航菜单
+            ul = document.getElementById("myMenu1");
+            // 根据标签名称获得 li 标签
+            li = ul.getElementsByTagName("li");
+            // 遍历搜索分类
+            for (i = 0; i < li.length; i++) {
+                // 在li 标签的基础上根据标签名称获得 a 标签
+                a = li[i].getElementsByTagName("a")[0];
+                // 导航 a 标签中的字符串是否包含 filter 子串
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else {
+                        li[i].style.display = "none";
+                }
+            }
+        }
+
+        function myFunction2() {
+            var input, filter, ul, li, a, i;
+            // 获得输入内容
+            input = document.getElementById("mySearch2");
+            // 把输入的字母全部更改为大写
+            filter = input.value.toUpperCase();
+            // 获得导航菜单
+            ul = document.getElementById("myMenu2");
+            // 根据标签名称获得 li 标签
+            li = ul.getElementsByTagName("li");
+            // 遍历搜索分类
+            for (i = 0; i < li.length; i++) {
+                // 在li 标签的基础上根据标签名称获得 a 标签
+                a = li[i].getElementsByTagName("a")[0];
+                // 导航 a 标签中的字符串是否包含 filter 子串
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else {
+                        li[i].style.display = "none";
+                }
+            }
+        }
+
+        function myFunction3() {
+            var input, filter, ul, li, a, i;
+            // 获得输入内容
+            input = document.getElementById("mySearch3");
+            // 把输入的字母全部更改为大写
+            filter = input.value.toUpperCase();
+            // 获得导航菜单
+            ul = document.getElementById("myMenu3");
+            // 根据标签名称获得 li 标签
+            li = ul.getElementsByTagName("li");
+            // 遍历搜索分类
+            for (i = 0; i < li.length; i++) {
+                // 在li 标签的基础上根据标签名称获得 a 标签
+                a = li[i].getElementsByTagName("a")[0];
+                // 导航 a 标签中的字符串是否包含 filter 子串
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else {
+                        li[i].style.display = "none";
+                }
+            }
+        }
+
+        function myFunction4() {
+            var input, filter, ul, li, a, i;
+            // 获得输入内容
+            input = document.getElementById("mySearch4");
+            // 把输入的字母全部更改为大写
+            filter = input.value.toUpperCase();
+            // 获得导航菜单
+            ul = document.getElementById("myMenu4");
+            // 根据标签名称获得 li 标签
+            li = ul.getElementsByTagName("li");
+            // 遍历搜索分类
+            for (i = 0; i < li.length; i++) {
+                // 在li 标签的基础上根据标签名称获得 a 标签
+                a = li[i].getElementsByTagName("a")[0];
+                // 导航 a 标签中的字符串是否包含 filter 子串
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else {
+                        li[i].style.display = "none";
+                }
+            }
+        }
+
+        function myFunction5() {
+            var input, filter, ul, li, a, i;
+            // 获得输入内容
+            input = document.getElementById("mySearch5");
+            // 把输入的字母全部更改为大写
+            filter = input.value.toUpperCase();
+            // 获得导航菜单
+            ul = document.getElementById("myMenu5");
+            // 根据标签名称获得 li 标签
+            li = ul.getElementsByTagName("li");
+            // 遍历搜索分类
+            for (i = 0; i < li.length; i++) {
+                // 在li 标签的基础上根据标签名称获得 a 标签
+                a = li[i].getElementsByTagName("a")[0];
+                // 导航 a 标签中的字符串是否包含 filter 子串
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else {
+                        li[i].style.display = "none";
+                }
+            }
+        }
+
+        // function doReset() {
+        //      document.getElementById("branch0").options.selectedIndex = 0; //回到初始状态
+        //     $("#branch0").selectpicker('refresh');//对searchPayState这个下拉框进行重置刷新
+        // }
+
+        window.onload=function () {
+            //获取鼠标点击的标签和要切换内容的元素
+            var titles=$('notice_title').getElementsByTagName('li'),
+                // divs=$('notice_con').getElementsByTagName('div');
+                divs_all=document.getElementById('notice_con');
+                // 获取第一层元素（div）
+                divs=divs_all.children;
+            if(titles.length!=divs.length)
+                return;
+            //遍历titles下所有的li
+            for(var i=0;i<titles.length;i++){
+                titles[i].id=i;
+                //当鼠标滑过onmouseover标签显示对应内容
+                //当鼠标点击onclick标签显示对应内容
+                titles[i].onmouseover=function () {
+                    //清除所有li上的class
+                    for(var j=0;j<titles.length;j++){
+                        titles[j].className='';
+                        divs[j].style.display='none';
+                    }
+                    //设置classname
+                    this.className='select';
+                    divs[this.id].style.display='block';
+                }
+            }
+
+            // 把选中的领域标签换个样式,class修改名为myMenu_domain_show
+            var domain_name=document.getElementById("notice_title_domain_name").value,
+                myMenu_name=document.getElementsByClassName(domain_name);
+                // alert('domain_name:'+domain_name);
+                // alert('myMenu_name个数:'+myMenu_name.length);
+            for(var k=0;k<myMenu_name.length;k++){
+                myMenu_name[k].className='myMenu_domain_show';
+
+                for(var z=0;z<myMenu_name.length;z++){
+                    myMenu_name[k].className='myMenu_domain_show';
+
+                    for(var n=0;n<myMenu_name.length;n++){
+                        myMenu_name[k].className='myMenu_domain_show';
+                    }
+                }
+            }
+
+
+            var oDiv = document.getElementById('add_domain');
+            oDiv.style.border = '2px solid green';
+            oDiv.style.fontSize = '20px';
+            oDiv.style.textAlign = 'center';
+
+            var oBtn = document.getElementById('add_button');
+            oBtn.value = '新增领域';
+            oDiv.style.display='none';
+            oBtn.onclick = changeWindow;
+
+            function changeWindow() {
+                if(oDiv.style.display=='none'){
+                    oDiv.style.display = 'block';
+                    oBtn.value = '取消新增';
+                    oBtn.style.backgroundColor='#d43f3a';
+                }
+                else{
+                    oDiv.style.display = 'none';
+                    oBtn.value = '新增领域';
+                    oBtn.style.backgroundColor='green';
+                }
+            }
+
+        };
+    </script>
+
+    {% endblock %}
+
+    {% block css %}
+        <style type="text/css">
+            #card_con{
+                text-align: center;
+                margin: 50px 100px;
+            }
+
+            #card_con a:hover{
+                background-color: gold;
+                color: red;
+            }
+
+            #link_index:hover,#link_top:hover{
+                color:red;
+                background-color: gold;
+            }
+
+            #link_index,#link_top{
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .form-group input:hover,#link_index:hover,#link_top:hover{
+                color:red;
+                background-color: gold;
+            }
+
+            .notice{
+                max-height: 800px;
+                border: 2px solid #ff8800;
+                overflow: hidden;
+                background-color: #fff4e8;
+            }
+
+            .notice_title{
+                height: 37px;
+                position: relative;
+                background-color: #ff8800;
+                padding-top: 10px;
+                font-weight: bold;
+            }
+
+            .notice_title a{
+                text-decoration:none;
+                font-size: 18px;
+                color: #FFF;
+            }
+
+            .notice_title a:hover{
+                background-color: transparent !important;
+            }
+
+            .notice_title ul{
+                list-style:none;
+                position: absolute;
+                left: -40px;
+            }
+
+            .notice_title li{
+                float: left;
+                width: 150px;
+                height: 27px;
+                line-height: 26px;
+                text-align: center;
+                overflow: hidden;
+            }
+
+            .select{
+                background-color: #fff4e8;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                /*border-radius: 20px;*/
+            }
+            .select a{
+                color: #2e6da4;
+            }
+            .select a:hover{
+                color: #2e6da4 !important;
+            }
+            .wow{
+                font-size: 20px;
+                width: 150px;
+                float: left;
+                font-weight: bold;
+                padding-top: 2px;
+                color: #0f0f0f;
+            }
+
+
+            /* *x选择器：选择所有元素 */
+            .row {
+                box-sizing: border-box;
+            }
+            /* 使用Flexbox创建一个列布局
+            flex 的定义和用法
+            1.flex 属性用于设置或检索弹性盒模型对象的子元素如何分配空间。
+            2.flex 属性是 flex-grow、flex-shrink 和 flex-basis 属性的简写属性。
+            注意：如果元素不是弹性盒模型对象的子元素，则 flex 属性不起作用。
+            */
+            .row {
+                height: 600px;
+                display: flex;
+                overflow: auto;
+            }
+            .row::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* 左列(菜单) */
+            .left {
+                text-align: left;
+                /*flex: 10%; !*让所有弹性盒模型对象的子元素的长度为15%，且忽略它们内部的内容*!*/
+                width: 165px;
+                padding: 15px 2px 15px 15px;
+                background-color: #ff8800;
+                max-height:1000px;
+                overflow-x: hidden;
+            }
+
+            .left::-webkit-scrollbar {
+                display: none;
+            }
+
+            .left h2 {
+                padding-left: 8px;
+            }
+
+            /*!* 中间(内容) *!*/
+            .center {
+                /*flex: 85%; !*让所有弹性盒模型对象的子元素的长度为85%，且忽略它们内部的内容*!*/
+                width: 40%;
+                padding: 15px;
+                text-align: left;
+            }
+
+            .right{
+                width: 50%;
+                padding: 15px;
+                text-align: left;
+            }
+
+            #add_con{
+                margin-top: 90px;
+                margin-bottom: 10px;
+            }
+
+            #add_button{
+                background-color: #398439;
+
+            }
+
+            #add_button:hover{
+                color: gold;
+            }
+
+            #add_domain{
+                display: none;
+                text-align: left !important;
+                background-color: #f9f7f6;
+            }
+
+            .new_domain_con{
+                margin: 40px;
+            }
+
+            .add_input{
+                background-color: #b2dba1 !important;
+            }
+
+            /* 搜索框 */
+            .mySearch {
+                width: 100%;
+                height: 35px;
+                font-size: 16px;
+                padding: 11px;
+                border:1px solid #ddd;
+                border-radius: 10px;
+                outline: none;  /*清除默认的border样式*/
+            }
+
+            /* 左侧导航 */
+            .myMenu {
+                  list-style-type: none;
+                  padding: 0;
+                  margin: 0;
+            }
+
+            /*左侧导航标签*/
+            .myMenu li a {
+                  background-color: #ff8800;
+                  padding: 12px;
+                  text-decoration: none;
+                  font-size: 16px;
+                  color: black;
+                  display: block;
+            }
+
+            /*左侧导航标签效果*/
+            .myMenu li a:hover {
+                border-radius: 15px;
+            }
+
+            .domain_title{
+                font-weight: bold;
+                font-size: 20px;
+                color: #2b669a;
+            }
+
+            #branch0,#branch1,#branch2,#branch3,#branch4{
+                margin-left: 5px;
+                max-height: 250px;
+                overflow: auto;
+            }
+
+            .start_time{
+                margin-left: 5px;
+            }
+            .weui-input{
+                margin-top: 2px;
+                border-radius: 5px;
+                width: 210px;
+                text-align: center;
+            }
+
+            #waird0,#waird1,#waird2,#waird3,#waird4,#waird5{
+                 background-color: green;
+            }
+
+            #waird0:hover,#waird1:hover,#waird2:hover,#waird3:hover,#waird4:hover,#waird5:hover{
+                background-color: gold !important;
+                color: red !important;
+            }
+
+            #waird:hover{
+                background-color: gold !important;
+                color: red;
+            }
+
+            .reset_btn{
+                color: green;
+            }
+            .submit_btn{
+                margin-left: 190px;
+            }
+
+            .reset_btn:hover,.submit_btn:hover{
+                color: red;
+                background-color: gold;
+            }
+
+            .myMenu_domain_show a{
+                background-color: #fff4e8 !important;
+                color: #2b669a !important;
+                font-weight: bold;
+                border-radius: 15px;
+            }
+
+            /*任务表*/
+            .crontab td {
+                text-align: center;
+                padding: 10px;
+            }
+
+            .interval_time{
+                margin-left: 5px;
+                margin-top: 5px;
+                font-size: 18px;
+            }
+
+            .selectpicker{
+                margin-left: 5px;
+                background-color: #FFF;
+                border: 1px solid #28a4c9 !important;
+                overflow: auto;
+            }
+
+            /*多选下拉框*/
+            .dropdown-menu{
+                max-height: 250px;
+                overflow: auto;
+                margin-left: 5px;
+            }
+
+            .reslut_con{
+                background-color: #f9f7f6;
+                height: 100%;
+                border: 2px solid #ff8800;
+            }
+
+            .result_title{
+                padding-top: 5px;
+                padding-left: 10px;
+                height: 32px;
+                font-weight: bold;
+                background-color: #ff9c01;
+                color: #2b669a;
+                margin: 0;
+            }
+
+            .management_con{
+                height: 38px;
+                text-align: left;
+                font-size: 16px;
+                padding-top: 9px;
+            }
+
+            .management_con label{
+                height: 40px;
+                margin-top: -10px;
+                margin-right: 10px;
+                font-size: 15px;
+                padding-top: 10px;
+            }
+
+            .management_con input{
+                height: 32px;
+                width: 100%;
+                margin-top: -20px;
+                border:none;
+                border-radius:5px;
+                font-size: 16px;
+                background-color: #ffccaa;
+                padding-left: 5px;
+            }
+
+            #management_reset_btn,#management_reset_btn2{
+                margin-left: 150px;
+            }
+
+        </style>
+    {% endblock %}
+
+    <div id="card_con">
+        <h2 style="font-weight: bold">神兵卡片管理</h2>
+
+        <div class="notice">
+            <!--标识，用于左侧菜单-->
+            <input type="text" style="display: none" id="notice_title_domain_name" value="{{domain_name}}">
+
+            <div class="notice_title" id="notice_title">
+                <ul>
+                    <span class="wow">领域</span>
+                        <li class="{{myMenu0}}">
+                            <a href="JavaScript:void(0);">按时间移动卡片</a>
+                        </li>
+
+                        <li class="{{myMenu1}}">
+                            <a href="JavaScript:void(0);">定时移动卡片</a>
+                        </li>
+
+                        <li class="{{myMenu2}}">
+                            <a href="JavaScript:void(0);">非编码卡片移动</a>
+                        </li>
+
+                        <li class="{{myMenu3}}">
+                            <a href="JavaScript:void(0);">任意卡片移动</a>
+                        </li>
+
+                        <li class="{{myMenu4}}">
+                            <a href="JavaScript:void(0);">全量移动卡片</a>
+                        </li>
+
+                        <li class="{{myMenu5}}">
+                            <a href="JavaScript:void(0);">领域管理</a>
+                        </li>
+                </ul>
+            </div>
+
+            <div class="notice_con" id="notice_con">
+              {% if myMenu0 %}
+                <div class="mod" style="display: block">
+              {% else %}
+                <div class="mod" style="display: none">
+              {% endif %}
+                    <div class="row">
+                      <div class="left">
+                        <input type="text" class="mySearch" id="mySearch0" onkeyup="myFunction0()" placeholder="搜索.." title="输入分类">
+                        <ul class="myMenu" id="myMenu0">
+                            {% for domain_name in domain_list %}
+                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}&feature=myMenu0">{{domain_name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                      </div>
+
+
+                      <div class="center">
+                          <br>
+                          <div class="domain_title" >领域：{{domain_name}}</div>
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu0" style="display: none">
+                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                  <button type="submit" class="btn btn-primary" id="waird0" title="获取神兵空间版本">同步神兵</button>
+                              </form>
+
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="feature" value="myMenu1" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                      <label class="btn btn-primary pull-left" for="branch0">选择分支：</label>
+                                      <select class="selectpicker" name="branch" id="branch0" data-style="selectpicker" data-live-search="true" required>
+                                        {% for branch in branch_list %}
+                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% endfor %}
+                                      </select>
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">起始时间：</label>
+                                      <span class="start_time">{{ date_form.Datetime }}</span>
+                                  </div>
+
+                                  <br><br>
+                                  <button type="reset" class="btn btn-default reset_btn" onclick=doReset()>重置</button>
+                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                              </form>
+                          </div>
+                        <!--center end-->
+
+                      <div class="right">
+                          <div class="reslut_con">
+                              <h4 class="result_title">运行结果：</h4>
+                              <div class="result_content">
+                                  111
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+
+                  {% if myMenu1 %}
+                <div class="mod" style="display: block">
+              {% else %}
+                <div class="mod" style="display: none">
+              {% endif %}
+                    <div class="row">
+                      <div class="left">
+                        <input type="text" class="mySearch" id="mySearch1" onkeyup="myFunction1()" placeholder="搜索.." title="输入分类">
+                        <ul class="myMenu" id="myMenu1">
+                          {% for domain_name in domain_list %}
+                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}&feature=myMenu1">{{domain_name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                      </div>
+
+                      <div class="center">
+                          <br>
+                          <div class="domain_title" >领域：{{domain_name}}</div>
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu1" style="display: none">
+                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                  <button type="submit" class="btn btn-primary" id="waird1" title="获取神兵空间版本">同步神兵</button>
+                              </form>
+                              <hr>
+                              <div>
+                                  <h4 style="font-weight: bold">现有任务：</h4>
+                                  <table border="1"  cellspacing="50" class="crontab">
+                                      <tr>
+                                          <td>分支名</td>
+                                          <td>开始时间</td>
+                                          <td>结束时间</td>
+                                          <td>触发间隔</td>
+                                          <td>状态</td>
+                                          <td>操作</td>
+                                      </tr>
+                                      <tr>
+                                          <td>BRON-CLSS1.1.0</td>
+                                          <td>2020-09-10 00:00</td>
+                                          <td>2020-09-11 00:00</td>
+                                          <td>30分钟</td>
+                                          <td>生效中</td>
+                                          <td><a href="#">删除</a></td>
+                                      </tr>
+                                  </table>
+                              </div>
+
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="feature" value="myMenu1" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                      <label class="btn btn-primary pull-left" for="branch1">选择分支：</label>
+                                      <select class="selectpicker" name="branch" id="branch1" data-style="selectpicker" data-live-search=”true” required>
+                                        {% for branch in branch_list %}
+                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% endfor %}
+                                      </select>
+                                  </div>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">起始时间：</label>
+                                      <span class="start_time">{{ date_form.Datetime }}</span>
+                                  </div>
+
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">结束时间：</label>
+                                      <span class="start_time">{{ date_form.Datetime }}</span>
+                                  </div>
+
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">时间间隔：</label>
+                                      <select class='interval_time' required>
+                                        <option value ="volvo">30分钟</option>
+                                        <option value ="saab">1小时</option>
+                                        <option value ="mercedes">1天</option>
+                                        <option value ="audi">3天</option>
+                                    </select>
+                                  </div>
+
+                                  <br><br>
+                                  <button type="reset" class="btn btn-default reset_btn">重置</button>
+                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                              </form>
+                          </div>
+                        <!--center end-->
+
+                      <div class="right">
+                          <div class="reslut_con">
+                              <h4 class="result_title">运行结果：</h4>
+                              <div class="result_content">
+                                  111
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+
+              {% if myMenu2 %}
+                <div class="mod" style="display: block">
+              {% else %}
+                <div class="mod" style="display: none">
+              {% endif %}
+                    <div class="row">
+                      <div class="left">
+                        <input type="text" class="mySearch" id="mySearch2" onkeyup="myFunction2()" placeholder="搜索.." title="输入分类">
+                        <ul class="myMenu" id="myMenu2">
+                          {% for domain_name in domain_list %}
+                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}">{{domain_name}}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+
+                      <div class="center">
+                          <br>
+                          <div class="domain_title" >领域：{{domain_name}}</div>
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu2" style="display: none">
+                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                  <button type="submit" class="btn btn-primary" id="waird2" title="获取神兵空间版本">同步神兵</button>
+                              </form>
+
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="feature" value="myMenu2" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                      <label class="btn btn-primary pull-left" for="branch2">选择分支：</label>
+                                      <select class="selectpicker" name="branch" id="branch2" data-style="selectpicker" data-live-search=”true” required>
+                                        {% for branch in branch_list %}
+                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% endfor %}
+                                      </select>
+                                  </div>
+                                  <br>
+                                   <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">选择卡片ID：</label>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                        <option value="北京">北京</option>
+                                        <option value="天津">天津</option>
+                                        <option value="河北省">河北省</option>
+                                        <option value="山西省">山西省</option>
+                                        <option value="内蒙古自治区">内蒙古自治区</option>
+                                        <option value="辽宁省">辽宁省</option>
+                                        <option value="吉林省">吉林省</option>
+                                        <option value="黑龙江省">黑龙江省</option>
+                                      </select>
+                                   </div>
+
+                                  <br><br>
+                                  <button type="reset" class="btn btn-default reset_btn">重置</button>
+                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                              </form>
+
+                          </div>
+                        <!--center end-->
+
+                      <div class="right">
+                          <div class="reslut_con">
+                              <h4 class="result_title">运行结果：</h4>
+                              <div class="result_content">
+                                  111
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+              {% if myMenu3 %}
+                <div class="mod" style="display: block">
+              {% else %}
+                <div class="mod" style="display: none">
+              {% endif %}
+                    <div class="row">
+                      <div class="left">
+                        <input type="text" class="mySearch" id="mySearch3" onkeyup="myFunction3()" placeholder="搜索.." title="输入分类">
+                        <ul class="myMenu" id="myMenu3">
+                          {% for domain_name in domain_list %}
+                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}">{{domain_name}}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+
+                      <div class="center">
+                          <br>
+                          <div class="domain_title" >领域：{{domain_name}}</div>
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu3" style="display: none">
+                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                  <button type="submit" class="btn btn-primary" id="waird3" title="获取神兵空间版本">同步神兵</button>
+                              </form>
+
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="feature" value="myMenu3" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                      <label class="btn btn-primary pull-left" for="branch3">选择分支：</label>
+                                      <select class="selectpicker" name="branch" id="branch3" data-style="selectpicker" data-live-search=”true” required>
+                                        {% for branch in branch_list %}
+                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% endfor %}
+                                      </select>
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">选择卡片ID：</label>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                        <option value="北京">北京</option>
+                                        <option value="天津">天津</option>
+                                        <option value="河北省">河北省</option>
+                                        <option value="山西省">山西省</option>
+                                        <option value="内蒙古自治区">内蒙古自治区</option>
+                                        <option value="辽宁省">辽宁省</option>
+                                        <option value="吉林省">吉林省</option>
+                                        <option value="黑龙江省">黑龙江省</option>
+                                      </select>
+                                   </div>
+
+                                  <br><br>
+                                  <button type="reset" class="btn btn-default reset_btn">重置</button>
+                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                              </form>
+                          </div>
+                        <!--center end-->
+
+                      <div class="right">
+                          <div class="reslut_con">
+                              <h4 class="result_title">运行结果：</h4>
+                              <div class="result_content">
+                                  111
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+              {% if myMenu4 %}
+                <div class="mod" style="display: block">
+              {% else %}
+                <div class="mod" style="display: none">
+              {% endif %}
+                    <div class="row">
+                      <div class="left">
+                        <input type="text" class="mySearch" id="mySearch4" onkeyup="myFunction4()" placeholder="搜索.." title="输入分类">
+                        <ul class="myMenu" id="myMenu4">
+                          {% for domain_name in domain_list %}
+                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}">{{domain_name}}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+
+                      <div class="center">
+                          <br>
+                          <div class="domain_title" >领域：{{domain_name}}</div>
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu4" style="display: none">
+                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                  <button type="submit" class="btn btn-primary" id="waird4" title="获取神兵空间版本">同步神兵</button>
+                              </form>
+
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="feature" value="myMenu4" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                      <label class="btn btn-primary pull-left" for="branch4">选择分支：</label>
+                                          <select class="selectpicker" name="branch" id="branch4" data-style="selectpicker" data-live-search=”true” required>
+                                        {% for branch in branch_list %}
+                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% endfor %}
+                                      </select>
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">选择卡片ID：</label>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                        <option value="北京">北京</option>
+                                        <option value="天津">天津</option>
+                                        <option value="河北省">河北省</option>
+                                        <option value="山西省">山西省</option>
+                                        <option value="内蒙古自治区">内蒙古自治区</option>
+                                        <option value="辽宁省">辽宁省</option>
+                                        <option value="吉林省">吉林省</option>
+                                        <option value="黑龙江省">黑龙江省</option>
+                                      </select>
+                                   </div>
+
+                                  <br><br>
+                                  <button type="reset" class="btn btn-default reset_btn">重置</button>
+                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                              </form>
+                          </div>
+                        <!--center end-->
+
+                      <div class="right">
+                          <div class="reslut_con">
+                              <h4 class="result_title">运行结果：</h4>
+                              <div class="result_content">
+                                  111
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+              {% if myMenu5 %}
+                <div class="mod" style="display: block">
+              {% else %}
+                <div class="mod" style="display: none">
+              {% endif %}
+                    <div class="row">
+                      <div class="left">
+                        <input type="text" class="mySearch" id="mySearch5" onkeyup="myFunction5()" placeholder="搜索.." title="输入分类">
+                        <ul class="myMenu" id="myMenu5">
+                          {% for domain_name in domain_list %}
+                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}">{{domain_name}}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+
+                      <div class="center">
+                          <br>
+                          <div class="domain_title" >领域：{{domain_name}}</div>
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu5" style="display: none">
+                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                  <button type="submit" class="btn btn-primary" id="waird5" title="获取神兵空间版本">同步神兵</button>
+                              </form>
+
+                              <hr>
+                              <form class='form-register' action="modifyCardStatus" method="get">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="feature" value="myMenu5" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                      <div class="management_con">
+                                          <label class="btn btn-primary pull-left" for="domain_name_management">神兵空间简称：</label>
+                                          <input type="text" id="domain_name_management" name="domain_name_management" value="{{domain_name}}" required>
+                                      </div>
+                                      <hr>
+                                      <div class="management_con">
+                                          <label class="btn btn-primary pull-left" for="projectId">项目id：</label>
+                                          <input type="text" id="projectId" name="projectId" value="projectId_list" required>
+                                      </div>
+                                      <hr>
+                                      <div class="management_con">
+                                          <label class="btn btn-primary pull-left" for="privateKey">privateKey：</label>
+                                          <input type="text" id="privateKey" name="privateKey" value="privateKey" required>
+                                      </div>
+                                      <hr>
+                                      <div class="management_con">
+                                          <label class="btn btn-primary pull-left" for="member">成员：</label>
+                                          <input type="text" id="member" name="member" value="member_list" required>
+                                      </div>
+                                  </div>
+
+                                  <br><br><br><br>
+                                  <button type="reset" class="btn btn-default reset_btn" id="management_reset_btn">重置</button>
+                                  <button type="submit" class="btn btn-primary submit_btn">更改</button>
+                              </form>
+                          </div>
+                        <!--center end-->
+
+                      <div class="right" id="add_con">
+                          <input class="btn btn-primary" id="add_button" type="button" name="" value="新增领域">
+                          <div id="add_domain">
+                                <div class="new_domain_con ">
+                                    <form class='form-register' action="modifyCardStatus" method="get">
+                                          {% csrf_token %}
+                                          <div>
+                                              <input type="text" name="feature" value="myMenu5" style="display: none">
+                                              <input type="text" class="add_input" name="domain_name" value="{{domain_name}}" style="display: none">
+
+                                              <div class="management_con">
+                                                  <label class="btn btn-primary pull-left" style="background-color: green">神兵空间简称：</label>
+                                                  <input type="text" class="add_input" name="domain_name_management" value="{{domain_name}}" required>
+                                              </div>
+                                              <hr>
+                                              <div class="management_con">
+                                                  <label class="btn btn-primary pull-left" style="background-color: green">项目id：</label>
+                                                  <input type="text" class="add_input" name="projectId" value="projectId_list" required>
+                                              </div>
+                                              <hr>
+                                              <div class="management_con">
+                                                  <label class="btn btn-primary pull-left" style="background-color: green">privateKey：</label>
+                                                  <input type="text" class="add_input" name="privateKey" value="privateKey" required>
+                                              </div>
+                                              <hr>
+                                              <div class="management_con">
+                                                  <label class="btn btn-primary pull-left" style="background-color: green">成员：</label>
+                                                  <input type="text" class="add_input" name="member" value="member_list" required>
+                                              </div>
+                                          </div>
+
+                                          <br><br>
+                                          <button type="reset" class="btn btn-default reset_btn" id="management_reset_btn2">重置</button>
+                                          <button type="submit" class="btn btn-primary submit_btn" style="background-color: green">提交</button>
+                                     </form>
+                                </div>
+                          </div>
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <hr>
+        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+        <br><br><br><br>
+        <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+        <br><br><br><br>
+
+    </div>
+
+{% endblock %}

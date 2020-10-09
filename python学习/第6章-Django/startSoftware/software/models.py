@@ -1,6 +1,7 @@
 # coding:utf-8
 from django.db import models
 from django import forms
+import datetime
 
 # Create your models here.
 class AppInfo(models.Model):
@@ -53,14 +54,20 @@ class DateForm(forms.Form):
     ServerIP = forms.CharField(label="服务器的IP", max_length=128, widget=forms.TextInput(attrs={'class': 'serverip'}))
     # 实现可选的日期输入格式
     # Date = forms.DateField(label='日期', widget=forms.DateInput(attrs={'type': 'date'}))
-    Datetime = forms.DateTimeField(label='日期和时间', input_formats=['%Y-%m-%dT%H:%M'],
+    Datetime = forms.DateTimeField(initial=datetime.datetime.now().strftime('%Y-%m-%dT%H:%M'),label='日期和时间', input_formats=['%Y-%m-%dT%H:%M'],
                                    widget=forms.DateTimeInput(attrs={'class': 'weui-input',
                                                                      'type': 'datetime-local',
                                                                      'emptyTips': '请选择时间'}))
-    ServerDatetime = forms.DateTimeField(label='日期和时间', input_formats=['%Y-%m-%dT%H:%M'],
+    ServerDatetime = forms.DateTimeField(initial=datetime.datetime.now().strftime('%Y-%m-%dT%H:%M'),label='日期和时间', input_formats=['%Y-%m-%dT%H:%M'],
                                          widget=forms.DateTimeInput(attrs={'class': 'weui-input',
                                                                            'type': 'datetime-local',
                                                                            'emptyTips': '请选择时间'}))
+
+class ModifyCard(forms.Form):
+    Datetime = forms.DateTimeField(initial=datetime.datetime.now().strftime('%Y-%m-%dT00:00'),label='日期和时间', input_formats=['%Y-%m-%dT%H:%M'],
+                                   widget=forms.DateTimeInput(attrs={'class': 'weui-input',
+                                                                     'type': 'datetime-local',
+                                                                     'emptyTips': '请选择时间'}))
 
 class DelForm(forms.Form):
     MyJobID = forms.CharField(label="线程ID", max_length=128, widget=forms.TextInput(attrs={'class': 'myjobid'}))
