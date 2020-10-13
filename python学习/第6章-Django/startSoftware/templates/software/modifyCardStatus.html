@@ -2,13 +2,13 @@
 
 {% extends 'software_base.html' %}
 {% load staticfiles %}
-{% block title %}投产材料管理{% endblock %}
+{% block title %}神兵卡片管理{% endblock %}
 
 {% block content %}
     {% block scripts %}
-    <link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.min.css' %}"/>
-    <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap/defaults-zh_CN.min.js' %}"></script>
+    <!--<link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.min.css' %}"/>-->
+    <!--<script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.min.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'js/bootstrap/defaults-zh_CN.min.js' %}"></script>-->
     <script type="text/javascript">
         function $(id) {
             return typeof id==='string'?document.getElementById(id):id;
@@ -637,7 +637,7 @@
                                   </div>
                                   <div style="font-size: 17px;">
                                       <label class="btn btn-primary pull-left">项目 ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
                                         <option value="北京">北京</option>
                                         <option value="天津">天津</option>
                                         <option value="河北省">河北省</option>
@@ -743,7 +743,7 @@
 
                                   <div style="font-size: 17px;">
                                       <label class="btn btn-primary pull-left">项目 ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
                                         <option value="北京">北京</option>
                                         <option value="天津">天津</option>
                                         <option value="河北省">河北省</option>
@@ -756,7 +756,7 @@
                                   </div>
                                   <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left" for="branch1">选择分支：</label>
-                                      <select class="selectpicker" name="branch" id="branch1" data-style="selectpicker" data-live-search=”true” required>
+                                      <select class="selectpicker" name="branch" id="branch1" data-style="selectpicker" data-live-search="true" required>
                                         {% for branch in branch_list %}
                                             <option value="{{branch}}">{{branch}}</option>
                                         {% endfor %}
@@ -835,7 +835,7 @@
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
                                       <label class="btn btn-primary pull-left" for="branch2">选择分支：</label>
-                                      <select class="selectpicker" name="branch" id="branch2" data-style="selectpicker" data-live-search=”true” required>
+                                      <select class="selectpicker" name="branch" id="branch2" data-style="selectpicker" data-live-search="true" required>
                                         {% for branch in branch_list %}
                                             <option value="{{branch}}">{{branch}}</option>
                                         {% endfor %}
@@ -844,7 +844,7 @@
                                   <br>
                                    <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left">选择卡片ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
                                         <option value="北京">北京</option>
                                         <option value="天津">天津</option>
                                         <option value="河北省">河北省</option>
@@ -910,7 +910,7 @@
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
                                       <label class="btn btn-primary pull-left" for="branch3">选择分支：</label>
-                                      <select class="selectpicker" name="branch" id="branch3" data-style="selectpicker" data-live-search=”true” required>
+                                      <select class="selectpicker" name="branch" id="branch3" data-style="selectpicker" data-live-search="true" required>
                                         {% for branch in branch_list %}
                                             <option value="{{branch}}">{{branch}}</option>
                                         {% endfor %}
@@ -919,7 +919,7 @@
                                   <br>
                                   <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left">选择卡片ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
                                         <option value="北京">北京</option>
                                         <option value="天津">天津</option>
                                         <option value="河北省">河北省</option>
@@ -984,7 +984,7 @@
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
                                       <label class="btn btn-primary pull-left" for="branch4">选择分支：</label>
-                                          <select class="selectpicker" name="branch" id="branch4" data-style="selectpicker" data-live-search=”true” required>
+                                          <select class="selectpicker" name="branch" id="branch4" data-style="selectpicker" data-live-search="true" required>
                                         {% for branch in branch_list %}
                                             <option value="{{branch}}">{{branch}}</option>
                                         {% endfor %}
@@ -993,7 +993,7 @@
                                   <br>
                                   <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left">选择卡片ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
                                         <option value="北京">北京</option>
                                         <option value="天津">天津</option>
                                         <option value="河北省">河北省</option>
