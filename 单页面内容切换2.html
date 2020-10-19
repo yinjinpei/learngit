@@ -1,87 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>点击按钮修改内容-jq22.com</title>
-<script src="js/jquery-3.5.1.min.js"></script>
-<style>
-    li {
-    list-style:none;
-    }
-    ul {
-    width:600px;
-    border:1px solid rgb(184,207,250);
-    margin:50px auto;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:1px 3px 10px rgb(176,217,250);
-    }
-    ul>li {
-    overflow:hidden;
-    width:100%;
-    border-bottom:1px dashed #f60;
-    }
-    li>p {
-    float:left;
-    width:540px;
-    outline:none;
-    }
-    input[type=button] {
-    float:right;
-    margin-top:18px;
-    outline:none;
-    border:none;
-    cursor:pointer;
-    width:40px;
-    height:24px;
-    font-size:12px;
-    background-color:#51cbfc;
-    color:#fff;
-    border-radius:5px;
-    }
-</style>
+<head><title>jQuery bootstrap-select可搜索多选下拉列表插件</title>
+    <script src="js/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="js/bootstrap/"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-select.css"/>
+    <link href="../css/dist/css/bootstrap.css" rel="stylesheet"/>
+    <script src="../css/dist/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+        $('.selectpicker').selectpicker({
+            'selectedText': 'cat',
+            header: 'Select a condiment',
+            'noneSelectedText': '请选择',
+            'deselectAllText': '全不选',
+            'selectAllText': '全选'
+        });
+    }); </script>
 </head>
-<body>
-<div id="modified">
-    <p>123</p>
-    <ul>
-        <li id="con">
-            <p>内容1</p>
-            <input type="button" value="修改">
-        </li>
-        <li>
-            <p>内容2</p>
-            <input type="button" value="修改">
-        </li>
-        <li>
-            <p>内容3</p>
-            <input type="button" value="修改">
-        </li>
-    </ul>
-</div>
-
-<script>
-    var pText = $('#con').getElementsByTagName('p'),
-        btn = document.getElementsByTagName('input');
-
-    for (var i = 0; i < btn.length; i++) {
-        btn[i].index = i;
-        btn[i].flag = false; // 不可修改
-        btn[i].onclick = function() {
-            if (this.flag) {
-                this.style.cssText = 'background:#51cbfc;color:#fff;';
-                this.value = '修改';
-                pText[this.index].setAttribute('contenteditable', false) // 当前p标签可编辑属性为假
-            } else { // 不可修改 变为可修改
-                this.style.cssText = 'background:#f60;color:#fff;';
-                this.value = '确定';
-                pText[this.index].setAttribute('contenteditable', true);
-                pText[this.index].focus(); //  聚焦
-            }
-            this.flag = !this.flag;
-        }
-    }
-</script>
-
-</body>
+<body><select class="selectpicker" multiple data-live-search="true" data-actions-box="true">
+    <option>name</option>
+    <option>addr</option>
+    <option>email</option>
+    <option selected>phone</option>
+    <option>tel</option>
+</select></body>
 </html>

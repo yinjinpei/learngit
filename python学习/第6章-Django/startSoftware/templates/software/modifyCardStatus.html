@@ -2,13 +2,13 @@
 
 {% extends 'software_base.html' %}
 {% load staticfiles %}
-{% block title %}投产材料管理{% endblock %}
+{% block title %}神兵卡片管理{% endblock %}
 
 {% block content %}
     {% block scripts %}
-    <link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.min.css' %}"/>
-    <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/bootstrap/defaults-zh_CN.min.js' %}"></script>
+    <!--<link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.min.css' %}"/>-->
+    <!--<script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.min.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'js/bootstrap/defaults-zh_CN.min.js' %}"></script>-->
     <script type="text/javascript">
         function $(id) {
             return typeof id==='string'?document.getElementById(id):id;
@@ -257,7 +257,7 @@
             }
 
             .notice{
-                max-height: 800px;
+                max-height: 850px;
                 border: 2px solid #ff8800;
                 overflow: hidden;
                 background-color: #fff4e8;
@@ -329,7 +329,7 @@
             注意：如果元素不是弹性盒模型对象的子元素，则 flex 属性不起作用。
             */
             .row {
-                height: 600px;
+                height: 650px;
                 display: flex;
                 overflow: auto;
             }
@@ -359,13 +359,13 @@
             /*!* 中间(内容) *!*/
             .center {
                 /*flex: 85%; !*让所有弹性盒模型对象的子元素的长度为85%，且忽略它们内部的内容*!*/
-                width: 40%;
+                width: 45%;
                 padding: 15px;
                 text-align: left;
             }
 
             .right{
-                width: 50%;
+                width: 44%;
                 padding: 15px;
                 text-align: left;
             }
@@ -490,6 +490,8 @@
             .crontab td {
                 text-align: center;
                 padding: 10px;
+                max-width: 150px;
+                overflow: auto;
             }
 
             .interval_time{
@@ -632,7 +634,22 @@
                                   <div>
                                       <input type="text" name="feature" value="myMenu1" style="display: none">
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
-
+                                  </div>
+                                  <div style="font-size: 17px;">
+                                      <label class="btn btn-primary pull-left">项目 ID：</label>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
+                                        <option value="北京">北京</option>
+                                        <option value="天津">天津</option>
+                                        <option value="河北省">河北省</option>
+                                        <option value="山西省">山西省</option>
+                                        <option value="内蒙古自治区">内蒙古自治区</option>
+                                        <option value="辽宁省">辽宁省</option>
+                                        <option value="吉林省">吉林省</option>
+                                        <option value="黑龙江省">黑龙江省</option>
+                                      </select>
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left" for="branch0">选择分支：</label>
                                       <select class="selectpicker" name="branch" id="branch0" data-style="selectpicker" data-live-search="true" required>
                                         {% for branch in branch_list %}
@@ -680,7 +697,7 @@
                         </ul>
                       </div>
 
-                      <div class="center">
+                      <div class="center" style="width: 100% !important;">
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
                               <hr>
@@ -696,6 +713,7 @@
                                   <h4 style="font-weight: bold">现有任务：</h4>
                                   <table border="1"  cellspacing="50" class="crontab">
                                       <tr>
+                                          <td>项目 ID</td>
                                           <td>分支名</td>
                                           <td>开始时间</td>
                                           <td>结束时间</td>
@@ -704,6 +722,7 @@
                                           <td>操作</td>
                                       </tr>
                                       <tr>
+                                          <td>1112,11131112,11131112,11131112,1113</td>
                                           <td>BRON-CLSS1.1.0</td>
                                           <td>2020-09-10 00:00</td>
                                           <td>2020-09-11 00:00</td>
@@ -720,9 +739,24 @@
                                   <div>
                                       <input type="text" name="feature" value="myMenu1" style="display: none">
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+                                  </div>
 
+                                  <div style="font-size: 17px;">
+                                      <label class="btn btn-primary pull-left">项目 ID：</label>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
+                                        <option value="北京">北京</option>
+                                        <option value="天津">天津</option>
+                                        <option value="河北省">河北省</option>
+                                        <option value="山西省">山西省</option>
+                                        <option value="内蒙古自治区">内蒙古自治区</option>
+                                        <option value="辽宁省">辽宁省</option>
+                                        <option value="吉林省">吉林省</option>
+                                        <option value="黑龙江省">黑龙江省</option>
+                                      </select>
+                                  </div>
+                                  <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left" for="branch1">选择分支：</label>
-                                      <select class="selectpicker" name="branch" id="branch1" data-style="selectpicker" data-live-search=”true” required>
+                                      <select class="selectpicker" name="branch" id="branch1" data-style="selectpicker" data-live-search="true" required>
                                         {% for branch in branch_list %}
                                             <option value="{{branch}}">{{branch}}</option>
                                         {% endfor %}
@@ -747,22 +781,21 @@
                                         <option value ="audi">3天</option>
                                     </select>
                                   </div>
-
-                                  <br><br>
+                                  <br>
                                   <button type="reset" class="btn btn-default reset_btn">重置</button>
                                   <button type="submit" class="btn btn-primary submit_btn">提交</button>
                               </form>
                           </div>
                         <!--center end-->
 
-                      <div class="right">
-                          <div class="reslut_con">
-                              <h4 class="result_title">运行结果：</h4>
-                              <div class="result_content">
-                                  111
-                              </div>
-                          </div>
-                      </div>
+                      <!--<div class="right">-->
+                          <!--<div class="reslut_con">-->
+                              <!--<h4 class="result_title">运行结果：</h4>-->
+                              <!--<div class="result_content">-->
+                                  <!--111-->
+                              <!--</div>-->
+                          <!--</div>-->
+                      <!--</div>-->
                     </div>
                 </div>
 
@@ -802,7 +835,7 @@
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
                                       <label class="btn btn-primary pull-left" for="branch2">选择分支：</label>
-                                      <select class="selectpicker" name="branch" id="branch2" data-style="selectpicker" data-live-search=”true” required>
+                                      <select class="selectpicker" name="branch" id="branch2" data-style="selectpicker" data-live-search="true" required>
                                         {% for branch in branch_list %}
                                             <option value="{{branch}}">{{branch}}</option>
                                         {% endfor %}
@@ -811,7 +844,7 @@
                                   <br>
                                    <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left">选择卡片ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
                                         <option value="北京">北京</option>
                                         <option value="天津">天津</option>
                                         <option value="河北省">河北省</option>
@@ -877,7 +910,7 @@
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
                                       <label class="btn btn-primary pull-left" for="branch3">选择分支：</label>
-                                      <select class="selectpicker" name="branch" id="branch3" data-style="selectpicker" data-live-search=”true” required>
+                                      <select class="selectpicker" name="branch" id="branch3" data-style="selectpicker" data-live-search="true" required>
                                         {% for branch in branch_list %}
                                             <option value="{{branch}}">{{branch}}</option>
                                         {% endfor %}
@@ -886,7 +919,7 @@
                                   <br>
                                   <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left">选择卡片ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
                                         <option value="北京">北京</option>
                                         <option value="天津">天津</option>
                                         <option value="河北省">河北省</option>
@@ -951,7 +984,7 @@
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
                                       <label class="btn btn-primary pull-left" for="branch4">选择分支：</label>
-                                          <select class="selectpicker" name="branch" id="branch4" data-style="selectpicker" data-live-search=”true” required>
+                                          <select class="selectpicker" name="branch" id="branch4" data-style="selectpicker" data-live-search="true" required>
                                         {% for branch in branch_list %}
                                             <option value="{{branch}}">{{branch}}</option>
                                         {% endfor %}
@@ -960,7 +993,7 @@
                                   <br>
                                   <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left">选择卡片ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search=”true” required>
+                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
                                         <option value="北京">北京</option>
                                         <option value="天津">天津</option>
                                         <option value="河北省">河北省</option>
