@@ -1,0 +1,28 @@
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+
+<script type="text/javascript">
+function timedMsg()
+{
+  obtn=document.getElementById('mybtn0');
+  obtn.style.display='none';
+  // obtn.disabled=true;
+  setTimeout("obtn.style.display='block'",5000);
+  // alert('hihi');
+  submit();
+  // alert('kkkk');
+
+}
+</script>
+
+</head>
+
+<body>
+<form>
+<input type="button" value="Display timed alertbox!" id="mybtn0" onClick="timedMsg()">
+</form>
+
+</body>
+ </html>

@@ -1675,21 +1675,28 @@ def modifyCardStatus(request):
 
     # 获取领域名
     domain_name='BRON-CLSS'
-    print('domain: ',request.GET.get('domain_name'))
     if request.GET.get('domain_name'):
         domain_name=request.GET.get('domain_name')
+        print('domain_name: ', domain_name)
 
-    if request.GET.get('waird'):
-        domain_name=request.GET.get('waird')
-    sync_domain_by_waird = request.GET.get('waird')
-    print('sync_domain_by_waird: ', sync_domain_by_waird)
+    if request.method == 'POST':
+        if request.POST.get('sync'):
+            sync_domain_by_waird = request.POST.get('sync')
+            print('sync_domain_by_waird: ', sync_domain_by_waird)
 
-    branch_list=['BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0','BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0']
+        domain_name = request.POST.get('domain_name')
+        print('domain_name: ', domain_name)
+
+
+    branch_list=['BRON-CLSS1.1.0','BRON-CLSS1.2.0','BRON-CLSS1.3.0','BRON-CLSS1.4.0','BRON-CLSS1.5.0']
     date_form = ModifyCard()
     deldate_form = ModifyCard()
 
     # 获取停留在哪个功能页面
-    myMenu = request.GET.get('feature')
+    if request.GET.get('feature'):
+        myMenu = request.GET.get('feature')
+    else:
+        myMenu = request.POST.get('feature')
     print('myMenu: ',myMenu)
     if myMenu == 'myMenu0':
         myMenu0='select'

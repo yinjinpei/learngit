@@ -620,19 +620,19 @@
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <input type="text" name="feature" value="myMenu0" style="display: none">
                                   <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
-                                  <button type="submit" class="btn btn-primary" id="waird0" title="获取神兵空间版本">同步神兵</button>
+                                  <button type="submit" class="btn btn-primary" id="waird0" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
                               </form>
 
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <div>
-                                      <input type="text" name="feature" value="myMenu1" style="display: none">
+                                      <input type="text" name="feature" value="myMenu0" style="display: none">
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
                                   </div>
                                   <div style="font-size: 17px;">
@@ -701,12 +701,12 @@
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <input type="text" name="feature" value="myMenu1" style="display: none">
                                   <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
-                                  <button type="submit" class="btn btn-primary" id="waird1" title="获取神兵空间版本">同步神兵</button>
+                                  <button type="submit" class="btn btn-primary" id="waird1" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
                               </form>
                               <hr>
                               <div>
@@ -734,7 +734,7 @@
                               </div>
 
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <div>
                                       <input type="text" name="feature" value="myMenu1" style="display: none">
@@ -819,16 +819,16 @@
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <input type="text" name="feature" value="myMenu2" style="display: none">
                                   <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
-                                  <button type="submit" class="btn btn-primary" id="waird2" title="获取神兵空间版本">同步神兵</button>
+                                  <button type="submit" class="btn btn-primary" id="waird2" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
                               </form>
 
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <div>
                                       <input type="text" name="feature" value="myMenu2" style="display: none">
@@ -894,16 +894,16 @@
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <input type="text" name="feature" value="myMenu3" style="display: none">
                                   <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
-                                  <button type="submit" class="btn btn-primary" id="waird3" title="获取神兵空间版本">同步神兵</button>
+                                  <button type="submit" class="btn btn-primary" id="waird3" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
                               </form>
 
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <div>
                                       <input type="text" name="feature" value="myMenu3" style="display: none">
@@ -968,16 +968,16 @@
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <input type="text" name="feature" value="myMenu4" style="display: none">
                                   <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
-                                  <button type="submit" class="btn btn-primary" id="waird4" title="获取神兵空间版本">同步神兵</button>
+                                  <button type="submit" class="btn btn-primary" id="waird4" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
                               </form>
 
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <div>
                                       <input type="text" name="feature" value="myMenu4" style="display: none">
@@ -1042,16 +1042,16 @@
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <input type="text" name="feature" value="myMenu5" style="display: none">
                                   <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
-                                  <button type="submit" class="btn btn-primary" id="waird5" title="获取神兵空间版本">同步神兵</button>
+                                  <button type="submit" class="btn btn-primary" id="waird5" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
                               </form>
 
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="get">
+                              <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <div>
                                       <input type="text" name="feature" value="myMenu5" style="display: none">
@@ -1089,7 +1089,7 @@
                           <input class="btn btn-primary" id="add_button" type="button" name="" value="新增领域">
                           <div id="add_domain">
                                 <div class="new_domain_con ">
-                                    <form class='form-register' action="modifyCardStatus" method="get">
+                                    <form class='form-register' action="modifyCardStatus" method="post">
                                           {% csrf_token %}
                                           <div>
                                               <input type="text" name="feature" value="myMenu5" style="display: none">
