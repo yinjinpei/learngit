@@ -590,11 +590,23 @@ def delFile(request):
         print('===================----------------=======================')
         print(downloadFileName)
         print('===================----------------=======================')
+
         if downloadFileName is not None:
-            if os.path.exists(downloadFileName):
-                os.remove(downloadFileName)
-                str_list = downloadFileName.split('/')
-                del_file_message = "【%s】 删除成功！！" % str_list[len(str_list) - 1]
+            lockbaseinfo = LockBaseInfo.lockbase.filter(pathName=dirname)
+            if lockbaseinfo:
+                islock = lockbaseinfo[0].islock
+                if islock:
+                    del_file_message = '已锁库，禁止上传和删除！'
+                else:
+                    if os.path.exists(downloadFileName):
+                        os.remove(downloadFileName)
+                        str_list = downloadFileName.split('/')
+                        del_file_message = "【%s】 删除成功！！" % str_list[len(str_list) - 1]
+            else:
+                if os.path.exists(downloadFileName):
+                    os.remove(downloadFileName)
+                    str_list = downloadFileName.split('/')
+                    del_file_message = "【%s】 删除成功！！" % str_list[len(str_list) - 1]
 
             if dirname:
                 print('dirname不是空值：',dirname)
@@ -672,12 +684,23 @@ def delFile(request):
             path = dirname + '/'
 
             FileName = delFile_form.cleaned_data['FileName']    # 获取删除的文件名
-            if os.path.exists(path+FileName):
-                os.remove(path+FileName)
-                delfile_message="【%s】 删除成功！！"%FileName
+            lockbaseinfo = LockBaseInfo.lockbase.filter(pathName=dirname)
+            if lockbaseinfo:
+                islock = lockbaseinfo[0].islock
+                if islock:
+                    del_file_message = '已锁库，禁止上传和删除！'
+                else:
+                    if os.path.exists(path+FileName):
+                        os.remove(path+FileName)
+                        delfile_message="【%s】 删除成功！！"%FileName
+                    else:
+                        delfile_message = "【%s】 文件不存在，删除失败！！" % FileName
             else:
-                delfile_message = "【%s】 文件不存在，删除失败！！" % FileName
-
+                if os.path.exists(path + FileName):
+                    os.remove(path + FileName)
+                    delfile_message = "【%s】 删除成功！！" % FileName
+                else:
+                    delfile_message = "【%s】 文件不存在，删除失败！！" % FileName
         fileObjectList, dirObjectList= downloadFileInfo(path)
 
         delFile_form = DelFile()
@@ -686,7 +709,6 @@ def delFile(request):
         # return HttpResponse('<h4 style="color: red;font-weight: bold">删除文件后请勿刷新，回退一步或重新打开即可！</h4>')
         user_home = 'uploads/' + request.session['user_name'] + '/'
         path = 'uploads/' + request.session['user_name'] + '/'  # 下载文件路径，相对路径，在项目根目录下
-        print('删除文件使用POST方式')
 
         dirname = request.GET.get('dirname')
 
@@ -859,27 +881,55 @@ def uploadFile(request):
         upload_list_successful=[] # 记录上传成功的文件名
         repeatFileSum=0 # 重名文件的总个数
 
-        if uploadFileList:
-            for file in uploadFileList:
-                print(len(uploadFileList))
-                fileName=str(file) # 上传的文件名
-                print("================== 文件名%s============="%fileName)
-                print(path+fileName)
+        lockbaseinfo = LockBaseInfo.lockbase.filter(pathName=dirname)
+        if lockbaseinfo:
+            islock = lockbaseinfo[0].islock
+            if islock:
+                message='已锁库，禁止上传和删除！'
+            else:
+                if uploadFileList:
+                    for file in uploadFileList:
+                        print(len(uploadFileList))
+                        fileName=str(file) # 上传的文件名
+                        print("================== 文件名%s============="%fileName)
+                        print(path+fileName)
 
-                if os.path.exists(path+fileName):
-                    repeatFileList.append(fileName) # 记录重名的文件名
-                    continue
-                    # return render(request, 'software/uploadFile.html', locals())
-                with open(path + fileName, 'wb+') as destination:
-                    for chunk in file.chunks():
-                        destination.write(chunk)
-                upload_list_successful.append(fileName) # 记录成功上传的文件名
+                        if os.path.exists(path+fileName):
+                            repeatFileList.append(fileName) # 记录重名的文件名
+                            continue
+                            # return render(request, 'software/uploadFile.html', locals())
+                        with open(path + fileName, 'wb+') as destination:
+                            for chunk in file.chunks():
+                                destination.write(chunk)
+                        upload_list_successful.append(fileName) # 记录成功上传的文件名
 
-            message="%d个文件上传成功，%d个文件上传失败！！"%(len(upload_list_successful),len(repeatFileList))
-            if len(upload_list_successful) !=0:
-                upload_successful_message="上传成功列表：%s"%upload_list_successful
-            if len(repeatFileList) != 0:
-                upload_failure_message = "【%d个文件重名，请重新命名再上传！】 失败列表:%s"%(len(repeatFileList),repeatFileList)
+                    message="%d个文件上传成功，%d个文件上传失败！！"%(len(upload_list_successful),len(repeatFileList))
+                    if len(upload_list_successful) !=0:
+                        upload_successful_message="上传成功列表：%s"%upload_list_successful
+                    if len(repeatFileList) != 0:
+                        upload_failure_message = "【%d个文件重名，请重新命名再上传！】 失败列表:%s"%(len(repeatFileList),repeatFileList)
+        else:
+            if uploadFileList:
+                for file in uploadFileList:
+                    print(len(uploadFileList))
+                    fileName = str(file)  # 上传的文件名
+                    print("================== 文件名%s=============" % fileName)
+                    print(path + fileName)
+
+                    if os.path.exists(path + fileName):
+                        repeatFileList.append(fileName)  # 记录重名的文件名
+                        continue
+                        # return render(request, 'software/uploadFile.html', locals())
+                    with open(path + fileName, 'wb+') as destination:
+                        for chunk in file.chunks():
+                            destination.write(chunk)
+                    upload_list_successful.append(fileName)  # 记录成功上传的文件名
+
+                message = "%d个文件上传成功，%d个文件上传失败！！" % (len(upload_list_successful), len(repeatFileList))
+                if len(upload_list_successful) != 0:
+                    upload_successful_message = "上传成功列表：%s" % upload_list_successful
+                if len(repeatFileList) != 0:
+                    upload_failure_message = "【%d个文件重名，请重新命名再上传！】 失败列表:%s" % (len(repeatFileList), repeatFileList)
     else:
         message='温馨提示：可直接用鼠标拖拉多个文件到框框内，鼠标停放框内查看已选择的文件！'
         print(message)
