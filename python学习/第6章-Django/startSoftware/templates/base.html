@@ -47,6 +47,24 @@
         <div class="collapse navbar-collapse" id="my-nav">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">主页</a></li>
+            <li class="active">
+                <div class="btn-group dropdown" id="dropdown">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 50px;">
+                    功能菜单 <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="/versionManagerIndex" >网址大全</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/productionMaterials" >投产材料管理</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/unblockedVersion" >解封版信息收集</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/setServerDate" >服务器时间管理</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/restart_tomcat" >tomcat应用重启</a></li>
+                  </ul>
+                </div>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if request.session.is_login %}
