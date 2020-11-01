@@ -5,6 +5,8 @@ from django.contrib import admin
 from django.urls import path,re_path
 from . import views
 from .views2 import restart_tomcat,productionVserionInfo
+from .views import test
+
 
 
 urlpatterns = [
@@ -35,6 +37,8 @@ urlpatterns = [
     # re_path('exec_command$', views.exec_command, name='exec_command'),
     # re_path('websocket_test$', views.websocket_test, name='websocket_test'),
     re_path('^test$', views.test, name='test'),
+    re_path('^test2$', views.test2, name='test2'),
+    re_path('^timed_task$', views.timed_task, name='timed_task'),
     path('', views.index,name='index'),
     # re_path('^WeChat$' ,views.WeChat,name='WeChat'),
     # re_path('^navicat$' ,views.navicat,name='navicat'),

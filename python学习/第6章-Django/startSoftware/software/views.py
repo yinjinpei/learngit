@@ -29,6 +29,38 @@ logger = logging.getLogger(__name__)
 # 生成一个名为collect的logger实例
 collect_logger = logging.getLogger("collect")
 
+# 启动异步定时任务
+# from apscheduler.schedulers.background import BackgroundScheduler
+# from django_apscheduler.jobstores import DjangoJobStore, register_job
+
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.jobstores.memory import MemoryJobStore
+from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
+from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
+
+
+jobstores = {
+    'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
+}
+executors = {
+    'default': ThreadPoolExecutor(20),
+    'processpool': ProcessPoolExecutor(10)
+}
+job_defaults = {
+    'coalesce': False,
+    'max_instances': 3
+}
+
+# 实例化调度器
+scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults)
+# 调度器开始
+scheduler.start()
+
+
+# print('-'*100)
+# print('所有定时任务：',scheduler.get_jobs())
+# print('-'*100)
 
 # 获取配置
 class getConfig(object):
@@ -1769,28 +1801,27 @@ def modifyCardStatus(request):
     return render(request, 'software/modifyCardStatus.html', locals())
 
 
-
 def test(request):
     path = 'config\\software_config\\report_check_list_config2.ini'
     try:
         config_1=getConfig(path)
         print('-----------------------------------------------------------------1')
-        print(config_1.get_items('report_check_list'))
-        print('-----------------------------------------------------------------2')
-        print(config_1.check_section('report_check_list'))
-        print('-----------------------------------------------------------------3')
-        print(config_1.check_key('report_check_list','ALL'))
-        print('-----------------------------------------------------------------4')
-        print(config_1.check_value('report_check_list','ALL','发布检查单qwe'))
-        print('-----------------------------------------------------------------5')
-        print(config_1.add_section('user'))
-        print('-----------------------------------------------------------------6')
-        print(config_1.set_section('user','b','2'))
-        print(config_1.set_section('user', 'c', '4'))
-        print('-----------------------------------------------------------------7')
-        print(config_1.remove_key('user','b'))
+        # print(config_1.get_items('report_check_list'))
+        # print('-----------------------------------------------------------------2')
+        # print(config_1.check_section('report_check_list'))
+        # print('-----------------------------------------------------------------3')
+        # print(config_1.check_key('report_check_list','ALL'))
+        # print('-----------------------------------------------------------------4')
+        # print(config_1.check_value('report_check_list','ALL','发布检查单qwe'))
+        # print('-----------------------------------------------------------------5')
+        print(config_1.add_section('yinjinpei'))
+        # print('-----------------------------------------------------------------6')
+        # print(config_1.set_section('user','b','2'))
+        # print(config_1.set_section('user', 'c', '4'))
+        # print('-----------------------------------------------------------------7')
+        # print(config_1.remove_key('user','b'))
         print(config_1.save())
-        print('-----------------------------------------------------------------8')
+        # print('-----------------------------------------------------------------8')
         # print(config_1.clear())
         print('-----------------------------------------------------------------9')
         print('-----------------------------------------------------------------10')
@@ -1802,3 +1833,61 @@ def test(request):
     except:
         print('路径有问题！')
     return render(request, 'test.html', locals())
+
+
+def test_job():
+    for i in range(5):
+        t_now = time.localtime()
+        print(t_now)
+
+def test_job2():
+    for i in range(5):
+        print('正在执行任务中。。。')
+
+def timed_task(request):
+    try:
+        # 调度器使用DjangoJobStore()
+        # scheduler.add_jobstore(DjangoJobStore(), "default")
+
+        # 'cron'方式循环，周一到周五，每天9:30:10执行,id为工作ID作为标记
+        # ('scheduler',"interval", seconds=1) #用interval方式循环，每一秒执行一次
+        # @register_job(scheduler, 'cron', day_of_week='mon-fri', hour='9', minute='30', second='10', id='task_time')
+
+        scheduler.add_job(test_job, trigger='interval', id='test_job3', minutes=1, next_run_time=datetime.datetime.now(),
+                          coalesce=True, misfire_grace_time=3000, start_date='2020-10-30 22:12:11',
+                          end_date='2020-11-26 23:00:00', replace_existing=True)
+        scheduler.add_job(test_job2, trigger='interval', id='test_job4', minutes=1, next_run_time=datetime.datetime.now(),
+                          coalesce=True, misfire_grace_time=3000, start_date='2020-10-30 22:12:11',
+                          end_date='2020-11-26 23:00:00', replace_existing=True)
+        # 调度器开始
+        # scheduler.start()
+
+    except Exception as e:
+        print(e)
+        # 报错则调度器停止执行
+        # scheduler.shutdown()
+
+    print(scheduler.get_job(job_id='test_job'))
+    return HttpResponse(scheduler.get_job(job_id='test_job'))
+
+def test2(request):
+
+    return HttpResponse(scheduler.get_job(job_id='test_job'))
+
+# from apscheduler.schedulers.background import BackgroundScheduler
+# from django_apscheduler.jobstores import DjangoJobStore, register_events, register_job
+#
+# scheduler = BackgroundScheduler()  # 创建一个调度器对象
+# scheduler.add_jobstore(DjangoJobStore(), "default")  # 添加一个作业
+# try:
+#     # @register_job(scheduler, 'cron', day_of_week='mon-sun', hour='8', minute='30', second='10', id='delete_stale_data')  # 定时执行：这里定时为周一到周日每天早上8：30执行一次
+#     @register_job(scheduler, "interval", seconds=2)  # 用interval方式,每1秒执行一次
+#     def time_task():
+#         """定时的任务逻辑"""
+#         print("delete_stale_data")
+#     register_events(scheduler)
+#     scheduler.start()
+#     # scheduler.remove_job(time_task)  # 移除定时任务
+# except Exception as e:
+#     print(e)
+#     scheduler.shutdown()
