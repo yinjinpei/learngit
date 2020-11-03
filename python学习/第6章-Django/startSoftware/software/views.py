@@ -521,7 +521,7 @@ def match_productionMaterials(user_name,domain_name,file_path):
     for report in all_check_report:
         try:
             findStr = report_config.get('match_keywords',report)
-            print('%s 的匹配关键字：'%report,findStr)
+            # print('%s 的匹配关键字：'%report,findStr)
         except Exception as e:
             print(e)
             print('本次匹配没有匹配到对应的报告类型！')
@@ -532,7 +532,9 @@ def match_productionMaterials(user_name,domain_name,file_path):
             if matchStr:
                 print('【%s】:【%s】 报告已上传！！' % (report,file))
                 all_check_report_dict[report] = '✔'
+                print(all_check_report_dict)
                 break
+
 
     # 筛选出不涉及的相关测试报告
     uncheck_report = list(set(all_check_report).difference(check_report))
