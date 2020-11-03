@@ -482,7 +482,6 @@ def match_productionMaterials(user_name,domain_name,file_path):
     if version is None:
         version=domain_name
 
-
     # 获取所有文件名
     file_list = os.listdir(file_path)
     if len(file_list) == 0:
@@ -1847,25 +1846,53 @@ def timed_task(request):
     print(scheduler.get_job(job_id='test_job'))
     return HttpResponse(scheduler.get_job(job_id='test_job'))
 
-def test2(request):
-    getMatchKeywords = getConfig('config\\software_config\\match_keywords_config.ini')
-    print(getMatchKeywords.get_keys('match_keywords'))
-    return HttpResponse(scheduler.get_job(job_id='test_job'))
+def test2(request,file_path,domain_name):
+    # 获取版本号
+    version = file_path.split('/')[-1].split('（')[0]
+    if version is None:
+        version = domain_name
 
-# from apscheduler.schedulers.background import BackgroundScheduler
-# from django_apscheduler.jobstores import DjangoJobStore, register_events, register_job
-#
-# scheduler = BackgroundScheduler()  # 创建一个调度器对象
-# scheduler.add_jobstore(DjangoJobStore(), "default")  # 添加一个作业
-# try:
-#     # @register_job(scheduler, 'cron', day_of_week='mon-sun', hour='8', minute='30', second='10', id='delete_stale_data')  # 定时执行：这里定时为周一到周日每天早上8：30执行一次
-#     @register_job(scheduler, "interval", seconds=2)  # 用interval方式,每1秒执行一次
-#     def time_task():
-#         """定时的任务逻辑"""
-#         print("delete_stale_data")
-#     register_events(scheduler)
-#     scheduler.start()
-#     # scheduler.remove_job(time_task)  # 移除定时任务
-# except Exception as e:
-#     print(e)
-#     scheduler.shutdown()
+    # 获取所有文件名
+    file_list = os.listdir(file_path)
+    if len(file_list) == 0:
+        return False
+
+    # 获取领域所需要检查的报告
+    getMatchKeywords = getConfig('config\\software_config\\report_check_list_config.ini')
+    check_report = getMatchKeywords.get_value('match_keywords', domain_name)
+    if len(check_report) == 0:
+        return False
+
+    # 去空格
+    check_report = check_report.strip()
+    # 把字符串(配置)转换为列表
+    check_report = check_report.split(',')
+
+    print('---------------------------------------------------')
+    print('%s检查报告列表：%s' % (domain_name, check_report))
+    print('---------------------------------------------------')
+
+    # 获取所有检查报告，不分前后端
+    all_check_report = getMatchKeywords.get_value('report_check_list', 'all')
+    # 去空格
+    all_check_report = all_check_report.strip()
+    # 把字符串(配置)转换为列表
+    all_check_report = all_check_report.split(',')
+
+
+
+    for report in all_check_report:
+        try:
+            findStr = getMatchKeywords.get_value('match_keywords', report)
+            # print('%s 的匹配关键字：'%report,findStr)
+        except Exception as e:
+            print(e)
+            print('本次匹配没有匹配到对应的报告类型！')
+            continue
+
+        for file in file_list:
+            matchStr = re.findall(findStr, str(file), re.M | re.I | re.S)
+            if matchStr:
+                print('【%s】:【%s】 报告已上传！！' % (report, file))
+                break
+
