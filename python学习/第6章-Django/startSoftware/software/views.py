@@ -449,6 +449,26 @@ def make_zip(source_dir, output_dir,output_filename):
       zipf.write(pathfile, arcname)
   zipf.close()
 
+def zipDir(sourcePath, outFullName, password=None):
+    """
+    压缩指定文件夹
+    :param sourcePath: 目标文件夹路径
+    :param outFullName: 保存路径+xxxx.zip
+    :return:
+    """
+    if password:
+        cmd = "zip -P %s -r %s %s" % (password, outFullName, sourcePath)   #有密码时设置密码并压缩
+    else:
+        cmd = "zip -r %s %s" % (outFullName, sourcePath)   #无密码直接压缩
+    try:
+        # 执行系统命令
+        os.popen(cmd)
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+
 def match_productionMaterials(user_name,domain_name,file_path):
     '''
     :param user_name: 登录用户名
@@ -499,48 +519,11 @@ def match_productionMaterials(user_name,domain_name,file_path):
         all_check_report_dict[report]='X'
 
     for report in all_check_report:
-        if report == '发布检查单':
-            findStr = r'发布检查单|发布检查清单|检查单|检查清单|投产检查单|投产检查清单|发布方案'
-
-        elif report == '需求说明书':
-            findStr = r'需求说明书|需求说明文档|需求文档|需求记录'
-
-        elif report == '需求评审':
-            findStr = r'需求评审|需求说明评审'
-
-        elif report == '安全评审':
-            findStr = r'安全评审'
-
-        elif report == '代码评审':
-            findStr = r'代码评审'
-
-        elif report == 'SIT测试报告':
-            findStr = r'SIT测试报告|系统测试报告|系统测试计划报告|SIT报告'
-
-        elif report == 'UAT测试报告':
-            findStr = r'UAT测试报告|业务测试报告|业务报告|UAT报告'
-
-        elif report == '安全测试报告':
-            findStr = r'安全测试报告|安全测试'
-
-        elif report == '回归测试报告':
-            findStr = r'回归测试报告|回归测试|回归报告|回归测试计划报告|回归计划报告'
-
-        elif report == '代码安全扫描报告':
-            findStr = r'代码安全扫描报告|安全扫描报告|代码安全扫描|安全扫描'
-
-        elif report == '代码质量扫描报告':
-            findStr = r'代码质量扫描报告|质量扫描报告|代码质量扫描|质量扫描'
-
-        elif report == 'SQM审核报告':
-            findStr = r'SQM审核报告|SQM审核'
-
-        elif report == 'DB脚本评审':
-            findStr = r'DB脚本评审|脚本评审|DB评审|SQL评审'
-
-        elif report == '冒烟测试报告':
-            findStr = r'冒烟'
-        else:
+        try:
+            findStr = report_config.get('match_keywords',report)
+            print('%s 的匹配关键字：'%report,findStr)
+        except Exception as e:
+            print(e)
             print('本次匹配没有匹配到对应的报告类型！')
             continue
 
@@ -550,14 +533,6 @@ def match_productionMaterials(user_name,domain_name,file_path):
                 print('【%s】:【%s】 报告已上传！！' % (report,file))
                 all_check_report_dict[report] = '✔'
                 break
-
-            # try:
-            #     matchStr = re.match("(.*)%s(.*)" % report, str(file), re.M | re.I | re.S)
-            #     print('【%s】 报告已上传！！'%matchStr.group())
-            #     all_check_report_dict[report]='✔'
-            #     break
-            # except:
-            #     continue
 
     # 筛选出不涉及的相关测试报告
     uncheck_report = list(set(all_check_report).difference(check_report))
@@ -1871,7 +1846,8 @@ def timed_task(request):
     return HttpResponse(scheduler.get_job(job_id='test_job'))
 
 def test2(request):
-
+    getMatchKeywords = getConfig('config\\software_config\\match_keywords_config.ini')
+    print(getMatchKeywords.get_keys('match_keywords'))
     return HttpResponse(scheduler.get_job(job_id='test_job'))
 
 # from apscheduler.schedulers.background import BackgroundScheduler
