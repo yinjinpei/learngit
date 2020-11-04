@@ -1846,31 +1846,29 @@ def timed_task(request):
     print(scheduler.get_job(job_id='test_job'))
     return HttpResponse(scheduler.get_job(job_id='test_job'))
 
-def test2(request,file_path,domain_name):
-    # 获取版本号
+def test2(request,file_path=None,domain_name=None):
+    # 获取版本号,BRON-COSS1.2.0
+    file_path='uploads/shar/BRON-CLSS（车主生活服务子系统）/BRON-CLSS1.0.0（2020-05-20）'
+    domain_name='BRON-CLSS'
+
     version = file_path.split('/')[-1].split('（')[0]
     if version is None:
         version = domain_name
 
+    # 获取版本号带日期，BRON-COSS1.2.0（2020-10-30）
+    planName_data = file_path.split('/')[-1]
+    print('带版本日期：', planName_data)
+    if planName_data is None:
+        planName_data = domain_name
+
     # 获取所有文件名
     file_list = os.listdir(file_path)
+    file_list_temp = os.listdir(file_path)
     if len(file_list) == 0:
         return False
 
     # 获取领域所需要检查的报告
     getMatchKeywords = getConfig('config\\software_config\\report_check_list_config.ini')
-    check_report = getMatchKeywords.get_value('match_keywords', domain_name)
-    if len(check_report) == 0:
-        return False
-
-    # 去空格
-    check_report = check_report.strip()
-    # 把字符串(配置)转换为列表
-    check_report = check_report.split(',')
-
-    print('---------------------------------------------------')
-    print('%s检查报告列表：%s' % (domain_name, check_report))
-    print('---------------------------------------------------')
 
     # 获取所有检查报告，不分前后端
     all_check_report = getMatchKeywords.get_value('report_check_list', 'all')
@@ -1879,20 +1877,55 @@ def test2(request,file_path,domain_name):
     # 把字符串(配置)转换为列表
     all_check_report = all_check_report.split(',')
 
+    print('---------------------------------------------------')
+    print('%s检查报告列表：%s' % (domain_name, all_check_report))
+    print('---------------------------------------------------')
+
+    # 创建临时目录
+    tempDir = planName_data + '_' + datetime.datetime.now().strftime('%Y%m%d%H%M%H%S')
+    tempDir = tempDir.replace(' ','')
+    targetPath = 'uploads\\temp'
+
+    sourcePath = targetPath + '\\' + tempDir
+    if os.path.exists(targetPath):
+        os.mkdir(sourcePath)
+    else:
+        os.makedirs(sourcePath)
+    print('创建分类打zip包临时目录：',sourcePath)
 
 
     for report in all_check_report:
+        # 创建分类目录
+        # print('创建分类目录：',sourcePath + '\\' + report)
+        os.mkdir(sourcePath + '\\' + report)
         try:
             findStr = getMatchKeywords.get_value('match_keywords', report)
-            # print('%s 的匹配关键字：'%report,findStr)
+            print('%s 的匹配关键字：'%report,findStr)
         except Exception as e:
             print(e)
             print('本次匹配没有匹配到对应的报告类型！')
             continue
 
+        print('文件列表：',file_list)
         for file in file_list:
             matchStr = re.findall(findStr, str(file), re.M | re.I | re.S)
             if matchStr:
-                print('【%s】:【%s】 报告已上传！！' % (report, file))
-                break
+                # print('拷贝目标路径: ',file_path+'\\'+str(file),sourcePath+'\\'+report+'\\'+str(file))
+                # 拷贝文件和状态信息
+                shutil.copy2(file_path+'\\'+str(file),sourcePath+'\\'+report+'\\'+str(file))
+                print('【%s】报告已拷贝到【%s】目录！' % (file, report))
+                file_list_temp.remove(file)
+    else:
+        os.mkdir(sourcePath + '\\' + '其他')
+        # print('创建分类目录：', sourcePath + '\\' + '其他')
+
+    for file in file_list_temp:
+        shutil.copy2(file_path + '\\' + str(file), sourcePath + '\\' + '其他' + '\\' + str(file))
+        print('【%s】报告已拷贝到【其他】目录！' % file)
+
+    outFullName=''
+    # zipDir('')
+
+
+    return HttpResponse('哈哈')
 

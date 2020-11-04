@@ -15,6 +15,13 @@ import re
 #
 #
 #
-a=[1,2,3,4,5]
-for i in a[1:]:
+
+a=['a','ab','b','b2']
+
+for i in a:
     print(i)
+
+for i in a:
+    print(i)
+    a.remove(i)
+    print(a)

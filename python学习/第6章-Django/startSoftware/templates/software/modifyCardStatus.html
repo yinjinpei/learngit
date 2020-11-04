@@ -473,7 +473,7 @@
             .submit_btn{
                 margin-left: 190px;
             }
-
+4
             .reset_btn:hover,.submit_btn:hover{
                 color: red;
                 background-color: gold;
@@ -652,8 +652,8 @@
                                   <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left" for="branch0">选择分支：</label>
                                       <select class="selectpicker" name="branch" id="branch0" data-style="selectpicker" data-live-search="true" required>
-                                        {% for branch in branch_list %}
-                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% for releaseName in releaseName_list %}
+                                            <option value="{{releaseName}}">{{releaseName}}</option>
                                         {% endfor %}
                                       </select>
                                   </div>
@@ -697,7 +697,7 @@
                         </ul>
                       </div>
 
-                      <div class="center" style="width: 100% !important;">
+                      <div class="center">
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
                               <hr>
@@ -757,8 +757,8 @@
                                   <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left" for="branch1">选择分支：</label>
                                       <select class="selectpicker" name="branch" id="branch1" data-style="selectpicker" data-live-search="true" required>
-                                        {% for branch in branch_list %}
-                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% for releaseName in releaseName_list %}
+                                            <option value="{{releaseName}}">{{releaseName}}</option>
                                         {% endfor %}
                                       </select>
                                   </div>
@@ -836,8 +836,8 @@
 
                                       <label class="btn btn-primary pull-left" for="branch2">选择分支：</label>
                                       <select class="selectpicker" name="branch" id="branch2" data-style="selectpicker" data-live-search="true" required>
-                                        {% for branch in branch_list %}
-                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% for releaseName in releaseName_list %}
+                                            <option value="{{releaseName}}">{{releaseName}}</option>
                                         {% endfor %}
                                       </select>
                                   </div>
@@ -911,8 +911,8 @@
 
                                       <label class="btn btn-primary pull-left" for="branch3">选择分支：</label>
                                       <select class="selectpicker" name="branch" id="branch3" data-style="selectpicker" data-live-search="true" required>
-                                        {% for branch in branch_list %}
-                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% for releaseName in releaseName_list %}
+                                            <option value="{{releaseName}}">{{releaseName}}</option>
                                         {% endfor %}
                                       </select>
                                   </div>
@@ -985,8 +985,8 @@
 
                                       <label class="btn btn-primary pull-left" for="branch4">选择分支：</label>
                                           <select class="selectpicker" name="branch" id="branch4" data-style="selectpicker" data-live-search="true" required>
-                                        {% for branch in branch_list %}
-                                            <option value="{{branch}}">{{branch}}</option>
+                                        {% for releaseName in releaseName_list %}
+                                            <option value="{{releaseName}}">{{releaseName}}</option>
                                         {% endfor %}
                                       </select>
                                   </div>
@@ -1086,7 +1086,7 @@
                         <!--center end-->
 
                       <div class="right" id="add_con">
-                          <input class="btn btn-primary" id="add_button" type="button" name="" value="新增领域">
+                          <input class="btn btn-primary" id="add_button" type="button" name="new_domain" value="新增领域">
                           <div id="add_domain">
                                 <div class="new_domain_con ">
                                     <form class='form-register' action="modifyCardStatus" method="post">
