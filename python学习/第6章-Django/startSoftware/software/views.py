@@ -1851,6 +1851,10 @@ def timed_task(request):
     print(scheduler.get_job(job_id='test_job'))
     return HttpResponse(scheduler.get_job(job_id='test_job'))
 
+
+def gitlab_member_permissions(request):
+    pass
+
 def test2(request,file_path=None,domain_name=None,password=None):
     file_path='uploads/shar/BRON-CLSS（车主生活服务子系统）/BRON-CLSS1.0.0（2020-05-20）'
     domain_name='BRON-CLSS'
