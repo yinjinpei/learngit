@@ -456,6 +456,11 @@ def zipDir(sourcePath, outFullName, password=None):
     :param outFullName: 保存路径+xxxx.zip
     :return:
     """
+
+    print('sourcePath: ',sourcePath)
+    print('sourcePath: ',outFullName)
+    print('password: ',password)
+
     if password:
         cmd = "zip -P %s -r %s %s" % (password, outFullName, sourcePath)   #有密码时设置密码并压缩
     else:
@@ -1846,11 +1851,12 @@ def timed_task(request):
     print(scheduler.get_job(job_id='test_job'))
     return HttpResponse(scheduler.get_job(job_id='test_job'))
 
-def test2(request,file_path=None,domain_name=None):
-    # 获取版本号,BRON-COSS1.2.0
+def test2(request,file_path=None,domain_name=None,password=None):
     file_path='uploads/shar/BRON-CLSS（车主生活服务子系统）/BRON-CLSS1.0.0（2020-05-20）'
     domain_name='BRON-CLSS'
 
+    '''文件分类 starting'''
+    # 获取版本号,BRON-COSS1.2.0
     version = file_path.split('/')[-1].split('（')[0]
     if version is None:
         version = domain_name
@@ -1891,8 +1897,7 @@ def test2(request,file_path=None,domain_name=None):
         os.mkdir(sourcePath)
     else:
         os.makedirs(sourcePath)
-    print('创建分类打zip包临时目录：',sourcePath)
-
+    print('创建分类zip打包临时目录：',sourcePath)
 
     for report in all_check_report:
         # 创建分类目录
@@ -1923,9 +1928,24 @@ def test2(request,file_path=None,domain_name=None):
         shutil.copy2(file_path + '\\' + str(file), sourcePath + '\\' + '其他' + '\\' + str(file))
         print('【%s】报告已拷贝到【其他】目录！' % file)
 
-    outFullName=''
-    # zipDir('')
+    '''文件分类 end'''
 
+    '''打包--未加密 starting'''
+    source_dir = sourcePath
+    output_dir = targetPath
+    output_filename = tempDir + '.zip'
+    make_zip(source_dir, output_dir, output_filename)
+    '''打包--未加密 end'''
+
+    # '''打包 starting'''
+    # outFullName=sourcePath+planName_data'+'.zip'
+    # password='123'
+    # isSuccessful = zipDir(sourcePath, outFullName, password)
+    # if isSuccessful == True:
+    #     print('zip打包成功！' )
+    # else:
+    #     print('zip打包失败！')
+    # '''加密打包 end'''
 
     return HttpResponse('哈哈')
 
