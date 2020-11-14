@@ -1,0 +1,604 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}gitlab权限管理{% endblock %}
+
+{% block content %}
+    {% block scripts %}
+    <!--<link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.min.css' %}"/>-->
+    <!--<script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.min.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'js/bootstrap/defaults-zh_CN.min.js' %}"></script>-->
+    <script type="text/javascript">
+        function $(id) {
+            return typeof id==='string'?document.getElementById(id):id;
+        }
+
+        function myFunction0() {
+            var input, filter, ul, li, a, i;
+            // 获得输入内容
+            input = document.getElementById("mySearch0");
+            // 把输入的字母全部更改为大写
+            filter = input.value.toUpperCase();
+            // 获得导航菜单
+            ul = document.getElementById("myMenu0");
+            // 根据标签名称获得 li 标签
+            li = ul.getElementsByTagName("li");
+            // 遍历搜索分类
+            for (i = 0; i < li.length; i++) {
+                // 在li 标签的基础上根据标签名称获得 a 标签
+                a = li[i].getElementsByTagName("a")[0];
+                // 导航 a 标签中的字符串是否包含 filter 子串
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else {
+                        li[i].style.display = "none";
+                }
+            }
+        }
+
+        function myFunction1() {
+            var input, filter, ul, li, a, i;
+            // 获得输入内容
+            input = document.getElementById("mySearch1");
+            // 把输入的字母全部更改为大写
+            filter = input.value.toUpperCase();
+            // 获得导航菜单
+            ul = document.getElementById("myMenu1");
+            // 根据标签名称获得 li 标签
+            li = ul.getElementsByTagName("li");
+            // 遍历搜索分类
+            for (i = 0; i < li.length; i++) {
+                // 在li 标签的基础上根据标签名称获得 a 标签
+                a = li[i].getElementsByTagName("a")[0];
+                // 导航 a 标签中的字符串是否包含 filter 子串
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else {
+                        li[i].style.display = "none";
+                }
+            }
+        }
+
+        function myFunction2() {
+            var input, filter, ul, li, a, i;
+            // 获得输入内容
+            input = document.getElementById("mySearch2");
+            // 把输入的字母全部更改为大写
+            filter = input.value.toUpperCase();
+            // 获得导航菜单
+            ul = document.getElementById("myMenu2");
+            // 根据标签名称获得 li 标签
+            li = ul.getElementsByTagName("li");
+            // 遍历搜索分类
+            for (i = 0; i < li.length; i++) {
+                // 在li 标签的基础上根据标签名称获得 a 标签
+                a = li[i].getElementsByTagName("a")[0];
+                // 导航 a 标签中的字符串是否包含 filter 子串
+                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                }else {
+                        li[i].style.display = "none";
+                }
+            }
+        }
+
+
+        window.onload=function () {
+            //获取鼠标点击的标签和要切换内容的元素
+            var titles=$('notice_title').getElementsByTagName('li'),
+                // divs=$('notice_con').getElementsByTagName('div');
+                divs_all=document.getElementById('notice_con');
+                // 获取第一层元素（div）
+                divs=divs_all.children;
+            if(titles.length!=divs.length)
+                return;
+            //遍历titles下所有的li
+            for(var i=0;i<titles.length;i++){
+                titles[i].id=i;
+                //当鼠标滑过onmouseover标签显示对应内容
+                //当鼠标点击onclick标签显示对应内容
+                titles[i].onclick=function () {
+                    //清除所有li上的class
+                    for(var j=0;j<titles.length;j++){
+                        titles[j].className='';
+                        divs[j].style.display='none';
+                    }
+                    //设置classname
+                    this.className='select';
+                    divs[this.id].style.display='block';
+                }
+            }
+
+            // 把选中的领域标签换个样式,class修改名为myMenu_domain_show
+            var domain_name=document.getElementById("notice_title_domain_name").value,
+                myMenu_name=document.getElementsByClassName(domain_name);
+                // alert('domain_name:'+domain_name);
+                // alert('myMenu_name个数:'+myMenu_name.length);
+            for(var k=0;k<myMenu_name.length;k++){
+                myMenu_name[k].className='myMenu_domain_show';
+
+                for(var z=0;z<myMenu_name.length;z++){
+                    myMenu_name[k].className='myMenu_domain_show';
+
+                    for(var n=0;n<myMenu_name.length;n++){
+                        myMenu_name[k].className='myMenu_domain_show';
+                    }
+                }
+            }
+
+
+        };
+    </script>
+
+    {% endblock %}
+
+    {% block css %}
+        <style type="text/css">
+            #card_con{
+                text-align: center;
+                margin: 50px 100px;
+            }
+
+            #card_con a:hover{
+                background-color: gold;
+                color: red;
+            }
+
+            #link_index:hover,#link_top:hover{
+                color:red;
+                background-color: gold;
+            }
+
+            #link_index,#link_top{
+                text-decoration: none;
+                color: #fff;
+            }
+
+            .form-group input:hover,#link_index:hover,#link_top:hover{
+                color:red;
+                background-color: gold;
+            }
+
+            .notice{
+                max-height: 850px;
+                overflow: hidden;
+                background-color: #fff4e8;
+                border: 15px solid #ff8800;
+                border-radius: 15px;
+            }
+
+            .notice_title{
+                height: 37px;
+                position: relative;
+                background-color: #ff8800;
+                padding-top: 10px;
+                font-weight: bold;
+            }
+
+            .notice_title a{
+                text-decoration:none;
+                font-size: 18px;
+                color: #FFF;
+            }
+
+            .notice_title a:hover{
+                background-color: transparent !important;
+            }
+
+            .notice_title ul{
+                list-style:none;
+                position: absolute;
+                left: -40px;
+            }
+
+            .notice_title li{
+                float: left;
+                width: 150px;
+                height: 27px;
+                line-height: 26px;
+                text-align: center;
+                overflow: hidden;
+            }
+
+            .select{
+                background-color: #fff4e8;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                /*border-radius: 20px;*/
+            }
+            .select a{
+                color: #2e6da4;
+            }
+            .select a:hover{
+                color: #2e6da4 !important;
+            }
+            .wow{
+                font-size: 20px;
+                width: 150px;
+                float: left;
+                font-weight: bold;
+                padding-top: 2px;
+                color: #0f0f0f;
+            }
+
+
+            /* *x选择器：选择所有元素 */
+            .row {
+                box-sizing: border-box;
+            }
+            /* 使用Flexbox创建一个列布局
+            flex 的定义和用法
+            1.flex 属性用于设置或检索弹性盒模型对象的子元素如何分配空间。
+            2.flex 属性是 flex-grow、flex-shrink 和 flex-basis 属性的简写属性。
+            注意：如果元素不是弹性盒模型对象的子元素，则 flex 属性不起作用。
+            */
+            .row {
+                height: 650px;
+                display: flex;
+                overflow: auto;
+            }
+            .row::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* 左列(菜单) */
+            .left {
+                text-align: left;
+                /*flex: 10%; !*让所有弹性盒模型对象的子元素的长度为15%，且忽略它们内部的内容*!*/
+                width: 165px;
+                padding: 15px 2px 15px 15px;
+                /*background-color: #ff8800;*/
+                max-height:1000px;
+                overflow-x: hidden;
+            }
+
+            .left::-webkit-scrollbar {
+                display: none;
+            }
+
+            .left h2 {
+                padding-left: 8px;
+            }
+
+            /*!* 中间(内容) *!*/
+            .center {
+                /*flex: 85%; !*让所有弹性盒模型对象的子元素的长度为85%，且忽略它们内部的内容*!*/
+                width: 45%;
+                padding: 15px;
+                text-align: left;
+            }
+
+            .right{
+                width: 44%;
+                padding: 15px;
+                text-align: left;
+            }
+
+
+            #waird0,#waird1,#waird2{
+                 background-color: green;
+            }
+
+            #waird0:hover,#waird1:hover,#waird2:hover{
+                background-color: gold !important;
+                color: red !important;
+            }
+
+
+
+            .reset_btn{
+                color: green;
+                margin-left: 100px;
+            }
+            .submit_btn{
+                margin-left: 200px;
+            }
+
+            .reset_btn:hover,.submit_btn:hover{
+                color: red;
+                background-color: gold;
+            }
+
+            .myMenu_domain_show a{
+                background-color: #fff4e8 !important;
+                color: #2b669a !important;
+                font-weight: bold;
+                border-radius: 15px;
+            }
+
+
+            .selectpicker{
+                width: 400px !important;
+                margin-left: 5px;
+                background-color: #FFF;
+                border: 1px solid #28a4c9 !important;
+                overflow: auto;
+            }
+
+            .reslut_con{
+                background-color: #f9f7f6;
+                height: 100%;
+                border: 5px solid #ff9c01;
+                border-radius: 15px;
+            }
+
+            .result_title{
+                padding-top: 5px;
+                padding-left: 10px;
+                height: 32px;
+                font-weight: bold;
+                background-color: #ff9c01;
+                color: #2b669a;
+                margin: 0;
+            }
+
+
+            .add_premissions input{
+                width: 400px;
+                height: 35px;
+                border-radius: 5px;
+                margin-left: 5px;
+                font-size: 16px;
+            }
+
+        </style>
+    {% endblock %}
+
+    <div id="card_con">
+        <h2 style="font-weight: bold">gitlab权限管理</h2>
+
+        <div class="notice">
+            <!--标识，用于左侧菜单-->
+            <input type="text" style="display: none" id="notice_title_domain_name" value="{{domain_name}}">
+
+            <div class="notice_title" id="notice_title">
+                <ul>
+                    <span class="wow">功能菜单：</span>
+                        <li class="{{myMenu0}}">
+                            <a href="JavaScript:void(0);">添加权限</a>
+                        </li>
+
+                        <li class="{{myMenu1}}">
+                            <a href="JavaScript:void(0);">删除权限</a>
+                        </li>
+
+                        <li class="{{myMenu2}}">
+                            <a href="JavaScript:void(0);">修改权限</a>
+                        </li>
+
+                </ul>
+            </div>
+
+            <div class="notice_con" id="notice_con">
+              {% if myMenu0 %}
+                <div class="mod" style="display: block">
+              {% else %}
+                <div class="mod" style="display: none">
+              {% endif %}
+                    <div class="row">
+                      <div class="left">
+                      </div>
+
+                      <div class="center">
+                          <br><br>
+                              <form class='add_premissions' action="modifyCardStatus" method="post">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu0" style="display: none">
+
+                                  <label class="btn btn-primary pull-left">访问令牌：</label>
+                                  <input type="text" name="privateKey" value="{{privateKey}}">
+                                  <button type="submit" class="btn btn-primary" id="waird0" title="privateKey" name="sync" value="True">更新为默认访问令牌</button>
+                              </form>
+
+                          <br><br><br><br><br><br>
+                              <form class='add_premissions' action="modifyCardStatus" method="post">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="feature" value="myMenu0" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;">
+                                      <label class="btn btn-primary pull-left">访问令牌：</label>
+                                      <input type="text" name="privateKey" value="{{privateKey}}">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;">
+                                      <label class="btn btn-primary pull-left">项 目 I D：</label>
+                                      <input type="text" name="projectId">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">UM 账号：</label>
+                                      <input type="text" name="member">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">授予权限：</label>
+                                      <select class="selectpicker" name="permissions" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
+                                        <option value="Guest">【Guest】可以创建issue、发表评论，不能读写版本库</option>
+                                        <option value="Reporter">【Reporter】可以克隆代码，不能提交</option>
+                                        <option value="Developer">【Developer】可以克隆代码、开发、提交、推送</option>
+                                        <option value="Master">【Master】可以创建项目、添加标签、保护分支、添加项目成员、编辑项目</option>
+                                        <option value="Owner">【Owner】可以设置项目访问权限 - 可见度、删除项目、迁移项目、管理组成员</option>
+                                      </select>
+                                  </div>
+
+                                  <br><br>
+                                  <button type="reset" class="btn btn-default reset_btn" onclick=doReset()>重置</button>
+                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                              </form>
+                          </div>
+
+                      <div class="right">
+                          <div class="reslut_con">
+                              <h4 class="result_title">运行结果：</h4>
+                              <div class="result_content">
+                                  111
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+
+                  {% if myMenu1 %}
+                <div class="mod" style="display: block">
+              {% else %}
+                <div class="mod" style="display: none">
+              {% endif %}
+                    <div class="row">
+                      <div class="left">
+                      </div>
+
+                      <div class="center">
+                          <br><br>
+                              <form class='add_premissions' action="modifyCardStatus" method="post">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu1" style="display: none">
+
+                                  <label class="btn btn-primary pull-left">访问令牌：</label>
+                                  <input type="text" name="privateKey" value="{{privateKey}}">
+                                  <button type="submit" class="btn btn-primary" id="waird1" title="privateKey" name="sync" value="True">更新为默认访问令牌</button>
+                              </form>
+
+                          <br><br><br><br><br><br>
+                              <form class='add_premissions' action="modifyCardStatus" method="post">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="feature" value="myMenu1" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;">
+                                      <label class="btn btn-primary pull-left">访问令牌：</label>
+                                      <input type="text" name="privateKey" value="{{privateKey}}">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;">
+                                      <label class="btn btn-primary pull-left">项 目 I D：</label>
+                                      <input type="text" name="projectId">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">UM 账号：</label>
+                                      <input type="text" name="member">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">授予权限：</label>
+                                      <select class="selectpicker" name="permissions" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
+                                        <option value="Guest">【Guest】可以创建issue、发表评论，不能读写版本库</option>
+                                        <option value="Reporter">【Reporter】可以克隆代码，不能提交</option>
+                                        <option value="Developer">【Developer】可以克隆代码、开发、提交、推送</option>
+                                        <option value="Master">【Master】可以创建项目、添加标签、保护分支、添加项目成员、编辑项目</option>
+                                        <option value="Owner">【Owner】可以设置项目访问权限 - 可见度、删除项目、迁移项目、管理组成员</option>
+                                      </select>
+                                  </div>
+
+                                  <br><br>
+                                  <button type="reset" class="btn btn-default reset_btn" onclick=doReset()>重置</button>
+                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                              </form>
+                          </div>
+                        <!--center end-->
+
+                      <div class="right">
+                          <div class="reslut_con">
+                              <h4 class="result_title">运行结果：</h4>
+                              <div class="result_content">
+                                  111
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+
+
+              {% if myMenu2 %}
+                <div class="mod" style="display: block">
+              {% else %}
+                <div class="mod" style="display: none">
+              {% endif %}
+                    <div class="row">
+                      <div class="left">
+                      </div>
+
+                      <div class="center">
+                          <br><br>
+                              <form class='add_premissions' action="modifyCardStatus" method="post">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu2" style="display: none">
+
+                                  <label class="btn btn-primary pull-left">访问令牌：</label>
+                                  <input type="text" name="privateKey" value="{{privateKey}}">
+                                  <button type="submit" class="btn btn-primary" id="waird2" title="privateKey" name="sync" value="True">更新为默认访问令牌</button>
+                              </form>
+
+                          <br><br><br><br><br><br>
+                              <form class='add_premissions' action="modifyCardStatus" method="post">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="feature" value="myMenu2" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;">
+                                      <label class="btn btn-primary pull-left">访问令牌：</label>
+                                      <input type="text" name="privateKey" value="{{privateKey}}">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;">
+                                      <label class="btn btn-primary pull-left">项 目 I D：</label>
+                                      <input type="text" name="projectId">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">UM 账号：</label>
+                                      <input type="text" name="member">
+                                  </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">授予权限：</label>
+                                      <select class="selectpicker" name="permissions" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
+                                        <option value="Guest">【Guest】可以创建issue、发表评论，不能读写版本库</option>
+                                        <option value="Reporter">【Reporter】可以克隆代码，不能提交</option>
+                                        <option value="Developer">【Developer】可以克隆代码、开发、提交、推送</option>
+                                        <option value="Master">【Master】可以创建项目、添加标签、保护分支、添加项目成员、编辑项目</option>
+                                        <option value="Owner">【Owner】可以设置项目访问权限 - 可见度、删除项目、迁移项目、管理组成员</option>
+                                      </select>
+                                  </div>
+
+                                  <br><br>
+                                  <button type="reset" class="btn btn-default reset_btn" onclick=doReset()>重置</button>
+                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                              </form>
+                          </div>
+                        <!--center end-->
+
+                      <div class="right">
+                          <div class="reslut_con">
+                              <h4 class="result_title">运行结果：</h4>
+                              <div class="result_content">
+                                  111
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <br><br>
+
+        <hr>
+        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
+        <br><br><br><br>
+        <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
+        <br><br><br><br>
+
+    </div>
+
+{% endblock %}

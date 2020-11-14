@@ -1782,38 +1782,7 @@ def modifyCardStatus(request):
     return render(request, 'software/modifyCardStatus.html', locals())
 
 
-def test(request):
-    path = 'config\\software_config\\report_check_list_config2.ini'
-    try:
-        config_1=getConfig(path)
-        print('-----------------------------------------------------------------1')
-        # print(config_1.get_items('report_check_list'))
-        # print('-----------------------------------------------------------------2')
-        # print(config_1.check_section('report_check_list'))
-        # print('-----------------------------------------------------------------3')
-        # print(config_1.check_key('report_check_list','ALL'))
-        # print('-----------------------------------------------------------------4')
-        # print(config_1.check_value('report_check_list','ALL','发布检查单qwe'))
-        # print('-----------------------------------------------------------------5')
-        print(config_1.add_section('yinjinpei'))
-        # print('-----------------------------------------------------------------6')
-        # print(config_1.set_section('user','b','2'))
-        # print(config_1.set_section('user', 'c', '4'))
-        # print('-----------------------------------------------------------------7')
-        # print(config_1.remove_key('user','b'))
-        print(config_1.save())
-        # print('-----------------------------------------------------------------8')
-        # print(config_1.clear())
-        print('-----------------------------------------------------------------9')
-        print('-----------------------------------------------------------------10')
-        print('-----------------------------------------------------------------11')
-        print('-----------------------------------------------------------------12')
-        print('-----------------------------------------------------------------13')
-        print('-----------------------------------------------------------------14')
-        print('-----------------------------------------------------------------15')
-    except:
-        print('路径有问题！')
-    return render(request, 'test.html', locals())
+
 
 
 def test_job():
@@ -1853,7 +1822,43 @@ def timed_task(request):
 
 
 def gitlab_member_permissions(request):
+
     pass
+    return render(request, 'software/gitlab_member_permissions.html', locals())
+
+
+def test(request):
+    path = 'config\\software_config\\report_check_list_config2.ini'
+    try:
+        config_1=getConfig(path)
+        print('-----------------------------------------------------------------1')
+        # print(config_1.get_items('report_check_list'))
+        # print('-----------------------------------------------------------------2')
+        # print(config_1.check_section('report_check_list'))
+        # print('-----------------------------------------------------------------3')
+        # print(config_1.check_key('report_check_list','ALL'))
+        # print('-----------------------------------------------------------------4')
+        # print(config_1.check_value('report_check_list','ALL','发布检查单qwe'))
+        # print('-----------------------------------------------------------------5')
+        print(config_1.add_section('yinjinpei'))
+        # print('-----------------------------------------------------------------6')
+        # print(config_1.set_section('user','b','2'))
+        # print(config_1.set_section('user', 'c', '4'))
+        # print('-----------------------------------------------------------------7')
+        # print(config_1.remove_key('user','b'))
+        print(config_1.save())
+        # print('-----------------------------------------------------------------8')
+        # print(config_1.clear())
+        print('-----------------------------------------------------------------9')
+        print('-----------------------------------------------------------------10')
+        print('-----------------------------------------------------------------11')
+        print('-----------------------------------------------------------------12')
+        print('-----------------------------------------------------------------13')
+        print('-----------------------------------------------------------------14')
+        print('-----------------------------------------------------------------15')
+    except:
+        print('路径有问题！')
+    return render(request, 'test.html', locals())
 
 def test2(request,file_path=None,domain_name=None,password=None):
     file_path='uploads/shar/BRON-CLSS（车主生活服务子系统）/BRON-CLSS1.0.0（2020-05-20）'
