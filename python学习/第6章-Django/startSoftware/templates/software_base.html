@@ -26,7 +26,7 @@
     <script type="text/javascript" src="{% static 'js/bootstrap/defaults-zh_CN.min.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
-
+    <script src="{% static 'js/script.js' %}"></script>
     <script type="text/javascript">
             if ( window.history.replaceState ) {
                 window.history.replaceState( null, null, window.location.href );
@@ -55,11 +55,54 @@
             margin-top: 15px;
         }
 
+        #rocket-to-top div {
+            left:0;
+            margin:0;
+            overflow:hidden;
+            padding:0;
+            position:absolute;
+            top:0;
+            width:149px;
+        }
+        #rocket-to-top .level-2 {
+            background:url("../static/images/rocket_button_up.png") no-repeat scroll -149px 0 transparent;
+            display:none;
+            height:250px;
+            opacity:0;
+            z-index:1;
+        }
+        #rocket-to-top .level-3 {
+            background:none repeat scroll 0 0 transparent;
+            cursor:pointer;
+            display:block;
+            height:150px;
+            z-index:2;
+        }
+        #rocket-to-top {
+            background:url("../static/images/rocket_button_up.png") no-repeat scroll 0 0 transparent;
+            cursor:default;
+            display:block;
+            height:250px;
+            margin:-125px 0 0;
+            overflow:hidden;
+            padding:0;
+            position:fixed;
+            right:0;
+            top:80%;
+            width:149px;
+            z-index:11;
+        }
+
         {% block css %}{% endblock %}
 
     </style>
   </head>
   <body>
+    <div style="display:none;" id="rocket-to-top">
+	<div style="opacity:0;display:block;" class="level-2"></div>
+	<div class="level-3"></div>
+    </div>
+
     <nav class="navbar navbar-default" id="con_a">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
