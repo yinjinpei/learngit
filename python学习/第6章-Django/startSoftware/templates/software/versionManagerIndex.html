@@ -1,10 +1,1332 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>versionManagerIndex</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>测试地址</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+
+      .top1 {
+         display: inline-block;
+         width: 300px;
+         height: 50px;
+         text-align: center;
+         font-size: 60px;
+         color: #FF9224;
+         font-family: 华文彩云;
+         margin-top: 1px;
+      }
+
+      .WithSplit {
+         display: inline-block;
+         width: 150px;
+         height: 50px;
+         line-height: 50px;
+         font-size: 25px;
+         text-align: center;
+         vertical-align: middle;
+         COLOR: #FFFFFF;
+         background-color: #E95404;
+         border: 2px solid #FFFFFF;
+         font-family: lisu;
+
+      }
+
+      .dn {
+         display: none;
+      }
+
+      .clearfix:after {
+         content: "";
+         display: block;
+         height: 0;
+         clear: both;
+         overflow: hidden;
+         visibility: hidden;
+      }
+
+      .container {
+         width: 99%;
+         margin: 0 auto;
+      }
+
+      .menu {
+         float: left;
+         width: 230px;
+         background: #666666;
+         color: #b8c7ce;
+      }
+
+      .menu>div {
+         text-align: center;
+         line-height: 44px;
+         border-left: 3px solid transparent;
+         cursor: pointer;
+      }
+
+      .menu>.active {
+         border-left-color: #f747ad;
+         color: #fff;
+         background: rgb(111, 157, 255);
+         font-weight:bold;
+      }
+
+      .menu>div:hover {
+         border-left-color: #0aa7e6;
+         color: #fff;
+         background: #0aa7e6;
+      }
+
+      .content {
+         position: relative;
+         margin-left: 230px;
+         min-height: 800px;
+         padding: 10px;
+      }
+
+      .content iframe {
+         width: 100%;
+         min-height: 800px;
+         height: 100%;
+      }
+
+      .middle {
+         float: left;
+         width: 80%;
+         margin: 0 5px 0 5px;
+      }
+
+      .h5 {
+         font-size: 20px;
+         color: #6A6AFF;
+         font-family: lisu;
+         margin-bottom: 5px;
+      }
+
+      .title1 {
+         padding: 20px;
+         border: 1px solid red;
+      }
+
+      .divStyle {
+         display: flex;
+         flex-direction: row;
+         flex-wrap: wrap;
+         /* justify-content: space-between; */
+         font-family: Arial;
+         font-size: 12px;
+      }
+
+      .divStyle li {
+         width: 20%;
+         color: #E95404;
+         padding-bottom: 20px;
+         list-style-type: circle;
+      }
+
+      .divStyle li a {
+         color: #000000;
+         text-decoration: none;
+      }
+
+      .content-right {
+         position: absolute;
+         right: 0;
+         width: 19%;
+         padding-top: 20px;
+      }
+
+      .content-right .p2 {
+         font-size: 18px;
+         color: #FFFFFF;
+         font-family: lisu;
+         margin-bottom: 20px;
+         background-color: #E95404;
+      }
+
+      .bottom {
+         padding: 20px 0 40px 0;
+         text-align: center;
+         font-size: 14px;
+         color: #818181;
+      }
+      textarea{
+         width: 300px;
+         height: 150px;
+         margin-top: 20px;
+      }
+      .h4{
+         width: 700px;
+         height: 250px;
+         color:darkgreen;
+      }
+   </style>
 </head>
+
 <body>
-    <h4>versionManagerIndex</h4>
+   <div style="text-align:center;">
+      <h2 class="top1">平安银行</h2>
+      <h4 class="WithSplit">遵规守纪</h4>
+      <h4 class="WithSplit">奋发拼搏</h4>
+      <h4 class="WithSplit">团结一心</h4>
+      <h4 class="WithSplit">共创佳绩</h4>
+   </div>
+
+   <marquee direction="left" behavior="scroll" loop="*" scrollamount="8" scrolldelay="1" align="top" width="100%"
+onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF4500;font-size:25px;font-weight:bold;font-family:lisu;">
+      一不为名，二不为利，但工作目标要奔世界先进水平。
+      <sub>--邓稼先<sub>
+   </marquee>
+
+   <hr color=#FF9224 style="margin:5px;">
+   <div class="container clearfix">
+      <div id="menu" class="menu">
+         <div data-id="0" class="active">链接列表</div>
+         <div data-id="1" style="text-decoration:none; font-size:18px">离线包CDN地址</div>
+         <div data-id="2"><a href="/extranetAddress" style="text-decoration:none; font-size:20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;访问外网地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+         <div data-id="3"><a href="/versionManagerIndex" style="text-decoration:none; font-size:20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;版本经理首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+         <div data-id="4"><a href="/"  style="text-decoration:none; font-size:20px;">
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</a></div>
+         <!--<div data-id="3">银行卡余额充值</div>-->
+         <!--<div data-id="5">RMS测试环境FAT（外网）</div>-->
+         <!--<div data-id="6">RMS测试环境FAT（内网）</div>-->
+         <!--<div data-id="7">RMS测试环境UAT（外网）</div>-->
+         <!--<div data-id="8">RMS测试环境UAT（内网）</div>-->
+         <!--<div data-id="9">RMS生产（外网）</div>-->
+         <!--<div data-id="10">RMS生产（内网）</div>-->
+
+      </div>
+      <div class="content clearfix">
+         <div class="content-right">
+            <p class="p2">扫描二维码下载口袋APP软件</p>
+            <img class="svip_icon" style="width: 300px;height:300px;" src="../../static/images/icon/pinganAppCode.png">
+            <p>在口袋登录页面复制以上代码到浏览器Console然后回车实现登录</p>
+            <textarea>$('#userId').val('17091550997'); // 登录账号
+               $('input#loginPwd').val('qweqwe123');
+               $('#codeInput').val('5047');
+               $('#submit').removeAttr('disabled').click();
+            </textarea>
+            <p>内网CDN刷新</p>
+            <textarea>https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data;https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data;
+            </textarea>
+            <p>生产CDN刷新</p>
+            <textarea>https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;
+            </textarea>
+            <p color=“darkgreen”>发版十项资料:<br>
+               1、需求说明书<br>
+               2、需求评审记录<br>
+               3、安全评审记录<br>
+               4、SIT测试报告<br>
+               5、UAT测试报告<br>
+               6、安全测试报告<br>
+               7、代码评审记录<br>
+               8、版本发布检查单<br>
+               9、回归测试报告<br>
+               10、生产验证记录<br>
+               11、代码质量扫描报告<br>
+               12、代码安全扫描报告<br>
+               13、SQM审核报告<br>
+               14、其他</p>
+         </div>
+         <div class="middle">
+            <h5 class="h5">常用平台地址</h5>
+            <div class="title1">
+               <div class="divStyle" id="testUrl">
+               </div>
+            </div>
+            <h5 class="h5">常用测试地址</h5>
+            <div class="title1">
+               <div class="divStyle" id="aumTestUrl">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="content dn">
+         <h4 class="h4" >内测CDN刷新：<br>
+            https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data;<br>
+            https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;<br>
+            https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;<br>
+            https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data;
+         </h4>
+          <h4 class="h4"  >生产CDN刷新：<br>
+            https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;<br>
+            https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;<br>
+            https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;<br>
+            https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;
+         </h4>
+      </div>
+      <!--div class="content dn">
+         <iframe src="http://hq-b07350:8080/autotest/html/qrCode.html" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://29.3.202.113:8080/risk/addmoney" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-gm.fat.qa.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-inner-gm.fat.qa.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-gm.uat.qa.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-inner-gm.uat.qa.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-inner.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      -->
+   </div>
+   <div class="bottom">
+      <p>版权所有 © 中国平安保险（集团）股份有限公司 未经许可不得复制、转载或摘编，违者必究!<br>Copyright © PING AN INSURANCE (GROUP) COMPANY OF CHINA ,LTD. All
+         Rights Reserved</p>
+   </div>
 </body>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<script>
+   window.onload = function () {
+      var page = {
+         hostUrl: {
+            aum: 'https://test-b-fat.pingan.com.cn',
+            pc: 'https://test-ebank-fat.pingan.com.cn',
+            pcVer: ''
+         },
+         init: function () {
+            this.testUrl = document.getElementById('testUrl');
+            this.menu = document.getElementById('menu');
+            this.menuItemArr = this.menu.children;
+            this.contentArr = document.getElementsByClassName('content');
+            this.pushTestUrl();
+            this.pushAumTestUrl();
+            this.clickFn();
+         },
+         clickFn: function () {
+            var self = this;
+            self.menu.onclick = function (e) {
+               var e = e || window.e;
+               var target = e.target || e.srcElement;
+               if (target.nodeName.toLocaleLowerCase() === 'div') {
+                  for (var i = 0; i < self.menuItemArr.length; i++) {
+                     self.menuItemArr[i].className = '';
+                  }
+                  target.className = 'active';
+                  for (var i = 0; i < self.contentArr.length; i++) {
+                     if (target.dataset.id == i) {
+                        self.contentArr[i].className = 'content';
+                     } else {
+                        self.contentArr[i].className = 'content dn';
+                     }
+                  }
+               }
+            }
+         },
+         loadImg: function () {
+                var arr = document.querySelectorAll('.lazyPic');
+                for (var i = 0; i < arr.length; i++) {
+                    arr[i].isLoad = true;
+                    if (arr[i].dataset) {
+                        this.afterLoadImg(arr[i], arr[i].dataset.src);
+                    } else {
+                        this.afterLoadImg(arr[i], arr[i].getAttribute('data-src'));
+                    }
+                }
+            },
+            afterLoadImg: function (obj, url) {
+                var oImg = new Image();
+                oImg.onload = function () {
+                    obj.src = oImg.src;
+                }
+                oImg.src = url;
+            },
+
+         pushTestUrl: function () {
+            var html = '';
+            for (var i = 0; i < this.testUrlArr.length; i++) {
+               html += '<li><a target="_blank" href="' + this.testUrlArr[i].url + '" title="' + this.testUrlArr[i].title + '">' + this.testUrlArr[i].name + '</a></li>';
+            }
+            this.testUrl.innerHTML = html;
+         },
+         pushAumTestUrl: function () {
+            var html = '',
+               aumTestUrlEl = document.getElementById('aumTestUrl');
+            for (var i = 0; i < this.aumTestUrl.length; i++) {
+               if (this.aumTestUrl[i].sourse === 'm') {
+                  html += '<li><a target="_blank" href="' + this.hostUrl.aum + this.aumTestUrl[i].url + '">' + this.aumTestUrl[i].name + '</a></li>';
+               } else if (this.aumTestUrl[i].sourse === 'pc') {
+                  html += '<li><a target="_blank" href="' + this.hostUrl.pc + '/aum' + this.hostUrl.pcVer + this.aumTestUrl[i].url + '">' + this.aumTestUrl[i].name + '</a></li>';
+               } else {
+                  html += '<li><a target="_blank" href="' + this.aumTestUrl[i].url + '">' + this.aumTestUrl[i].name + '</a></li>';
+               }
+            }
+            aumTestUrlEl.innerHTML = html;
+         },
+         aumTestUrl: [
+            {
+               name: '口袋投资理财首页',
+               url: '/aum/mobile/index.html',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '平安证券理财频道',
+               url: 'https://stock.stg.pingan.com/omm/phonex/index.html',
+               sourse: ''  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋投资理财首页（生产）',
+               url: 'https://bank-static.pingan.com.cn/aum/mobile/index.html',
+               sourse: ''  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋持仓页',
+               url: '/aum/m/assets_entrance_v3.html#/assets/0',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋订单中心',
+               url: '/aum/m/order_v2.html#/list',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋环境选择',
+               url: 'https://bank-static-stg.pingan.com.cn/ibank/member/testenv/login/pages/test.html?__paramed__',
+               sourse: ''  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋首发基金001',
+               url: '/aum/m/fund_first_detail.html?templateId=PrdTempINI001&prdCode=700001&#/&',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋公募货基002',
+               url: '//aum/m/fund_money_detail.html?templateId=PrdTempINI002&prdCode=003474&',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋公募非货基003',
+               url: '/aum/m/fund_public_detail.html?templateId=PrdTempINI003&prdCode=000041#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋代销活期现金宝004',
+               url: '/aum/m/cash_detail.html?templateId=PrdTempINI004&prdCode=PAZ999',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋代销理财平安盈006',
+               url: '/aum/m/product_detail.html?templateId=PrdTempINI006&prdCode=000905',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋代销单期封闭型007',
+               url: '/aum/m/fund_one.html?templateId=PrdTempINI007&prdCode=A0DH01#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋稳盈30天008',
+               url: '/aum/m/period_detail.html?templateId=PrdTempINI008&prdCode=PA9008&#/?__paramed__',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋基金滚动型009',
+               url: '/aum/m/fund_roll_detail.html?templateId=PrdTempINI009&prdCode=270046',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋闲钱+ 012',
+               url: '/aum/m/pa_spare_cash.html?templateId=PrdTempINI012&prdCode=000759#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋代销开放式N天013',
+               url: '/aum/m/consignment_open_detail.html?templateId=PrdTempINI013&prdCode=002446&',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋每日盈014',
+               url: '/aum/m/daily_profit.html?templateId=PrdTempINI014&prdCode=PA3012&#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋私募收益率型封闭式022',
+               url: '/aum/m/private_profit_close.html?templateId=PrdTempINI022&prdCode=700008&#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋日添利增强型101',
+               url: '/aum/m/current_detail.html?templateId=PrdTempINI101&prdCode=DLR170001#/&',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋普通日添利102',
+               url: '/aum/m/product_detail.html?templateId=PrdTempINI102&prdCode=ALR110001#/&',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋和盈单期产品103',
+               url: '/aum/m/single_detail.html?templateId=PrdTempINI103&prdCode=DLN170063',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋滚动型产品104',
+               url: '/aum/m/rolling_detail.html?templateId=PrdTempINI104&prdCode=DLY120001#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋净值型产品105',
+               url: '/aum/m/net_value_detail.html?templateId=PrdTempINI105&prdCode=JLK150003#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋寿险专属序列号106',
+               url: '/aum/m/series_number.html',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋结构型产品107',
+               url: '/aum/m/struct_detail.html?templateId=PrdTempINI107&prdCode=TLG170025',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋开放N天产品108',
+               url: '/aum/m/open_detail.html?templateId=PrdTempINI108&prdCode=DLN170090#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋封闭阶梯产品109',
+               url: '/aum/m/step_detail.html?templateId=PrdTempINI109&prdCode=FJ2LJ170002#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋开放阶梯产品110',
+               url: '/aum/m/step_detail.html?templateId=PrdTempINI110&prdCode=FJ1LJ170001#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋智能日添利111',
+               url: '/aum/m/daily_buy.html?templateId=PrdTempINI111&prdCode=ALR170001#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋天天成长113',
+               url: '/aum/m/grow_detail.html?templateId=PrdTempINI113&prdCode=T01LK180001#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋成长N天114',
+               url: '/aum/m/grow_nday_detail.html?templateId=PrdTempINI114&prdCode=DK4LK180004#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋开放式结构产品116',
+               url: '/aum/m/open_struct.html?templateId=PrdTempINI116&prdCode=ALR18063726#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋定期理财复杂结构117',
+               url: '/aum/m/complex_struct_detail.html?templateId=PrdTempINI117&prdCode=TLG180903#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋天天成长C 118',
+               url: '/aum/m/grow_detail_c.html?templateId=PrdTempINI118&prdCode=T03LK180003#/',
+               sourse: 'm'  // 口袋：m    PC：pc
+            },
+            {
+               name: '口袋天天成长C 118(STG2)',
+               url: 'https://bank-static-stg2.pingan.com.cn:10443/aum/m/grow_detail_c.html?templateId=PrdTempINI118&prdCode=T03LK180003#/',
+               sourse: ''  // 口袋：m    PC：pc
+            },
+
+            {
+               name: 'PC新理财持仓',
+               url: '/assets/list/index.html?initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC定期理财列表',
+               url: '/finance/finance-prolist/index.html?initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC定期理财列表（生产）',
+               url: 'https://bank.pingan.com.cn/m/aum/finance/finance-prolist/index.html',
+               sourse: ''  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC本行理财产品101',
+               url: '/finance/daily-buy/index.html?tplId=PrdTempINI101&prdCode=DLR170001&prdId=3100017001&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC保本日添利产品102',
+               url: '/finance/daily-buy/index.html?tplId=PrdTempINI102&prdCode=ALR110001&prdId=3100009002&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC和盈单期产品103',
+               url: '/finance/single-detail/index.html?tplId=PrdTempINI103&prdCode=DLN170063&prdId=3200018001&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC滚动型产品104',
+               url: '/finance/rolling-detail/index.html?tplId=PrdTempINI104&prdCode=DLY120001&prdId=2010012222&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC净值型产品105',
+               url: '/finance/net-value-detail/index.html?tplId=PrdTempINI105&prdCode=JLK150002&prdId=5100015001&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC序列号产品106',
+               url: '/finance/series-detail/index.html?tplId=PrdTempINI106&seqNo=307050126166&prdId=2200015725&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC结构类产品107',
+               url: '/finance/struct-detail/index.html?tplId=PrdTempINI107&prdCode=TLG170025&prdId=2040017022&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC开放式N天产品108',
+               url: '/finance/open-detail/index.html?tplId=PrdTempINI108&prdCode=DLN170090&prdId=DLN170090&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC封闭阶梯产品109',
+               url: '/finance/step-detail/index.html?tplId=PrdTempINI109&prdCode=DJLN1807021&prdId=ALN121109&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC开放阶梯产品110',
+               url: '/finance/step-detail/index.html?tplId=PrdTempINI110&prdCode=FJ1LJ170001&prdId=FJ1LJ170001&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC智能日添利产品111',
+               url: '/finance/daily-buy/index.html?tplId=PrdTempINI111&prdCode=ALR170001&prdId=ALR170001&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC天天成长113',
+               url: '/finance/grow-detail/index.html?tplId=PrdTempINI113&prdCode=T01LK180001&prdId=TLK180001&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC N天成长114',
+               url: '/finance/grow-n-detail/index.html?tplId=PrdTempINI114&prdCode=DK4LK180004&prdId=DLK180004&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC开放式结构产品116',
+               url: '/fund/open-struct/index.html?tplId=PrdTempINI116&prdCode=ALR18063726&prdId=ALR180637&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC复杂结构产品117',
+               url: '/finance/complex-struct-detail/index.html?tplId=PrdTempINI117&prdCode=TLG180903&prdId=TLG180903&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC天天成长C 118',
+               url: '/finance/grow-detail-c/index.html?prdCode=T03LK180003&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC首发基金001',
+               url: '/fund/first-fund/index.html?prdCode=110020&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC公募货基002',
+               url: '/fund/fund-money-detail/index.html?templateId=PrdTempINI002&prdCode=288101&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC公募非货基003',
+               url: '/fund/fund-public-detail/index.html?templateId=PrdTempINI003&prdCode=002983&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC现金宝产品004',
+               url: '/fund/cash-detail/index.html?prdCode=PAZ999&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC平安盈鹏华产品006',
+               url: '/fund/pa-profit/index.html?templateId=PrdTempINI006&prdCode=000905&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC代销单期封闭007',
+               url: '/fund/fund-one/index.html?tplId=PrdTempINI007&prdCode=A0DH05&prdId=&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC代销稳盈30天008',
+               url: '/finance/finance-prolist/index.html&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC滚动型理财基金009',
+               url: '/fund/fund-roll-detail/index.html?prdCode=270046&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC代销（开放式N天型）013',
+               url: '/fund/consignment-open-detail/index.html?tplId=PrdTempINI013&prdCode=017120&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC活期盈（每日盈）014',
+               url: '/fund/daily-profit/index.html?tplId=PrdTempINI014&prdCode=PA3012&initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: 'PC产品在售清单',
+               url: '/common/sales_list/index.html?initPage=true',
+               sourse: 'pc'  // 口袋：m    PC：pc
+            },
+            {
+               name: '调持仓接口',
+               url: 'http://29.2.201.172:8080/test/holdings.do?ecifNo=600071961012',
+               sourse: ''  // 口袋：m    PC：pc   29.2.201.173和29.2.201.172
+            },
+            {
+               name: '大数据理财刷缓存',
+               url: 'http://29.2.201.172:8080/test/redis/delete.do?key=LF:600103315430',
+               sourse: ''
+            },
+            {
+               name: '智能投研（生产）',
+               url: 'http://pro.pab.com.cn/newAdmin/index.html#/login',
+               sourse: ''  // 口袋：m    PC：pc   29.2.201.173和29.2.201.172
+            },
+            {
+               name: '智能投研UAT',
+               url: 'http://pro.stg2.paic.com.cn:8080/newAdmin/index.html#/login',
+               sourse: ''
+            },
+            {
+               name: '产品雷达',
+               url: 'https://test-b-fat.pingan.com.cn/aum/banka/product_radar.html#/',
+               sourse: ''
+            },
+         ],
+         testUrlArr: [
+            {
+               name: 'pafa5第一套测试环境',
+               url: 'http://pafa.fat.qa.pab.com.cn/admin/login.html',
+               title: 'UM注册登录'
+            },
+            {
+               name: 'pafa5第二套测试环境',
+               url: 'http://pafa.uat.qa.pab.com.cn/admin//login.html',
+               title: 'UM注册登录'
+            },
+            {
+               name: 'pafa5第三套DEV测试环境',
+               url: 'http://pafa.dev.pab.com.cn/admin//login.html',
+               title: 'UM注册登录'
+            },
+            {
+               name: 'pafa5第四套测试环境',
+               url: 'http://bank-pafa5-admin-stg-prd.sdb.com.cn/admin//login.html',
+               title: 'UM注册登录'
+            },
+            {
+               name: 'pafa5生产环境',
+               url: 'http://pafa5.pab.com.cn/admin//login.html',
+               title: 'UM注册登录'
+            },
+            {
+               name: 'UM用户管理',
+               url: 'http://um-selfservice.paic.com.cn/um-selfservice/ss/index.jsp',
+               title: 'UM注册登录'
+            },
+            {
+               name: '电子会议预定系统',
+               url: 'http://svcm.paic.com.cn/svcm/login.do',
+               title: 'UM注册登录'
+            },
+            {
+               name: '神兵系统',
+               url: 'http://vt-pab.paic.com.cn/user-center-web/htm/index.html#/login',
+               title: 'UM账号登录'
+            },
+            {
+               name: '产品货架STG1',
+               url: 'http://portal.fat.qa.pab.com.cn/portal-new/login.html',
+               title: 'UM账号登录'
+            },
+            {
+               name: '产品货架STG2',
+               url: 'http://portal.uat.qa.pab.com.cn/portal-new/newHome.html',
+               title: 'UM账号登录'
+            },
+            {
+               name: '产品货架（生产）',
+               url: 'http://portal.app.gl.pab.com.cn/portal-new/main.html',
+               title: 'UM账号登录'
+            },
+            {
+               name: '测试支持平台',
+               url: 'http://ftsp.qa.pab.com.cn:48882/TestAll/',
+               title: 'dps_query   !3Mon5Adm7l$'
+            },
+            {
+               name: '客户信息查询平台',
+               url: 'http://ftsp.qa.pab.com.cn:48883/BECIFQuery/#',
+               title: ''
+            },
+            {
+               name: 'DPS自助查询平台',
+               url: 'http://29.3.200.116:48883/TestAll/user/login.do',
+               title: 'http://ftsp.qa.pab.com.cn:48882/dps_core_ST/user/login.do'
+            },
+            {
+               name: '短信及彩信查询平台',
+               url: 'http://pscptest-10.paic.com.cn:42154/pscp/login.jsp',
+               title: ''
+            },
+            {
+               name: '理财系统',
+               url: 'http://29.2.210.171:8080/fms/view/index/index.html',
+               title: 'yangshasha222 huangjun993 aaaaa888'
+            },
+            {
+               name: '外包考勤系统',
+               url: 'http://amsims.paic.com.cn/ams/locallogin',
+               title: '办公电脑开机账号登录'
+            },
+            {
+               name: '短信及彩信查询平台',
+               url: 'http://pscptest-10.paic.com.cn:42154/pscp/login.jsp',
+               title: 'xudan005  hello1234'
+            },
+            {
+               name: '零售理财产品管理中心FAT',
+               url: 'http://pro.stg1.paic.com.cn:8080/admin/login.html',
+               title: ''
+            },
+            {
+               name: '零售理财产品管理中心STG2',
+               url: 'http://pro.stg2.paic.com.cn:8080/admin/login.html',
+               title: ''
+            },
+            {
+               name: '个贷业务系统（IE打开）',
+               url: 'http://bloan-rcpm-common-s2.paic.com.cn:30202/bloan_common/login.jsp',
+               title: 'WEISINA894  aaaaa888'
+            },
+            {
+               name: '查询理财系统时间',
+               url: 'http://29.3.202.113:8080/risk/index',
+               title: 'UM账号登录'
+            },
+            {
+               name: 'Gopher用户行为分析平台',
+               url: 'http://oba.fat.qa.pab.com.cn',
+               title: 'gopher / Gopher1234!@#$'
+            },
+            {
+               name: 'RocketMq控制台',
+               url: 'http://29.3.193.125:8080/#/message',
+               title: ''
+            },
+            {
+               name: '他行卡限额控制',
+               url: 'http://29.2.219.151:8080/index',
+               title: 'test_cas_100/aaaaa888'
+            },
+            {
+               name: '知鸟平台',
+               url: 'http://mlearning.pingan.com.cn/znWeb/login.html',
+               title: ''
+            },
+            {
+               name: '欢迎使用RAP接口库',
+               url: 'http://rap.qa.pab.com.cn',
+               title: ''
+            },
+            {
+               name: '测试环境邮件地址',
+               url: 'https://stg-mail.paic.com.cn/owa',
+               title: 'pub_stg_mail_bank  youjianceshi2009@'
+            },
+            {
+               name: 'FAT卡管查询系统',
+               url: 'http://ftsp.qa.pab.com.cn:48882/CardAdminQ-ST2/',
+               title: ''
+            },
+            {
+               name: '客户信息管理查询及服务平台',
+               url: 'http://ftsp.qa.pab.com.cn:48883/BECIFQuery/',
+               title: ''
+            },
+            {
+               name: '齐治科技堡垒机',
+               url: 'https://apmptest.pab.com.cn/shterm/login?logout',
+               title: '开机账号密码'
+            },
+            {
+               name: '测试环境EOA审批',
+               url: 'http://oas-eoa10-stg1.paic.com.cn/eoa/',
+               title: 'wanglei145/aaaaa888   LIPENGCHENG461/aaaaa888    YAOJIPENG348/aaaaa888'
+            },
+            {
+               name: '大数据客户标签库',
+               url: 'http://29.2.218.204:8080/webroot/componentLabel.shtml?partnerId=labelsystem',
+               title: 'pubbieb   bieb8888'
+            },
+            {
+               name: 'RMS测试环境FAT（外网）',
+               url: 'http://b-rms-gm.fat.qa.pab.com.cn',
+               title: ''
+            },
+            {
+               name: 'RMS测试环境FAT（内网）',
+               url: 'http://b-rms-inner-gm.fat.qa.pab.com.cn',
+               title: ''
+            },
+            {
+               name: 'RMS测试环境UAT（外网）',
+               url: 'http://b-rms-gm.uat.qa.pab.com.cn',
+               title: ''
+            },
+            {
+               name: 'RMS测试环境UAT（内网）',
+               url: 'http://b-rms-inner-gm.uat.qa.pab.com.cn',
+               title: ''
+            },
+            {
+               name: 'RMS测试环境DEV（外网）',
+               url: 'http://b-rms-gm.dev.pab.com.cn',
+               title: ''
+            },
+            {
+               name: 'RMS测试环境DEV（内网）',
+               url: 'http://b-rms-inner-gm.dev.pab.com.cn',
+            },
+            {
+               name: 'RMS生产环境（外网）',
+               url: 'http://b-rms.pab.com.cn',
+               title: ''
+            },
+            {
+               name: 'RMS生产环境（内网）',
+               url: 'http://b-rms-inner.pab.com.cn',
+               title: ''
+            },
+            {
+               name: '统一后管FAT',
+               url: 'http://portal.fat.qa.pab.com.cn/portal-new/login.html',
+               title: ''
+            },
+            {
+               name: '统一后管UAT',
+               url: 'http://portal.uat.qa.pab.com.cn/portal-new/login.html',
+               title: ''
+            },
+            {
+               name: '统一后管DEV',
+               url: 'http://portal.dev.pab.com.cn/portal-new/login.html',
+               title: ''
+            },
+            {
+               name: '统一后管生产',
+               url: 'http://portal.app.gl.pab.com.cn/portal-new/login.html',
+               title: ''
+            },
+            {
+               name: 'Seiya塞亚自动化测试',
+               url: 'http://seiya.fat.qa.pab.com.cn/',
+               title: ''
+            },
+            {
+               name: 'ITSM版本申请审批',
+               url: 'http://itsmv2.pab.com.cn/login/toLogin',
+               title: ''
+            },
+            {
+               name: 'Aladdin打包平台',
+               url: 'http://10.2.133.111:3000/#!/login',
+               title: ''
+            },
+            {
+               name: 'EOA签报',
+               url: 'http://eoa2.paic.com.cn/eoa/',
+               title: ''
+            },
+            {
+               name: 'RMS资料库',
+               url: 'http://iwiki.pab.com.cn/pages/viewpage.action?pageId=149588254',
+               title: 'UM账号登录'
+            },
+            {
+               name: '组件清单',
+               url: 'http://gitlab.pab.com.cn/pages/ARCH/front-arch/aladdin-components-website/public/extension/ibank/pages/componentList.html',
+               title: ''
+            },
+            {
+               name: 'Wiki《AUM业务线》',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=12372744',
+               title: '电脑开机账号登录'
+            },
+            {
+               name: 'WiKi《零售IT软件版本管理细则》',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=40424951',
+               title: ''
+            },
+            {
+               name: '    WiKi《零售IT敏捷软件版本管理》',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=70094505',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'WiKi《故障联系人》',
+               url: 'http://iwiki.pab.com.cn/pages/viewpage.action?pageId=83171140',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'WiKi常用软件下载',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=13077768',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'OPR系统',
+               url: 'http://opr.pab.com.cn/Admin/Login/index.html',
+               title: ''
+            },
+            {
+               name: 'OPR自助注册',
+               url: 'http://work.qa.pab.com.cn/shterm',
+               title: 'http://ftsp.qa.pab.com.cn:48882/dps_core_ST/user/login.do'
+            },
+            {
+               name: 'Lotus打tar包地址',
+               url: 'http://29.2.221.246:8080/lotus/app/tools?tab=tar',
+               title: ''
+            },
+            {
+               name: 'Lotus问题汇总',
+               url: 'http://confl.pab.com.cn/pages/viewpage.action?pageId=46399938',
+               title: 'xudan005  hello1234'
+            },
+            {
+               name: 'Lotus发布手册',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=42795806',
+               title: ''
+            },
+            {
+               name: 'Lotus平台',
+               url: 'http://lotus.pab.com.cn',
+               title: ''
+            },
+            {
+               name: 'Apollo生产平台',
+               url: 'http://apollo.qa.pab.com.cn',
+               title: 'UM账号登录'
+            },
+            {
+               name: '隔离网关平台',
+               url: 'http://gwa.fat.qa.pab.com.cn',
+               title: 'UM账号登录'
+            },
+            {
+               name: 'CMS测试&生产APPID查看',
+               url: 'http://orchid.pab.com.cn',
+               title: '负责人：熊长江(金服银行科技中心) <XIONGCHANGJIANG391@pingan.com.cn>'
+            },
+            {
+               name: 'Jira生产环境',
+               url: 'http://jira.pab.com.cn/',
+               title: 'UM账号登录'
+            },
+            {
+               name: 'Jira测试环境',
+               url: 'http://29.3.201.81/',
+               title: 'UM账号登录'
+            },
+            {
+               name: 'Starlink平台',
+               url: 'http://starlink.pab.com.cn',
+               title: ''
+            },
+            {
+               name: 'Iris平台',
+               url: 'http://iris.pab.com.cn',
+               title: ''
+            },
+                {
+               name: 'Lilac资料',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=119311352',
+               title: ''
+            },
+            {
+               name: 'Lilac平台',
+               url: 'http://lilac.dev.pab.com.cn',
+               title: ''
+            },
+            {
+               name: '统一后管FAT',
+               url: 'http://portal.fat.qa.pab.com.cn/portal-new/login.html',
+               title: ''
+            },
+            {
+               name: '统一后管UAT',
+               url: 'http://portal.uat.qa.pab.com.cn/portal-new/login.html',
+               title: ''
+            },
+            {
+               name: '统一后管DEV',
+               url: 'http://portal.dev.pab.com.cn/portal-new/login.html',
+               title: ''
+            },
+            {
+               name: '统一后管生产',
+               url: 'http://portal.app.gl.pab.com.cn/portal-new/login.html',
+               title: ''
+            },
+            {
+               name: 'GitLab代码库',
+               url: 'http://gitlab.pab.com.cn/',
+               title: ''
+            },
+            {
+               name: 'WiKi《Gitlab资料库》',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=37649426',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'Gitlab-版本清单管理',
+               url: 'http://gitlab.pab.com.cn/REF/release-warehouse/version-list-manage',
+               title: 'UM账号登录'
+            },
+            {
+               name: 'Gitlab-T8组',
+               url: 'http://gitlab.pab.com.cn/REF/release-warehouse/T8_team',
+               title: 'UM账号登录'
+            },
+            {
+               name: '代码安全扫描',
+               url: 'http://scan.fat.qa.pab.com.cn',
+               title: ''
+            },
+            {
+               name: '代码安全报告',
+               url: 'http://29.2.181.16:8080/ssc/',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'sonar使用手册',
+               url: 'http://iwiki.pab.com.cn/pages/viewpage.action?pageId=207979902',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'sonar报告【网金】',
+               url: 'http://sonar.dev.pab.com.cn/REF',
+               title: '开机账号&密码'
+            },
+
+            {
+               name: '防火墙梳理【独角鲸】',
+               url: 'http://narwhal.pab.com.cn',
+               title: '开机账号&密码'
+            },
+            {
+               name: '防火墙联通',
+               url: 'http://firewall.pab.com.cn/',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'FireFly发版看板',
+               url: 'http://firefly.pab.com.cn/',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'UCD平台【生产】',
+               url: 'http://ucd.pab.com.cn',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'UCD平台【测试】',
+               url: 'https://29.2.180.64:8443',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'Code代码库',
+               url: 'http://code.paic.com.cn',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'SVN代码库',
+               url: 'http://svn-admin.paic.com.cn/svn/',
+               title: '开机账号&密码'
+            },
+            {
+               name: '阿拉丁打包平台【生产】',
+               url: 'http://10.2.133.111:3000/#!/login',
+               title: '开机账号&密码/上传包路径：/upload/ibank/upgrade/plugins'
+            },
+            {
+               name: '阿拉丁打包平台【测试】',
+               url: 'http://29.2.221.178/#!/login',
+               title: '内测路径：upload/ibank-InnerTest/plugins/1245780-fB-9102'
+            },
+            {
+               name: '阿拉丁打包平台【测试-行员】',
+               url: 'http://29.2.208.33:3000/#!/login',
+               title: '帐号&密码,联系人：杨立浩'
+            },
+            {
+               name: 'Jenkins【安卓&iOS】',
+               url: 'http://10.6.183.245:8080/jenkins',
+               title: '注册帐号&密码，联系人：洪海'
+            },
+            {
+               name: 'Zabbix平台-监控测试服务器',
+               url: 'http://29.3.196.165/zabbix/',
+               title: '[TEST001/Paic@10086]'
+            },
+            {
+               name: 'ivy查询',
+               url: 'http://abts-pr-prd.paic.com.cn/abts-pr/',
+               title: ''
+            },
+                        {
+               name: 'Vanda测试平台',
+               url: 'http://vanda.qa.pab.com.cn/qualityControl/',
+               title: '开机账号&密码'
+            },
+            {
+               name: '软件白名单【双\+ip】',
+               url: '\\10.5.32.102',
+               title: '\\10.5.32.102'
+            },
+
+            {
+               name: '总行IT邮箱',
+               url: '<PAB_itservice@pingan.com.cn&gt',
+               title: '<PAB_itservice@pingan.com.cn&gt'
+            },
+            {
+               name: 'DETECTOR监控平台',
+               url: 'http://29.2.210.109:28080/#/main',
+               title: '开机账号&密码'
+            },
+            {
+               name: '平安云版本上传手册',
+               url: 'http://fcloud.paic.com.cn/u/d/6000d265a7/',
+               title: '开机账号&密码'
+            },
+            {
+               name: 'DLM 开发管理平台',
+               url: 'http://itpm-dlm.pab.com.cn/DLM',
+               title: '开机账号&密码'
+            },
+            {
+               name: '平安云网盘',
+               url: 'http://fcloud.paic.com.cn/d/ad94a75052/',
+               title: 'versionmanager'
+            },
+            {
+               name: 'PAFA5中间件部署指南',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=17762150',
+               title: '位置:【玩转指南】-【PAFA5中间件部署指南】8G内存机器'
+            },
+                        {
+               name: '人力资源信息',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=15546705',
+               title: '开机账号&密码'
+            },
+            {
+               name: '个税细则',
+               url: 'http://bip.pab.com.cn/kbs/home/cc',
+               title: '开机账号&密码'
+            },
+            {
+               name: '员工福利保险',
+               url: 'http://home.pingan.com.cn/bank.screen',
+               title: '开机账号&密码'
+            },
+            {
+               name: '有薪病假福利',
+               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=15546705',
+               title: '开机账号&密码'
+            },
+            {
+               name: '电子会议预定系统',
+               url: 'http://svcm.paic.com.cn/svcm/login.do',
+               title: 'UM注册登录'
+            },
+            {
+               name: '财富宝路径-生产',
+               url: '/upload/cfbbank/nativerResource ',
+               title: '/upload/cfbbank/nativerResource '
+            },
+            {
+               name: '个贷app路径-生产',
+               url: '/upload/paloan/loanbank',
+               title: '/upload/paloan/loanbank'
+            },
+            {
+               name: '统一后管生产内网路径',
+               url: '/bank_dir/static/platform/bron-coms',
+               title: '/bank_dir/static/platform/bron-coms'
+            },
+            {
+               name: '堡垒机网段',
+               url: '10.5.45.104-109【已停用】、29.0.10.78-97',
+               title: '10.5.45.104-109【已停用】、29.0.10.78-97'
+            },
+            {
+               name: '后管开关',
+               url: 'httpDnsSwitch【新增关闭这个开关】、rym【任意门】、资源更新、snapShotFeedBackSwitch【截屏意见反馈】',
+               title: 'httpDnsSwitch【新增关闭这个开关】、rym【任意门】、资源更新、snapShotFeedBackSwitch【截屏意见反馈】'
+            },
+            {
+               name: '神兵故障提单',
+               url: 'http://srvbot.paic.com.cn/#/app/incidentManagement/incident-new-system',
+               title: '开机账号&密码'
+            },
+            {
+               name: '发版异常管理',
+               url: 'http://ring.pab.com.cn/eventMange/abnormalList',
+               title: '发版异常上报-Ring'
+            },
+            {
+               name: 'RMS规范细则',
+               url: 'http://iwiki.pab.com.cn/pages/viewpage.action?pageId=149588419',
+               title: 'RMS环境信息'
+            },
+            {
+               name: 'knight质量考试',
+               url: 'http://knight.fat.qa.pab.com.cn/#/main',
+               title: 'knight质量考试'
+            },
+            {
+               name: '堡垒机口令',
+               url: 'https://otp.paic.com.cn/newhome',
+               title: '堡垒机口令'
+            },
+         ]
+      }
+      page.init();
+   }
+</script>
+
 </html>

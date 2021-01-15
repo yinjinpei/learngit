@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 {% load staticfiles %}
 <html lang="zh-CN">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +9,10 @@
     <title>{% block title %}base{% endblock %}</title>
 
     <!-- Bootstrap -->
-    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/bootstrap/bootstrap-select.min.css' %}" rel='stylesheet'/>
+    <!--<link href="{% static 'css/bootstrap/bootstrap-switch.css' %}" rel='stylesheet'/>-->
+    <!--<link href="{% static 'css/bootstrap/bootstrap-switch.min.css' %}" rel='stylesheet'/>-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,29 +22,40 @@
     <!--[endif]-->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{% static 'js/jquery-3.5.1.js' %}"></script>
-    <link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.min.css' %}"/>
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap/defaults-zh_CN.min.js' %}"></script>
+    <!--<script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-switch.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-switch.min.js' %}"></script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
     <script type="text/javascript">
             if ( window.history.replaceState ) {
                 window.history.replaceState( null, null, window.location.href );
             }
+
     </script>
 
     {% block scripts %}{% endblock %}
 
     <style type="text/css">
+        #con_a{
+            z-index: 9999;
+        }
+
+        #con_a a{
+            color: #2e6da4;
+        }
+
         #con_a a:hover{
             color: red;
         }
 
         #indexLink{
-            font: bold 20px/20px '华文彩云';
-            color: green;
+            font: bold 20px/20px KaiTi;
+            color: #2e6da4;
         }
 
         .svip_flag{
@@ -55,6 +68,38 @@
             margin-top: 15px;
         }
 
+        #dropdown button{
+            height: 50px;
+            color: #2e6da4;
+        }
+
+        #dropdown button:hover{
+            color: red !important;
+        }
+
+        .to_top_bton{
+            width: 30px;
+            height: 50px;
+            margin-left:96%;
+            margin-bottom:5%;
+        }
+
+        .to_top_bton_a{
+            padding:5px;
+            writing-mode: vertical-rl;
+        }
+
+        .to_top_bton_a:hover{
+            background-color:gold;
+            color:red;
+        }
+
+        .bottom-remark{
+            background-color:whitesmoke;
+            padding-top:5px;
+        }
+
+        /*jQuery右下角浮动层火箭动画返回顶部效果代码 starting*/
         #rocket-to-top div {
             left:0;
             margin:0;
@@ -65,7 +110,7 @@
             width:149px;
         }
         #rocket-to-top .level-2 {
-            background:url("../static/images/rocket_button_up.png") no-repeat scroll -149px 0 transparent;
+            background:url("../static/images/icon/rocket_button_up.png") no-repeat scroll -149px 0 transparent;
             display:none;
             height:250px;
             opacity:0;
@@ -79,7 +124,7 @@
             z-index:2;
         }
         #rocket-to-top {
-            background:url("../static/images/rocket_button_up.png") no-repeat scroll 0 0 transparent;
+            background:url("../static/images/icon/rocket_button_up.png") no-repeat scroll 0 0 transparent;
             cursor:default;
             display:block;
             height:250px;
@@ -92,75 +137,163 @@
             width:149px;
             z-index:11;
         }
+        /*jQuery右下角浮动层火箭动画返回顶部效果代码 end*/
+
+        .blessing{
+            background-color:Crimson;
+            color: #FFF;
+            font-weight: bold;
+            margin-top: 50px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            padding-top:6px;
+            font-size: 16px;
+        }
+
+        .index-button a{
+            background-color: #FFF !important;
+            border-radius: 5px !important;
+            border: 1px solid #ccc !important;
+            line-height: 18px !important;
+        }
+
+        .index-button a:hover{
+            background-color: #e6e6e6 !important;
+            color: red !important;
+
+        }
+
+        .loginSuperManager-button:hover{
+            color: red !important;
+        }
+
+        .li_menu{
+            padding:0;
+            text-align: center;
+            border-radius: 10px !important;
+            overflow: hidden;
+        }
+
+        .li_menu .li_base a{
+            border: 1px solid #ccc !important;
+            padding: 8px 0;
+        }
+
+        .li_menu .li_base a:hover{
+            background-color: gold;
+        }
+
+        .title-systemName{
+            position: absolute;
+            top:20%;
+            left: 45%;
+            font-weight:bold;
+            font-size: 24px;
+            FONT-FAMILY: "隶书"
+        }
+
+        .title-systemName a{
+            text-decoration:none;
+        }
 
         {% block css %}{% endblock %}
 
-    </style>
-  </head>
-  <body>
-    <div style="display:none;" id="rocket-to-top">
-	<div style="opacity:0;display:block;" class="level-2"></div>
-	<div class="level-3"></div>
-    </div>
 
-    <nav class="navbar navbar-default" id="con_a">
-      <div class="container-fluid">
+    </style>
+</head>
+<body>
+<div style="display:none;" id="rocket-to-top" title="回到项部">
+    <div style="opacity:0;display:block;" class="level-2"></div>
+    <div class="level-3"></div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-top" id="con_a">
+    <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
-            <span class="sr-only">切换导航条</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/versionManagerIndex" id="indexLink">网址大全</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav"
+aria-expanded="false">
+                <span class="sr-only">切换导航条</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/versionManagerIndex" id="indexLink">网址大全</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggl ing -->
         <div class="collapse navbar-collapse" id="my-nav">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/">主页</a></li>
-            <li class="active">
-                <div class="btn-group dropdown" id="dropdown">
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="height: 50px;">
-                    功能菜单 <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a href="/versionManagerIndex" >网址大全</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="/productionMaterials" >投产材料管理</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="/unblockedVersion" >解封版信息收集</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="/setServerDate" >服务器时间管理</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="/restart_tomcat" >tomcat应用重启</a></li>
-                  </ul>
-                </div>
-            </li>
-          </ul>
-
-          <ul class="nav navbar-nav navbar-right">
-            {% if request.session.is_login %}
+            <ul class="nav navbar-nav">
+                <li class="active index-button" title="返回主页"><a href="/">主页</a></li>
+                <li class="active">
+                    <div class="btn-group dropdown" id="dropdown">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            功能菜单 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu li_menu">
+                            <li class="li_base"><a href="/interfacePerson">故障接口人</a></li>
+                            <li class="li_base"><a href="/uploadFile">文件管理</a></li>
+                            <li class="li_base"><a href="/productionMaterials">投产材料管理</a></li>
+                            <li class="li_base"><a href="/setUpCollectionMaterialConfig">设置材料检查项</a></li>
+                            <li class="li_base"><a href="/unblockedVersion">解封版信息收集</a></li>
+                            <li class="li_base"><a href="/modifyCardStatus">神兵卡片管理</a></li>
+                            <li class="li_base"><a href="/gitlab_member_permissions">gitlab权限管理</a></li>
+                            <li class="li_base"><a href="/announcement">生产数据库信息</a></li>
+                            <li class="li_base"><a href="/addCardField">添加神兵空间字段</a></li>
+                            <li class="li_base"><a href="/countDeploymentInfo">部署窗口申请</a></li>
+                            <li class="li_base"><a href="/myServerInfo">测试环境信息</a></li>
+                            <li class="li_base"><a href="/setServerDate">服务器时间管理</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <span class="title-systemName">
+                <a href="/">
+                    <font color="#FF0000">版</font><font color="#D5372A">本</font><font color="#AB0D54">管</font><font
+color="#81007E">理</font><font color="#8000A8">系</font><font color="#8000D2">统</font>
+                </a>
+            </span>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.session.is_login %}
                 {% if request.session.manager_islogin %}
-                    <li><img class="svip_icon" src="../static/images/icon/vip2.png"></li>
-                    <li><a class="svip_flag" href="logoutSuperManager" title="点击：切换普通用户">【超级用户】</a></li>
+                <li><img class="svip_icon" src="../static/images/icon/vip2.png"></li>
+                <li><a class="svip_flag loginSuperManager-button" href="/logoutSuperManager" title="点击：切换普通用户">【超级用户】</a></li>
                 {% else %}
-                    <li><a style="color: #2e6da4" href="loginSuperManager" title="点击：切换超级用户">【普通用户】</a></li>
+                <li><a class="loginSuperManager-button" href="/loginSuperManager" title="点击：切换超级用户">【普通用户】</a></li>
                 {% endif %}
-                  <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
-                  <li><a href="/user/modifyPassword">修改密码</a></li>
-                  <li><a href="/user/logout">退出</a></li>
-              {% else %}
-                  <li><a href="/user/login">登录</a></li>
-                  <li><a href="/user/register">注册</a></li>
-              {% endif %}
-          </ul>
+                <li><a href="#">当前在线：{{ request.session.user_name }}</a></li>
+                <li><a href="/user/modifyPassword" title="修改普通用户密码">修改密码</a></li>
+                <li><a href="/user/logout">退出</a></li>
+                {% else %}
+                <li><a href="/user/login">登录</a></li>
+                <li><a href="/user/register">注册</a></li>
+                {% endif %}
+            </ul>
         </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+    </div><!-- /.container-fluid -->
+</nav>
+<!--<nav class="navbar-fixed-top blessing">-->
+    <!--<marquee direction="right" behavior="alternate" scrollamount="15" scrolldelay="10" onmouseover=this.stop()-->
+             <!--onmouseout=this.start()>-->
+        <!--祝大家2021年元旦快乐，吉祥好运！ ♪(＾∀＾●)ﾉ-->
+    <!--</marquee>-->
+<!--</nav>-->
+<!--<br><br>-->
+<br><br><br>
 
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
+<!--<div class="navbar navbar-fixed-bottom to_top_bton">-->
+<!--<a class="brand btn btn-primary pull-right to_top_bton_a" href="#">回到顶部</a>-->
+<!--</div>-->
+<br><br><br>
 
-  </body>
+<div class="navbar-fixed-bottom bottom-remark">
+    <!--要固定的html或者其他内容-->
+    <marquee direction="right" behavior="alternate" scrollamount="10" scrolldelay="10" onmouseover=this.stop()
+onmouseout=this.start()>
+        <font>系统联系人邮箱：EX-YINJINPEI001@pingan.com.cn</font>
+    </marquee>
+</div>
+</body>
+{% block body_out %}{% endblock %}
 </html>

@@ -1,10 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>外网地址</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>测试地址</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+
+      .top1 {
+         display: inline-block;
+         width: 300px;
+         height: 50px;
+         text-align: center;
+         font-size: 60px;
+         color: #FF9224;
+         font-family: 华文彩云;
+         margin-top: 1px;
+      }
+
+      .WithSplit {
+         display: inline-block;
+         width: 150px;
+         height: 50px;
+         line-height: 50px;
+         font-size: 25px;
+         text-align: center;
+         vertical-align: middle;
+         COLOR: #FFFFFF;
+         background-color: #E95404;
+         border: 2px solid #FFFFFF;
+         font-family: lisu;
+
+      }
+
+      .dn {
+         display: none;
+      }
+
+      .clearfix:after {
+         content: "";
+         display: block;
+         height: 0;
+         clear: both;
+         overflow: hidden;
+         visibility: hidden;
+      }
+
+      .container {
+         width: 99%;
+         margin: 0 auto;
+      }
+
+      .menu {
+         float: left;
+         width: 230px;
+         background: #666666;
+         color: #b8c7ce;
+      }
+
+      .menu>div {
+         text-align: center;
+         line-height: 44px;
+         border-left: 3px solid transparent;
+         cursor: pointer;
+      }
+
+      .menu>.active {
+         border-left-color: #f747ad;
+         color: #fff;
+         background: rgb(111, 157, 255);
+         font-weight:bold;
+      }
+
+      .menu>div:hover {
+         border-left-color: #0aa7e6;
+         color: #fff;
+         background: #0aa7e6;
+      }
+
+      .content {
+         position: relative;
+         margin-left: 230px;
+         min-height: 800px;
+         padding: 10px;
+      }
+
+      .content iframe {
+         width: 100%;
+         min-height: 800px;
+         height: 100%;
+      }
+
+      .middle {
+         float: left;
+         width: 80%;
+         margin: 0 5px 0 5px;
+      }
+
+      .h5 {
+         font-size: 20px;
+         color: #6A6AFF;
+         font-family: lisu;
+         margin-bottom: 5px;
+      }
+
+      .title1 {
+         padding: 20px;
+         border: 1px solid red;
+      }
+
+      .divStyle {
+         display: flex;
+         flex-direction: row;
+         flex-wrap: wrap;
+         /* justify-content: space-between; */
+         font-family: Arial;
+         font-size: 12px;
+      }
+
+      .divStyle li {
+         width: 20%;
+         color: #E95404;
+         padding-bottom: 20px;
+         list-style-type: circle;
+      }
+
+      .divStyle li a {
+         color: #000000;
+         text-decoration: none;
+      }
+
+      .content-right {
+         position: absolute;
+         right: 0;
+         width: 19%;
+         padding-top: 20px;
+      }
+
+      .content-right .p2 {
+         font-size: 18px;
+         color: #FFFFFF;
+         font-family: lisu;
+         margin-bottom: 20px;
+         background-color: #E95404;
+      }
+
+      .bottom {
+         padding: 20px 0 40px 0;
+         text-align: center;
+         font-size: 14px;
+         color: #818181;
+      }
+      textarea{
+         width: 300px;
+         height: 150px;
+         margin-top: 20px;
+      }
+      .h4{
+         width: 700px;
+         height: 250px;
+         color:darkgreen;
+      }
+   </style>
 </head>
+
 <body>
-    <h4>外网地址</h4>
+   <div style="text-align:center;">
+      <h2 class="top1">平安银行</h2>
+      <h4 class="WithSplit">遵规守纪</h4>
+      <h4 class="WithSplit">奋发拼搏</h4>
+      <h4 class="WithSplit">团结一心</h4>
+      <h4 class="WithSplit">共创佳绩</h4>
+   </div>
+
+   <marquee direction="left" behavior="scroll" loop="*" scrollamount="8" scrolldelay="1" align="top" width="100%"
+onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF4500;font-size:25px;font-weight:bold;font-family:lisu;">
+      一不为名，二不为利，但工作目标要奔世界先进水平。
+      <sub>--邓稼先<sub>
+   </marquee>
+
+   <hr color=#FF9224 style="margin:5px;">
+   <div class="container clearfix">
+      <div id="menu" class="menu">
+         <div data-id="0" class="active">链接列表</div>
+         <div data-id="1" style="text-decoration:none; font-size:18px">离线包CDN地址</div>
+         <div data-id="2"><a href="/extranetAddress" style="text-decoration:none; font-size:20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;访问外网地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+         <div data-id="3"><a href="/versionManagerIndex" style="text-decoration:none; font-size:20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;版本经理首页&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></div>
+         <div data-id="4"><a href="/"  style="text-decoration:none; font-size:20px;">
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回首页
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</a></div>
+         <!--<div data-id="3">银行卡余额充值</div>-->
+         <!--<div data-id="5">RMS测试环境FAT（外网）</div>-->
+         <!--<div data-id="6">RMS测试环境FAT（内网）</div>-->
+         <!--<div data-id="7">RMS测试环境UAT（外网）</div>-->
+         <!--<div data-id="8">RMS测试环境UAT（内网）</div>-->
+         <!--<div data-id="9">RMS生产（外网）</div>-->
+         <!--<div data-id="10">RMS生产（内网）</div>-->
+
+      </div>
+      <div class="content clearfix">
+         <div class="content-right">
+            <p class="p2">扫描二维码下载口袋APP软件</p>
+            <img class="svip_icon" style="width: 300px;height:300px;" src="../../static/images/icon/pinganAppCode.png">
+            <p>在口袋登录页面复制以上代码到浏览器Console然后回车实现登录</p>
+            <textarea>$('#userId').val('17091550997'); // 登录账号
+               $('input#loginPwd').val('qweqwe123');
+               $('#codeInput').val('5047');
+               $('#submit').removeAttr('disabled').click();
+            </textarea>
+            <p>内网CDN刷新</p>
+            <textarea>https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data;https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data;
+            </textarea>
+            <p>生产CDN刷新</p>
+            <textarea>https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;
+            </textarea>
+            <p color=“darkgreen”>发版十项资料:<br>
+               1、需求说明书<br>
+               2、需求评审记录<br>
+               3、安全评审记录<br>
+               4、SIT测试报告<br>
+               5、UAT测试报告<br>
+               6、安全测试报告<br>
+               7、代码评审记录<br>
+               8、版本发布检查单<br>
+               9、回归测试报告<br>
+               10、生产验证记录<br>
+               11、代码质量扫描报告<br>
+               12、代码安全扫描报告<br>
+               13、SQM审核报告<br>
+               14、其他</p>
+         </div>
+         <div class="middle">
+            <!--<h5 class="h5">常用平台地址</h5>-->
+            <!--<div class="title1">-->
+               <!--<div class="divStyle" id="testUrl">-->
+               <!--</div>-->
+            <!--</div>-->
+            <h5 class="h5">常用测试地址</h5>
+            <div class="title1">
+               <div class="divStyle" id="aumTestUrl">
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="content dn">
+         <h4 class="h4" >内测CDN刷新：<br>
+            https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data;<br>
+            https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;<br>
+            https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;<br>
+            https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data;
+         </h4>
+          <h4 class="h4"  >生产CDN刷新：<br>
+            https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;<br>
+            https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;<br>
+            https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;<br>
+            https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;
+         </h4>
+      </div>
+      <!--div class="content dn">
+         <iframe src="http://hq-b07350:8080/autotest/html/qrCode.html" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://29.3.202.113:8080/risk/addmoney" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-gm.fat.qa.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-inner-gm.fat.qa.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-gm.uat.qa.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-inner-gm.uat.qa.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      <div class="content dn">
+         <iframe src="http://b-rms-inner.pab.com.cn" frameborder="0"></iframe>
+      </div>
+      -->
+   </div>
+   <div class="bottom">
+      <p>版权所有 © 中国平安保险（集团）股份有限公司 未经许可不得复制、转载或摘编，违者必究!<br>Copyright © PING AN INSURANCE (GROUP) COMPANY OF CHINA ,LTD. All
+         Rights Reserved</p>
+   </div>
 </body>
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+<script>
+   window.onload = function () {
+      var page = {
+         hostUrl: {
+            aum: 'https://test-b-fat.pingan.com.cn',
+            pc: 'https://test-ebank-fat.pingan.com.cn',
+            pcVer: ''
+         },
+         init: function () {
+            this.testUrl = document.getElementById('testUrl');
+            this.menu = document.getElementById('menu');
+            this.menuItemArr = this.menu.children;
+            this.contentArr = document.getElementsByClassName('content');
+            <!--this.pushTestUrl();-->
+            this.pushAumTestUrl();
+            this.clickFn();
+         },
+         clickFn: function () {
+            var self = this;
+            self.menu.onclick = function (e) {
+               var e = e || window.e;
+               var target = e.target || e.srcElement;
+               if (target.nodeName.toLocaleLowerCase() === 'div') {
+                  for (var i = 0; i < self.menuItemArr.length; i++) {
+                     self.menuItemArr[i].className = '';
+                  }
+                  target.className = 'active';
+                  for (var i = 0; i < self.contentArr.length; i++) {
+                     if (target.dataset.id == i) {
+                        self.contentArr[i].className = 'content';
+                     } else {
+                        self.contentArr[i].className = 'content dn';
+                     }
+                  }
+               }
+            }
+         },
+         loadImg: function () {
+                var arr = document.querySelectorAll('.lazyPic');
+                for (var i = 0; i < arr.length; i++) {
+                    arr[i].isLoad = true;
+                    if (arr[i].dataset) {
+                        this.afterLoadImg(arr[i], arr[i].dataset.src);
+                    } else {
+                        this.afterLoadImg(arr[i], arr[i].getAttribute('data-src'));
+                    }
+                }
+            },
+            afterLoadImg: function (obj, url) {
+                var oImg = new Image();
+                oImg.onload = function () {
+                    obj.src = oImg.src;
+                }
+                oImg.src = url;
+            },
+
+         <!--pushTestUrl: function () {-->
+            <!--var html = '';-->
+            <!--for (var i = 0; i < this.testUrlArr.length; i++) {-->
+               <!--html += '<li><a target="_blank" href="' + this.testUrlArr[i].url + '" title="' + this.testUrlArr[i].title + '">' + this.testUrlArr[i].name + '</a></li>';-->
+            <!--}-->
+            <!--this.testUrl.innerHTML = html;-->
+         <!--},-->
+         pushAumTestUrl: function () {
+            var html = '',
+               aumTestUrlEl = document.getElementById('aumTestUrl');
+            for (var i = 0; i < this.aumTestUrl.length; i++) {
+               if (this.aumTestUrl[i].sourse === 'm') {
+                  html += '<li><a target="_blank" href="' + this.hostUrl.aum + this.aumTestUrl[i].url + '">' + this.aumTestUrl[i].name + '</a></li>';
+               } else if (this.aumTestUrl[i].sourse === 'pc') {
+                  html += '<li><a target="_blank" href="' + this.hostUrl.pc + '/aum' + this.hostUrl.pcVer + this.aumTestUrl[i].url + '">' + this.aumTestUrl[i].name + '</a></li>';
+               } else {
+                  html += '<li><a target="_blank" href="' + this.aumTestUrl[i].url + '">' + this.aumTestUrl[i].name + '</a></li>';
+               }
+            }
+            aumTestUrlEl.innerHTML = html;
+         },
+         aumTestUrl: [
+            {
+               name: 'CDN加速',
+               url: 'https://portal.chinanetcenter.com/',
+               title: 'CDN加速-生产发版'
+            },
+            {
+               name: '谷歌翻译',
+               url: 'https://translate.google.cn/',
+               title: '谷歌翻译'
+            },
+            {
+               name: 'Linux命令搜索引擎',
+               url: 'https://wangchujiang.com/linux-command/',
+               title: 'Linux命令搜索引擎'
+            },
+            {
+               name: '微软Bing搜索引擎',
+               url: 'http://cn.bing.com/',
+               title: '微软Bing搜索引擎'
+            },
+            {
+               name: '百度一下',
+               url: 'https://www.baidu.com/',
+               title: '百度一下'
+            },
+            {
+               name: '百度文库',
+               url: 'https://wenku.baidu.com/',
+               title: '百度文库'
+            },
+            {
+               name: '百度经验',
+               url: 'https://jingyan.baidu.com/',
+               title: '百度经验'
+            },
+            {
+               name: '百度知道',
+               url: 'https://zhidao.baidu.com/',
+               title: '百度知道'
+            },
+            {
+               name: 'CSDN社区',
+               url: 'http://www.csdn.net/',
+               title: 'CSDN-专业IT技能社区'
+            },
+            {
+               name: '知乎',
+               url: 'https://www.zhihu.com/',
+               title: '知乎-有问题，上知乎'
+            },
+            {
+               name: '博客园',
+               url: 'https://www.cnblogs.com/',
+               title: '博客园'
+            },
+            {
+               name: 'linu公社',
+               url: 'https://www.linuxidc.com/',
+               title: 'linu公社-Linux系统门户网站'
+            },
+            {
+               name: '菜鸟教程',
+               url: 'https://www.runoob.com/',
+               title: '菜鸟教程'
+            },
+            {
+               name: 'W3Cschool社区',
+               url: 'https://www.w3cschool.cn/',
+               title: 'W3Cschool随时随地学编程'
+            },
+            {
+               name: 'python第三方库',
+               url: 'https://pypi.org/',
+               title: 'python第三方库'
+            },
+            {
+               name: 'gitee码云',
+               url: 'https://gitee.com/',
+               title: 'gitee码云'
+            },
+            {
+               name: 'gitHub',
+               url: 'https://github.com/',
+               title: 'gitHub'
+            },
+         ],
+         <!--testUrlArr: [-->
+
+         <!--]-->
+      }
+      page.init();
+   }
+</script>
+
 </html>

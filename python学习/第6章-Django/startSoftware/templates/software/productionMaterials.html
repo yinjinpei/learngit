@@ -144,11 +144,11 @@
     }
 
     #reset_btn{
-        color: green;
+        color:green;
     }
 
     #reset_btn:hover,#checkout_btn:hover{
-        color: red;
+        color:red;
         background-color: gold;
     }
 
@@ -229,22 +229,23 @@
             <h3 class="title_h2">所有版本投产材料的收集情况</h3>
             <br>
             <form class='form-register' action="productionMaterials?dirname={{path}}" method="get" id="my_checkoutDate">
-            {% csrf_token %}
-            <label class="btn btn-primary pull-left domain_list" for="checkoutDate">投产日期：</label>
-                <select class="btn btn-default pull-left" onchange="submit2Form();" name="checkoutDate" id="checkoutDate" required>
-                    {% if checkoutDate %}
-                        <option>{{checkoutDate}}</option>
-                    {% else %}
-                        <option value="">所有版本</option>
-                    {% endif %}
+                {% csrf_token %}
+                <label class="btn btn-primary pull-left domain_list" for="checkoutDate">投产日期：</label>
+                <a class="btn btn-primary pull-right" href="/setUpCollectionMaterialConfig">设置检查项</a>
+                    <select class="btn btn-default pull-left" onchange="submit2Form();" name="checkoutDate" id="checkoutDate" required>
+                        {% if checkoutDate %}
+                            <option>{{checkoutDate}}</option>
+                        {% else %}
+                            <option value="">没有选中任何项</option>
+                        {% endif %}
 
-                    {% if date_list %}
-                        {% for date in date_list %}
-                    　　　　<option>{{date}}</option>
-                        {% endfor %}
-                        <option value="">所有版本</option>
-                    {% endif %}
-                </select>
+                        {% if date_list %}
+                            {% for date in date_list %}
+                    　　　　    <option>{{date}}</option>
+                            {% endfor %}
+                            <option value="所有版本">所有版本</option>
+                        {% endif %}
+                    </select>
             </form>
 
             <br>
@@ -274,11 +275,11 @@
     </div>
     {% endif %}
 
-    <br><br>
-    <hr>
-    <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
-    <br><br><br><br>
-    <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
-    <br><br><br><br>
+    <!--<br><br>-->
+    <!--<hr>-->
+    <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+    <!--<br><br><br><br>-->
+    <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+    <!--<br><br><br><br>-->
 </div>
 {% endblock %}

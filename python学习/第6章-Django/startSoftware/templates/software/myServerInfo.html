@@ -1,0 +1,890 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}测试环境信息{% endblock %}
+
+{% block content %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+        window.onload = function () {
+
+            var oDiv = document.getElementById('con');
+            oDiv.style.border = '2px solid #2e6da4';
+            oDiv.style.fontSize = '20px';
+            oDiv.style.textAlign = 'center';
+
+            var oBtn = document.getElementById('btn');
+            oBtn.value = '隐藏数据库信息';
+            oBtn.style.backgroundColor = '#2e6da4'
+            oBtn.onclick = changeWindow;
+
+            function changeWindow() {
+                if(oDiv.style.display=='none'){
+                    oDiv.style.display = 'block';
+                    oBtn.style.backgroundColor = '#2e6da4'
+                    oBtn.value = '隐藏数据库信息';
+                }
+                else{
+                    oDiv.style.display = 'none';
+                    oBtn.style.backgroundColor = 'green'
+                    oBtn.value = '显示数据库信息';
+                }
+            }
+
+
+            var oDiv2 = document.getElementById('con2');
+            oDiv2.style.border = '2px solid #2e6da4';
+            oDiv2.style.fontSize = '20px';
+            oDiv2.style.textAlign = 'center';
+
+            var oBtn2 = document.getElementById('btn2');
+            oBtn2.value = '隐藏服务器信息';
+            oBtn2.style.backgroundColor = '#2e6da4'
+            oBtn2.onclick = changeWindow2;
+
+            function changeWindow2() {
+                if(oDiv2.style.display=='none'){
+                    oDiv2.style.display = 'block';
+                    oBtn2.style.backgroundColor = '#2e6da4'
+                    oBtn2.value = '隐藏服务器信息';
+                }
+                else{
+                    oDiv2.style.display = 'none';
+                    oBtn2.style.backgroundColor = 'green'
+                    oBtn2.value = '显示服务器信息';
+                }
+            }
+
+
+            var oDiv3 = document.getElementById('con3');
+            oDiv3.style.border = '2px solid #2e6da4';
+            oDiv3.style.fontSize = '20px';
+            oDiv3.style.textAlign = 'center';
+
+            var oBtn3 = document.getElementById('btn3');
+            oBtn3.value = '隐藏gitlab库信息';
+            oBtn3.style.backgroundColor = '#2e6da4'
+            oBtn3.onclick = changeWindow3;
+
+            function changeWindow3() {
+                if(oDiv3.style.display=='none'){
+                    oDiv3.style.display = 'block';
+                    oBtn3.style.backgroundColor = '#2e6da4'
+                    oBtn3.value = '隐藏gitlab库信息';
+                }
+                else{
+                    oDiv3.style.display = 'none';
+                    oBtn3.style.backgroundColor = 'green'
+                    oBtn3.value = '显示gitlab库信息';
+                }
+            }
+
+        }
+</script>
+
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+        margin: 50px 100px;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .title_h3{
+        color: green;
+        font-weight: bold;
+    }
+
+
+    .title_h4{
+        color: RoyalBlue;
+        font-weight: bold;
+    }
+
+    #link_index:hover,#link_top:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .dataBase_table{
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        background-color: #f6ffff;
+        margin-bottom: 25px;
+        border-collapse:collapse;
+    }
+
+    .dataBase_table th{
+        text-align: center;
+        font-size: 16px;
+        background-color: LightSkyBlue;
+    }
+
+    .table_td{
+        padding: 3px;
+        max-width: 500px;
+    }
+
+    .table_td button{
+        background-color: IndianRed;
+        border-color: IndianRed;
+    }
+
+    .dataBase_table button:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .table_td button:hover{
+        border-color: IndianRed;
+    }
+
+    .show_window{
+        text-align: left;
+    }
+
+    #btn,#btn2,#btn3{
+        margin-left: 5px;
+    }
+
+    #con,#con2,#con3{
+        padding: 10px;
+        border-radius: 10px;
+        <!--max-height: 2000px;-->
+        <!--overflow: auto;-->
+    }
+
+    #con{
+        background-color: LightBlue;
+    }
+
+    #con2{
+        background-color: NavajoWhite;
+    }
+
+    #con3{
+        background-color: MistyRose;
+    }
+
+    #reset_btn{
+        color:green;
+    }
+
+    #reset_btn:hover,#checkout_btn:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    .table_text{
+        min-width: 100%;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        display: block;
+    }
+
+
+    input.input-append{
+        float: left;
+        margin-right: -34px;
+    }
+
+    input.input-append + button.btn{
+        float:none;
+    }
+
+    div.input-append{
+        display:block;
+    }
+
+    ul.input-append {
+        min-width: 100%;
+    }
+
+    .envType-btn{
+        height: 46px;
+    }
+
+    .envType-input{
+        text-align: center;
+        height: 46px;
+    }
+
+    {
+        border-color: Black;
+    }
+
+    /* 设置table边框 */
+    .addDataBase,.addDataBase tr th,.addDataBase tr td{
+        border-color: LimeGreen;
+    }
+
+    .addDataBase .table_td{
+        background-color: SeaGreen;
+        color: #FFF;
+
+    }
+
+    .addDataBase button{
+        background-color: green;
+    }
+
+    .type_td{
+        border-radius: 3px;
+    }
+
+    .table_text_type{
+        border-color: green;
+        background-color: green;
+        height:44px;
+        width: 120px;
+    }
+
+    .table_text_type:hover,.type_td:hover{
+        background-color: #204d74;
+    }
+
+    .table_text_select,.type_td_select{
+        background-color: #337ab7;
+        border-color: #337ab7;
+    }
+
+    .dataBase_table input,.dataBase_table textarea{
+        background-color: LightGreen;
+    }
+
+</style>
+{% endblock %}
+
+<div id="uploadFile_con">
+    <div class="show_window">
+        <input class="btn btn-primary" id="btn" type="button" name="" title="点击隐藏/显示" value="切换">
+        <div id="con">
+            <h3 class="title_h3">测试环境-数据库信息</h3>
+            <br><br>
+
+            <h3 class="title_h3">新增团队数据库</h3>
+             <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table addDataBase">
+                 <tr>
+                    <th class="table_td">团队名</th>
+                    <th class="table_td">领域名</th>
+                    <th class="table_td">环境</th>
+                    <th class="table_td">数据库串</th>
+                    <th class="table_td">库名</th>
+                    <th class="table_td">用户名</th>
+                    <th class="table_td">备注</th>
+                    <th class="table_td">操作</th>
+                 </tr>
+                 <form class='form-register' action="myServerInfo" method="post">
+                    {% csrf_token %}
+                     <input type="text" name="operating" value="create" style="display: none;">
+                    <tr>
+                        <td><textarea class="table_text" name='blongTo' required></textarea></td>
+                        <!--<td><textarea class="table_text" name='domain' required></textarea></td>-->
+                        <td>
+                            <div class="input-append btn-group">
+                                  <input type="text" class="input-append form-control envType-input" name="domain">
+                                  <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      <span class="caret"></span>
+                                  </button>
+                                  <ul class="input-append dropdown-menu addDomain">
+                                      {% for domain in dataBaseDomain_list %}
+                                           <li><a href="#addDomain">{{domain}}</a></li>
+                                      {% endfor %}
+                                  </ul>
+                            </div>
+                        </td>
+
+                        <td>
+                            <div class="input-append btn-group">
+                                  <input type="text" class="input-append form-control envType-input" name="envType">
+                                  <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      <span class="caret"></span>
+                                  </button>
+                                  <ul class="input-append dropdown-menu add">
+                                      {% for envType in envType_list %}
+                                           <li><a href="#add">{{envType}}</a></li>
+                                      {% endfor %}
+                                  </ul>
+                            </div>
+                        </td>
+                        <td><textarea class="table_text" name='dataBaseLink' required></textarea></td>
+                        <td><textarea class="table_text" name='dataBaseName' required></textarea></td>
+                        <td><textarea class="table_text" name='userName' required></textarea></td>
+                        <td><textarea class="table_text" name='remark' required></textarea></td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">新增</button>
+                        </td>
+                    </tr>
+                 </form>
+             </table>
+            <br>
+
+            {% for blongTo,dataBaseInfo_list in all_blongTo_dict.items %}
+                <h4 class="title_h4">{{blongTo}}</h4>
+                    <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table">
+                        <tr>
+                           <th class="table_td">领域名</th>
+                           <th class="table_td">环境</th>
+                           <th class="table_td">数据库串</th>
+                           <th class="table_td">库名</th>
+                           <th class="table_td">用户名</th>
+                           <th class="table_td">备注</th>
+                           <th class="table_td">修改时间</th>
+                           <th class="table_td">操作</th>
+                        </tr>
+                        <form class='form-register' action="myServerInfo" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="operating" value="create" style="display: none;">
+                            <input type="text" name="blongTo" value="{{blongTo}}" style="display: none;">
+                            <tr>
+                                <td>
+                                    <div class="input-append btn-group">
+                                          <input type="text" class="input-append form-control envType-input" name="domain">
+                                          <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              <span class="caret"></span>
+                                          </button>
+                                          <ul class="input-append dropdown-menu {{blongTo}}_domain">
+                                              {% for domain in dataBaseDomain_list %}
+                                                    <li><a href="#{{blongTo}}_domain">{{domain}}</a></li>
+                                              {% endfor %}
+                                          </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-append btn-group">
+                                          <input type="text" class="input-append form-control envType-input" name="envType">
+                                          <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              <span class="caret"></span>
+                                          </button>
+                                          <ul class="input-append dropdown-menu {{blongTo}}_envType">
+                                              {% for envType in envType_list %}
+                                                    <li><a href="#{{blongTo}}_envType">{{envType}}</a></li>
+                                              {% endfor %}
+                                          </ul>
+                                    </div>
+                                </td>
+                                <td><textarea class="table_text" name='dataBaseLink' required></textarea></td>
+                                <td><textarea class="table_text" name='dataBaseName' required></textarea></td>
+                                <td><textarea class="table_text" name='userName' required></textarea></td>
+                                <td><textarea class="table_text" name='remark' required></textarea></td>
+                                <td></td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary">新增</button>
+                                </td>
+                            </tr>
+                        </form>
+                        {% for dataBaseInfo in dataBaseInfo_list %}
+                            <tr>
+                                <td class="table_td">{{dataBaseInfo.domain}}</td>
+                                <td class="table_td">{{dataBaseInfo.envType}}</td>
+                                <td class="table_td">{{dataBaseInfo.dataBaseLink}}</td>
+                                <td class="table_td">{{dataBaseInfo.dataBaseName}}</td>
+                                <td class="table_td">{{dataBaseInfo.userName}}</td>
+                                <td class="table_td">{{dataBaseInfo.remark}}</td>
+                                <td class="table_td">{{dataBaseInfo.modifyTime}}</td>
+                                <td class="table_td">
+                                    {% if request.session.manager_islogin %}
+                                        <form action="myServerInfo" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                                            {% csrf_token %}
+                                            <input type="text" name="operating" value="deleted" style="display:none;">
+                                            <input type="text" name="id" value="{{dataBaseInfo.id}}" style="display:none;">
+                                            <input type="text" name="modifyTime" value="{{dataBaseInfo.modifyTime}}" style="display:none;">
+                                            <button type="submit" class="btn btn-primary">删除</button>
+                                        </form>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-primary" disabled="disabled">删除</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <br><br><br>
+    <div class="show_window">
+        <input class="btn btn-primary" id="btn2" type="button" name=""  title="点击隐藏/显示" value="切换">
+        <div id="con2">
+            <h3 class="title_h3">测试环境-服务器信息</h3>
+            <br><br>
+
+            <h3 class="title_h3">新增团队服务器</h3>
+             <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table addDataBase">
+                 <tr>
+                    <th class="table_td">团队名</th>
+                    <th class="table_td">领域名</th>
+                    <th class="table_td">环境</th>
+                    <th class="table_td">APPID</th>
+                    <th class="table_td">IP</th>
+                    <th class="table_td">应用名</th>
+                    <th class="table_td">应用类型</th>
+                    <th class="table_td">部署平台</th>
+                    <th class="table_td">备注</th>
+                    <th class="table_td">操作</th>
+                 </tr>
+                 <form class='form-register' action="myServerInfo" method="post">
+                    {% csrf_token %}
+                     <input type="text" name="operating" value="addServer" style="display: none;">
+                    <tr>
+                        <td><textarea class="table_text" name='blongTo' required></textarea></td>
+                        <td>
+                            <div class="input-append btn-group">
+                                  <input type="text" class="input-append form-control envType-input" name="domainName">
+                                  <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      <span class="caret"></span>
+                                  </button>
+                                  <ul class="input-append dropdown-menu addDomainServer">
+                                      {% for domain in myServer_domain_list %}
+                                           <li><a href="#addDomainServer">{{domain}}</a></li>
+                                      {% endfor %}
+                                  </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-append btn-group">
+                                  <input type="text" class="input-append form-control envType-input" name="envType">
+                                  <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      <span class="caret"></span>
+                                  </button>
+                                  <ul class="input-append dropdown-menu addServer">
+                                      {% for envType in myServer_envType_list %}
+                                           <li><a href="#addServer">{{envType}}</a></li>
+                                      {% endfor %}
+                                  </ul>
+                            </div>
+                        </td>
+                        <td><textarea class="table_text" name='appid' required></textarea></td>
+                        <td><textarea class="table_text" name='ip' placeholder="多个IP用逗号隔开" required></textarea></td>
+                        <td><textarea class="table_text" name='applicantName' required></textarea></td>
+                        <td>
+                            <div class="input-append btn-group">
+                                  <input type="text" class="input-append form-control envType-input" name="applicantType">
+                                  <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      <span class="caret"></span>
+                                  </button>
+                                  <ul class="input-append dropdown-menu addApplicantTypeServer">
+                                      {% for applicantType in myServer_applicantType_list %}
+                                           <li><a href="#addApplicantTypeServer">{{applicantType}}</a></li>
+                                      {% endfor %}
+                                  </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="input-append btn-group">
+                                  <input type="text" class="input-append form-control envType-input" name="deployPlatform">
+                                  <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      <span class="caret"></span>
+                                  </button>
+                                  <ul class="input-append dropdown-menu addDeployPlatformServer">
+                                      {% for deployPlatform in myServer_deployPlatform_list %}
+                                           <li><a href="#addDeployPlatformServer">{{deployPlatform}}</a></li>
+                                      {% endfor %}
+                                  </ul>
+                            </div>
+                        </td>
+                        <td><textarea class="table_text" name='remark' required></textarea></td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">新增</button>
+                        </td>
+                    </tr>
+                 </form>
+             </table>
+            <br>
+
+
+            {% for blongTo,myServerInfo_list in allMyServer_blongTo_dict.items %}
+                <h4 class="title_h4">{{blongTo}}</h4>
+                    <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table">
+                        <tr>
+                           <th class="table_td">领域名</th>
+                           <th class="table_td">环境</th>
+                           <th class="table_td">APPID</th>
+                           <th class="table_td">IP</th>
+                           <th class="table_td">应用名</th>
+                           <th class="table_td">应用类型</th>
+                           <th class="table_td">部署平台</th>
+                           <th class="table_td">备注</th>
+                           <th class="table_td">修改时间</th>
+                           <th class="table_td">操作</th>
+                        </tr>
+                        <form class='form-register' action="myServerInfo" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="operating" value="addServer" style="display: none;">
+                            <input type="text" name="blongTo" value="{{blongTo}}" style="display: none;">
+                            <tr>
+                                <td>
+                                    <div class="input-append btn-group">
+                                          <input type="text" class="input-append form-control envType-input" name="domainName">
+                                          <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              <span class="caret"></span>
+                                          </button>
+                                          <ul class="input-append dropdown-menu {{blongTo}}_MyServerDomainName">
+                                              {% for domain in myServer_domain_list %}
+                                                   <li><a href="#{{blongTo}}_MyServerDomainName">{{domain}}</a></li>
+                                              {% endfor %}
+                                          </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-append btn-group">
+                                          <input type="text" class="input-append form-control envType-input" name="envType">
+                                          <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              <span class="caret"></span>
+                                          </button>
+                                          <ul class="input-append dropdown-menu {{blongTo}}_MyServerEnvType">
+                                              {% for envType in myServer_envType_list %}
+                                                   <li><a href="#{{blongTo}}_MyServerEnvType">{{envType}}</a></li>
+                                              {% endfor %}
+                                          </ul>
+                                    </div>
+                                </td>
+                                <td><textarea class="table_text" name='appid' required></textarea></td>
+                                <td><textarea class="table_text" name='ip' placeholder="多个IP用逗号隔开" required></textarea></td>
+                                <td><textarea class="table_text" name='applicantName' required></textarea></td>
+                                <td>
+                                    <div class="input-append btn-group">
+                                          <input type="text" class="input-append form-control envType-input" name="applicantType">
+                                          <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              <span class="caret"></span>
+                                          </button>
+                                          <ul class="input-append dropdown-menu {{blongTo}}_MyServerApplicantType">
+                                              {% for applicantType in myServer_applicantType_list %}
+                                                   <li><a href="#{{blongTo}}_MyServerApplicantType">{{applicantType}}</a></li>
+                                              {% endfor %}
+                                          </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="input-append btn-group">
+                                          <input type="text" class="input-append form-control envType-input" name="deployPlatform">
+                                          <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              <span class="caret"></span>
+                                          </button>
+                                          <ul class="input-append dropdown-menu {{blongTo}}_MyServerDeployPlatform">
+                                              {% for deployPlatform in myServer_deployPlatform_list %}
+                                                   <li><a href="#{{blongTo}}_MyServerDeployPlatform">{{deployPlatform}}</a></li>
+                                              {% endfor %}
+                                          </ul>
+                                    </div>
+                                </td>
+                                <td><textarea class="table_text" name='remark' required></textarea></td>
+                                <td></td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary">新增</button>
+                                </td>
+                            </tr>
+                        </form>
+                        {% for myServer in myServerInfo_list %}
+                            <tr>
+                                <td class="table_td">{{myServer.domainName}}</td>
+                                <td class="table_td">{{myServer.envType}}</td>
+                                <td class="table_td">{{myServer.appid}}</td>
+                                <td class="table_td">{{myServer.ip}}</td>
+                                <td class="table_td">{{myServer.applicantName}}</td>
+                                <td class="table_td">{{myServer.applicantType}}</td>
+                                <td class="table_td">{{myServer.deployPlatform}}</td>
+                                <td class="table_td">{{myServer.remark}}</td>
+                                <td class="table_td">{{myServer.modifyTime}}</td>
+                                <td class="table_td">
+                                    {% if request.session.manager_islogin %}
+                                        <form action="myServerInfo" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                                            {% csrf_token %}
+                                            <input type="text" name="operating" value="delServer" style="display:none;">
+                                            <input type="text" name="id" value="{{myServer.id}}" style="display:none;">
+                                            <input type="text" name="modifyTime" value="{{myServer.modifyTime}}" style="display:none;">
+                                            <button type="submit" class="btn btn-primary">删除</button>
+                                        </form>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-primary" disabled="disabled">删除</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+            <br>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+    <br><br><br>
+    <div class="show_window">
+        <input class="btn btn-primary" id="btn3" type="button" name=""  title="点击隐藏/显示" value="切换">
+        <div id="con3">
+            <h3 class="title_h3">测试环境-gitlab库信息</h3>
+            <br><br>
+
+            <h3 class="title_h3">新增团队gitlab库信息</h3>
+             <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table addDataBase">
+                 <tr>
+                    <th class="table_td">团队名</th>
+                    <th class="table_td">插件英文名称（仅前端）</th>
+                    <th class="table_td">APPID</th>
+                    <th class="table_td">gitlab地址</th>
+                    <th class="table_td">gitlab项目ID</th>
+                    <th class="table_td">绑定空间</th>
+                    <th class="table_td">子系统</th>
+                    <th class="table_td">开发负责人</th>
+                    <th class="table_td">类型（仅前端）</th>
+                    <th class="table_td">备注</th>
+                    <th class="table_td">操作</th>
+                 </tr>
+                 <form class='form-register' action="myServerInfo" method="post">
+                    {% csrf_token %}
+                     <input type="text" name="operating" value="addGitlabInfo" style="display: none;">
+                    <tr>
+                        <td><textarea class="table_text" name='blongTo' required></textarea></td>
+                        <td><textarea class="table_text" name='packageName' placeholder="后端库不填写"></textarea></td>
+                        <td><textarea class="table_text" name='appid' required></textarea></td>
+                        <td><textarea class="table_text" name='gitlabBase' required></textarea></td>
+                        <td><textarea class="table_text" name='projectId' required></textarea></td>
+                        <td>
+                            <div class="input-append btn-group">
+                                  <input type="text" class="input-append form-control envType-input" name="wizardSpace">
+                                  <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                      <span class="caret"></span>
+                                  </button>
+                                  <ul class="input-append dropdown-menu addGitlab">
+                                      {% for wizardSpace in wizardSpace_list %}
+                                           <li><a href="#addGitlab">{{wizardSpace}}</a></li>
+                                      {% endfor %}
+                                  </ul>
+                            </div>
+                        </td>
+                        <td><textarea class="table_text" name='system' required></textarea></td>
+                        <td><textarea class="table_text" name='person' required></textarea></td>
+                        <td class="table_text type_td">
+                          <select class="btn btn-primary table_text_type" name="packageType">
+                            <option value="在线包">在线包</option>
+                            <option value="离线包">离线包</option>
+                            <option value="ios">ios</option>
+                            <option value="android">android</option>
+                            <option value="">不涉及</option>
+                          </select>
+                        </td>
+                        <td><textarea class="table_text" name='remark'></textarea></td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">新增</button>
+                        </td>
+                    </tr>
+                 </form>
+             </table>
+            <br>
+
+
+            {% for blongTo,myGitlabInfo_list in all_myGitlabInfo_blongTo_dict.items %}
+                <h4 class="title_h4">{{blongTo}}</h4>
+                    <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table">
+                        <tr>
+                            <th class="table_td">插件英文名称（仅前端）</th>
+                            <th class="table_td">APPID</th>
+                            <th class="table_td">gitlab地址</th>
+                            <th class="table_td">gitlab项目ID</th>
+                            <th class="table_td">绑定空间</th>
+                            <th class="table_td">子系统</th>
+                            <th class="table_td">开发负责人</th>
+                            <th class="table_td">类型（仅前端）</th>
+                            <th class="table_td">备注</th>
+                            <th class="table_td">修改时间</th>
+                            <th class="table_td">操作</th>
+                        </tr>
+                        <form class='form-register' action="myServerInfo" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="operating" value="addGitlabInfo" style="display: none;">
+                            <input type="text" name="blongTo" value="{{blongTo}}" style="display: none;">
+                            <tr>
+                                <td><textarea class="table_text" name='packageName' required></textarea></td>
+                                <td><textarea class="table_text" name='appid' required></textarea></td>
+                                <td><textarea class="table_text" name='gitlabBase' required></textarea></td>
+                                <td><textarea class="table_text" name='projectId' required></textarea></td>
+                                <td>
+                                    <div class="input-append btn-group">
+                                          <input type="text" class="input-append form-control envType-input" name="wizardSpace">
+                                          <button type="button" class="btn btn-primary dropdown-toggle envType-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                              <span class="caret"></span>
+                                          </button>
+                                          <ul class="input-append dropdown-menu {{blongTo}}_myGitlab_wizardSpace">
+                                              {% for wizardSpace in wizardSpace_list %}
+                                                   <li><a href="#{{blongTo}}_myGitlab_wizardSpace">{{wizardSpace}}</a></li>
+                                              {% endfor %}
+                                          </ul>
+                                    </div>
+                                </td>
+
+
+                                <td><textarea class="table_text" name='system' required></textarea></td>
+                                <td><textarea class="table_text" name='person' required></textarea></td>
+                                <td class="table_text type_td type_td_select">
+                                  <select class="btn btn-primary table_text_type table_text_select" name="packageType">
+                                    <option value="在线包">在线包</option>
+                                    <option value="离线包">离线包</option>
+                                    <option value="ios">ios</option>
+                                    <option value="android">android</option>
+                                    <option value="">不涉及</option>
+                                  </select>
+                        </td>
+                                <td><textarea class="table_text" name='remark'></textarea></td>
+                                <td></td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary">新增</button>
+                                </td>
+                            </tr>
+                        </form>
+                        {% for myGitlab in myGitlabInfo_list %}
+                            <tr>
+                                <td class="table_td">{{myGitlab.packageName}}</td>
+                                <td class="table_td">{{myGitlab.appid}}</td>
+                                <td class="table_td">{{myGitlab.gitlabBase}}</td>
+                                <td class="table_td">{{myGitlab.projectId}}</td>
+                                <td class="table_td">{{myGitlab.wizardSpace}}</td>
+                                <td class="table_td">{{myGitlab.system}}</td>
+                                <td class="table_td">{{myGitlab.person}}</td>
+                                <td class="table_td">{{myGitlab.type}}</td>
+                                <td class="table_td">{{myGitlab.remark}}</td>
+                                <td class="table_td">{{myGitlab.modifyTime}}</td>
+                                <td class="table_td">
+                                    {% if request.session.manager_islogin %}
+                                        <form action="myServerInfo" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                                            {% csrf_token %}
+                                            <input type="text" name="operating" value="delGitlab" style="display:none;">
+                                            <input type="text" name="id" value="{{myGitlab.id}}" style="display:none;">
+                                            <input type="text" name="modifyTime" value="{{myGitlab.modifyTime}}" style="display:none;">
+                                            <button type="submit" class="btn btn-primary">删除</button>
+                                        </form>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-primary" disabled="disabled">删除</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+            <br>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+    <!--<br><br>-->
+    <!--<hr>-->
+    <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+    <!--<br><br><br><br>-->
+    <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+    <!--<br><br><br><br>-->
+</div>
+<script>
+$(document).ready(function(){
+    $("[href='#add']").click(function(){
+        $("ul.add").siblings("input").val($(this).html());
+    });
+});
+
+$(document).ready(function(){
+    $("[href='#addDomain']").click(function(){
+        $("ul.addDomain").siblings("input").val($(this).html());
+    });
+});
+
+{% for blongTo,dataBaseInfo_list in all_blongTo_dict.items %}
+    $(document).ready(function(){
+        $("[href='#{{blongTo}}_envType']").click(function(){
+            $("ul.{{blongTo}}_envType").siblings("input").val($(this).html());
+        });
+    });
+
+    $(document).ready(function(){
+        $("[href='#{{blongTo}}_domain']").click(function(){
+            $("ul.{{blongTo}}_domain").siblings("input").val($(this).html());
+        });
+    });
+{% endfor %}
+
+
+$(document).ready(function(){
+    $("[href='#addServer']").click(function(){
+        $("ul.addServer").siblings("input").val($(this).html());
+    });
+});
+
+$(document).ready(function(){
+    $("[href='#addDomainServer']").click(function(){
+        $("ul.addDomainServer").siblings("input").val($(this).html());
+    });
+});
+
+$(document).ready(function(){
+    $("[href='#addApplicantTypeServer']").click(function(){
+        $("ul.addApplicantTypeServer").siblings("input").val($(this).html());
+    });
+});
+
+$(document).ready(function(){
+    $("[href='#addDeployPlatformServer']").click(function(){
+        $("ul.addDeployPlatformServer").siblings("input").val($(this).html());
+    });
+});
+
+{% for blongTo,MyServerInfo_list in allMyServer_blongTo_dict.items %}
+    $(document).ready(function(){
+        $("[href='#{{blongTo}}_MyServerEnvType']").click(function(){
+            $("ul.{{blongTo}}_MyServerEnvType").siblings("input").val($(this).html());
+        });
+    });
+
+    $(document).ready(function(){
+        $("[href='#{{blongTo}}_MyServerDomainName']").click(function(){
+            $("ul.{{blongTo}}_MyServerDomainName").siblings("input").val($(this).html());
+        });
+    });
+
+    $(document).ready(function(){
+        $("[href='#{{blongTo}}_MyServerApplicantType']").click(function(){
+            $("ul.{{blongTo}}_MyServerApplicantType").siblings("input").val($(this).html());
+        });
+    });
+
+    $(document).ready(function(){
+        $("[href='#{{blongTo}}_MyServerDeployPlatform']").click(function(){
+            $("ul.{{blongTo}}_MyServerDeployPlatform").siblings("input").val($(this).html());
+        });
+    });
+{% endfor %}
+
+
+$(document).ready(function(){
+    $("[href='#addGitlab']").click(function(){
+        $("ul.addGitlab").siblings("input").val($(this).html());
+    });
+});
+
+{% for blongTo,myGitlabInfo_list in all_myGitlabInfo_blongTo_dict.items %}
+    $(document).ready(function(){
+        $("[href='#{{blongTo}}_myGitlab_wizardSpace']").click(function(){
+            $("ul.{{blongTo}}_myGitlab_wizardSpace").siblings("input").val($(this).html());
+        });
+    });
+{% endfor %}
+
+
+</script>
+{% endblock %}

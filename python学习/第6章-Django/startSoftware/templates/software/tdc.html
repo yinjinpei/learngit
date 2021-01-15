@@ -167,44 +167,6 @@
          height: 250px;
          color:darkgreen;
       }
-
-      .wizard{
-         padding: 30px;
-         margin:30px 250px;
-         margin-right:340px;
-         text-align: left;
-         border: 2px solid green;
-      }
-
-      .wizard li{
-         list-style-type:none;
-         margin-bottom:10px;
-      }
-
-      .wizard a{
-         text-decoration: none;
-      }
-
-      .wizard a:link{
-         color: red;
-      }
-
-      .wizard a:visited{
-         color: green;
-      }
-
-      .wizard a:active{
-         color: red;
-      }
-
-      .wizard a:hover{
-         color: red;
-      }
-
-      .wizard2{
-         float:right;
-      }
-
    </style>
 </head>
 
@@ -241,8 +203,8 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
          <!--<div data-id="8">RMS测试环境UAT（内网）</div>-->
          <!--<div data-id="9">RMS生产（外网）</div>-->
          <!--<div data-id="10">RMS生产（内网）</div>-->
-      </div>
 
+      </div>
       <div class="content clearfix">
          <div class="content-right">
             <p class="p2">扫描二维码下载口袋APP软件</p>
@@ -328,19 +290,6 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
       </div>
       -->
    </div>
-   <div class="wizard">
-      <ul>
-         <li><a target="_blank" href="http://alm-pab.paic.com.cn/project/974/setting/?page#/member">BRON-COMS</a></li>
-         <li><a target="_blank" href="http://alm-pab.paic.com.cn/project/2228/setting/?page#/member">BRON-COSS</a></li>
-         <li><a target="_blank" href="http://alm-pab.paic.com.cn/project/14575/setting/?page#/member">BRON-CRMP</a></li>
-         <li><a target="_blank" href="http://alm-pab.paic.com.cn/project/29171/setting/?page#/member">BRON-CLSS</a></li>
-         <li><a target="_blank" href="http://alm-pab.paic.com.cn/project/29445/setting/?page#/member">COSS-HEALTH</a></li>
-         <li><a target="_blank" href="http://alm-pab.paic.com.cn/project/29573/setting/?page#/member">BRON-UGCMINIVIDEO</a></li>
-         <li><a target="_blank" href="http://alm-pab.paic.com.cn/project/29086/setting/?page#/member">BROP-NBI-GOLF</a></li>
-         <li><a target="_blank" href="http://alm-pab.paic.com.cn/project/29466/setting/?page#/member">BRON-CASS</a></li>
-      </ul>
-   </div>
-
    <div class="bottom">
       <p>版权所有 © 中国平安保险（集团）股份有限公司 未经许可不得复制、转载或摘编，违者必究!<br>Copyright © PING AN INSURANCE (GROUP) COMPANY OF CHINA ,LTD. All
          Rights Reserved</p>
@@ -425,31 +374,7 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
             aumTestUrlEl.innerHTML = html;
          },
          aumTestUrl: [
-            {
-               name: 'pafa5-FAT测试环境',
-               url: 'http://pafa.fat.qa.pab.com.cn/admin/login.html',
-               title: 'Cgz35137 共用REF_T8team'
-            },
-            {
-               name: 'pafa5-FAT102-双活测试环境',
-               url: 'http://pafa.fat102.qa.pab.com.cn/admin/login.html',
-               title: 'Cgz35137'
-            },
-            {
-               name: 'pafa5-UAT测试环境',
-               url: 'http://pafa.uat.qa.pab.com.cn/admin//login.html',
-               title: 'UM注册登录'
-            },
-            {
-               name: 'pafa5-DEV测试环境',
-               url: 'http://pafa.dev.pab.com.cn/admin//login.html',
-               title: 'UM注册登录'
-            },
-            {
-               name: 'pafa5生产环境',
-               url: 'http://bank-config-admin.pab.com.cn/admin/main.html',
-               title: 'UM注册登录'
-            },
+
             {
                name: 'ITSM提单系统',
                url: 'http://itsmv2.pab.com.cn/login/toLogin',
@@ -461,28 +386,8 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
                title: 'UM注册登录'
             },
             {
-               name: '持续集成【神兵部署】',
-               url: 'http://vt-pab.paic.com.cn/pipeline/deployList.jsp',
-               title: '开机账号&密码'
-            },
-            {
-               name: '银行神兵系统',
-               url: 'http://alm-pab.paic.com.cn/',
-               title: 'UM账号登录'
-            },
-            {
                name: 'RMS测试环境FAT（外网）',
                url: 'http://b-rms-gm.fat.qa.pab.com.cn',
-               title: ''
-            },
-            {
-               name: 'RMS测试环境UAT（外网）',
-               url: 'http://b-rms-gm.uat.qa.pab.com.cn',
-               title: ''
-            },
-            {
-               name: 'RMS测试环境DEV（外网）',
-               url: 'http://b-rms-gm.dev.pab.com.cn',
                title: ''
             },
             {
@@ -491,8 +396,18 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
                title: ''
             },
             {
+               name: 'RMS测试环境UAT（外网）',
+               url: 'http://b-rms-gm.uat.qa.pab.com.cn',
+               title: ''
+            },
+            {
                name: 'RMS测试环境UAT（内网）',
                url: 'http://b-rms-inner-gm.uat.qa.pab.com.cn',
+               title: ''
+            },
+            {
+               name: 'RMS测试环境DEV（外网）',
+               url: 'http://b-rms-gm.dev.pab.com.cn',
                title: ''
             },
             {
@@ -513,11 +428,6 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
                name: 'RMS资料库',
                url: 'http://iwiki.pab.com.cn/pages/viewpage.action?pageId=149588254',
                title: 'UM账号登录'
-            },
-            {
-               name: '组件清单',
-               url: 'http://gitlab.pab.com.cn/pages/ARCH/front-arch/aladdin-components-website/public/extension/ibank/pages/componentList.html',
-               title: ''
             },
             {
                name: 'WIKI版本归档',
@@ -570,13 +480,8 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
                title: ''
             },
             {
-               name: 'Apollo测试环境',
+               name: 'Apollo生产平台',
                url: 'http://apollo.qa.pab.com.cn',
-               title: 'UM账号登录'
-            },
-            {
-               name: 'Apollo生产环境',
-               url: 'http://apollo.pab.com.cn',
                title: 'UM账号登录'
             },
             {
@@ -630,26 +535,6 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
                title: ''
             },
             {
-               name: '统一后管FAT',
-               url: 'http://portal.fat.qa.pab.com.cn/portal-new/newHome.html',
-               title: ''
-            },
-            {
-               name: '统一后管UAT',
-               url: 'http://portal.uat.qa.pab.com.cn/portal-new/newHome.html',
-               title: ''
-            },
-            {
-               name: '统一后管DEV',
-               url: 'http://portal.dev.qa.pab.com.cn/portal-new/newHome.html',
-               title: ''
-            },
-            {
-               name: '统一后管生产',
-               url: 'http://portal.app.gl.pab.com.cn/portal-new/newHome.html',
-               title: ''
-            },
-            {
                name: 'GitLab代码库',
                url: 'http://gitlab.pab.com.cn/',
                title: ''
@@ -665,8 +550,8 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
                title: 'UM账号登录'
             },
             {
-               name: 'pafa密码备份',
-               url: 'http://10.6.180.205:8000/uploadFile?dirname=uploads/shar/administrator/T81.0.0%EF%BC%882020-11-16%EF%BC%89',
+               name: 'Gitlab-T8组',
+               url: 'http://gitlab.pab.com.cn/REF/release-warehouse/T8_team',
                title: 'UM账号登录'
             },
             {
@@ -686,7 +571,7 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
             },
             {
                name: 'sonar报告【网金】',
-               url: ' http://lilac.dev.pab.com.cn/#/sonarReport/ref',
+               url: 'http://sonar.dev.pab.com.cn/SDD',
                title: '开机账号&密码'
             },
             {
@@ -696,7 +581,7 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
             },
             {
                name: '防火墙梳理【独角鲸】',
-               url: 'http://narwhal.pab.com.cn/noah/FileServer',
+               url: 'http://narwhal.pab.com.cn',
                title: '开机账号&密码'
             },
             {
@@ -864,21 +749,7 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
                url: 'httpDnsSwitch【新增关闭这个开关】、rym【任意门】、资源更新、snapShotFeedBackSwitch【截屏意见反馈】',
                title: 'httpDnsSwitch【新增关闭这个开关】、rym【任意门】、资源更新、snapShotFeedBackSwitch【截屏意见反馈】'
             },
-            {
-               name: '内测离线包CDN刷新',
-               url: 'file:///D:/%E8%B5%84%E6%96%99/D%E7%9B%98[%E5%8E%9F%E7%94%B5%E8%84%91]/%E7%89%88%E6%9C%AC%E5%BD%92%E6%A1%A3/%E5%8F%91%E7%89%88%E8%B5%84%E6%96%99201810/%E8%B5%84%E6%96%99/%E5%8F%91%E7%89%88%E9%93%BE%E6%8E%A5%E5%B7%A5%E5%85%B7/%E7%A6%BB%E7%BA%BF%E5%8C%85CDN%E9%93%BE%E6%8E%A5.html',
-               title: 'https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data;https://bank-static.pingan.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank-InnerTest/plugins/upgradefile.android.simplify.data'
-            },
-            {
-               name: '生产离线包CDN刷新',
-               url: 'https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;',
-               title: 'https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;https://bank-static.pingan.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.android.simplify.data;https://cdn.sdb.com.cn/ibank/upgrade/plugins/upgradefile.ios.simplify.data;'
-            },
-            {
-               name: 'T8组页面替换地址',
-               url: 'http://gitlab.pab.com.cn/REF/release-warehouse/yinjinpeiproject/blob/autodeploy1.0.0/startSoftware/templates/software/T8_index.html',
-               title: 'T8_index.html'
-            },
+
             {
                name: '办公云盘',
                url: 'http://ithome.pab.com.cn/',
@@ -933,51 +804,6 @@ onmouseover="this.stop()" onmouseout="this.start()" style="height:36px;color:#FF
                name: 'RMS规范细则',
                url: 'http://iwiki.pab.com.cn/pages/viewpage.action?pageId=149588419',
                title: 'RMS环境信息'
-            },
-            {
-               name: '版本资料放置位置',
-               url: 'http://29.3.196.166:8000/uploadFile',
-               title: 'shar/123'
-            },
-            {
-               name: '网页版平安令牌',
-               url: 'https://otp.paic.com.cn/newhome',
-               title: 'UM/密码'
-            },
-            {
-               name: '神兵卡片工具',
-               url: 'http://29.3.196.166:8000/modifyCardStatus',
-               title: 'UM/chenguizhou123'
-            },
-            {
-               name: '神兵卡片工具2',
-               url: 'http://29.3.196.166:8000/modifyCardStatus',
-               title: 'shar/123'
-            },
-            {
-               name: 'APP资料集中位置',
-               url: 'http://paapm.fat.qa.pab.com.cn/platform/',
-               title: 'shar/123'
-            },
-            {
-               name: 'DLM工具',
-               url: 'http://itpm-dlm.pab.com.cn/DLM/index.do',
-               title: 'shar/123'
-            },
-            {
-               name: 'apollo接入神兵文档',
-               url: 'http://wiki.pab.com.cn/pages/viewpage.action?pageId=437061817',
-               title: 'shar/123'
-            },
-            {
-               name: '服务器-Linux界面',
-               url: 'http://29.2.208.80:3000/home',
-               title: ''
-            },
-            {
-               name: '堡垒机口令',
-               url: 'https://otp.paic.com.cn/newhome',
-               title: '堡垒机口令'
             },
          ],
          <!--testUrlArr: [-->

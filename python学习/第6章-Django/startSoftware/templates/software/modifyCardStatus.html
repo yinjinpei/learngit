@@ -6,12 +6,41 @@
 
 {% block content %}
     {% block scripts %}
-    <!--<link rel='stylesheet' href="{% static 'css/bootstrap/bootstrap-select.min.css' %}"/>-->
-    <!--<script type="text/javascript" src="{% static 'js/bootstrap/bootstrap-select.min.js' %}"></script>-->
-    <!--<script type="text/javascript" src="{% static 'js/bootstrap/defaults-zh_CN.min.js' %}"></script>-->
     <script type="text/javascript">
+
+        <!--定时移动卡片功能 ，选择分支时自动填写结束时间为该版本投产日期-->
+        function getbranchInfo(){
+            var branchInfo = document.getElementById("branch1").value;
+            var planEndDate = document.getElementById(branchInfo).value;
+            var planEndDateStr = planEndDate.replace(" ","T").substring(0,16)
+            document.getElementById("end_time").value=planEndDateStr;
+        }
+
         function $(id) {
             return typeof id==='string'?document.getElementById(id):id;
+        }
+
+        function button0(){
+            <!--alert("数据可能较大，请勿重复提交，请至少相隔10秒后再提交，确认提交？");-->
+            obtn0 = document.getElementById("mybtn0");
+            odiv0 = document.getElementById("mydiv0");
+            obtn0.style.display='none';
+            odiv0.style.display='inline-block';
+            var text = document.createTextNode("已提交，请勿刷新页面，正在获取数据...");
+            odiv0.appendChild(text);
+            setTimeout("obtn0.style.display='inline-block';",10000);
+            submit();
+        }
+
+        function button1(){
+            obtn1 = document.getElementById("mybtn1");
+            odiv1 = document.getElementById("mydiv1");
+            obtn1.style.display='none';
+            odiv1.style.display='inline-block';
+            var text = document.createTextNode("已提交，请勿刷新页面，正在获取数据...");
+            odiv1.appendChild(text);
+            setTimeout("obtn1.style.display='inline-block';odiv1.style.display='none';",5000);
+            submit();
         }
 
         function myFunction0() {
@@ -106,56 +135,16 @@
             }
         }
 
-        function myFunction4() {
-            var input, filter, ul, li, a, i;
-            // 获得输入内容
-            input = document.getElementById("mySearch4");
-            // 把输入的字母全部更改为大写
-            filter = input.value.toUpperCase();
-            // 获得导航菜单
-            ul = document.getElementById("myMenu4");
-            // 根据标签名称获得 li 标签
-            li = ul.getElementsByTagName("li");
-            // 遍历搜索分类
-            for (i = 0; i < li.length; i++) {
-                // 在li 标签的基础上根据标签名称获得 a 标签
-                a = li[i].getElementsByTagName("a")[0];
-                // 导航 a 标签中的字符串是否包含 filter 子串
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                }else {
-                        li[i].style.display = "none";
-                }
-            }
-        }
-
-        function myFunction5() {
-            var input, filter, ul, li, a, i;
-            // 获得输入内容
-            input = document.getElementById("mySearch5");
-            // 把输入的字母全部更改为大写
-            filter = input.value.toUpperCase();
-            // 获得导航菜单
-            ul = document.getElementById("myMenu5");
-            // 根据标签名称获得 li 标签
-            li = ul.getElementsByTagName("li");
-            // 遍历搜索分类
-            for (i = 0; i < li.length; i++) {
-                // 在li 标签的基础上根据标签名称获得 a 标签
-                a = li[i].getElementsByTagName("a")[0];
-                // 导航 a 标签中的字符串是否包含 filter 子串
-                if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                }else {
-                        li[i].style.display = "none";
-                }
-            }
-        }
-
         // function doReset() {
         //      document.getElementById("branch0").options.selectedIndex = 0; //回到初始状态
         //     $("#branch0").selectpicker('refresh');//对searchPayState这个下拉框进行重置刷新
         // }
+
+        // 窗口倒数时间隐藏
+        setTimeout(function(){
+            document.getElementById("new_domain_msg_title").style.display="none",
+            document.getElementById("new_domain_msg_title").style.backgroundColor="#fff4e8";
+        },5000);
 
         window.onload=function () {
             //获取鼠标点击的标签和要切换内容的元素
@@ -171,7 +160,7 @@
                 titles[i].id=i;
                 //当鼠标滑过onmouseover标签显示对应内容
                 //当鼠标点击onclick标签显示对应内容
-                titles[i].onmouseover=function () {
+                titles[i].onclick=function () {
                     //清除所有li上的class
                     for(var j=0;j<titles.length;j++){
                         titles[j].className='';
@@ -191,7 +180,7 @@
             for(var k=0;k<myMenu_name.length;k++){
                 myMenu_name[k].className='myMenu_domain_show';
 
-                for(var z=0;z<myMenu_name.length;z++){
+                for(var z=0;z<=myMenu_name.length;z++){
                     myMenu_name[k].className='myMenu_domain_show';
 
                     for(var n=0;n<myMenu_name.length;n++){
@@ -211,18 +200,23 @@
             oDiv.style.display='none';
             oBtn.onclick = changeWindow;
 
+            var oDel_domain = document.getElementById('del_domain');
+
             function changeWindow() {
                 if(oDiv.style.display=='none'){
                     oDiv.style.display = 'block';
                     oBtn.value = '取消新增';
                     oBtn.style.backgroundColor='#d43f3a';
+                    oDel_domain.style.display = 'none';
                 }
                 else{
                     oDiv.style.display = 'none';
                     oBtn.value = '新增领域';
                     oBtn.style.backgroundColor='green';
+                    oDel_domain.style.display = 'block';
                 }
             }
+
 
         };
     </script>
@@ -258,9 +252,10 @@
 
             .notice{
                 max-height: 850px;
-                border: 2px solid #ff8800;
+                border: 10px solid #ff8800;
                 overflow: hidden;
                 background-color: #fff4e8;
+                border-radius: 10px;
             }
 
             .notice_title{
@@ -279,6 +274,7 @@
 
             .notice_title a:hover{
                 background-color: transparent !important;
+                color: #2b669a !important;
             }
 
             .notice_title ul{
@@ -371,7 +367,7 @@
             }
 
             #add_con{
-                margin-top: 90px;
+                margin-top: 40px;
                 margin-bottom: 10px;
             }
 
@@ -388,6 +384,9 @@
                 display: none;
                 text-align: left !important;
                 background-color: #f9f7f6;
+                border-radius: 10px;
+                margin-left:-5px;
+                margin-right:5px;
             }
 
             .new_domain_con{
@@ -421,7 +420,7 @@
                   background-color: #ff8800;
                   padding: 12px;
                   text-decoration: none;
-                  font-size: 16px;
+                  font-size: 12px;
                   color: black;
                   display: block;
             }
@@ -444,8 +443,24 @@
             }
 
             .start_time{
+                width: 220px;
+                height: 33px;
                 margin-left: 5px;
+                border-radius: 5px;
+                border: 1px solid #28a4c9;
             }
+
+            .intervals{
+                height: 33px;
+                font-size: 18px;
+                margin-left: 5px;
+                border-radius: 5px;
+                border: 1px solid #28a4c9;
+                text-align: center;
+                width: 135px;
+                color: DarkOrange;
+            }
+
             .weui-input{
                 margin-top: 2px;
                 border-radius: 5px;
@@ -471,16 +486,20 @@
                 color: green;
             }
             .submit_btn{
-                margin-left: 190px;
+                margin-left: 208px;
             }
 
-            .reset_btn:hover,.submit_btn:hover{
+            .submit_btn_1{
+                margin-left: 180px;
+            }
+
+            .reset_btn:hover,.submit_btn:hover,.submit_btn_1:hover{
                 color: red;
-                background-color: gold;
+                background-color: gold !important;
             }
 
             .myMenu_domain_show a{
-                background-color: #fff4e8 !important;
+                background-color: PeachPuff !important;
                 color: #2b669a !important;
                 font-weight: bold;
                 border-radius: 15px;
@@ -490,14 +509,14 @@
             .crontab td {
                 text-align: center;
                 padding: 10px;
-                max-width: 150px;
+                max-width: 100px;
                 overflow: auto;
             }
 
             .interval_time{
                 margin-left: 5px;
-                margin-top: 5px;
-                font-size: 18px;
+                margin-top:-4px;
+                height:33px;
             }
 
             .selectpicker{
@@ -509,7 +528,7 @@
 
             /*多选下拉框*/
             .dropdown-menu{
-                max-height: 250px;
+                <!--max-height: 250px;-->
                 overflow: auto;
                 margin-left: 5px;
             }
@@ -517,7 +536,8 @@
             .reslut_con{
                 background-color: #f9f7f6;
                 height: 100%;
-                border: 2px solid #ff8800;
+                border: 5px solid #ff8800;
+                border-radius:10px;
             }
 
             .result_title{
@@ -525,9 +545,11 @@
                 padding-left: 10px;
                 height: 32px;
                 font-weight: bold;
-                background-color: #ff9c01;
+                background-color: #ff8800;
                 color: #2b669a;
                 margin: 0;
+                border-top-left-radius:5px;
+                border-top-right-radius:5px;
             }
 
             .management_con{
@@ -552,12 +574,61 @@
                 border:none;
                 border-radius:5px;
                 font-size: 16px;
-                background-color: #ffccaa;
+                background-color: #a6e1ec;
                 padding-left: 5px;
             }
 
             #management_reset_btn,#management_reset_btn2{
                 margin-left: 150px;
+            }
+
+            .new_domain_msg_con{
+                height: 50px;
+                border-radius:10px;
+            }
+
+            .new_domain_msg_title{
+                height: 50px;
+                border-radius:10px;
+                background-color: #ffccaa;
+            }
+
+            #new_domain_msg{
+                padding-top: 15px;
+                margin-left: 40%;
+                font-size: 16px;
+            }
+
+            #del_domain button{
+                 background-color: #d43f3a;
+            }
+
+            #del_domain button:hover{
+                color: gold;
+            }
+
+            /*定时任务表div*/
+            .crontab_con{
+                width: 663px;
+                height: 190px;
+                overflow: auto;
+            }
+
+            .deletedTimedTask{
+                background-color: Crimson;
+            }
+
+            .deletedTimedTask:hover{
+                background-color: gold;
+                color:red;
+            }
+
+            .defect_and_story_cards .inner{
+                max-height: 250px;
+            }
+
+            .codeBaseId .inner{
+                max-height: 250px;
             }
 
         </style>
@@ -582,18 +653,10 @@
                         </li>
 
                         <li class="{{myMenu2}}">
-                            <a href="JavaScript:void(0);">非编码卡片移动</a>
-                        </li>
-
-                        <li class="{{myMenu3}}">
                             <a href="JavaScript:void(0);">任意卡片移动</a>
                         </li>
 
-                        <li class="{{myMenu4}}">
-                            <a href="JavaScript:void(0);">全量移动卡片</a>
-                        </li>
-
-                        <li class="{{myMenu5}}">
+                        <li class="{{myMenu3}}">
                             <a href="JavaScript:void(0);">领域管理</a>
                         </li>
                 </ul>
@@ -619,37 +682,61 @@
                       <div class="center">
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
+                              <!--<hr>-->
+                              <!--<form class='form-register' action="modifyCardStatus" method="post">-->
+                                  <!--{% csrf_token %}-->
+                                  <!--<input type="text" name="feature" value="myMenu0" style="display: none">-->
+                                  <!--<input type="text" name="domain_name" value="{{domain_name}}" style="display: none">-->
+
+                                  <!--<button type="submit" class="btn btn-primary" id="waird0" title="获取神兵空间版本" disabled="disabled">同步神兵</button>-->
+                              <!--</form>-->
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
+                              <br><br><br><br><br>
+
+                              <form class='form-register' action="modifyCardStatus?domain_name={{domain_name}}&feature=myMenu0" method="post">
                                   {% csrf_token %}
-                                  <input type="text" name="feature" value="myMenu0" style="display: none">
+                                  <input type="text" name="feature" value="myMenu0" style="display: none;">
                                   <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
-                                  <button type="submit" class="btn btn-primary" id="waird0" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left" for="branch0">选择分支：</label>
+                                      <select class="selectpicker" name="select_branch" onchange="submit();" data-style="selectpicker" data-live-search="true" required>
+                                        {% for releaseName in releaseName_list %}
+                                            <option value="{{releaseName}}">{{releaseName}}</option>
+                                        {% endfor %}
+                                      </select>
+                                  </div>
                               </form>
+                              <br>
 
-                              <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
+                              <form class='form-register' action="modifyCardStatus?domain_name={{domain_name}}&feature=myMenu0" method="post">
                                   {% csrf_token %}
                                   <div>
+                                      <input type="text" name="move_card_by_time" value="move_card_by_time" style="display: none">
                                       <input type="text" name="feature" value="myMenu0" style="display: none">
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
                                   </div>
-                                  <div style="font-size: 17px;">
-                                      <label class="btn btn-primary pull-left">项目 ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
-                                        <option value="北京">北京</option>
-                                        <option value="天津">天津</option>
-                                        <option value="河北省">河北省</option>
-                                        <option value="山西省">山西省</option>
-                                        <option value="内蒙古自治区">内蒙古自治区</option>
-                                        <option value="辽宁省">辽宁省</option>
-                                        <option value="吉林省">吉林省</option>
-                                        <option value="黑龙江省">黑龙江省</option>
+                                  <div class="codeBaseId" style="font-size: 17px;">
+                                      <label class="btn btn-primary pull-left">代码库ID：</label>
+                                      <select class="selectpicker" name="projectId" data-style="selectpicker"
+multiple="multiple" data-actions-box="true" data-live-search="true"
+required>
+                                        {% if projectid_select %}
+                                            {% for projectid in projectid_select %}
+                                                <option value="{{projectid}}" selected>{{projectid}}</option>
+                                            {% endfor %}
+                                            {% for projectid in projectid_list %}
+                                                <option value="{{projectid}}">{{projectid}}</option>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for projectid in projectid_list %}
+                                                <option value="{{projectid}}" selected>{{projectid}}</option>
+                                            {% endfor %}
+                                        {% endif %}
                                       </select>
                                   </div>
-                                  <br>
-                                  <div style="font-size: 17px;padding-top: 10px;">
+                                  <!--<br>-->
+                                  <div style="font-size: 17px;padding-top: 10px;display: none;">
                                       <label class="btn btn-primary pull-left" for="branch0">选择分支：</label>
                                       <select class="selectpicker" name="branch" id="branch0" data-style="selectpicker" data-live-search="true" required>
                                         {% for releaseName in releaseName_list %}
@@ -659,14 +746,18 @@
                                   </div>
                                   <br>
                                   <div style="font-size: 17px;padding-top: 10px;">
-                                      <label class="btn btn-primary pull-left">起始时间：</label>
-                                      <span class="start_time">{{ date_form.Datetime }}</span>
+                                      <label class="btn btn-primary pull-left" >起始时间：</label>
+                                      <input type="datetime-local" class="start_time" name="start_time" value="{{createdDate}}"
+min="{{createdDate}}" max="{{now_time}}"
+title="即获取所有仓库在起始时间到当前时间期间所有在该分支提交的卡片号, 默认为神兵创建该版本时间，时间范围已做限制，不能早于创建时间，不能晚于当前时间！"/>
                                   </div>
-
+                                  <br>
                                   <br><br>
                                   <button type="reset" class="btn btn-default reset_btn" onclick=doReset()>重置</button>
-                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                                  <button type="submit" class="btn btn-primary submit_btn" id="mybtn0" onclick=button0()>提交</button>
                               </form>
+                            <br>
+                            <div id="mydiv0" style="color:red;font-size: 16px;"></div>
                           </div>
                         <!--center end-->
 
@@ -674,7 +765,32 @@
                           <div class="reslut_con">
                               <h4 class="result_title">运行结果：</h4>
                               <div class="result_content">
-                                  111
+                                  <div style="background-color: MediumSeaGreen;height:190px;overflow: auto;padding:3px 5px;">
+                                      <h4 style="margin:0;">已移动的卡片：</h4>
+                                      {{move_cards_str}}
+                                      {% for msg in move_cards %}
+                                        {{msg}}<br>
+                                      {% endfor %}
+                                      {% if move_uncode_cards %}
+                                        <h4 style="margin:0">非编码且已移动的卡片：</h4>
+                                        {% for msg in move_uncode_cards %}
+                                            {{msg}}<br>
+                                        {% endfor %}
+                                      {% endif %}
+                                  </div>
+                                  <div style="background-color: Salmon;height:190px;overflow: auto;padding:3px 5px;">
+                                      <h4 style="margin:0">未找到提交代码记录，且未能移动的卡片：</h4>
+                                      {% for msg in unmove_cards %}
+                                        {{msg}}<br>
+                                      {% endfor %}
+                                  </div>
+                                  <div style="background-color: SkyBlue;height:198px;overflow: auto;
+                                        border-bottom-right-radius:8px;border-bottom-left-radius:8px;padding:3px 5px;">
+                                      <h4 style="margin:0">移动前的所有用户故事和缺陷卡片状态：</h4>
+                                      {% for cards_stateDetail in all_cards_stateDetail_list %}
+                                            {{cards_stateDetail}}<br>
+                                      {% endfor %}
+                                  </div>
                               </div>
                           </div>
                       </div>
@@ -700,38 +816,20 @@
                       <div class="center">
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
-                              <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
-                                  {% csrf_token %}
-                                  <input type="text" name="feature" value="myMenu1" style="display: none">
-                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+                              <!--<hr>-->
+                              <!--<form class='form-register' action="modifyCardStatus" method="post">-->
+                                  <!--{% csrf_token %}-->
+                                  <!--<input type="text" name="feature" value="myMenu1" style="display: none">-->
+                                  <!--<input type="text" name="domain_name" value="{{domain_name}}" style="display: none">-->
 
-                                  <button type="submit" class="btn btn-primary" id="waird1" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
-                              </form>
-                              <hr>
-                              <div>
-                                  <h4 style="font-weight: bold">现有任务：</h4>
-                                  <table border="1"  cellspacing="50" class="crontab">
-                                      <tr>
-                                          <td>项目 ID</td>
-                                          <td>分支名</td>
-                                          <td>开始时间</td>
-                                          <td>结束时间</td>
-                                          <td>触发间隔</td>
-                                          <td>状态</td>
-                                          <td>操作</td>
-                                      </tr>
-                                      <tr>
-                                          <td>1112,11131112,11131112,11131112,1113</td>
-                                          <td>BRON-CLSS1.1.0</td>
-                                          <td>2020-09-10 00:00</td>
-                                          <td>2020-09-11 00:00</td>
-                                          <td>30分钟</td>
-                                          <td>生效中</td>
-                                          <td><a href="#">删除</a></td>
-                                      </tr>
-                                  </table>
-                              </div>
+                                  <!--<button type="submit" class="btn btn-primary" id="waird1" title="获取神兵空间版本" disabled="disabled">同步神兵</button>-->
+                              <!--</form>-->
+
+                              {% if planReleaseEndDate_dict %}
+                                {% for release,endDate in planReleaseEndDate_dict.items %}
+                                    <input type="text" id="{{release}}" value="{{endDate}}" style="display: none">
+                                {% endfor %}
+                              {% endif %}
 
                               <hr>
                               <form class='form-register' action="modifyCardStatus" method="post">
@@ -739,52 +837,106 @@
                                   <div>
                                       <input type="text" name="feature" value="myMenu1" style="display: none">
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+                                      <input type="text" name="zoneName" value="{{domain}}" style="display: none">
+                                      <input type="text" name="createTimedTask" value="createTimedTask" style="display: none">
                                   </div>
 
                                   <div style="font-size: 17px;">
-                                      <label class="btn btn-primary pull-left">项目 ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
-                                        <option value="北京">北京</option>
-                                        <option value="天津">天津</option>
-                                        <option value="河北省">河北省</option>
-                                        <option value="山西省">山西省</option>
-                                        <option value="内蒙古自治区">内蒙古自治区</option>
-                                        <option value="辽宁省">辽宁省</option>
-                                        <option value="吉林省">吉林省</option>
-                                        <option value="黑龙江省">黑龙江省</option>
-                                      </select>
-                                  </div>
-                                  <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left" for="branch1">选择分支：</label>
-                                      <select class="selectpicker" name="branch" id="branch1" data-style="selectpicker" data-live-search="true" required>
+                                      <select class="selectpicker" name="branch" id="branch1" onchange=getbranchInfo() data-style="selectpicker" data-live-search="true" required>
                                         {% for releaseName in releaseName_list %}
                                             <option value="{{releaseName}}">{{releaseName}}</option>
                                         {% endfor %}
                                       </select>
                                   </div>
-                                  <div style="font-size: 17px;padding-top: 10px;">
-                                      <label class="btn btn-primary pull-left">起始时间：</label>
-                                      <span class="start_time">{{ date_form.Datetime }}</span>
+                                  <div class="codeBaseId" style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">代码库ID：</label>
+                                      <select class="selectpicker" name="projectId" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
+                                        {% if projectid_select %}
+                                            {% for projectid in projectid_select %}
+                                                <option value="{{projectid}}" selected>{{projectid}}</option>
+                                            {% endfor %}
+                                            {% for projectid in projectid_list %}
+                                                <option value="{{projectid}}">{{projectid}}</option>
+                                            {% endfor %}
+                                        {% else %}
+                                            {% for projectid in projectid_list %}
+                                                <option value="{{projectid}}" selected>{{projectid}}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                      </select>
                                   </div>
-
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">开始时间：</label>
+                                      <input type="datetime-local" class="start_time" name="start_time" value="{{now_date}}" min="{{now_date}}" title="任务的开始时间！"/>
+                                  </div>
                                   <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left">结束时间：</label>
-                                      <span class="start_time">{{ date_form.Datetime }}</span>
+                                      <input type="datetime-local" class="start_time" name="end_time" id="end_time" value="{{TimedTask_endDate}}" min="{{now_time}}" title="任务的结束时间！"/>
                                   </div>
-
                                   <div style="font-size: 17px;padding-top: 10px;">
                                       <label class="btn btn-primary pull-left">时间间隔：</label>
-                                      <select class='interval_time' required>
-                                        <option value ="volvo">30分钟</option>
-                                        <option value ="saab">1小时</option>
-                                        <option value ="mercedes">1天</option>
-                                        <option value ="audi">3天</option>
-                                    </select>
+                                      <input type="text" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" class="intervals" name="time_intervals" placeholder="请输入正整数" title="时间间隔, 是从开始时间算起的！" required>
+                                      <select class="interval_time btn-primary btn" name="time_type" required>
+                                        <option value ="minutes">分钟</option>
+                                        <option value ="hours">小时</option>
+                                        <option value ="days">天</option>
+                                      </select>
                                   </div>
                                   <br>
                                   <button type="reset" class="btn btn-default reset_btn">重置</button>
-                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
+                                  <button type="submit" class="btn btn-primary submit_btn_1" id="mybtn1" onclick=button1()>创建任务</button>
                               </form>
+                              <br>
+                              <div id="mydiv1" style="color:red;font-size: 16px;"></div>
+                              <hr>
+                              {% if getDomainTimedTask_list %}
+                                  <h4 style="font-weight: bold;color:green;">现有定时任务：</h4>
+                                  <div class="crontab_con">
+                                      <table border="1"  cellspacing="50" class="crontab">
+                                          <tr>
+                                              <td>任务ID</td>
+                                              <td>代码库ID</td>
+                                              <td>分支名</td>
+                                              <td>开始时间</td>
+                                              <td>结束时间</td>
+                                              <td>触发间隔</td>
+                                              <td>状态</td>
+                                              <td>操作</td>
+                                          </tr>
+
+                                          {% for domainTimedTask in getDomainTimedTask_list %}
+                                              <tr>
+                                                  <td>{{domainTimedTask.id}}</td>
+                                                  <td>{{domainTimedTask.projectId}}</td>
+                                                  <td>{{domainTimedTask.branch}}</td>
+                                                  <td>{{domainTimedTask.startTime}}</td>
+                                                  <td>{{domainTimedTask.endTime}}</td>
+                                                  <td>{{domainTimedTask.intervalTime}} {{domainTimedTask.timeType}}</td>
+                                                  <td>{{domainTimedTask.taskStatus}}</td>
+                                                  <!--<td><input style="margin-right: 5px;" name="status_on_or_of" id="status_on_or_of" type="checkbox"  checked></td>-->
+                                                  <td>
+                                                      <form action="modifyCardStatus" method="post">
+                                                          {% csrf_token %}
+                                                          <input type="text" name="feature" value="myMenu1" style="display: none">
+                                                          <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+                                                          <input type="text" name="zoneName" value="{{domain}}" style="display: none">
+                                                          <input type="text" name="deletedTimedTask" value="deletedTimedTask" style="display: none">
+                                                          <input type="text" name="timedTaskId" value="{{domainTimedTask.id}}" style="display: none">
+                                                          <button type="submit" class="btn btn-primary deletedTimedTask"
+onclick="if(confirm('确定删除任务: {{domainTimedTask.id}} ？')){return true;}else{return false;}{this.form.submit();}">
+                                                              删除
+                                                          </button>
+                                                      </form>
+                                                  </td>
+                                              </tr>
+                                          {% endfor %}
+                                      </table>
+                                  </div>
+                              {% else %}
+                                    <h4 style="font-weight: bold;color:green;">暂无定时任务！</h4>
+                              {% endif %}
+
                           </div>
                         <!--center end-->
 
@@ -810,7 +962,7 @@
                         <input type="text" class="mySearch" id="mySearch2" onkeyup="myFunction2()" placeholder="搜索.." title="输入分类">
                         <ul class="myMenu" id="myMenu2">
                           {% for domain_name in domain_list %}
-                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}">{{domain_name}}</a></li>
+                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}&feature=myMenu2">{{domain_name}}</a></li>
                           {% endfor %}
                         </ul>
                       </div>
@@ -818,41 +970,48 @@
                       <div class="center">
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
-                              <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
-                                  {% csrf_token %}
-                                  <input type="text" name="feature" value="myMenu2" style="display: none">
-                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
-
-                                  <button type="submit" class="btn btn-primary" id="waird2" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
-                              </form>
-
-                              <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
+                              <hr><br><br><br><br><br>
+                              <form class='form-register' action="?domain_name={{domain_name}}&feature=myMenu2" method="post">
                                   {% csrf_token %}
                                   <div>
                                       <input type="text" name="feature" value="myMenu2" style="display: none">
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
                                       <label class="btn btn-primary pull-left" for="branch2">选择分支：</label>
-                                      <select class="selectpicker" name="branch" id="branch2" data-style="selectpicker" data-live-search="true" required>
+                                      <select class="selectpicker" name="branch" id="branch2" onchange="submit();" data-style="selectpicker" data-live-search="true" required>
                                         {% for releaseName in releaseName_list %}
                                             <option value="{{releaseName}}">{{releaseName}}</option>
                                         {% endfor %}
                                       </select>
                                   </div>
+                              </form>
+
+                              <form class='form-register' action="modifyCardStatus" method="post">
+                                  {% csrf_token %}
+                                  <div>
+                                      <input type="text" name="get_releaseName_cards" value="get_releaseName_cards" style="display: none">
+                                      <input type="text" name="feature" value="myMenu2" style="display: none">
+                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
+                                      <input type="text" name="branch" value="{{branch}}" style="display: none">
+                                  </div>
                                   <br>
                                    <div style="font-size: 17px;padding-top: 10px;">
-                                      <label class="btn btn-primary pull-left">选择卡片ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
-                                        <option value="北京">北京</option>
-                                        <option value="天津">天津</option>
-                                        <option value="河北省">河北省</option>
-                                        <option value="山西省">山西省</option>
-                                        <option value="内蒙古自治区">内蒙古自治区</option>
-                                        <option value="辽宁省">辽宁省</option>
-                                        <option value="吉林省">吉林省</option>
-                                        <option value="黑龙江省">黑龙江省</option>
+                                      <label class="btn btn-primary pull-left">选择卡片：</label>
+                                      <select class="selectpicker defect_and_story_cards" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
+                                        {% if defect_and_story_cards_dict %}
+                                            {% for card,stateDetail in defect_and_story_cards_dict.items %}
+                                               <option value="{{card}}">{{card}}：{{stateDetail}}</option>
+                                            {% endfor %}
+                                        {% endif %}
+                                      </select>
+                                   </div>
+                                  <br>
+                                  <div style="font-size: 17px;padding-top: 10px;">
+                                      <label class="btn btn-primary pull-left">卡片泳道：</label>
+                                      <select class="selectpicker" name="card_status_name_list" data-style="selectpicker" data-actions-box="true" data-live-search="true" required>
+                                        {% for card_status_name in card_status_name_list %}
+                                           <option value="{{card_status_name}}">{{card_status_name}}</option>
+                                        {% endfor %}
                                       </select>
                                    </div>
 
@@ -868,7 +1027,26 @@
                           <div class="reslut_con">
                               <h4 class="result_title">运行结果：</h4>
                               <div class="result_content">
-                                  111
+                                  <div style="background-color: MediumSeaGreen;height:288px;overflow: auto;padding:3px 5px;">
+                                      {% if any_card_movement_message %}
+                                          <h4 style="margin:0;">{{any_card_movement_message}}</h4>
+                                      {% else %}
+                                          <h4 style="margin:0;">已移动的卡片：</h4>
+                                          {% for cards in move_cards_myMenu2 %}
+                                            {{cards}}<br>
+                                          {% endfor %}
+                                      {% endif %}
+                                  </div>
+                                  <div style="background-color: Salmon;height:290px;overflow: auto;padding:3px 5px;">
+                                      {% if any_card_movement_message %}
+                                          <h4 style="margin:0;">{{any_card_movement_message}}</h4>
+                                      {% else %}
+                                          <h4 style="margin:0">未能移动的卡片：</h4>
+                                          {% for cards in unmove_cards_myMenu2 %}
+                                            {{cards}}<br>
+                                          {% endfor %}
+                                      {% endif %}
+                                  </div>
                               </div>
                           </div>
                       </div>
@@ -885,7 +1063,7 @@
                         <input type="text" class="mySearch" id="mySearch3" onkeyup="myFunction3()" placeholder="搜索.." title="输入分类">
                         <ul class="myMenu" id="myMenu3">
                           {% for domain_name in domain_list %}
-                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}">{{domain_name}}</a></li>
+                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}&feature=myMenu3">{{domain_name}}</a></li>
                           {% endfor %}
                         </ul>
                       </div>
@@ -894,187 +1072,36 @@
                           <br>
                           <div class="domain_title" >领域：{{domain_name}}</div>
                               <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
-                                  {% csrf_token %}
-                                  <input type="text" name="feature" value="myMenu3" style="display: none">
-                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
-
-                                  <button type="submit" class="btn btn-primary" id="waird3" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
-                              </form>
-
-                              <hr>
+                              <br>
+                              <br>
                               <form class='form-register' action="modifyCardStatus" method="post">
                                   {% csrf_token %}
                                   <div>
                                       <input type="text" name="feature" value="myMenu3" style="display: none">
                                       <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
 
-                                      <label class="btn btn-primary pull-left" for="branch3">选择分支：</label>
-                                      <select class="selectpicker" name="branch" id="branch3" data-style="selectpicker" data-live-search="true" required>
-                                        {% for releaseName in releaseName_list %}
-                                            <option value="{{releaseName}}">{{releaseName}}</option>
-                                        {% endfor %}
-                                      </select>
-                                  </div>
-                                  <br>
-                                  <div style="font-size: 17px;padding-top: 10px;">
-                                      <label class="btn btn-primary pull-left">选择卡片ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
-                                        <option value="北京">北京</option>
-                                        <option value="天津">天津</option>
-                                        <option value="河北省">河北省</option>
-                                        <option value="山西省">山西省</option>
-                                        <option value="内蒙古自治区">内蒙古自治区</option>
-                                        <option value="辽宁省">辽宁省</option>
-                                        <option value="吉林省">吉林省</option>
-                                        <option value="黑龙江省">黑龙江省</option>
-                                      </select>
-                                   </div>
-
-                                  <br><br>
-                                  <button type="reset" class="btn btn-default reset_btn">重置</button>
-                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
-                              </form>
-                          </div>
-                        <!--center end-->
-
-                      <div class="right">
-                          <div class="reslut_con">
-                              <h4 class="result_title">运行结果：</h4>
-                              <div class="result_content">
-                                  111
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                </div>
-
-              {% if myMenu4 %}
-                <div class="mod" style="display: block">
-              {% else %}
-                <div class="mod" style="display: none">
-              {% endif %}
-                    <div class="row">
-                      <div class="left">
-                        <input type="text" class="mySearch" id="mySearch4" onkeyup="myFunction4()" placeholder="搜索.." title="输入分类">
-                        <ul class="myMenu" id="myMenu4">
-                          {% for domain_name in domain_list %}
-                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}">{{domain_name}}</a></li>
-                          {% endfor %}
-                        </ul>
-                      </div>
-
-                      <div class="center">
-                          <br>
-                          <div class="domain_title" >领域：{{domain_name}}</div>
-                              <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
-                                  {% csrf_token %}
-                                  <input type="text" name="feature" value="myMenu4" style="display: none">
-                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
-
-                                  <button type="submit" class="btn btn-primary" id="waird4" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
-                              </form>
-
-                              <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
-                                  {% csrf_token %}
-                                  <div>
-                                      <input type="text" name="feature" value="myMenu4" style="display: none">
-                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
-
-                                      <label class="btn btn-primary pull-left" for="branch4">选择分支：</label>
-                                          <select class="selectpicker" name="branch" id="branch4" data-style="selectpicker" data-live-search="true" required>
-                                        {% for releaseName in releaseName_list %}
-                                            <option value="{{releaseName}}">{{releaseName}}</option>
-                                        {% endfor %}
-                                      </select>
-                                  </div>
-                                  <br>
-                                  <div style="font-size: 17px;padding-top: 10px;">
-                                      <label class="btn btn-primary pull-left">选择卡片ID：</label>
-                                      <select class="selectpicker" name="cardID" data-style="selectpicker" multiple="multiple" data-actions-box="true" data-live-search="true" required>
-                                        <option value="北京">北京</option>
-                                        <option value="天津">天津</option>
-                                        <option value="河北省">河北省</option>
-                                        <option value="山西省">山西省</option>
-                                        <option value="内蒙古自治区">内蒙古自治区</option>
-                                        <option value="辽宁省">辽宁省</option>
-                                        <option value="吉林省">吉林省</option>
-                                        <option value="黑龙江省">黑龙江省</option>
-                                      </select>
-                                   </div>
-
-                                  <br><br>
-                                  <button type="reset" class="btn btn-default reset_btn">重置</button>
-                                  <button type="submit" class="btn btn-primary submit_btn">提交</button>
-                              </form>
-                          </div>
-                        <!--center end-->
-
-                      <div class="right">
-                          <div class="reslut_con">
-                              <h4 class="result_title">运行结果：</h4>
-                              <div class="result_content">
-                                  111
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                </div>
-
-              {% if myMenu5 %}
-                <div class="mod" style="display: block">
-              {% else %}
-                <div class="mod" style="display: none">
-              {% endif %}
-                    <div class="row">
-                      <div class="left">
-                        <input type="text" class="mySearch" id="mySearch5" onkeyup="myFunction5()" placeholder="搜索.." title="输入分类">
-                        <ul class="myMenu" id="myMenu5">
-                          {% for domain_name in domain_list %}
-                                <li class="{{domain_name}}"><a href="modifyCardStatus?domain_name={{domain_name}}">{{domain_name}}</a></li>
-                          {% endfor %}
-                        </ul>
-                      </div>
-
-                      <div class="center">
-                          <br>
-                          <div class="domain_title" >领域：{{domain_name}}</div>
-                              <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
-                                  {% csrf_token %}
-                                  <input type="text" name="feature" value="myMenu5" style="display: none">
-                                  <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
-
-                                  <button type="submit" class="btn btn-primary" id="waird5" title="获取神兵空间版本" name="sync" value="True">同步神兵</button>
-                              </form>
-
-                              <hr>
-                              <form class='form-register' action="modifyCardStatus" method="post">
-                                  {% csrf_token %}
-                                  <div>
-                                      <input type="text" name="feature" value="myMenu5" style="display: none">
-                                      <input type="text" name="domain_name" value="{{domain_name}}" style="display: none">
-
+                                      <div class="management_con">
+                                          <label class="btn btn-primary pull-left" for="zone_name">领域名：</label>
+                                          <input type="text" id="zone_name" name="zone_name" value="{{domain_name}}" readonly="readonly" style="color:#FFF" required>
+                                      </div>
+                                      <hr>
                                       <div class="management_con">
                                           <label class="btn btn-primary pull-left" for="domain_name_management">神兵空间简称：</label>
-                                          <input type="text" id="domain_name_management" name="domain_name_management" value="{{domain_name}}" required>
+                                          <input type="text" id="domain_name_management" name="domain_name_management" value="{{domain}}" required>
                                       </div>
                                       <hr>
                                       <div class="management_con">
-                                          <label class="btn btn-primary pull-left" for="projectId">项目id：</label>
-                                          <input type="text" id="projectId" name="projectId" value="projectId_list" required>
+                                          <label class="btn btn-primary pull-left" for="projectId">代码库id：</label>
+                                          <input type="text" id="projectId" name="projectId" value="{{projectid_str}}" title="如有多个代码库ID, 请用英文逗号隔开" required>
                                       </div>
                                       <hr>
                                       <div class="management_con">
-                                          <label class="btn btn-primary pull-left" for="privateKey">privateKey：</label>
-                                          <input type="text" id="privateKey" name="privateKey" value="privateKey" required>
-                                      </div>
-                                      <hr>
-                                      <div class="management_con">
-                                          <label class="btn btn-primary pull-left" for="member">成员：</label>
-                                          <input type="text" id="member" name="member" value="member_list" required>
+                                          <label class="btn btn-primary pull-left">privateKey：</label>
+                                          {% if privatekey %}
+                                            <input type="text" name="privateKey" placeholder="********************" title="gitlab个人访问令牌" required>
+                                          {% else %}
+                                            <input type="text" name="privateKey" placeholder="None" title="gitlab个人访问令牌" required>
+                                          {% endif%}
                                       </div>
                                   </div>
 
@@ -1084,35 +1111,44 @@
                               </form>
                           </div>
                         <!--center end-->
-
                       <div class="right" id="add_con">
+                          <br>
+                          <div class="new_domain_msg_con">
+                            {% if new_domain_msg %}
+                                <div class="new_domain_msg_title" id="new_domain_msg_title">
+                                    <div id="new_domain_msg">
+                                        {{ new_domain_msg }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                          </div>
                           <input class="btn btn-primary" id="add_button" type="button" name="new_domain" value="新增领域">
                           <div id="add_domain">
                                 <div class="new_domain_con ">
                                     <form class='form-register' action="modifyCardStatus" method="post">
                                           {% csrf_token %}
                                           <div>
-                                              <input type="text" name="feature" value="myMenu5" style="display: none">
+                                              <input type="text" name="feature" value="myMenu3" style="display: none">
                                               <input type="text" class="add_input" name="domain_name" value="{{domain_name}}" style="display: none">
 
                                               <div class="management_con">
-                                                  <label class="btn btn-primary pull-left" style="background-color: green">神兵空间简称：</label>
-                                                  <input type="text" class="add_input" name="domain_name_management" value="{{domain_name}}" required>
+                                                  <label class="btn btn-primary pull-left" style="background-color: green">领域名：</label>
+                                                  <input type="text" class="add_input" name="new_zone_name" placeholder="显示在左侧的领域名">
                                               </div>
                                               <hr>
                                               <div class="management_con">
-                                                  <label class="btn btn-primary pull-left" style="background-color: green">项目id：</label>
-                                                  <input type="text" class="add_input" name="projectId" value="projectId_list" required>
+                                                  <label class="btn btn-primary pull-left" style="background-color: green">神兵空间简称：</label>
+                                                  <input type="text" class="add_input" name="new_domain_name_management" placeholder="英文简称" required>
+                                              </div>
+                                              <hr>
+                                              <div class="management_con">
+                                                  <label class="btn btn-primary pull-left" style="background-color: green">代码库id：</label>
+                                                  <input type="text" class="add_input" name="new_projectId" title="gitlab代码库ID" placeholder="如有多个代码库ID, 请用英文逗号隔开" required>
                                               </div>
                                               <hr>
                                               <div class="management_con">
                                                   <label class="btn btn-primary pull-left" style="background-color: green">privateKey：</label>
-                                                  <input type="text" class="add_input" name="privateKey" value="privateKey" required>
-                                              </div>
-                                              <hr>
-                                              <div class="management_con">
-                                                  <label class="btn btn-primary pull-left" style="background-color: green">成员：</label>
-                                                  <input type="text" class="add_input" name="member" value="member_list" required>
+                                                  <input type="text" class="add_input" name="new_privateKey" placeholder="gitlab个人访问令牌" required>
                                               </div>
                                           </div>
 
@@ -1122,6 +1158,16 @@
                                      </form>
                                 </div>
                           </div>
+                          <br><br>
+                          <div id="del_domain">
+                              <form class='form-register' action="modifyCardStatus" method="post">
+                                  {% csrf_token %}
+                                  <input type="text" name="feature" value="myMenu3" style="display: none">
+                                  <input type="text" class="add_input" name="domain_name" value="" style="display: none">
+                                  <input type="text" class="add_input" name="del_domain_name" value="{{domain_name}}" style="display: none">
+                                  <button type="submit" class="btn btn-primary" onclick="if(confirm('确定删除{{domain_name}}领域？')){return true;}else{return false;}{this.form.submit();}">删除该领域</button>
+                             </form>
+                          </div>
                       </div>
 
                     </div>
@@ -1129,14 +1175,32 @@
             </div>
         </div>
 
-        <br><br>
+        <!--<br><br>-->
 
-        <hr>
-        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
-        <br><br><br><br>
-        <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
-        <br><br><br><br>
+        <!--<hr>-->
+        <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+        <!--<br><br><br><br>-->
+        <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+        <!--<br><br><br><br>-->
 
     </div>
+{% endblock %}
 
+{% block body_out %}
+    <!--<script type="text/javascript">-->
+        <!--$("[name='status_on_or_of']").bootstrapSwitch({-->
+                   <!--onText:"Yes",-->
+                   <!--offText:"No",-->
+                   <!--onColor:"success",-->
+                   <!--offColor:"info",-->
+                   <!--size:"small",-->
+                   <!--onSwitchChange:function(event,state){-->
+                      <!--if(state==true){-->
+                           <!--console.log("开启");-->
+                         <!--}else{-->
+                          <!--console.log("关闭");-->
+                         <!--}-->
+                     <!--}-->
+                <!--});-->
+      <!--</script>-->
 {% endblock %}

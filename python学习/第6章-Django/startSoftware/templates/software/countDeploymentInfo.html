@@ -1,0 +1,527 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}部署窗口申请{% endblock %}
+
+{% block content %}
+
+{% block scripts %}
+<script type="text/javascript">
+    window.onload=function () {
+        //窗口关闭
+        odiv0 = document.getElementById("message_con");
+        setTimeout("odiv0.style.display='none';",5000);
+    }
+</script>
+
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+        margin: 0 100px;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .title_h3{
+        color: #FFF;
+        font-weight: bold;
+    }
+
+    .title_h2{
+        margin-left:35%;
+        font-weight: bold;
+    }
+
+    .title_h4{
+        color: RoyalBlue;
+        font-weight: bold;
+    }
+
+    #link_index:hover,#link_top:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .dataBase_table{
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        background-color: #f6ffff;
+        margin-bottom: 25px;
+        border-collapse:collapse;
+    }
+
+    .dataBase_table th{
+        text-align: center;
+        font-size: 16px;
+        background-color: #2e6da4;
+        color: #FFF;
+    }
+
+    .dataBase_table td{
+        color: #2e6da4;
+        padding:3px;
+        font-size:16px;
+        max-width: 450px;
+    }
+
+    .table_td{
+        padding: 10px;
+        max-width: 200px;
+    }
+
+    .table_td button{
+        background-color: IndianRed;
+    }
+
+    .dataBase_table button:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    /* 显示页面 */
+    .show_window{
+        text-align: left;
+        background-color: LightSeaGreen;
+        border-radius: 10px;
+        padding: 30px;
+    }
+
+    .title_con{
+        <!--border: 2px solid #9acfea;-->
+        padding: 0 10px;
+        font-size: 24px;
+        text-align: left;
+
+    }
+
+    .title_con ul{
+        margin-top: 30px
+    }
+
+    .title_con li{
+        list-style-type:none;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    #con{
+        padding: 10px;
+    }
+
+    #reset_btn{
+        color:green;
+    }
+
+    #reset_btn:hover,#checkout_btn:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    .table_text{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        display: block;
+    }
+
+    .show_window{
+        text-align: center;
+    }
+
+    .dataBase_table .filter-option{
+        color: green;
+    }
+
+    .start_time{
+        font-size: 18px;
+        border-radius: 5px;
+        color: green;
+    }
+
+    /* 系统录入页面 */
+    .system_input{
+        font-size:18px;
+        padding: 20px;
+        background-color: SeaGreen;
+        border-radius: 10px;
+        color: #FFF;
+    }
+
+    /* 系统删除页面 */
+    .system_delete{
+        font-size:18px;
+        padding: 20px;
+        background-color: LightPink;
+        border-radius: 10px;
+        color: DarkRed;
+    }
+
+    /* 申请部署页面 */
+    .deploy_input{
+        padding: 30px;
+        border-radius: 10px;
+        color: #FFF;
+        background-color:#2e6da4;
+        font-size:21px;
+    }
+
+    /* 申请部署页面2 */
+    .deploy_input2{
+        padding: 30px;
+        border-radius: 10px;
+        color: #FFF;
+        background-color:Peru;
+        font-size:21px;
+    }
+
+
+    .system_delete .dropdown-toggle{
+        width:150%;
+    }
+
+    .system_delete_btn{
+        background-color: FireBrick;
+        margin-left: 130px;
+        border:1px solid FireBrick;
+
+    }
+
+    .system_input input{
+        border-radius: 5px;
+        color: green;
+    }
+
+    .system_input .filter-option-inner-inner{
+        color: green;
+    }
+
+    .system_input_btn{
+        font-size:16px;
+        margin-left: 20px;
+        background-color: #2e6da4;
+    }
+
+    .system_input_btn:hover,.deploy_input_btn:hover,.system_delete_btn:hover,.deploy_input2_btn:hover{
+        background-color: gold;
+        color: red;
+    }
+
+
+    .deploy_input_btn,.deploy_input2_btn{
+        font-size:17px;
+        background-color: DarkGreen;
+    }
+
+    .deploy_input2_btn{
+        margin-left: 20px;
+        background-color: DarkGreen;
+    }
+
+    .deploy_input_textarea{
+        font-size: 16px !important;
+        text-align: left !important;
+        height: 100px;
+        border-radius: 10px;
+        color: green;
+        min-height: 100px;
+        max-width: 100%;
+        min-width: 100%;
+        background-color: LightCyan;
+        padding: 10px;
+    }
+
+    .deploy_input input{
+        border-radius: 5px;
+    }
+
+    .multiplechoice,.filter-option{
+        color: green;
+    }
+
+    .multiplechoice{
+        font-size:18px;
+        border-radius: 5px;
+    }
+
+    .message_con{
+        height: 50px;
+        font-size:21px;
+        line-height:50px;
+        text-align: center;
+        color:#8a6d3b;
+        background-color:#fcf8e3;
+        border-radius: 10px;
+    }
+
+    .css_line{
+        margin-left: 50px;
+    }
+
+    .delete_btn{
+        background-color:IndianRed;
+        border: 1px solid IndianRed;
+    }
+
+    @keyframes fade-in {
+        0% {opacity: 0;}/*初始状态 透明度为0*/
+        40% {opacity: 0;}/*过渡状态 透明度为0*/
+        100% {opacity: 1;}/*结束状态 透明度为1*/
+    }
+
+    @-webkit-keyframes fade-in {/*针对webkit内核*/
+        0% {opacity: 0;}
+        40% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+
+    #message_con {
+        animation: fade-in;/*动画名称*/
+        animation-duration: 1s;/*动画持续时间*/
+        -webkit-animation: fade-in 1s;/*针对webkit内核*/
+    }
+
+    .con{
+        max-height: 1000px;
+        overflow: auto;
+    }
+
+</style>
+{% endblock %}
+
+<div id="uploadFile_con">
+    {% if message %}
+        <div class="message_con" id="message_con">
+            {{message}}
+        </div>
+    {% endif %}
+
+    {% if request.session.manager_islogin %}
+    <div class="title_con">
+        <form class='form-register' action="countDeploymentInfo" method="post">
+            {% csrf_token %}
+            <input type="text" name="system_input" value="system_input" style="display:none;">
+            <div class="system_input">
+                <label>系统英文名称：</label>
+                <input class="multiplechoice" type="text" name="systemEnglishName" required>
+                <label class="css_line">系统中文名称：</label>
+                <input class="multiplechoice" type="text" name="systemChineseName" required>
+                <label class="css_line">子系统分类：</label>
+                <select class="selectpicker css_line" name="systemType" required>
+                                <option value="第一类" >第一类</option>
+                                <option value="第二类" >第二类</option>
+                                <option value="第三类" selected>第三类</option>
+                </select>
+                <button type="submit" class="btn btn-primary system_input_btn">录入系统</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="title_con">
+        <form class='form-register' action="countDeploymentInfo" method="post">
+            {% csrf_token %}
+            <input type="text" name="system_delete" value="system_delete" style="display:none;">
+            <div class="system_delete">
+                <label>系统名称：</label>
+                <select class="selectpicker" name="systemName" data-actions-box="true" data-live-search="true" required>
+                    {% for systemName in allSystemName %}
+                        <option value="{{systemName}}">{{systemName}}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary system_delete_btn" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}">删除系统</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+    <br><br>
+
+    {% if isWorkTime == True %}
+    <div class="title_con">
+        <form class='form-register' action="countDeploymentInfo" method="post">
+            {% csrf_token %}
+            <input type="text" name="deploy_input" value="deploy_input" style="display:none;">
+            <div class="deploy_input">
+                    <h3 class="title_h2">非窗口期部署申请<span>（工作时间在这填写）</span></h3> <br><br>
+                <label>系统名称：</label>
+                <select class="selectpicker" name="systemName" data-actions-box="true" data-live-search="true" required>
+                    <option value=""></option>
+                    {% for systemName in allSystemName %}
+                        <option value="{{systemName}}">{{systemName}}</option>
+                    {% endfor %}
+                </select>
+                <label class="css_line">申请人：</label>
+                <input class="multiplechoice" type="text" name="applicant" required>
+                <label class="css_line">申请时间：</label>
+                <input type="datetime-local" class="multiplechoice" name="applicantTime" value="{{start_time}}" required/>
+                <br><br>
+                <label>原因分类：</label>
+                <select class="selectpicker" name="reasonType" required>
+                    <option value=""></option>
+                    <option value="部署失败">部署失败</option>
+                    <option value="测试要求">测试要求</option>
+                    <option value="代码优化">代码优化</option>
+                    <option value="联调原因">联调原因</option>
+                    <option value="漏移交">漏移交</option>
+                    <option value="缺陷">缺陷</option>
+                    <option value="需求">需求</option>
+                    <option value="阻碍测试">阻碍测试</option>
+                </select>
+                <br><br>
+                <label>申请原因：</label>
+                {% if request.session.user_name == "T1" or request.session.user_name == "shar" %}
+                    <textarea class="table_text deploy_input_textarea" name='reason' required placeholder=" 第一类系统部署窗口：10点、15点、17点 &#10; 第二类系统部署窗口：10点、11点、15点、16点、17点、18点 &#10; 第三类系统部署窗口：按需部署，但时间间隔必须大于30分钟"></textarea>
+                {% else %}
+                    <textarea class="table_text deploy_input_textarea" name='reason' required placeholder=" 第一类系统部署窗口：10点、14点、17点 &#10; 第二类系统部署窗口：9点、11点、14点、16点、17点、18点 &#10; 第三类系统部署窗口：按需部署，但时间间隔必须大于30分钟"></textarea>
+                {% endif %}
+                <br>
+                <button type="submit" class="btn btn-primary deploy_input_btn">提交申请</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if isWorkTime_mark == False %}
+    <div class="title_con">
+        <form class='form-register' action="countDeploymentInfo" method="post">
+            {% csrf_token %}
+            <input type="text" name="deploy_input2" value="deploy_input2" style="display:none;">
+            <div class="deploy_input2">
+                <h3 class="title_h2">测试/开发自行部署登记<span>（非工作时间在这填写）</span></h3> <br>
+                <label>系统名称：</label>
+                <select class="selectpicker" name="systemName" data-actions-box="true" data-live-search="true" required>
+                    <option value=""></option>
+                    {% for systemName in allSystemName %}
+                        <option value="{{systemName}}">{{systemName}}</option>
+                    {% endfor %}
+                </select>
+                <label class="css_line">执行人角色：</label>
+                <select class="selectpicker" name="role" required>
+                    <option value=""></option>
+                    <option value="开发">开发</option>
+                    <option value="测试">测试</option>
+                </select>
+                <label class="css_line">部署执行人：</label>
+                <input class="multiplechoice" type="text" name="deploymentPersonnel" required>
+                <label class="css_line">部署时间：</label>
+                <input type="datetime-local" class="multiplechoice" name="deploymentTime" value="{{start_time}}" required/>
+                <button type="submit" class="btn btn-primary deploy_input2_btn">提交</button>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+    <br><br>
+    <div class="show_window">
+        <h3 class="title_h3">统计非窗口期部署申请</h3>
+        <div id="con" class="con">
+             <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table">
+                 <tr>
+                    <th class="table_td">系统名称</th>
+                    <th class="table_td">系统分类</th>
+                    <th class="table_td">申请人</th>
+                    <th class="table_td">申请时间</th>
+                    <th class="table_td">原因分类</th>
+                    <th class="table_td">申请原因</th>
+                    <th class="table_td">修改时间</th>
+                    <th class="table_td">操作</th>
+                 </tr>
+                 {% if getApplicantDeploymentInfo_list %}
+                     {% for applicantDeploymentInfo in getApplicantDeploymentInfo_list %}
+                        <tr>
+                            <td>{{applicantDeploymentInfo.systemName}}</td>
+                            <td>{{applicantDeploymentInfo.systemType}}</td>
+                            <td>{{applicantDeploymentInfo.applicant}}</td>
+                            <td>{{applicantDeploymentInfo.applicantTime}}</td>
+                            <td>{{applicantDeploymentInfo.reasonType}}</td>
+                            <td>{{applicantDeploymentInfo.reason}}</td>
+                            <td>{{applicantDeploymentInfo.modifyTime}}</td>
+                            <td>
+                                <form class='form-register' action="countDeploymentInfo" method="post">
+                                    {% csrf_token %}
+                                    <input type="text" name="delete_system_input" value="delete_system_input" style="display:none;">
+                                    <input type="text" name="id" value="{{applicantDeploymentInfo.id}}" style="display:none;">
+                                    <input type="text" name="modifyTime" value="{{applicantDeploymentInfo.modifyTime}}" style="display:none;">
+                                    <button type="submit" class="btn btn-primary delete_btn" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}">删除</button>
+                                </form>
+                            </td>
+                        </tr>
+                     {% endfor %}
+                 {% else %}
+                    <tr>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                    </tr>
+                 {% endif %}
+             </table>
+        </div>
+
+        <br><br>
+        <h3 class="title_h3">统计测试/开发自行部署</h3>
+        <div id="con2" class="con">
+             <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table">
+                 <tr>
+                    <th class="table_td">系统名称</th>
+                    <th class="table_td">执行人角色</th>
+                    <th class="table_td">部署执行人</th>
+                    <th class="table_td">部署时间</th>
+                    <th class="table_td">修改时间</th>
+                    <th class="table_td">操作</th>
+                 </tr>
+                 {% if getSelfDeploymentInfo_list %}
+                     {% for selfDeploymentInfo in getSelfDeploymentInfo_list %}
+                        <tr>
+                            <td>{{selfDeploymentInfo.systemName}}</td>
+                            <td>{{selfDeploymentInfo.role}}</td>
+                            <td>{{selfDeploymentInfo.deploymentPersonnel}}</td>
+                            <td>{{selfDeploymentInfo.deploymentTime}}</td>
+                            <td>{{selfDeploymentInfo.modifyTime}}</td>
+                            <td>
+                                <form class='form-register' action="countDeploymentInfo" method="post">
+                                    {% csrf_token %}
+                                    <input type="text" name="delete_system_input2" value="delete_system_input2" style="display:none;">
+                                    <input type="text" name="id" value="{{selfDeploymentInfo.id}}" style="display:none;">
+                                    <input type="text" name="modifyTime" value="{{selfDeploymentInfo.modifyTime}}" style="display:none;">
+                                    <button type="submit" class="btn btn-primary delete_btn" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}">删除</button>
+                                </form>
+                            </td>
+                        </tr>
+                     {% endfor %}
+                 {% else %}
+                    <tr>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                    </tr>
+                 {% endif %}
+             </table>
+        </div>
+    </div>
+
+    <br><br>
+    <!--<hr>-->
+    <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+    <!--<br><br><br><br>-->
+    <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+    <!--<br><br><br><br>-->
+</div>
+{% endblock %}

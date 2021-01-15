@@ -1,0 +1,185 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}投产材料检查项设置{% endblock %}
+
+{% block content %}
+{% block scripts %}
+<script type="text/javascript">
+    window.onload=function () {
+        oDiv = document.getElementById("message");
+        oDiv.style.display='block';
+        setTimeout("oDiv.style.display='none';",10000);
+    }
+</script>
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+    .context_con{
+        margin:50px 100px;
+    }
+
+    #uploadFile_con{
+        text-align: center;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .dir_list ul{
+        list-style-type: none;
+    }
+
+    .form-group{
+        color: green;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover,#delfile_btn:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #reset_btn{
+        color:green;
+    }
+
+    #delfile_btn{
+        margin-left: 200px;
+     }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+
+
+    .titel{
+        color: green;
+    }
+
+    .createVerionDirectorylable{
+        color: #9d9d9d;
+        font-size: 15px;
+        font-weight: normal;
+    }
+
+    .check_report_table{
+        width: 100%;
+    }
+
+    .check_report_table th{
+        text-align: center;
+    }
+
+    .table_title{
+        height:50px;
+        color: #FFF;
+        background-color:#2e6da4;
+    }
+
+    .table_context{
+        height: 30px;
+        color:green;
+        font-weight:bold;
+        background-color:#f6ffff;
+    }
+
+    .context_red{
+        background-color:Tomato;
+        color: Indigo;
+    }
+
+    .context_waring{
+        background-color:Gold;
+        color: red;
+    }
+
+    .selectpicker{
+        background-color:#FFF;
+        margin-left: 5px;
+        border: 1px solid DodgerBlue;
+    }
+
+    #message{
+        font-size: 20px;
+        text-align: center;
+        color: green;
+    }
+
+</style>
+{% endblock %}
+<div id="uploadFile_con">
+    {% if request.session.is_login %}
+        <h1 class="titel">投产材料检查项设置</h1>
+    {% else %}
+        <h2>你尚未登录，只能访问公开内容！</h2>
+    {% endif %}
+
+    <div class="context_con">
+        {% if message %}
+            <div class="alert alert-warning" id="message">{{ message }}</div>
+        {% endif %}
+
+        <form class='form-register' action="setUpCollectionMaterialConfig" method="post">
+            {% csrf_token %}
+
+            <label class="btn btn-primary pull-left" for="domain">领域名：</label>
+            <select class="selectpicker pull-left" name="domain" id="domain" data-style="selectpicker" data-live-search="true" required>
+                {% for domain in domain_list %}
+                    <option value="{{domain}}">{{domain}}</option>
+                {% endfor %}
+                </select>
+                <br><br><br>
+            <label class="btn btn-primary pull-left">检查项：</label>
+            <select class="selectpicker pull-left" name="checkout_list" data-style="selectpicker"
+multiple="multiple" data-actions-box="true" data-live-search="true">
+                {% for check_type in check_type_list %}
+                    <option value="{{check_type}}" selected>{{check_type}}</option>
+                {% endfor %}
+            </select>
+
+            <br><br><br>
+            <button type="reset" class="btn btn-default pull-left" id="reset_btn" disabled="disabled">重置</button>
+            <button type="submit" class="btn btn-primary pull-left" id="delfile_btn">提交</button>
+        </form>
+        <br><br>
+        <h3 class="titel">已设置的检查项</h3>
+        <table border="1"  cellspacing="50" class="check_report_table">
+            <tr class="table_title">
+                <th>领域名</th>
+                {% for check_type in check_type_list %}
+                    <th>{{check_type}}</th>
+                {% endfor %}
+            </tr>
+            {% for domain,report_list in domain_report_dict.items %}
+                <tr class="table_context">
+                    <td>{{domain}}</td>
+                    {% for report in report_list %}
+                    {% if report == '不涉及' %}
+                        <td class="context_red">{{report}}</td>
+                    {% elif report == '未设置' %}
+                        <td class="context_waring">{{report}}</td>
+                    {% else %}
+                        <td>{{report}}</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+
+        </table>
+
+            <!--<br><br><br><br>-->
+            <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+            <!--<br><br><br><br>-->
+            <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+            <!--<br><br><br><br>-->
+    </div>
+
+</div>
+{% endblock %}

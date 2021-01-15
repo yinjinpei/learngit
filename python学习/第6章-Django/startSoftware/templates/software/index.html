@@ -1,17 +1,54 @@
 {#login/templates/login/index.html#}
 
 {% extends 'software_base.html' %}
-{% block title %}主页{% endblock %}
+{% block title %}版本管理系统{% endblock %}
 
 {% block scripts %}
-    <!--<script src="/static/js/modernizr.js"></script>-->
+    <!--猪头动画-->
     <!--<link rel="stylesheet" href="/static/css/style.css" media="screen" type="text/css" />-->
+    <!--<script src="/static/js/modernizr.js"></script>-->
+
+    <script type="text/javascript">
+    const endTime = new Date("2021-01-13 18:00:00").getTime();
+    // countdown
+    let timer = setInterval(function() {
+      // get today's date
+      const today = new Date().getTime();
+      // get the difference
+      const diff = endTime - today;
+      // math
+      let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      // display
+      document.getElementById("timer").innerHTML =
+        "<div class=\"days\"> \
+      <div class=\"numbers\">" + days + "</div><span>天</span></div> \
+    <div class=\"hours\"> \
+      <div class=\"numbers\">" + hours + "</div><span>时</span></div> \
+    <div class=\"minutes\"> \
+      <div class=\"numbers\">" + minutes + "</div><span>分</span></div> \
+    <div class=\"seconds\"> \
+      <div class=\"numbers\">" + seconds + "</div><span>秒</span></div> \
+    </div>";
+    }, 1000);
+
+    window.onload=function () {
+        //窗口关闭
+        odiv0 = document.getElementById("login-warning");
+        setTimeout("odiv0.style.display='none';",5000);
+    }
+</script>
+
 {% endblock %}
 
 {% block css %}
-
     .con_h{
-        text-align:center;
+        box-sizing: border-box;
+        text-align: center;
+        display: flex;
+        overflow: auto;
     }
 
     .con_h a:hover{
@@ -19,110 +56,320 @@
         color:red;
     }
 
-    .software_con{
-        display: none;
+    .con_left{
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        width: 30%;
+        float:left;
+        overflow: hidden;
+        border-radius: 10px;
     }
 
-    #software_name{
-        background-color: #FF8000;
-        margin-right:10px;
-        margin-top:5px;
-        color:#fff;
+    .con_center{
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        float:center;
+        width: 40%;
     }
 
-    #software_name:hover{
-        color:red;
+    .con_right{
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        width: 30%;
+        float:right;
     }
 
-    .software_title{
-        font-weight: bolder;
-        color: green;
+
+    .login-btn{
+        background-color: green;
     }
 
-    #software_del{
-        background-color: #d9534f;
-        color:#fff;
+    .login-warning{
+        border-radius: 10px;
+        max-width: 800px;
+        margin: 0 auto;
     }
 
-    #software_del:hover{
-        color:#c0a16b;
-    }
-
-    #software_add{
-        color: #2e6da4;
-        margin-top:5px;
-    }
-
-    #software_add:hover{
+    #login-warning{
+        font-size: 18px;
         color: red;
+        font-weight: bold;
     }
+
+    .announcement,.common,.manager,.offline{
+        border-radius: 10px;
+        max-width: 800px;
+        padding: 0 0 20px 0;
+        margin:0 auto;
+    }
+
+    .con-title{
+        color: #FFF;
+        font-size: 21px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+
+    .con_h a{
+        margin-left: 20px;
+    }
+
+    .announcement{
+        border: 5px solid green;
+    }
+
+    .announcement .con-title{
+        background-color: green;
+    }
+
+    .common{
+        border: 5px solid #337ab7;
+    }
+
+    .common .con-title{
+        background-color: #337ab7;
+    }
+
+    .manager{
+        border: 5px solid DarkOrange;
+    }
+
+    .manager .con-title{
+        background-color: DarkOrange;
+    }
+
+    .offline{
+        border: 5px solid Gray;
+    }
+
+    .offline .con-title{
+        background-color: Gray;
+    }
+
+    .announcement a{
+        background-color: green;
+    }
+
+    .manager a{
+        background-color: DarkOrange;
+    }
+
+    .offline a{
+        background-color: Gray;
+    }
+
+    .announcement .btn-primary{
+        border-color: green;
+    }
+
+    .manager .btn-primary{
+        border-color: DarkOrange;
+    }
+
+    .offline .btn-primary{
+        border-color: Gray;
+    }
+
+    .title-systemName{
+        display: block;
+    }
+
+    /* 倒计时 starting */
+    .containers {
+      margin: 0 auto;
+      overflow: auto;
+      text-align: center;
+    }
+
+    .timer_title{
+        font-size: 21px;
+        border: 5px solid Pink;
+        border-radius: 10px;
+        font-weight:bold;
+        background-color: Pink;
+        color: #337ab7;
+        width: 420px;
+        margin:0 auto;
+        margin-bottom: 5px;
+    }
+
+    #timer h1 {
+      font-family: "Lato", sans-serif;
+      text-align: center;
+      margin-top: 32px;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: #F6F4F3;
+    }
+
+    #timer {
+      color: #F6F4F3;
+      text-align: center;
+      text-transform: uppercase;
+      font-family: "Lato", sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .days, .hours, .minutes, .seconds {
+      display: inline-block;
+      padding: 5px;
+      height: 100px;
+      width: 100px;
+      border-radius: 5px;
+      font-weight:bold;
+    }
+
+    .days {
+      background: ForestGreen;
+    }
+
+    .hours {
+      background: #276FBF;
+    }
+
+    .minutes {
+      background: #F0A202;
+    }
+
+    .seconds {
+      background: #EF2F3C;
+    }
+
+    .numbers {
+      font-family: "Montserrat", sans-serif;
+      color: #183059;
+      font-size: 48px;
+    }
+
+    #timer span{
+      font-size: 16px;
+      font-weight:bold;
+    }
+
+    /* 倒计时 end */
+
 {% endblock %}
 
 {% block content %}
 <div class="con_h">
-    {% if request.session.is_login %}
-        <!--<h1>您好,{{ request.session.user_name }}！欢迎回来！</h1>-->
-        <h1 style="font-weight:bold ">版 本 管 理 系 统</h1>
-        <h4>Version Management System</h4>
-        内测版
-
-        <div class="software_con">
-            <hr>
-            <h3 class="software_title">常用软件快捷键：</h3>
-            <h5 class="software_title" style="color: red;">权限受限，此功能不可用！</h5>
-            {% for app in appsList %}
-                <a id="software_name" class="btn" href={{app.appName}}?name={{app.appName}} >{{app.remark}}</a>
-            {% endfor %}
-
-            <a class="btn btn-default" id="software_add" href="/addSoftware" >添加</a>
-            <br>
-            <br>
-            <a class="btn" id="software_del" href="/delSoftware" >删除常用软件</a>
+    <div class="con_left con_box">
+        <br><br><br>
+        <div class="con_left_top">
+                <!--左边信息-->
+            <div class="containers">
+                <div class="timer_title">【2021-01-14】常规版本封版倒计时</div>
+                <div id="timer"></div>
+            </div>
         </div>
-    {% else %}
-        <h1 style="font-weight:bold ">版 本 管 理 系 统</h1>
-        <h4>Version Management System</h4>
-        内测版
-        <hr>
-        <h3 style="color: red;">您尚未登录，只能访问公开内容！</h3>
-        <!--<hr>-->
-        <!--<h4 style="color: red">无法显示常用软件，请先登录！</h4>-->
-        <hr>
-        <a class="btn btn-primary" href="/user/login" >用户登录</a>
-    {% endif %}
-    <hr>
-    {% if uploadFile_message %}
-        <div class="alert alert-warning">{{ uploadFile_message }}</div>
-        <br>
-    {% endif %}
-    <a class="btn btn-primary" href="/versionManagerIndex" >网址大全</a>
-    <hr>
-    <a class="btn btn-primary" href="/uploadFile" >文件管理</a>
-    <hr>
-    <a class="btn btn-primary" href="/productionMaterials" >投产材料管理</a>
-    <hr>
-    <a class="btn btn-primary" href="/unblockedVersion" >解封版信息收集</a>
-    <hr>
-    <a class="btn btn-primary" href="/setServerDate" >服务器时间管理</a>
-    <hr>
-    <a class="btn btn-primary" href="/restart_tomcat" >tomcat应用重启</a>
-    <hr>
-    <!--<a href="/exec_command" >执行shell脚本</a>-->
+    </div>
+
+    <div class="con_center con_box">
+        <!--<h1 style="font-weight:bold;">-->
+            <!--<font color="#FF0000"> 版</font><font color="#D5372A"> 本</font><font color="#AB0D54"> 管</font><font-->
+            <!--color="#81007E"> 理</font><font color="#8000A8"> 系</font><font color="#8000D2"> 统</font>-->
+        <!--</h1>-->
+        <!--<h4>-->
+            <!--<font color="#FF0000">V</font><font color="#F5570A">e</font><font color="#EB4D14">r</font><font color="#E1431E">s</font><font-->
+                <!--color="#D73928">i</font><font color="#CD2F32">o</font><font color="#C3253C">n</font><font-->
+                <!--color="#B91B46"> </font><font color="#AF1150">M</font><font color="#A5075A">a</font><font-->
+                <!--color="#9B0064">n</font><font color="#91006E">a</font><font color="#870078">g</font><font-->
+                <!--color="#800082">e</font><font color="#80008C">m</font><font color="#800096">e</font><font-->
+                <!--color="#8000A0">n</font><font color="#8000AA">t</font><font color="#8000B4"> </font><font-->
+                <!--color="#8000BE">S</font><font color="#8000C8">y</font><font color="#8000D2">s</font><font-->
+                <!--color="#8000DC">t</font><font color="#8000E6">e</font><font color="#8000F0">m</font>-->
+        <!--</h4>-->
+        <br><br><br>
+        {% if not request.session.is_login %}
+            <h3 class="alert alert-warning login-warning">您尚未登录，只能访问公共信息区！</h3>
+            <br>
+        {% endif %}
+        {% if uploadFile_message %}
+            <div class="alert alert-warning login-warning" id="login-warning">{{ uploadFile_message }}</div>
+            <br>
+        {% endif %}
+
+        <div class="announcement">
+        <div class="con-title">公共信息区</div>
+        {% if not request.session.is_login %}
+            <a class="btn btn-primary login-btn" href="/user/login" >用户登录</a>
+        {% endif %}
+        <a class="btn btn-primary" target="_blank" href="/versionManagerIndex" >网址大全</a>
+        <a class="btn btn-primary" target="_blank" href="/interfacePerson" >故障接口人</a>
+        </div>
+        <br><br>
+        <div class="common">
+            <div class="con-title">常用功能区</div>
+            <a class="btn btn-primary" target="_blank" href="/uploadFile" >文件管理</a>
+            <a class="btn btn-primary" target="_blank" href="/productionMaterials" >投产材料管理</a>
+            <a class="btn btn-primary" target="_blank" href="/unblockedVersion" >解封版信息收集</a>
+            <a class="btn btn-primary" target="_blank" href="/announcement" >生产数据库信息</a>
+            <br><br>
+            <a class="btn btn-primary" target="_blank" href="/countDeploymentInfo" >部署窗口申请</a>
+            <a class="btn btn-primary" target="_blank" href="/myServerInfo">测试环境信息</a>
+        </div>
+        <br><br>
+        <div class="manager">
+            <div class="con-title">超级用户区</div>
+            <a class="btn btn-primary" target="_blank" href="/setUpCollectionMaterialConfig">设置材料检查项</a>
+            <a class="btn btn-primary" target="_blank" href="/modifyCardStatus" >神兵卡片管理</a>
+            <a class="btn btn-primary" target="_blank" href="/gitlab_member_permissions" >gitlab权限管理</a>
+            <a class="btn btn-primary" target="_blank" href="/addCardField" >添加神兵空间字段</a>
+            <br><br>
+            <a class="btn btn-primary" href="/user/modifyPassword" >普通用户密码修改</a>
+            {% if request.session.manager_islogin %}
+                <a class="btn btn-primary" href="/modifySuperPWD" >超级用户密码修改</a>
+            {% else %}
+                <a class="btn btn-primary" href="/loginSuperManager" >登录超级用户</a>
+            {% endif %}
+            {% if request.session.user_name == "shar" %}
+                {% if request.session.manager_islogin %}
+                    <hr>
+                    <a class="btn btn-primary" target="_blank" href="/T8_index">T8组独享页面</a>
+                    <a class="btn btn-primary" target="_blank" href="/myServerInfo">测试环境信息</a>
+                    <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/974/setting/?page#/member">BRON-COMS</a>
+                    <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/2228/setting/?page#/member">BRON-COSS</a>
+                    <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/14575/setting/?page#/member">BRON-CRMP</a>
+                    <br><br>
+                    <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29171/setting/?page#/member">BRON-CLSS</a>
+                    <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29445/setting/?page#/member">COSS-HEALTH</a>
+                    <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29573/setting/?page#/member">BRON-UGCMINIVIDEO</a>
+                    <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29086/setting/?page#/member">BROP-NBI-GOLF</a>
+                    <br><br>
+                    <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29466/setting/?page#/member">BRON-CASS</a>
+                {% endif %}
+            {% endif %}
+        </div>
+        <br><br>
+        <div class="offline">
+            <div class="con-title">已下线功能</div>
+            <a class="btn btn-primary" target="_blank" href="/setServerDate" >服务器时间管理</a>
+        </div>
+    </div>
+
+    <div class="con_right con_box">
+        <div class="con_left_right">
+                <!--右边信息-->
+        </div>
+    </div>
+
+
+    <br><br>
     <!--<hr>-->
-    <!--<a href="/websocket_test" >websocket_test</a>-->
-    <!--<hr>-->
-<a class="btn btn-primary" href="#" >跳到顶部</a>
+    <!--<a class="btn btn-primary" href="#" >跳到顶部</a>-->
 </div>
 
+<!--猪头动画-->
 <!--<div id="pig">-->
-    <!--<div class="ear right"></div>-->
-    <!--<div class="ear left"></div>-->
-    <!--<div class="eye right"></div>-->
-    <!--<div class="eye left"></div>-->
-    <!--<div class="nose"></div>-->
+  <!--<div class="ear right"></div>-->
+  <!--<div class="ear left"></div>-->
+  <!--<div class="eye right"></div>-->
+  <!--<div class="eye left"></div>-->
+  <!--<div class="nose"></div>-->
 <!--</div>-->
 <!--<div style="text-align:center;clear:both;margin-top:30px">-->
 <!--</div>-->
-
 
 {% endblock %}

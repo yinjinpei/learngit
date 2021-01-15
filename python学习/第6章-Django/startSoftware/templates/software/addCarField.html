@@ -1,0 +1,282 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}批量添加神兵空间自定义字段{% endblock %}
+
+{% block content %}
+
+    {% block scripts %}
+        <script type="text/javascript">
+            function addInput1(){
+                var ObInput = document.createElement('input');
+                ObInput.setAttribute('type', 'text');
+                ObInput.setAttribute('name', 'singlechoice');
+                ObInput.setAttribute('class', 'singlechoice');
+
+                var btn = document.getElementById("singlechoice");
+                btn.insertBefore(ObInput,null);
+            }
+
+            function addInput2(){
+                var ObInput = document.createElement('input');
+                ObInput.setAttribute('type', 'text');
+                ObInput.setAttribute('name', 'multiplechoice');
+                ObInput.setAttribute('class', 'multiplechoice');
+
+                var btn = document.getElementById("multiplechoice");
+                btn.insertBefore(ObInput,null);
+            }
+
+            function addInput3(){
+                var ObInput = document.createElement('input');
+                ObInput.setAttribute('type', 'text');
+                ObInput.setAttribute('name', 'domain');
+                ObInput.setAttribute('class', 'domain');
+
+                var btn = document.getElementById("domain");
+                btn.insertBefore(ObInput,null);
+            }
+
+            function online() {
+                var b1 = document.getElementsByName('select_menu');
+                var Odiv = document.getElementsByClassName('show_menu');
+
+                for ( var i=0; i<Odiv.length; i++){
+                    Odiv[i].style.display='none';
+                }
+
+                for ( var i=0; i<b1.length; i++){
+                    if (b1[i].checked == true){
+                        var ob = document.getElementById(b1[i].value);
+                        ob.style.display='block';
+                    }
+                }
+            }
+
+        </script>
+    {% endblock %}
+
+    {% block css %}
+        <style type="text/css">
+            .con{
+                margin: 50px 300px;
+            }
+
+            .title{
+                text-align: center;
+                color: green;
+            }
+
+            .fieldName_con{
+                font-size: 24px;
+            }
+
+            .fieldName_con span{
+                font-size: 18px;
+            }
+
+            .menu{
+                font-size: 24px;
+            }
+
+            .menu span{
+                font-size: 18px;
+            }
+
+            .menu input{
+                margin-left: 30px;
+            }
+
+            .addOption{
+                background-color: green;
+            }
+
+            .addOption:hover{
+                background-color: gold;
+                color: red;
+            }
+
+            .singlechoice,.multiplechoice{
+                margin-right: 10px;
+                margin-top: 10px;
+                border: 1px solid green;
+                border-radius: 5px;
+                font-size: 21px;
+            }
+
+            .reset_btn{
+                margin-right: 280px;
+                color: green;
+            }
+
+            .reset_btn:hover,.submit_btn:hover{
+                background-color: gold;
+                color: red;
+            }
+
+            .fieldName,.domain{
+                border: 1px solid green;
+                border-radius: 5px;
+                font-size: 21px;
+            }
+
+            .domain{
+                margin-top: 5px;
+                margin-right: 10px;
+            }
+
+            .customFieldSubjectTypes{
+                font-size: 17px;
+            }
+
+            .context{
+                box-sizing: border-box;
+                background-color: #fcf8e3;
+                height: 100px;
+                width: 100%;
+                border-radius: 10px;
+            }
+
+            .context_title{
+                color: #8a6d3b;
+                text-align: center;
+                font-size: 18px;
+                font-weight:bold;
+                line-height: 100px;
+            }
+
+            .success_message,.fail_message{
+                overflow: auto;
+                float: left;
+                width:50%;
+                height: 100%;
+                font-size: 18px;
+                font-weight:bold;
+                border-radius: 10px;
+                padding: 5px;
+            }
+
+            .success_message{
+                background-color: MediumSeaGreen;
+            }
+
+            .fail_message{
+                background-color: Salmon;
+            }
+
+            .customFieldSubjectTypes .dropdown-toggle{
+                border: 1px solid green;
+            }
+
+            .customFieldSubjectTypes .dropdown-toggle:hover{
+                border: 1px solid green;
+            }
+
+        </style>
+    {% endblock %}
+
+    <div class="con">
+        <div class="title">
+            <h1>批量添加神兵空间自定义字段</h1>
+        </div>
+        <br><br><br>
+        <div class="context">
+            {% if success_message_list or fail_message_list %}
+            <div class="success_message">
+                添加成功空间列表: <br>
+                {{success_message_list}}
+            </div>
+            <div class="fail_message">
+                添加失败空间列表: <br>
+                {{fail_message_list}}
+            </div>
+            {% else %}
+                <div class="context_title">
+                    {% if message %}
+                        {{message}}
+                    {% else %}
+                        温馨提示：添加字段不能设置【必填设置】, 即 “必填” 作用于当前及后续的卡片状态，需要设置的请在添加后手工设置！
+                    {% endif%}
+                </div>
+            {% endif %}
+
+
+        </div>
+
+        <br><br>
+        <form class='form-register' action="addCardField" method="post">
+            {% csrf_token %}
+            <div class="fieldName_con">
+                <span class="btn btn-primary">字段名称：</span>
+                <input class="fieldName" type="text" name="fieldName" required>
+            </div>
+
+            <br>
+            <div class="fieldName_con" id="domain">
+                <span class="btn btn-primary">空间简称：</span>
+                <input class="btn btn-primary addOption" type="button" onclick="addInput3();" value="添加空间">
+                <br><input class="domain" type="text" name="domain" required>
+
+            </div>
+
+            <br>
+            <div class="menu">
+                <span class="btn btn-primary">控件类型：</span>
+                <input type="radio" name="select_menu" value="text"           required onclick=online()> 文本框
+                <input type="radio" name="select_menu" value="singlechoice"   required onclick=online()> 下拉框
+                <input type="radio" name="select_menu" value="number"         required onclick=online()> 数字输入框
+                <input type="radio" name="select_menu" value="userlist"       required onclick=online()> 人员单选
+                <input type="radio" name="select_menu" value="multipleuser"   required onclick=online()> 人员多选
+                <input type="radio" name="select_menu" value="datetime"       required onclick=online()> 日期
+                <input type="radio" name="select_menu" value="multiplechoice" required onclick=online()> 复选框
+            </div>
+            <div class="show">
+               <div class="show_menu" id="text"           style="display:none"></div>
+               <div class="show_menu" id="singlechoice"   style="display:none">
+                   <br><input class="btn btn-primary addOption" type="button" onclick="addInput1();" value="添加选项">
+                   <br><input class="singlechoice" type="text" name="singlechoice">
+               </div>
+               <div class="show_menu" id="number"         style="display:none"></div>
+               <div class="show_menu" id="userlist"       style="display:none"></div>
+               <div class="show_menu" id="multipleuser"   style="display:none"></div>
+               <div class="show_menu" id="datetime"       style="display:none"></div>
+               <div class="show_menu" id="multiplechoice" style="display:none">
+                   <br><input class="btn btn-primary addOption" type="button" onclick="addInput2();" value="添加选项">
+                   <br><input class="multiplechoice" type="text" name="multiplechoice">
+               </div>
+            </div>
+
+            <br>
+            <div class="customFieldSubjectTypes">
+                <span class="btn btn-primary customFieldSubjectTypes">应用至：</span>
+                <select class="selectpicker" name="customFieldSubjectTypes" multiple="multiple"
+data-actions-box="true" data-live-search="true" required>
+                    <option value="story">用户故事</option>
+                    <option value="defect">缺陷</option>
+                    <option value="prddefect">生产缺陷</option>
+                    <option value="assignment">任务</option>
+                    <option value="release">版本</option>
+                    <option value="idea">意向</option>
+                    <option value="feature">特性</option>
+                    <option value="general">一般</option>
+                    <option value="testcase">测试用例</option>
+                    <option value="iteration">迭代</option>
+                </select>
+            </div>
+
+            <br><br><br>
+            <button type="reset" class="btn btn-default reset_btn">重置</button>
+            <button type="submit" class="btn btn-primary submit_btn">提交</button>
+
+        </form>
+
+
+        <br><br><br>
+        <!--<hr>-->
+        <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+        <!--<br><br><br><br>-->
+        <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+        <!--<br><br><br><br>-->
+    </div>
+{% endblock %}

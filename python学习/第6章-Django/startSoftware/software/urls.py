@@ -4,9 +4,7 @@
 from django.contrib import admin
 from django.urls import path,re_path
 from . import views
-from .views2 import restart_tomcat,productionVserionInfo
-from .views import test
-
+from .views2 import restart_tomcat
 
 
 urlpatterns = [
@@ -14,8 +12,8 @@ urlpatterns = [
     re_path('^versionManagerIndex$', views.versionManagerIndex, name='versionManagerIndex'),
     re_path('^T8_index$', views.T8_index, name='T8_index'),
     re_path('^CDNofflink$', views.CDNofflink, name='CDNofflink'),
-    re_path('^addSoftware$', views.addSoftware, name='addSoftware'),
-    re_path('^delSoftware$', views.delSoftware, name='delSoftware'),
+    # re_path('^addSoftware$', views.addSoftware, name='addSoftware'),
+    # re_path('^delSoftware$', views.delSoftware, name='delSoftware'),
     re_path('^uploadFile$', views.uploadFile, name='uploadFile'),
     re_path('^downloadFile$', views.downloadFile, name='downloadFile'),
     re_path('^delFile$', views.delFile, name='delFile'),
@@ -30,20 +28,24 @@ urlpatterns = [
     re_path('^extranetAddress$', views.extranetAddress, name='extranetAddress'),
     re_path('^loginSuperManager$', views.loginSuperManager, name='loginSuperManager'),
     re_path('^logoutSuperManager$', views.logoutSuperManager, name='logoutSuperManager'),
+    re_path('^restart_tomcat$', restart_tomcat.restart_tomcat),
     re_path('^modifySuperPWD$', views.modifySuperPWD,name='modifySuperPWD'),
-    re_path('^restart_tomcat$', restart_tomcat.restart_tomcat,name='restart_tomcat'),
-    re_path('^productionVserionInfo$', productionVserionInfo.productionVserionInfo,name='productionVserionInfo'),
     re_path('^modifyCardStatus$', views.modifyCardStatus,name='modifyCardStatus'),
+    re_path('^interfacePerson$', views.interfacePerson,name='interfacePerson'),
+    re_path('^announcement$', views.announcement,name='announcement'),
+    re_path('^setUpCollectionMaterialConfig$', views.setUpCollectionMaterialConfig,name='setUpCollectionMaterialConfig'),
+    re_path('^downloadByClassification$', views.downloadByClassification,name='downloadByClassification'),
+    re_path('^gitlab_member_permissions$', views.gitlab_member_permissions,name='gitlab_member_permissions'),
+    re_path('^addCardField$', views.addCardField,name='addCardField'),
+    re_path('^countDeploymentInfo$', views.countDeploymentInfo,name='countDeploymentInfo'),
+    re_path('^myServerInfo$', views.myServerInfo,name='myServerInfo'),
     # re_path('exec_command$', views.exec_command, name='exec_command'),
     # re_path('websocket_test$', views.websocket_test, name='websocket_test'),
     re_path('^test$', views.test, name='test'),
-    re_path('^test2$', views.test2, name='test2'),
-    re_path('^timed_task$', views.timed_task, name='timed_task'),
-    re_path('^gitlab_member_permissions$', views.gitlab_member_permissions, name='gitlab_member_permissions'),
     re_path('', views.index,name='index'),
     # re_path('^WeChat$' ,views.WeChat,name='WeChat'),
     # re_path('^navicat$' ,views.navicat,name='navicat'),
     # re_path('^YoudaoNote$' ,views.YoudaoNote,name='YoudaoNote'),
-    # re_path('' ,views.openAppHelper,name='openAppHelper'),
-]
+    # re_path('^openAppHelper$' ,views.openAppHelper,name='openAppHelper'),
 
+]

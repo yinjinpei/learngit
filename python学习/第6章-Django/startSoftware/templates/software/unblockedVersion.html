@@ -45,7 +45,7 @@
 
     #submit_btn{
         margin-right: 35%;
-     }
+    }
 
     #link_index,#link_top{
         text-decoration: none;
@@ -69,7 +69,8 @@
 
     .table_data{
         text-align: center;
-        max-width:1000px;
+        max-width: 1000px
+
     }
 
     .table_text{
@@ -81,6 +82,43 @@
 
     .table_th{
         height: 100px;
+    }
+
+    .table_th textarea{
+        line-height: 50px
+    }
+
+    .delete_btn{
+        margin: 5px;
+        background-color: IndianRed;
+        border-color: IndianRed;
+    }
+
+    .delete_btn:hover{
+        color: red;
+        background-color: gold;
+        border-color: IndianRed;
+    }
+
+    .table_td button{
+        padding: 15px 0;
+        background-color: green;
+        color: #FFF;
+    }
+
+    .table_text{
+        background-color: LightGreen;
+    }
+
+    .select{
+        padding: 15px 0;
+        background-color: green;
+        color: #FFF;
+        border-radius: 5px;
+    }
+
+    .table_th .right{
+        margin: 5px !important;
     }
 
 </style>
@@ -100,9 +138,6 @@
     {% if message %}
         <div class="alert alert-warning delfile_msg">{{ message }}</div>
     {% endif %}
-        <!--<form class='form-register' action="unblockedVersion" method="post" target="iframe">-->
-        <form class='form-register' action="unblockedVersion" method="post">
-            {% csrf_token %}
             <table border="1"  cellspacing="50" class="unblockedVersion_table">
                 <tr>
                     <!--<th class="table_title"><div class="table_title_content">序号</div></th>-->
@@ -121,6 +156,48 @@
                     <th class="table_title"><div class="table_title_content">确认封版时间</div></th>
                     <th class="table_title"><div class="table_title_content">解封版类别</div></th>
                     <th class="table_title"><div class="table_title_content">解封版说明及根因分析</div></th>
+                    <th class="table_title"><div class="table_title_content">操作</div></th>
+                </tr>
+
+                <tr>
+                    <!--<form class='form-register' action="unblockedVersion" method="post" target="iframe">-->
+                    <form class='form-register' action="unblockedVersion" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="options" value="insert" style="display:none;">
+
+                        <td class="table_th table_td">
+                            <select class="select" name="month" required>
+                                <option value="">请选择</option>
+                                <option value="1">1月份</option>
+                                <option value="2">2月份</option>
+                                <option value="3">3月份</option>
+                                <option value="4">4月份</option>
+                                <option value="5">5月份</option>
+                                <option value="6">6月份</option>
+                                <option value="7">7月份</option>
+                                <option value="8">8月份</option>
+                                <option value="9">9月份</option>
+                                <option value="10">10月份</option>
+                                <option value="11">11月份</option>
+                                <option value="12">12月份</option>
+                            </select>
+                        </td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='team'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_number'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='subsystem'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_name'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="512" class="table_text" name='content'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_compiler'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_leader'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='test_leader' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='development_team' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_type' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='unblocked_datetime' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='blocked_datetime' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='unblocked_type' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="1024" placeholder="注意：不能超出1024个字数！" class="table_text" name='unblocked_reason' required></textarea></td>
+                        <td class="table_th"><button type="submit" class="btn btn-primary pull-right right" id="submit_btn">提交</button></td>
+                    </form>
                 </tr>
 
                 {% for versionInfo in unblocked_versionInfo_list %}
@@ -128,50 +205,34 @@
                         {% if versionInfo.username == request.session.user_name %}
                             <tr>
                                 <!--<th class="table_data">{{versionInfo.pk}}</th>-->
-                                <th class="table_data">{{versionInfo.month}}</th>
-                                <th class="table_data">{{versionInfo.team}}</th>
-                                <th class="table_data">{{versionInfo.version_number}}</th>
-                                <th class="table_data">{{versionInfo.subsystem}}</th>
-                                <th class="table_data">{{versionInfo.version_name}}</th>
-                                <th class="table_data">{{versionInfo.content}}</th>
-                                <th class="table_data">{{versionInfo.version_compiler}}</th>
-                                <th class="table_data">{{versionInfo.version_leader}}</th>
-                                <th class="table_data">{{versionInfo.test_leader}}</th>
-                                <th class="table_data">{{versionInfo.development_team}}</th>
-                                <th class="table_data">{{versionInfo.version_type}}</th>
-                                <th class="table_data">{{versionInfo.unblocked_datetime}}</th>
-                                <th class="table_data">{{versionInfo.blocked_datetime}}</th>
-                                <th class="table_data">{{versionInfo.unblocked_type}}</th>
-                                <th class="table_data">{{versionInfo.unblocked_reason}}</th>
+                                <td class="table_data">{{versionInfo.month}}</td>
+                                <td class="table_data">{{versionInfo.team}}</td>
+                                <td class="table_data">{{versionInfo.version_number}}</td>
+                                <td class="table_data">{{versionInfo.subsystem}}</td>
+                                <td class="table_data">{{versionInfo.version_name}}</td>
+                                <td class="table_data">{{versionInfo.content}}</td>
+                                <td class="table_data">{{versionInfo.version_compiler}}</td>
+                                <td class="table_data">{{versionInfo.version_leader}}</td>
+                                <td class="table_data">{{versionInfo.test_leader}}</td>
+                                <td class="table_data">{{versionInfo.development_team}}</td>
+                                <td class="table_data">{{versionInfo.version_type}}</td>
+                                <td class="table_data">{{versionInfo.unblocked_datetime}}</td>
+                                <td class="table_data">{{versionInfo.blocked_datetime}}</td>
+                                <td class="table_data">{{versionInfo.unblocked_type}}</td>
+                                <td class="table_data">{{versionInfo.unblocked_reason}}</td>
+                                <td>
+                                    <form class='table_data' action="unblockedVersion" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" name="options" value="delete" style="display:none;">
+                                        <input type="text" name="id" value="{{versionInfo.id}}" style="display:none;">
+                                        <button type="submit" class="btn btn-primary delete_btn" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}">删除</button>
+                                    </form>
+                                </td>
                             </tr>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
-
-                <tr>
-                    <!--<th class="table_th"><textarea class="table_text" name='id'  required></textarea></th>-->
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='month'  required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='team'  required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_number'  required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='subsystem'  required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_name'  required></textarea></th>
-                    <th class="table_th"><textarea maxlength="512" class="table_text" name='content'  required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_compiler'  required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_leader'  required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='test_leader' required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='development_team' required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='version_type' required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='unblocked_datetime' required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='blocked_datetime' required></textarea></th>
-                    <th class="table_th"><textarea maxlength="128" class="table_text" name='unblocked_type' required></textarea></th>
-                    <th class="table_th"><textarea maxlength="1024" placeholder="注意：不能超出1024个字数！" class="table_text" name='unblocked_reason' required></textarea></th>
-                </tr>
-
             </table>
-            <br><br><br>
-            <button type="reset" class="btn btn-default pull-left" id="reset_btn">重置</button>
-            <button type="submit" class="btn btn-primary pull-right" id="submit_btn">提交</button>
-        </form>
 
         {% comment  %}
         <!--<iframe id="iframe" name="iframe" style="display:none;"></iframe>-->
@@ -181,11 +242,11 @@
         <!--{% endfor %}-->
         {% endcomment  %}
 
-        <br><br><br><hr>
-        <a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>
-        <br><br><br><br>
-        <a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>
-        <br><br><br><br>
+        <!--<br><br><br><hr>-->
+        <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+        <br><br><br><br><br><br>
+        <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+        <!--<br><br><br><br>-->
 
 </div>
 {% endblock %}

@@ -1,0 +1,285 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}投产准备{% endblock %}
+
+{% block content %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+        window.onload = function () {
+
+            var oDiv = document.getElementById('con');
+            // oDiv.style.width = '300px';
+            // oDiv.style.height = '200px';
+            oDiv.style.border = '2px solid green';
+            oDiv.style.fontSize = '20px';
+            oDiv.style.textAlign = 'center';
+
+            var oBtn = document.getElementById('btn');
+            oBtn.value = '隐藏数据库信息';
+            oBtn.onclick = changeWindow;
+
+            function changeWindow() {
+                if(oDiv.style.display=='none'){
+                    oDiv.style.display = 'block';
+                    oBtn.value = '隐藏数据库信息';
+                }
+                else{
+                    oDiv.style.display = 'none';
+                    oBtn.value = '显示数据库信息';
+                }
+            }
+        }
+</script>
+
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+        margin: 50px 100px;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .title_h2,.title_h3{
+        color: green;
+        font-weight: bold;
+    }
+
+    .title_h2{
+        margin-left:45%;
+    }
+
+    .title_h4{
+        color: RoyalBlue;
+        font-weight: bold;
+    }
+
+    #link_index:hover,#link_top:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .dataBase_table{
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        background-color: #f6ffff;
+        margin-bottom: 25px;
+        border-collapse:collapse;
+    }
+
+    .dataBase_table th{
+        text-align: center;
+        font-size: 16px;
+        background-color: LightSkyBlue;
+    }
+
+    .table_td{
+        padding: 3px;
+        max-width: 500px;
+    }
+
+    .table_td button{
+        background-color: IndianRed;
+    }
+
+    .dataBase_table button:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .show_window{
+        text-align: left;
+    }
+
+    .title_con{
+        border: 2px solid #9acfea;
+        padding: 0 10px;
+        font-size: 24px;
+        text-align: left;
+    }
+
+    .title_con ul{
+        margin-top: 30px
+    }
+
+    .title_con li{
+        list-style-type:none;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    #con{
+        padding: 10px;
+    }
+
+    #reset_btn{
+        color:green;
+    }
+
+    #reset_btn:hover,#checkout_btn:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    .table_text{
+        min-width: 100%;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        display: block;
+    }
+
+    .dataBase_table input,.dataBase_table textarea{
+        background-color: LightGreen;
+    }
+
+</style>
+{% endblock %}
+
+<div id="uploadFile_con">
+    {% if request.session.user_name == "shar" %}
+        <div class="title_con">
+        <h3 class="title_h2">投产准备</h3>
+        <ul>
+            <li>1、 锁库进行截图，敦促测试翻卡片</li>
+            <li>2、 清单检查：防火墙提醒&关联方&sql验证人</li>
+            <li style="color: red;">3、 检查SQL脚本：sql内容与sql名称是否一致，ddl语句中不允许参杂dml语句</li>
+            <li>4、 sonar检查内容：不能有bug、漏洞</li>
+            <li>5、 安全扫描内容：不能有高危漏洞、中危漏洞，如有需要开发说明原因</li>
+            <li>6、 sql语句取包、核对检查，上传</li>
+            <li>7、 存量sql帐号核对，告知运维，这个需要重新收集对应的数据库帐号</li>
+            <li>8、 SQM报告检查</li>
+            <li>9、 神兵&lotus跑流水，翻到发布待部署状态，lotus上传RE工单</li>
+            <li>9-1、对应集群：50114&50210&50211&50212&50213-gl.central.prd,（50034-gl.central.prd-一共6台，只有三台需要上线：29.1.163.229--231） </li>
+            <li>9-2、对应集群：50035&50073&50028&50042-gl.app.prd </li>
+            <li>9-3、对应集群：70097-gl.central.prd </li>
+            <li>10、操作流水</li>
+            <li>10-1、BRON-COSS:PRD&FT102-PRD，神兵【含应用配置】双生产流水，福田机房服务器不能使用独角鲸重启tomcat，只能通过管控平台</li>
+            <li>10-2、BRON-COMS:PRD&FT102-PRD，神兵【含应用配置】双生产流水，LOTUS流水</li>
+            <li>10-3、BRON-CLSS，神兵生产双流水【PRD-GRAY】</li>
+            <li>10-4、BRON-CRMP&GOLF&HEALTH&CASS，神兵-LOTUS流水</li>
+            <li>10-5、BRON-MNV，神兵，后续上starlink</li>
+            <li>10-6、BCMP-OTP，神兵编译,移交到DLM</li>
+            <li>11、操作间提单</li>
+            <li>12、版本完成后找运维翻版</li>
+            <li>13-1、部署窗口：第一类（10点、14点、17点）：BRON-COSS、BCMP-OTP、SAFETY-TOOL</li>
+            <li>13-2、部署窗口：第二类（9点、11点、14点、16点、17点、18点）：BRON-COMS、BRON-CRMP、BRON-CLSS</li>
+            <li>13-3、部署窗口：第三类（大于30分钟）：COSS-HEALTH、BROP-NBI-GOLF、BRON-CASS、BRON-UGCMINIVIDEO</li>
+        </ul>
+        <br>
+        </div>
+    {% endif %}
+
+    <br><br><br>
+    <div class="show_window">
+        <input id="btn" type="button" name="" value="切换">
+        <div id="con">
+            <h3 class="title_h3">新增团队数据库</h3>
+             <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table">
+                 <tr>
+                    <th class="table_td">团队名</th>
+                    <th class="table_td">领域名</th>
+                    <th class="table_td">数据库串</th>
+                    <th class="table_td">库名</th>
+                    <th class="table_td">用户名</th>
+                    <th class="table_td">备注</th>
+                    <th class="table_td">操作</th>
+                 </tr>
+                 <form class='form-register' action="announcement" method="post">
+                    {% csrf_token %}
+                    <tr>
+                        <td><textarea class="table_text" name='blongTo' required></textarea></td>
+                        <td><textarea class="table_text" name='domain' required></textarea></td>
+                        <td><textarea class="table_text" name='dataBaseLink' required></textarea></td>
+                        <td><textarea class="table_text" name='dataBaseName' required></textarea></td>
+                        <td><textarea class="table_text" name='userName' required></textarea></td>
+                        <td><textarea class="table_text" name='remark' required></textarea></td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">新增</button>
+                        </td>
+                    </tr>
+                 </form>
+             </table>
+            <br><hr>
+
+            <h3 class="title_h3">生产数据库信息</h3>
+            <br><br>
+            {% for blongTo,dataBaseInfo_list in all_blongTo_dict.items %}
+                <h4 class="title_h4">{{blongTo}}</h4>
+                    <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table">
+                        <tr>
+                           <th class="table_td">领域名</th>
+                           <th class="table_td">数据库串</th>
+                           <th class="table_td">库名</th>
+                           <th class="table_td">用户名</th>
+                           <th class="table_td">备注</th>
+                           <th class="table_td">修改时间</th>
+                           <th class="table_td">操作</th>
+                        </tr>
+                        <form class='form-register' action="announcement" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="blongTo" value="{{blongTo}}" style="display:none;">
+                            <tr>
+                                <td><textarea class="table_text" name='domain' required></textarea></td>
+                                <td><textarea class="table_text" name='dataBaseLink' required></textarea></td>
+                                <td><textarea class="table_text" name='dataBaseName' required></textarea></td>
+                                <td><textarea class="table_text" name='userName' required></textarea></td>
+                                <td><textarea class="table_text" name='remark' required></textarea></td>
+                                <td></td>
+                                <td>
+                                    <button type="submit" class="btn btn-primary">新增</button>
+                                </td>
+                            </tr>
+                        </form>
+                        {% for dataBaseInfo in dataBaseInfo_list %}
+                            <tr>
+                                <td class="table_td">{{dataBaseInfo.domain}}</td>
+                                <td class="table_td">{{dataBaseInfo.dataBaseLink}}</td>
+                                <td class="table_td">{{dataBaseInfo.dataBaseName}}</td>
+                                <td class="table_td">{{dataBaseInfo.userName}}</td>
+                                <td class="table_td">{{dataBaseInfo.remark}}</td>
+                                <td class="table_td">{{dataBaseInfo.modifyTime}}</td>
+                                <td class="table_td">
+                                    {% if request.session.manager_islogin %}
+                                        <form action="announcement" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}" method="post">
+                                            {% csrf_token %}
+                                            <input type="text" name="operating" value="deleted" style="display:none;">
+                                            <input type="text" name="id" value="{{dataBaseInfo.id}}" style="display:none;">
+                                            <input type="text" name="modifyTime" value="{{dataBaseInfo.modifyTime}}" style="display:none;">
+                                            <button type="submit" class="btn btn-primary">删除</button>
+                                        </form>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-primary" disabled="disabled">删除</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
+
+    <br><br>
+    <!--<hr>-->
+    <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+    <!--<br><br><br><br>-->
+    <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+    <!--<br><br><br><br>-->
+</div>
+{% endblock %}

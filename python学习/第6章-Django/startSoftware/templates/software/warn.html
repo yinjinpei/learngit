@@ -1,0 +1,58 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}文件管理{% endblock %}
+
+{% block content %}
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .dir_list ul{
+        list-style-type: none;
+    }
+
+    .row label,.row select{
+        color: green;
+    }
+
+    .row select{
+        background-color: #EEE;
+    }
+
+    .form-group input:hover,#link_index:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #newdir input{
+        background-color: #fff;
+        color: red;
+    }
+
+    #link_index {
+        text-decoration: none;
+        color: #fff;
+    }
+</style>
+{% endblock %}
+<div class="col-md-8 col-md-offset-2" id="uploadFile_con">
+    <h3 style="color: red">此功能不适用于此页面，只适用于投产版本材料收到功能！</h3>
+    <br><br><br><br>
+    {% if message %}
+        <div class="alert alert-warning">{{ message }}</div>
+        <br>
+    {% endif %}
+    <!--<br><br>-->
+    <!--<a class="btn btn-primary" id="link_index" href="/">返回首页</a>-->
+
+</div>
+{% endblock %}

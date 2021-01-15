@@ -1,0 +1,356 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}故障接口人名单{% endblock %}
+
+{% block content %}
+
+    {% block scripts %}
+        <script type="text/javascript">
+
+            function submitForm(){
+                   var form = document.getElementById("my_domain");
+                    form.submit();
+            }
+
+            function submit2Form(){
+                   var form = document.getElementById("my_checkoutDate");
+                    form.submit();
+            }
+
+            window.onload = function () {
+
+                var oDiv = document.getElementById('con');
+                // oDiv.style.width = '300px';
+                // oDiv.style.height = '200px';
+                oDiv.style.border = '2px solid green';
+                oDiv.style.fontSize = '20px';
+                oDiv.style.textAlign = 'center';
+
+                var oBtn = document.getElementById('btn');
+                oBtn.value = '隐藏收集情况';
+                oBtn.onclick = changeWindow;
+
+                function changeWindow() {
+                    if(oDiv.style.display=='none'){
+                        oDiv.style.display = 'block';
+                        oBtn.value = '隐藏收集情况';
+                    }
+                    else{
+                        oDiv.style.display = 'none';
+                        oBtn.value = '显示收集情况';
+                    }
+                }
+            }
+    </script>
+    {% endblock %}
+
+    {% block css %}
+        <style type="text/css">
+        #uploadFile_con{
+            text-align: center;
+            margin: 50px 100px;
+        }
+
+        .table_title{
+            background-color: #2e6da4;
+            text-align: center;
+        }
+
+        .table_title_content{
+            margin: 15px;
+            color: #fff;
+            min-width: 50px;
+        }
+
+        .table_data{
+            max-width: 650px;
+            padding: 5px;
+        }
+
+        #link_index:hover,#link_top:hover{
+            color:red !important;
+            background-color: gold;
+        }
+
+    </style>
+    {% endblock %}
+
+    <div id="uploadFile_con">
+        <div class="title_con">
+        <h1 class="title">【故障接口人名单】</h1>
+        <table border="1"  cellspacing="50" class="unblockedVersion_table">
+                <tr>
+                    <th class="table_title"><div class="table_title_content">序号</div></th>
+                    <th class="table_title"><div class="table_title_content">系统平台名称</div></th>
+                    <th class="table_title"><div class="table_title_content">负责人员</div></th>
+                    <th class="table_title"><div class="table_title_content">备注</div></th>
+                </tr>
+                <tr>
+                    <th class="table_data">1</th>
+                    <th class="table_data">总行空调</th>
+                    <th class="table_data">22166606</th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">2</th>
+                    <th class="table_data">总行PC桌面维护服务台</th>
+                    <th class="table_data">总行职场IT服务台  0755-88675511</th>
+                    <th class="table_data">平安银行总行职场IT服务专用邮箱 &ltPAB_itservice@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">3</th>
+                    <th class="table_data">老网银系统室</th>
+                    <th class="table_data">夏英祥、陈小敏、崔二磊 、左超、柳林文</th>
+                    <th class="table_data">ML_系统管理室中间件平台 &ltml_PAB3765@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">4</th>
+                    <th class="table_data">神兵系统问题</th>
+                    <th class="table_data">肖美琴(平安科技研发管理部DevOps领域实施推广组) &ltXIAOMEIQIN975@pingan.com.cn>、匡琪、苏科铭、李少峰、常春明、黄晨杰、林诗源</th>
+                    <th class="table_data">ML_平安科技研发管理部用户运营组 &ltML_14686@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">5</th>
+                    <th class="table_data">vanda自动化测试平台</th>
+                    <th class="table_data">黄巧金，江帅，王霞</th>
+                    <th class="table_data">ML_平安科技孵化产品团队开放平台测试分组 &ltML_15576@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">6</th>
+                    <th class="table_data">SVN代码库</th>
+                    <th class="table_data">许李强、张珊珊</th>
+                    <th class="table_data">ML_平安科技神兵部署联合组 &ltML_17913@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">7</th>
+                    <th class="table_data">科技运营人员</th>
+                    <th class="table_data">李杰、吴杰锋、付晓强、罗忠恒、龚向林</th>
+                    <th class="table_data">ML_平安银行科技运营中心 &ltML_sdb_834@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">8</th>
+                    <th class="table_data">Pafa5生产权限</th>
+                    <th class="table_data">李杰、吴杰锋、付晓强、余祥、龚向林、韩梦如、曹志峰</th>
+                    <th class="table_data">ML_平安银行科技运营中心 &ltML_sdb_834@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">9</th>
+                    <th class="table_data">Open CMS权限</th>
+                    <th class="table_data">雷梦怛(总行零售网络金融);李海平(总行零售科技)</th>
+                    <th class="table_data">ML_银行平台架构部资源服务团队 &ltML_pab1505@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">10</th>
+                    <th class="table_data">RMS系统权限</th>
+                    <th class="table_data">雷梦怛(总行零售网络金融) ;陈培建</th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">11</th>
+                    <th class="table_data">Pafa5测试环境权限</th>
+                    <th class="table_data">钟剑雄、向春晓</th>
+                    <th class="table_data">ML_孵化产品团队版本经理 &ltML_7132@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">12</th>
+                    <th class="table_data">Pafa5管控平台问题</th>
+                    <th class="table_data">王树忠，吴文彬，吴志远，冯春棚、秦伶俐</th>
+                    <th class="table_data">ML_银行平台架构部Pafa5技术支持团队 &ltml_18050219@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">13</th>
+                    <th class="table_data">DBA</th>
+                    <th class="table_data">王鹏冲, 段义强，刘志文，余志刚，江晓明、孙辉莲、周佳奇    </th>
+                    <th class="table_data">ML_银行数据库管理组_开发DBA &ltML_17898@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">14</th>
+                    <th class="table_data">REDIS</th>
+                    <th class="table_data">刘彪(金服银行科技中心) ; 刘雪峰（科技运营中心）;陈灿荣(PAB科技运营中心)</th>
+                    <th class="table_data">ML_零售网金redis用户组 &ltML_pab4717@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">15</th>
+                    <th class="table_data">mongodb</th>
+                    <th class="table_data">孙钊、郑国丰(科技运营中心)</th>
+                    <th class="table_data">ML_银行数据库管理组_运维DBA &ltml_PAB3982@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">16</th>
+                    <th class="table_data">网络室</th>
+                    <th class="table_data">周仕添(PAB科技运营中心);黄有锐(PAB科技运营中心);陈华(PAB科技运营中心) （经理）、崔涛(PAB科技运营中心)（部门长）</th>
+                    <th class="table_data">ML_平安银行科技运营部网络管理室 &ltML_SDB_928@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">17</th>
+                    <th class="table_data">gitlab</th>
+                    <th class="table_data">陈琼(金服银行科技中心);王晓磊(金服银行科技中心零售系统平台架构团队研发平台组) &ltWANGXIAOLEI186@pingan.com.cn>; 张晨铖(金服银行科技中心零售系统平台架构团队研发平台组) &ltZHANGCHENCHENG956@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">18</th>
+                    <th class="table_data">RAP（视化接口管理工具 ）</th>
+                    <th class="table_data">王旭(金服银行科技中心)、林煜(金服银行科技中心) &ltLINYU874@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">19</th>
+                    <th class="table_data">Rocketmq</th>
+                    <th class="table_data">吕云捷(科技开发中心) &ltLVYUNJIE731@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">20</th>
+                    <th class="table_data">APOLLO阿波罗</th>
+                    <th class="table_data">杨青(金服银行科技中心零售系统平台架构团队后端架构组) ,刘彪(金服银行科技中心),刘览(平银橙信零售科技)</th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">21</th>
+                    <th class="table_data">云桌面</th>
+                    <th class="table_data">张鑫(云桌面) &ltZHANGXIN941@pingan.com.cn>; 李冰(云桌面) &ltLIBING930@pingan.com.cn></th>
+                    <th class="table_data">ML_平安科技云桌面 &ltML_10190@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">22</th>
+                    <th class="table_data">Lotus</th>
+                    <th class="table_data">王珂(金服银行科技中心零售系统平台架构团队基础业务组) &ltWANGKE759@pingan.com.cn>; 倪涛 &ltNITAO341@pingan.com.cn>;李正江 &ltLIZHENGJIANG966@pingan.com.cn>; 万鹏(金服银行科技中心零售系统平台架构团队后端架构组) &ltWANPENG726@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">23</th>
+                    <th class="table_data">Iris（离线包、Native打包）</th>
+                    <th class="table_data">宋江龙(总行零售网金) &ltEX_WLJR_SONGJL@pingan.com.cn>; 李志伟(金服银行科技中心) &ltLIZHIWEI077@pingan.com.cn>;辛鹏辉 &ltXINPENGHUI973@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">24</th>
+                    <th class="table_data">4A</th>
+                    <th class="table_data">赵波(总行零售网金) &ltEX_WLJR_ZHAOBO@pingan.com.cn>; 吴新华 &ltWUXINHUA781@pingan.com.cn>; 杨柳春(金服银行科技中心零售系统平台架构团队PMO组) &ltYANGLIUCHUN865@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">25</th>
+                    <th class="table_data">esb</th>
+                    <th class="table_data">谢小咪(科技开发中心) &ltXIEXIAOMI929@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">26</th>
+                    <th class="table_data">sonar扫描工具</th>
+                    <th class="table_data">王晓磊(金服银行科技中心零售系统平台架构团队研发平台组) &ltWANGXIAOLEI186@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">27</th>
+                    <th class="table_data">Horae平台新增job</th>
+                    <th class="table_data">谢亚光（总行零售网金） &ltEX_WLJR_XIEYAGUANG@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">28</th>
+                    <th class="table_data">测试环境联系人</th>
+                    <th class="table_data">王东来（PAB科技运营中心） &ltWANGDONGLAI111@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">29</th>
+                    <th class="table_data">OPR操作间进出及用户申请管理系统</th>
+                    <th class="table_data">徐文杰(PAB科技运营中心) &ltxuwenjie983@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">30</th>
+                    <th class="table_data">神兵故障上报的链接</th>
+                    <th class="table_data">http://srvbot.paic.com.cn/#/app/incidentManagement/incident-new-system</th>
+                    <th class="table_data">事件类型选择：银行神兵wizard。</th>
+                </tr>
+                <tr>
+                    <th class="table_data">31</th>
+                    <th class="table_data">    halo框架 consul agent接入</th>
+                    <th class="table_data">范子成(金服银行科技中心非零科技团队平台开发组) &ltFANZICHENG288@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">32</th>
+                    <th class="table_data">UCD</th>
+                    <th class="table_data">韩兵凯(外包) &ltex_kjkfb_hanbk@pingan.com.cn>;贺小军（科技开发中心） &ltHEXIAOJUN339@pingan.com.cn>;</th>
+                    <th class="table_data">平安银行对公测试环境部署支持邮箱 &ltPAB_dgcshjbszc@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">33</th>
+                    <th class="table_data">maven仓库 </th>
+                    <th class="table_data">王珂(金服银行科技中心零售系统平台架构团队基础业务组) WANGKE759@pingan.com.cn</th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">34</th>
+                    <th class="table_data">lilac</th>
+                    <th class="table_data">王晓磊(金服银行科技中心零售系统平台架构团队研发平台组) &ltWANGXIAOLEI186@pingan.com.cn>, Starlink首页会更新相关的值班人员：http://starlink.pab.com.cn/#/dashboard</th>
+                    <th class="table_data">可抄送以下人员：李姗儒(EX-LISHANRU001) &ltEX-LISHANRU001@pingan.com.cn>; 黎勇(EX-LIYONG016) &ltEX-LIYONG016@pingan.com.cn>; 于鹏(金服银行科技中心零售系统平台架构团队研发平台组) &ltYUPENG747@pingan.com.cn>; 李清华(金服银行科技中心) &ltLIQINGHUA833@pingan.com.cn>; 杨月芳(金服银行科技中心) &ltYANGYUEFANG211@pingan.com.cn>; 陈嘉蒙(EX-CHENJIAMENG001) &ltEX-CHENJIAMENG001@pingan.com.cn>; 王刘林（PAB） &ltex_kjkfzx_wangll@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">35</th>
+                    <th class="table_data">ANPM依赖</th>
+                    <th class="table_data">刘宝昌 &ltLIUBAOCHANG193@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">36</th>
+                    <th class="table_data">wiki</th>
+                    <th class="table_data">潘世豪(金服银行科技中心非零科技团队平台开发组) &ltPANSHIHAO215@pingan.com.cn>;方奕晓(科技开发中心) &ltfangyixiao@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">37</th>
+                    <th class="table_data">IVY仓库</th>
+                    <th class="table_data">张家伟(平安科技架构师团队) &ltZHANGJIAWEI370@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">38</th>
+                    <th class="table_data">ESG</th>
+                    <th class="table_data">王丽(公共平台系统开发部) &ltWANGLI103@pingan.com.cn>;谢冬 &ltEX-XIEDONG002@pingan.com.cn></th>
+                    <th class="table_data">ML_科技ESBX平台支持组 &ltml_18052315@pingan.com.cn></th>
+                </tr>
+                <tr>
+                    <th class="table_data">39</th>
+                    <th class="table_data">ITSM</th>
+                    <th class="table_data">王熙(PAB科技运营中心) &ltWANGXI993@pingan.com.cn>;赤帅超(PAB科技运营中心) &ltCHISHUAICHAO925@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">40</th>
+                    <th class="table_data">UM系统</th>
+                    <th class="table_data">廖维(公共平台系统开发部) &ltLIAOWEI773@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">41</th>
+                    <th class="table_data">隔离网关ESB生产接口apollo发布</th>
+                    <th class="table_data">曹元(PAB科技运营中心) &ltCAOYUAN749@pingan.com.cn>;李政国(总行科技运营中心) &ltEX_WLJR_LIZHENGGUO@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+                <tr>
+                    <th class="table_data">42</th>
+                    <th class="table_data">规则引擎</th>
+                    <th class="table_data">规则引擎开发：王磊(金服银行科技中心零售系统平台架构团队后端架构组) &ltWANGLEIJ52@pingan.com.cn>， 规则引擎运维：曹元(PAB科技运营中心) CAOYUAN749@pingan.com.cn， APPID：10022</th>
+                    <th class="table_data">如果需要规则引擎权限，需要先找传涛开通统一后管权限，再找曹元开通规则引擎权限。</th>
+                </tr>
+                <tr>
+                    <th class="table_data">43</th>
+                    <th class="table_data">Cat告警信息联系人</th>
+                    <th class="table_data">喻尚勇 &ltYUSHANGYONG312@pingan.com.cn>;梁昭(总行零售网络金融) &ltEX_WLJR_LIANGZHAO@pingan.com.cn></th>
+                    <th class="table_data"></th>
+                </tr>
+            </table>
+            <br><br><br>
+        <!--<hr>-->
+        <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+        <!--<br><br><br><br>-->
+        <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+        <!--<br><br><br><br>-->
+    </div>
+{% endblock %}
