@@ -9,7 +9,7 @@
     <!--<script src="/static/js/modernizr.js"></script>-->
 
     <script type="text/javascript">
-    const endTime = new Date("2021-01-13 18:00:00").getTime();
+    const endTime = new Date("2021-02-11 00:00:00").getTime();
     // countdown
     let timer = setInterval(function() {
       // get today's date
@@ -147,6 +147,10 @@
         background-color: Gray;
     }
 
+    .common a,.announcement a,.manager a,.offline a{
+        margin:5px;
+    }
+
     .announcement a{
         background-color: green;
     }
@@ -189,9 +193,7 @@
         font-weight:bold;
         background-color: Pink;
         color: #337ab7;
-        width: 420px;
-        margin:0 auto;
-        margin-bottom: 5px;
+        margin: 3px 13%;
     }
 
     #timer h1 {
@@ -223,19 +225,19 @@
     }
 
     .days {
-      background: ForestGreen;
+      background: #EF2F3C;
     }
 
     .hours {
-      background: #276FBF;
+      background: ForestGreen;
     }
 
     .minutes {
-      background: #F0A202;
+      background: #276FBF;
     }
 
     .seconds {
-      background: #EF2F3C;
+      background: #F0A202;
     }
 
     .numbers {
@@ -260,7 +262,8 @@
         <div class="con_left_top">
                 <!--左边信息-->
             <div class="containers">
-                <div class="timer_title">【2021-01-14】常规版本封版倒计时</div>
+                <!--<div class="timer_title">【2021-01-14】常规版本封版倒计时</div>-->
+                <div class="timer_title">距离【除夕】剩余时间</div>
                 <div id="timer"></div>
             </div>
         </div>
@@ -292,12 +295,12 @@
         {% endif %}
 
         <div class="announcement">
-        <div class="con-title">公共信息区</div>
-        {% if not request.session.is_login %}
-            <a class="btn btn-primary login-btn" href="/user/login" >用户登录</a>
-        {% endif %}
-        <a class="btn btn-primary" target="_blank" href="/versionManagerIndex" >网址大全</a>
-        <a class="btn btn-primary" target="_blank" href="/interfacePerson" >故障接口人</a>
+            <div class="con-title">公共信息区</div>
+            {% if not request.session.is_login %}
+                <a class="btn btn-primary login-btn" href="/user/login" >用户登录</a>
+            {% endif %}
+            <a class="btn btn-primary" target="_blank" href="/versionManagerIndex" >网址大全</a>
+            <a class="btn btn-primary" target="_blank" href="/interfacePerson" >故障接口人</a>
         </div>
         <br><br>
         <div class="common">
@@ -306,7 +309,6 @@
             <a class="btn btn-primary" target="_blank" href="/productionMaterials" >投产材料管理</a>
             <a class="btn btn-primary" target="_blank" href="/unblockedVersion" >解封版信息收集</a>
             <a class="btn btn-primary" target="_blank" href="/announcement" >生产数据库信息</a>
-            <br><br>
             <a class="btn btn-primary" target="_blank" href="/countDeploymentInfo" >部署窗口申请</a>
             <a class="btn btn-primary" target="_blank" href="/myServerInfo">测试环境信息</a>
         </div>
@@ -317,7 +319,6 @@
             <a class="btn btn-primary" target="_blank" href="/modifyCardStatus" >神兵卡片管理</a>
             <a class="btn btn-primary" target="_blank" href="/gitlab_member_permissions" >gitlab权限管理</a>
             <a class="btn btn-primary" target="_blank" href="/addCardField" >添加神兵空间字段</a>
-            <br><br>
             <a class="btn btn-primary" href="/user/modifyPassword" >普通用户密码修改</a>
             {% if request.session.manager_islogin %}
                 <a class="btn btn-primary" href="/modifySuperPWD" >超级用户密码修改</a>
@@ -332,12 +333,10 @@
                     <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/974/setting/?page#/member">BRON-COMS</a>
                     <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/2228/setting/?page#/member">BRON-COSS</a>
                     <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/14575/setting/?page#/member">BRON-CRMP</a>
-                    <br><br>
                     <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29171/setting/?page#/member">BRON-CLSS</a>
                     <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29445/setting/?page#/member">COSS-HEALTH</a>
                     <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29573/setting/?page#/member">BRON-UGCMINIVIDEO</a>
                     <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29086/setting/?page#/member">BROP-NBI-GOLF</a>
-                    <br><br>
                     <a class="btn btn-primary" target="_blank" href="http://alm-pab.paic.com.cn/project/29466/setting/?page#/member">BRON-CASS</a>
                 {% endif %}
             {% endif %}
