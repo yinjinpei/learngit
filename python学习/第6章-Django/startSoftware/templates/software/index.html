@@ -21,6 +21,15 @@
       let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      if (seconds < 0)
+      {
+          days="时";
+          hours="辰";
+          minutes="已";
+          seconds="到";
+      }
+
       // display
       document.getElementById("timer").innerHTML =
         "<div class=\"days\"> \
