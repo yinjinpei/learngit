@@ -1642,9 +1642,9 @@ def productionMaterials(request):
         uploadFile_message = "您尚未登录，使用【投产材料管理】请先登录！！"
         return render(request, 'software/index.html', locals())
 
-        user_management_config = getConfig('config/software_config/user_management_config.ini')
-        # 访问此功能的白名单用户, 白名单可访问投产材料管理页面
-        allow_users = user_management_config.get_value('user_list', 'allow_users_list').split(',')
+    user_management_config = getConfig('config/software_config/user_management_config.ini')
+    # 访问此功能的白名单用户, 白名单可访问投产材料管理页面
+    allow_users = user_management_config.get_value('user_list', 'allow_users_list').split(',')
 
     user_dir_list = []
     if request.session['user_name'] in allow_users:
