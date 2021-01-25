@@ -1907,27 +1907,40 @@ class request_gitlab_api(object):
 
     def get_gitlab_branch(self):
         '''获取项目下所有分支'''
-        barnch_list = []  # 存储分支名
+        barnch_list_temp = []  # 存储所有分支
+        barnch_list = []  # 存储所有有效的分支，已去除没有用的分支
+        message=""
+
         page = 0
         while True:
             page += 1
-            parms_dict = {"search": "^Release_", "per_page": 100, "page": page}
-            r = requests.get(url=self.url, headers=self.headers, params=parms_dict).text
-            r_list = json.loads(r)  # 获取所有分支及分支相关信息
-            # print(r_list)
-            if isinstance(r_list, list):
-                if len(r_list) == 0:
+            # parms_dict = {"search":"^Release_","per_page": 100, "page": page}
+            parms_dict = {"per_page": 100, "page": page}
+            r = requests.get(url=self.url, headers=self.headers, params=parms_dict)
+            # print(r.json())
+            if r.status_code == 200:
+                r_list = r.json()  # 访问成功则返回为列表
+                if r_list:
+                    for branch_info in r_list:
+                        barnch_list_temp.append(branch_info['name']) # 提取每个分支的名称
+                else:
                     break
-                for branch_info in r_list:
-                    barnch_list.append(branch_info['name'])  # 提取每个分支的名称
-                barnch_list = barnch_list[::-1]  # 按字母倒序排列
-                barnch_list.append("master")  # 添加默认分支
             else:
-                print('请检查gitlab项目ID:%s 是否存在或是否已授权！' % self.project_id)
-                return
-        print(barnch_list)
-        return barnch_list
+                # 访问失败则返回为字典
+                message=r.json()["message"]
+                break
 
+        if barnch_list_temp:
+            for barnch in barnch_list_temp:
+                # 筛选有效的分支
+                m = re.findall('^Release_|^master$|^main$', barnch, re.M | re.I | re.S)
+                if m:
+                    barnch_list.append(barnch)
+            barnch_list = barnch_list[::-1]  # 按字母倒序排列
+
+        data = {"barnch_list": barnch_list}
+        foo = {"status_code": r.status_code, "data": data, "message": message}
+        return json.dumps(foo, sort_keys=True, indent=4)
 
     def deploy_go_by_time(self, which_branch, date):
         '''
@@ -2021,7 +2034,6 @@ class request_gitlab_api(object):
             user_id = None
         return user_id
 
-
     def add_member_permissions(self, project_type, projectId, user_id, access_level, expires_at):
         '''
         #将成员添加到组或项目
@@ -2058,7 +2070,6 @@ class request_gitlab_api(object):
         # print('r_list: ', r_list)
         return r_list
 
-
     def delete_member_permissions(self, project_type, projectId, user_id):
         '''
         #将成员添加到组或项目
@@ -2074,6 +2085,64 @@ class request_gitlab_api(object):
         r_list = requests.delete(url=post_url, headers=self.headers).text
         # print('r_list: ', r_list)
         return r_list
+
+    def checkout_branch_commit(self,source_branch,target_branch):
+        '''
+        比较两个分支最后一次提交的信息是否一致
+        :param source_branch:  源分支
+        :param target_branch:  目标分支
+        :return:
+        '''
+
+        # 获取分支的最后一次的提交信息
+        def get_last_commit(which_branch):
+            parms_dict = {"ref_name": which_branch}
+            r = requests.get(url=self.url, headers=self.headers, params=parms_dict)
+            if r.status_code == 200:
+                r_dict = r.json()  # 转为字典
+                if r_dict:
+                    committed_id=r_dict[0]['id']    # 提交id
+                    parent_ids=r_dict[0]['parent_ids']  # 提交父id
+                    committed_date=r_dict[0]['committed_date'][:19].replace('T'," ")    # 提交日期
+                    committer_name=r_dict[0]['committer_name']  # 提交人
+                    result = {"status_code": r.status_code, "data": {"committed_id": committed_id, "parent_ids": parent_ids,
+                                                                  "committed_date": committed_date,
+                                                                  "committer_name": committer_name}, "message": ""}
+                else:   # 找到不此分支则返回空值
+                    result = {"status_code": 404, "data": {}, "message": "%s does not exist" % which_branch}
+            else:
+                r_dict = r.json()  # 转为字典
+                result = {"status_code": r.status_code, "data": {}, "message": r_dict["message"]}
+            # print(commits)
+            return json.dumps(result, sort_keys=True, indent=4)
+
+        release_source=get_last_commit(source_branch)
+        release_target=get_last_commit(target_branch)
+        # print(release_source)
+        # print(release_target)
+
+        release_source = json.loads(release_source) # 字符串转字典
+        release_target = json.loads(release_target) # 字符串转字典
+
+        if release_source["status_code"] == 200 and release_target["status_code"] == 200:
+            if release_source["data"]["committed_id"] in release_target["data"]["committed_id"]:
+                foo = {"status_code": 200, "data": {}, "message": "源分支和目标分支代码完全一致！"}
+            elif release_source["data"]["committed_id"] in release_target["data"]["parent_ids"]:
+                foo = {"status_code": 200, "data": {}, "message": "源分支代码已合并到目标分支，源分支和目标分支代码一致！"}
+            elif release_target["data"]["committed_id"] in release_source["data"]["parent_ids"]:
+                foo = {"status_code": 200, "data": {}, "message": "目标分支代码已合并到源分支，源分支和目标分支代码一致！"}
+            else:
+                foo = {"status_code": 200, "data": {}, "message": "源分支和目标分支代码不一致！"}
+        elif release_source["status_code"] == 404 and release_target["status_code"] == 404:
+            foo = {"status_code": 404, "data": {}, "message": "找不到源分支和目标分支！"}
+        elif release_source["status_code"] == 404:
+            foo = {"status_code": 404, "data": {}, "message": "找不到源分支！"}
+        elif release_target["status_code"] == 404:
+            foo = {"status_code": 404, "data": {}, "message": "找不到目标分支！"}
+        else:
+            foo = {"status_code": 404, "data": {}, "message": "获取分支信息有误！"}
+        # print(foo)
+        return json.dumps(foo, sort_keys=True, indent=4)
 
 
 class request(object):
