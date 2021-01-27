@@ -366,7 +366,7 @@
                                     <td class="table_td">{{projectInfo.projectName}}</td>
                                     <td class="table_td">{{projectInfo.projectId}}</td>
                                     <td class="table_td">
-                                        <a class="btn" href="{{projectInfo.http_url}}" target="_blank">{{projectInfo.http_url}}</a>
+                                        <a class="btn" href="{{projectInfo.http_url}}" title="{{projectInfo.http_url}}" target="_blank">{{projectInfo.http_url}}</a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -443,7 +443,7 @@ data-live-search="true" required>
                             <tr>
                                 <td class="table_td" style="color: red;">{{branch_diff_info.project_id}}</td>
                                 <td class="table_td">
-                                    <a class="btn" href="{{branch_diff_info.project_http_url}}"  style="color: red;" target="_blank">
+                                    <a class="btn" href="{{branch_diff_info.project_http_url}}" title="{{branch_diff_info.project_http_url}}"  style="color: red;" target="_blank">
                                         {{branch_diff_info.project_http_url}}
                                     </a>
                                 </td>
@@ -459,7 +459,7 @@ data-live-search="true" required>
                             <tr>
                                 <td class="table_td">{{branch_diff_info.project_id}}</td>
                                 <td class="table_td">
-                                    <a class="btn" href="{{branch_diff_info.project_http_url}}" target="_blank">
+                                    <a class="btn" href="{{branch_diff_info.project_http_url}}" title="{{branch_diff_info.project_http_url}}" target="_blank">
                                         {{branch_diff_info.project_http_url}}
                                     </a>
                                 </td>
