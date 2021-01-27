@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.urls import path,re_path
 from . import views
 from .views2 import restart_tomcat
+from .views2 import branch_difference
 
 
 urlpatterns = [
@@ -41,6 +42,7 @@ urlpatterns = [
     re_path('^myServerInfo$', views.myServerInfo,name='myServerInfo'),
     # re_path('exec_command$', views.exec_command, name='exec_command'),
     # re_path('websocket_test$', views.websocket_test, name='websocket_test'),
+    re_path('branch_difference', branch_difference.branch_difference, name='branch_difference'),
     re_path('^test$', views.test, name='test'),
     re_path('', views.index,name='index'),
     # re_path('^WeChat$' ,views.WeChat,name='WeChat'),

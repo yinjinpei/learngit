@@ -1,0 +1,486 @@
+{#login/templates/login/index.html#}
+
+{% extends 'software_base.html' %}
+{% load staticfiles %}
+{% block title %}gitlab分支代码对比{% endblock %}
+
+{% block content %}
+
+{% block scripts %}
+<script type="text/javascript">
+    window.onload=function () {
+        //窗口关闭
+        odiv0 = document.getElementById("message_con");
+        setTimeout("odiv0.style.display='none';",5000);
+    }
+
+    function button0(){
+            <!--alert("数据可能较大，请勿重复提交，请至少相隔10秒后再提交，确认提交？");-->
+            obtn0 = document.getElementById("mybtn0");
+            odiv0 = document.getElementById("mydiv0");
+            obtn0.style.display='none';
+            odiv0.style.display='inline-block';
+            var text = document.createTextNode("已提交，请勿刷新页面，正在获取数据...");
+            odiv0.appendChild(text);
+            setTimeout("obtn0.style.display='inline-block';",30000);
+            submit();
+        }
+
+    $(document).ready(function(){
+    $("[href='#domain']").click(function(){
+        $("ul.domain").siblings("input").val($(this).html());
+        });
+    });
+
+
+</script>
+
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+    #uploadFile_con{
+        text-align: center;
+        margin: 0 100px;
+    }
+
+    #uploadFile_con a:hover{
+        background-color: gold;
+        color: red;
+    }
+
+
+    .title_h2{
+        margin-left:35%;
+        font-weight: bold;
+    }
+
+    #link_index:hover,#link_top:hover{
+        color:red;
+        background-color: gold;
+    }
+
+    #link_index,#link_top{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .title_con{
+        <!--border: 2px solid #9acfea;-->
+        padding: 0 10px;
+        font-size: 24px;
+        text-align: left;
+
+    }
+
+    .title_con ul{
+        margin-top: 30px
+    }
+
+    .title_con li{
+        list-style-type:none;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .table_text{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        display: block;
+    }
+
+    /* gitlab projectId查询页面 */
+    .system_input{
+        box-sizing: border-box;
+        display: flex;
+        padding: 30px;
+        font-size:18px;
+        background-color: SeaGreen;
+        border-radius: 10px;
+        color: #FFF;
+        height: 280px;
+        overflow: auto;
+    }
+
+    .select_project_left{
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        width: 50%;
+        float:left;
+        overflow: auto;
+        border-radius: 10px;
+    }
+
+    .select_project_right{
+        box-sizing:border-box;
+        -moz-box-sizing:border-box; /* Firefox */
+        width: 50%;
+        float:right;
+    }
+
+    /* gitlab分支比较页面 */
+    .deploy_input{
+        padding: 30px;
+        border-radius: 10px;
+        color: #FFF;
+        background-color:#2e6da4;
+        font-size:21px;
+    }
+
+    .system_input input{
+        border-radius: 5px;
+        color: green;
+    }
+
+    .system_input .filter-option-inner-inner{
+        color: green;
+    }
+
+    .system_input_btn{
+        font-size:16px;
+        margin-top: 30px;
+        background-color: #2e6da4;
+        border-color:Aqua;
+        width: 700px;
+    }
+
+    .system_input_btn:hover,.deploy_input_btn:hover{
+        background-color: gold;
+        color: red;
+    }
+
+    .envType-btn{
+
+    }
+
+    .input_text{
+        position: relative;
+        top:20px;
+        width: 500px;
+        height: 50px;
+        max-width: 700px;
+        min-width: 700px;
+        max-height: 100px;
+        min-height: 100px;
+        border-radius:8px;
+        padding:5px;
+        color: green;
+
+    }
+
+    .deploy_input_btn{
+        font-size:17px;
+        background-color: DarkGreen;
+        margin-left: 20px;
+        border-color: Lime;
+    }
+
+    .checkout{
+        font-size: 16px !important;
+        text-align: left !important;
+        border-radius: 10px;
+        color: green;
+        width: 800px;
+        background-color: LightCyan;
+        padding: 10px;
+        overflow: auto;
+    }
+
+    .deploy_input_textarea{
+        font-size: 16px !important;
+        text-align: left !important;
+        border-radius: 10px;
+        color: green;
+        min-width: 100%;
+        max-width: 100%;
+        min-height: 100px;
+        max-height: 900px;
+        background-color: LightCyan;
+        padding: 10px;
+        overflow: auto;
+    }
+
+    .deploy_input input{
+        border-radius: 5px;
+    }
+
+    .multiplechoice,.filter-option{
+        color: green;
+    }
+
+    .message_con{
+        height: 50px;
+        font-size:21px;
+        line-height:50px;
+        text-align: center;
+        color:#8a6d3b;
+        background-color:#fcf8e3;
+        border-radius: 10px;
+    }
+
+    .css_line{
+        margin-left: 50px;
+    }
+
+    @keyframes fade-in {
+        0% {opacity: 0;}/*初始状态 透明度为0*/
+        40% {opacity: 0;}/*过渡状态 透明度为0*/
+        100% {opacity: 1;}/*结束状态 透明度为1*/
+    }
+
+    @-webkit-keyframes fade-in {/*针对webkit内核*/
+        0% {opacity: 0;}
+        40% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+
+    #message_con {
+        animation: fade-in;/*动画名称*/
+        animation-duration: 1s;/*动画持续时间*/
+        -webkit-animation: fade-in 1s;/*针对webkit内核*/
+    }
+
+    .not-block{
+        display: inline;
+    }
+
+    .release .inner{
+        max-height: 400px;
+    }
+
+    #mydiv0{
+        color:red;
+        margin-left: 20px;
+        font-size: 16px;
+    }
+
+    .dataBase_table{
+        font-size: 14px;
+        width: 100%;
+        text-align: center;
+        background-color: #f6ffff;
+        margin-bottom: 25px;
+        border-collapse:collapse;
+    }
+
+    .dataBase_table th{
+        text-align: center;
+        font-size: 16px;
+        background-color: #2e6da4;
+        color: #FFF;
+    }
+
+    .dataBase_table td{
+        color: #2e6da4;
+        padding:3px;
+        font-size:16px;
+        max-width: 450px;
+    }
+
+    .table_td{
+        padding: 10px;
+        max-width: 200px;
+    }
+
+    .table_td a{
+        text-decoration: none;
+    }
+
+    .projectKey_title{
+        margin-left: 30px;
+    }
+
+    .domain{
+        top: 3px;
+        width:258px;
+        height: 180px;
+        overflow: auto;
+    }
+
+    .search_title{
+        padding: 90px;
+        font-size: 24px;
+        font-weight: bold;
+        overflow: hidden;
+    }
+
+    .addDomain-btn{
+        background-color: DarkGreen;
+        border-color: Lime;
+        color: #FFF;
+    }
+ 
+</style>
+{% endblock %}
+<br><br>
+<div id="uploadFile_con">
+    {% if message %}
+    <div class="message_con" id="message_con">
+        {{message}}
+    </div>
+    {% endif %}
+
+    <div class="title_con">
+        <div class="system_input">
+            <div class="select_project_left">
+                <form class='form-register' action="branch_difference" method="post">
+                {% csrf_token %}
+                <input type="text" name="options" value="select_project" style="display:none;">
+                <label>查询类型：</label>
+                <select class="selectpicker" name="projectId_or_projectName" required>
+                    <option value="projectId">根据项目Id查询名称和url</option>
+                    <option value="projectName">根据项目名称查询Id和url</option>
+                </select>
+                <label class="projectKey_title">访问令牌：</label>
+                <div class="input-append btn-group">
+                    <input type="text" name="projectKeyOrDomain" placeholder="输入访问令牌或选择领域" title="选择领域（即使用领域中的访问令牌）或输入访问令牌" required>
+                    <button type="button" class="btn btn-primary pull-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="input-append dropdown-menu pull-right domain">
+                        {% for domain in domain_list2 %}
+                            <li><a href="#domain">{{domain}}__token</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <textarea class="input_text" name='context' placeholder="输入项目的名称或id，多个用逗号隔开" required></textarea>
+                <button type="submit" class="btn btn-primary system_input_btn">查询</button>
+            </form>
+            </div>
+
+            <div class="select_project_right">
+                {% if projectInfo_list %}
+                    <div class="table_text checkout">
+                        <label>查询结果：</label>
+                        <br>
+                        <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table">
+                            <tr>
+                                <th class="table_td">项目名称</th>
+                                <th class="table_td">项目id</th>
+                                <th class="table_td">项目url</th>
+                            </tr>
+                            {% for projectInfo in projectInfo_list %}
+                                <tr>
+                                    <td class="table_td">{{projectInfo.projectName}}</td>
+                                    <td class="table_td">{{projectInfo.projectId}}</td>
+                                    <td class="table_td">
+                                        <a class="btn" href="{{projectInfo.projectUrl}}" target="_blank">{{projectInfo.http_url}}</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="search_title">
+                        查询gitlab项目信息
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="title_con">
+        <div class="deploy_input">
+            <h3 class="title_h2"><span>gitlab分支代码比较（检查两者是否一致）</span></h3>
+            <br>
+            <a class="btn addDomain-btn" title="此功能共用【神兵卡片管理】功能录入信息，新增领域请点击跳转" href="/modifyCardStatus">添加领域</a>
+            <br><br>
+            <form class='form-register not-block' action="branch_difference" method="post">
+                {% csrf_token %}
+                <input type="text" name="options" value="select_domain" style="display:none;">
+                <label>选择领域</label>
+                <select class="selectpicker release" name="domain_name" onchange="submit();" data-actions-box="true"
+data-live-search="true" required>
+                    {% for domain in domain_list %}
+                    <option value="{{domain}}">{{domain}}</option>
+                    {% endfor %}
+                </select>
+            </form>
+
+            <form class='form-register not-block' action="branch_difference" method="post">
+                {% csrf_token %}
+                <input type="text" name="options" value="get_difference_info" style="display:none;">
+                <input type="text" name="domain_name" value="{{domain_name}}" style="display:none;">
+                <label class="css_line">源分支：</label>
+                <select class="selectpicker release" name="source_branch" data-actions-box="true"
+data-live-search="true" required>
+                    <option value=""></option>
+                    {% for branch_list in branch_list %}
+                    <option value="{{branch_list}}">{{branch_list}}</option>
+                    {% endfor %}
+                </select>
+
+                <label class="css_line">目标分支：</label>
+                <select class="selectpicker release" name="target_branch" data-actions-box="true"
+data-live-search="true" required>
+                    <option value=""></option>
+                    {% for branch_list in branch_list %}
+                    <option value="{{branch_list}}">{{branch_list}}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary deploy_input_btn" id="mybtn0" onclick=button0()>比较</button>
+                <span id="mydiv0"></span>
+                <br>
+            </form>
+            {% if all_branch_diff_info_list %}
+            <br>
+            <label>比较结果：</label>
+            <div class="table_text deploy_input_textarea">
+                <br>
+                <table border="1" cellpadding=0 cellspacing="50" class="dataBase_table">
+                    <tr>
+                        <th class="table_td">项目id</th>
+                        <th class="table_td">项目url</th>
+                        <th class="table_td">源分支</th>
+                        <th class="table_td">目标分支</th>
+                        <th class="table_td">比较结果</th>
+                    </tr>
+                    {% for branch_diff_info in all_branch_diff_info_list %}
+                        {% if branch_diff_info.status_code != 200 %}
+                            <tr>
+                                <td class="table_td" style="color: red;">{{branch_diff_info.project_id}}</td>
+                                <td class="table_td">
+                                    <a class="btn" href="{{branch_diff_info.project_http_url}}"  style="color: red;" target="_blank">
+                                        {{branch_diff_info.project_http_url}}
+                                    </a>
+                                </td>
+                                <td class="table_td" style="color: red;">{{branch_diff_info.source_branch}}</td>
+                                <td class="table_td" style="color: red;">{{branch_diff_info.target_branch}}</td>
+                                <td class="table_td" style="color: red;">{{branch_diff_info.result}}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for branch_diff_info in all_branch_diff_info_list %}
+                        {% if branch_diff_info.status_code == 200 %}
+                            <tr>
+                                <td class="table_td">{{branch_diff_info.project_id}}</td>
+                                <td class="table_td">
+                                    <a class="btn" href="{{branch_diff_info.project_http_url}}" target="_blank">
+                                        {{branch_diff_info.project_http_url}}
+                                    </a>
+                                </td>
+                                <td class="table_td">{{branch_diff_info.source_branch}}</td>
+                                <td class="table_td">{{branch_diff_info.target_branch}}</td>
+                                <td class="table_td">{{branch_diff_info.result}}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+            <br>
+        </div>
+
+    </div>
+
+    <br><br>
+    <!--<hr>-->
+    <!--<a class="btn btn-primary pull-left" id="link_index" href="/">返回首页</a>-->
+    <!--<br><br><br><br>-->
+    <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
+    <!--<br><br><br><br>-->
+</div>
+{% endblock %}

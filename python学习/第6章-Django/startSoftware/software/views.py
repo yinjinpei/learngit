@@ -2132,7 +2132,7 @@ class request_gitlab_api(object):
             elif release_target["data"]["committed_id"] in release_source["data"]["parent_ids"]:
                 foo = {"status_code": 200, "data": {}, "message": "目标分支代码已合并到源分支，源分支和目标分支代码一致！"}
             else:
-                foo = {"status_code": 200, "data": {}, "message": "源分支和目标分支代码不一致！"}
+                foo = {"status_code": 201, "data": {}, "message": "源分支和目标分支代码不一致！"}
         elif release_source["status_code"] == 404 and release_target["status_code"] == 404:
             foo = {"status_code": 404, "data": {}, "message": "找不到源分支和目标分支！"}
         elif release_source["status_code"] == 404:
@@ -2144,6 +2144,56 @@ class request_gitlab_api(object):
         # print(foo)
         return json.dumps(foo, sort_keys=True, indent=4)
 
+    def get_projectInfo_by_id(self):
+        # 通过项目id查询项目信息
+        url = "http://gitlab.pab.com.cn/api/v4/projects/%s" % (self.project_id)
+        r = requests.get(url=url, headers=self.headers)
+        # print('状态码：',r.status_code)
+        if r.status_code == 200:
+            r_dict = r.json()  # 转为字典
+            # print(r_dict)
+            # print('httl地址: ',r_dict['http_url_to_repo'])
+            foo = {"status_code": r.status_code,
+                   "data": {"projectId": self.project_id, "http_url": r_dict['http_url_to_repo'],
+                            "projectName": r_dict['name']},
+                   "message": ""}
+        else:
+            foo = {"status_code": r.status_code, "data": {"projectId": self.project_id}, "message": r.json()["message"]}
+        return json.dumps(foo, sort_keys=True, indent=4)
+
+    def get_projectInfo_by_name(self, projectName):
+        # 通过项目名称查询项目信息
+        # curl --header "PRIVATE-TOKEN: <your_access_token>" "https://gitlab.example.com/api/v4/search?scope=projects&search=flight"
+        url = "http://gitlab.pab.com.cn/api/v4/search"
+
+        page = 0
+        projectInfo_list = []
+        foo = {"status_code": 404, "data": {"projectInfo_list": [{"projectName": projectName}]}, "message": "获取信息失败！"}
+        while True:
+            page += 1
+            parms_dict = {"scope": "projects", "search": projectName, "per_page": 100, "page": page}
+            r = requests.get(url=url, headers=self.headers, params=parms_dict)
+            if r.status_code == 200:
+                if len(r.json()) == 0 and page == 1:
+                    foo = {"status_code": 201, "data": {"projectInfo_list": [{"projectName": projectName}]},
+                           "message": "没有找到对应项目！"}
+                    break
+                elif len(r.json()) == 0:
+                    break
+                else:
+                    r_list = r.json()
+                    for r_dict in r_list:
+                        projectInfo_list.append({"projectName": r_dict["name"], "projectId": r_dict["id"],
+                                                 "http_url": r_dict["http_url_to_repo"]})
+
+                    foo = {"status_code": r.status_code, "data": {"projectInfo_list": projectInfo_list, },
+                           "message": ""}
+            else:
+                foo = {"status_code": r.status_code, "data": {"projectInfo_list": [{"projectName": projectName}]},
+                       "message": r.json()["message"]}
+                break
+        print(foo)
+        return json.dumps(foo, sort_keys=True, indent=4)
 
 class request(object):
     def __init__(self, url, userToken, serviceName, params):
