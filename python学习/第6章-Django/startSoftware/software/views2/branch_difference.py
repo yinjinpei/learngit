@@ -162,7 +162,7 @@ def branch_difference(request):
                 # print(json.loads(projectInfo)["data"])
 
                 for project in json.loads(projectInfo)["data"]["projectInfo_list"]:
-                    print("#############################",project)
+                    # print("#############################",project)
                     projectInfo_list.append(project)
 
             thread_list = []  # 储存将要生成的所有线程
@@ -189,5 +189,5 @@ def branch_difference(request):
                 print("查询选择有误，请重新选择！")
                 message = "查询选择有误，请重新选择！"
 
-            print(projectInfo_list)
+            # print(projectInfo_list)
     return render(request, 'software/branch_difference.html', locals())

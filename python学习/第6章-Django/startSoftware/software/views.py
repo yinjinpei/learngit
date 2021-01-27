@@ -2192,7 +2192,7 @@ class request_gitlab_api(object):
                 foo = {"status_code": r.status_code, "data": {"projectInfo_list": [{"projectName": projectName}]},
                        "message": r.json()["message"]}
                 break
-        print(foo)
+        # print(foo)
         return json.dumps(foo, sort_keys=True, indent=4)
 
 class request(object):
