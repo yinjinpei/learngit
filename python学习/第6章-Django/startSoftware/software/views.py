@@ -2128,11 +2128,11 @@ class request_gitlab_api(object):
             if release_source["data"]["committed_id"] in release_target["data"]["committed_id"]:
                 foo = {"status_code": 200, "data": {}, "message": "源分支和目标分支代码完全一致！"}
             elif release_source["data"]["committed_id"] in release_target["data"]["parent_ids"]:
-                foo = {"status_code": 200, "data": {}, "message": "源分支代码已合并到目标分支，源分支和目标分支代码一致！"}
+                foo = {"status_code": 201, "data": {}, "message": "源分支代码已合并到目标分支，源分支和目标分支代码可能不一致！"}
             elif release_target["data"]["committed_id"] in release_source["data"]["parent_ids"]:
-                foo = {"status_code": 200, "data": {}, "message": "目标分支代码已合并到源分支，源分支和目标分支代码一致！"}
+                foo = {"status_code": 201, "data": {}, "message": "目标分支代码已合并到源分支，源分支和目标分支代码可能不一致！"}
             else:
-                foo = {"status_code": 201, "data": {}, "message": "源分支和目标分支代码不一致！"}
+                foo = {"status_code": 202, "data": {}, "message": "源分支和目标分支代码不一致！"}
         elif release_source["status_code"] == 404 and release_target["status_code"] == 404:
             foo = {"status_code": 404, "data": {}, "message": "找不到源分支和目标分支！"}
         elif release_source["status_code"] == 404:
