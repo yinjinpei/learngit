@@ -2128,9 +2128,27 @@ class request_gitlab_api(object):
             if release_source["data"]["committed_id"] in release_target["data"]["committed_id"]:
                 foo = {"status_code": 200, "data": {}, "message": "源分支和目标分支代码完全一致！"}
             elif release_source["data"]["committed_id"] in release_target["data"]["parent_ids"]:
-                foo = {"status_code": 201, "data": {}, "message": "源分支代码已合并到目标分支，源分支和目标分支代码可能不一致！"}
+                # foo = {"status_code": 201, "data": {}, "message": "源分支代码已合并到目标分支，源分支和目标分支代码可能不一致！"}
+                ########## 如果源分支commit Id存在目标分支父commit Id，且目标分支父commit Id有存在源分支父commit Id中，则代码是一致的，否则不一致！ starting ##########
+                release_target["data"]["parent_ids"].remove(release_source["data"]["committed_id"])
+                reslut = list(set(release_target["data"]["parent_ids"]).intersection(
+                    set(release_source["data"]["parent_ids"])))  # 两个父id列表交集
+                if len(reslut) > 0:
+                    foo = {"status_code": 200, "data": {}, "message": "源分支代码已合并到目标分支，源分支和目标分支代码一致！"}
+                else:
+                    foo = {"status_code": 201, "data": {}, "message": "源分支代码已合并到目标分支，源分支和目标分支代码不一致！"}
+                ########## 如果源分支commit Id存在目标分支父commit Id，且目标分支父commit Id有存在源分支父commit Id中，则代码是一致的，否则不一致！ end ###############
             elif release_target["data"]["committed_id"] in release_source["data"]["parent_ids"]:
-                foo = {"status_code": 201, "data": {}, "message": "目标分支代码已合并到源分支，源分支和目标分支代码可能不一致！"}
+                # foo = {"status_code": 201, "data": {}, "message": "目标分支代码已合并到源分支，源分支和目标分支代码可能不一致！"}
+                ########## 如果目标分支commit Id存在源分支父commit Id，且源分支父commit Id有存在目标分支父commit Id中，则代码是一致的，否则不一致！ starting ##########
+                release_source["data"]["parent_ids"].remove(release_target["data"]["committed_id"])
+                reslut = list(set(release_source["data"]["parent_ids"]).intersection(
+                    set(release_target["data"]["parent_ids"])))  # 两个父id列表交集
+                if len(reslut) > 0:
+                    foo = {"status_code": 200, "data": {}, "message": "源分支代码已合并到目标分支，源分支和目标分支代码一致！"}
+                else:
+                    foo = {"status_code": 201, "data": {}, "message": "源分支代码已合并到目标分支，源分支和目标分支代码不一致！"}
+                ########## 如果目标分支commit Id存在源分支父commit Id，且源分支父commit Id有存在目标分支父commit Id中，则代码是一致的，否则不一致！ end ##############
             else:
                 foo = {"status_code": 202, "data": {}, "message": "源分支和目标分支代码不一致！"}
         elif release_source["status_code"] == 404 and release_target["status_code"] == 404:
