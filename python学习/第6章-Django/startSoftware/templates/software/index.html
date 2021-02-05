@@ -262,6 +262,18 @@
 
     /* 倒计时 end */
 
+    .left-image{
+        padding-top:5px;
+    }
+
+    .left-image,.right-image-title,.right-image{
+        width: 100%;
+    }
+
+    .right-image-title{
+        padding: 0 10%;
+    }
+
 {% endblock %}
 
 {% block content %}
@@ -275,6 +287,9 @@
                 <div class="timer_title">距离【除夕】剩余时间</div>
                 <div id="timer"></div>
             </div>
+        </div>
+        <div>
+            <img class="left-image" src="../static/images/2021/left.png">
         </div>
     </div>
 
@@ -361,6 +376,12 @@
     <div class="con_right con_box">
         <div class="con_left_right">
                 <!--右边信息-->
+            <div>
+                <img class="right-image-title" src="../static/images/2021/title.png">
+            </div>
+            <div>
+                <img class="right-image" src="../static/images/2021/right.png">
+            </div>
         </div>
     </div>
 

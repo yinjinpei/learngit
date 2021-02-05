@@ -37,3 +37,8 @@ class X(object):
         del self.range
 xInstance = X(1, 2, 3)
 xInstance(1,2)
+
+
+
+for i in range(5):
+    print(i)
