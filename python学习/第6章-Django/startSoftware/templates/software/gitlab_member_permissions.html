@@ -415,7 +415,7 @@
                                   <div class="failMessage">
                                         {% if add_member_id_is_None_list %}
                                             <div class="failMessage_title">获取用户ID失败的用户名：</div>
-                                            请检查用户名是否正确或是否有登录过gitlab！<hr>
+                                            请检查用户名是否正确或是否有登录过gitlab，授权用户token是否有Owner权限！<hr>
                                             {% for member in add_member_id_is_None_list %}
                                                 {{member}}<br>
                                             {% endfor %}
@@ -540,7 +540,7 @@
                                   <div class="failMessage">
                                         {% if modify_member_id_is_None_list %}
                                             <div class="failMessage_title">获取用户ID失败的用户名：</div>
-                                            请检查用户名是否正确或是否有登录过gitlab！<hr>
+                                            请检查用户名是否正确或是否有登录过gitlab，授权用户token是否有Owner权限！<hr>
                                             {% for member in modify_member_id_is_None_list %}
                                                 {{member}}<br>
                                             {% endfor %}
@@ -643,7 +643,7 @@
                                   <div class="failMessage">
                                         {% if del_member_id_is_None_list %}
                                             <div class="failMessage_title">获取用户ID失败的用户名：</div>
-                                            请检查用户名是否正确或是否有登录过gitlab！<hr>
+                                            请检查用户名是否正确或是否有登录过gitlab，授权用户token是否有Owner权限！<hr>
                                             {% for member in del_member_id_is_None_list %}
                                                 {{member}}<br>
                                             {% endfor %}
