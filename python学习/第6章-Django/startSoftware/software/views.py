@@ -4171,16 +4171,12 @@ def countDeploymentInfo(request):
         try:
             if is_workday(april_last):  # 判断当前时间是不是节假日
                 hours = int(april_last.strftime("%H"))
-                if hours >= 9 and hours < 18:  # 判断当前时间是不是工作时间
+                if hours >= 9 and hours < 19:  # 判断当前时间是不是工作时间
                     isWorkTime = True
                     isWorkTime_mark = True
                     # print("现在是工作日的工作时间")
-                elif hours >= 18 and hours < 19:
-                    isWorkTime_mark = False
-                    if request.session['user_name'] == "T4":
-                        isWorkTime = True
-                    else:
-                        isWorkTime = False
+                    if hours >= 18 and request.session['user_name'] == "T4":
+                        isWorkTime_mark = False
                 else:
                     isWorkTime = False
                     isWorkTime_mark = False
