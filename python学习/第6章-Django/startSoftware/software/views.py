@@ -1790,6 +1790,66 @@ def productionMaterials(request):
         return render(request, 'software/ERROR.html', locals())
 
 
+# def unblockedVersion(request):
+#     clientIP = request.META['REMOTE_ADDR']
+#     webName = str(unblockedVersion.__name__)
+#     logging.info(("INFO：来自：%s, 访问software/%s.html页面！！！") % (clientIP, webName))
+#
+#     if not request.session.get('is_login', None):
+#         uploadFile_message = "您尚未登录，使用【解封版信息收集】请先登录！！"
+#         return render(request, 'software/index.html', locals())
+#
+#     if request.method == "POST":
+#         if request.POST.get('options') == "insert":
+#             newUnblocked_version = UnblockedVersionInfo.unblockedversion.create()
+#             newUnblocked_version.username = request.session['user_name']
+#             newUnblocked_version.month = request.POST.get('month')
+#             newUnblocked_version.team = request.POST.get('team')
+#             newUnblocked_version.version_number = request.POST.get('version_number')
+#             newUnblocked_version.subsystem = request.POST.get('subsystem')
+#             newUnblocked_version.version_name = request.POST.get('version_name')
+#             newUnblocked_version.content = request.POST.get('content')
+#             newUnblocked_version.version_compiler = request.POST.get('version_compiler')
+#             newUnblocked_version.version_leader = request.POST.get('version_leader')
+#             newUnblocked_version.test_leader = request.POST.get('test_leader')
+#             newUnblocked_version.development_team = request.POST.get('development_team')
+#             newUnblocked_version.version_type = request.POST.get('version_type')
+#             newUnblocked_version.unblocked_datetime = request.POST.get('unblocked_datetime')
+#             newUnblocked_version.blocked_datetime = request.POST.get('blocked_datetime')
+#             newUnblocked_version.unblocked_type = request.POST.get('unblocked_type')
+#             newUnblocked_version.unblocked_reason = request.POST.get('unblocked_reason')
+#             newUnblocked_version.save()
+#         elif request.POST.get('options') == "delete":
+#             if not request.session.get('manager_islogin', None):
+#                 message = "您尚未登录超级用户，请先登录！！"
+#             else:
+#                 username = request.session['user_name']
+#                 id = request.POST.get('id')
+#                 try:
+#                     getUnblocked_version_list = UnblockedVersionInfo.unblockedversion.filter(username=username, id=id)
+#                 except Exception as e:
+#                     logging.info("ERROR：来自：%s, " % e)
+#                     getUnblocked_version_list = None
+#                     message = "删除数据失败，获取不到对应的数据！"
+#
+#                 # 删除数据
+#                 if getUnblocked_version_list:
+#                     for unblocked_version in getUnblocked_version_list:
+#                         unblocked_version.delete()
+#                         message = "删除数据成功！"
+#         else:
+#             message = "提交信息有误，请刷新页面重新提交！"
+#
+#     # @register.filter
+#     # def get_range(value):
+#     #     return range(value)
+#
+#     # 从数据库中查询当前登录用户的解封版所收集的信息
+#     unblocked_versionInfo_list = UnblockedVersionInfo.unblockedversion.filter(
+#         username=request.session['user_name']).order_by('-id')
+#     return render(request, 'software/unblockedVersion.html', locals())
+
+
 def unblockedVersion(request):
     clientIP = request.META['REMOTE_ADDR']
     webName = str(unblockedVersion.__name__)
@@ -1801,23 +1861,22 @@ def unblockedVersion(request):
 
     if request.method == "POST":
         if request.POST.get('options') == "insert":
-            newUnblocked_version = UnblockedVersionInfo.unblockedversion.create()
+            newUnblocked_version = NewUnblockedVersionInfo.newunblockedversion.create()
             newUnblocked_version.username = request.session['user_name']
             newUnblocked_version.month = request.POST.get('month')
             newUnblocked_version.team = request.POST.get('team')
-            newUnblocked_version.version_number = request.POST.get('version_number')
-            newUnblocked_version.subsystem = request.POST.get('subsystem')
             newUnblocked_version.version_name = request.POST.get('version_name')
+            newUnblocked_version.subsystem = request.POST.get('subsystem')
             newUnblocked_version.content = request.POST.get('content')
-            newUnblocked_version.version_compiler = request.POST.get('version_compiler')
+            newUnblocked_version.version_manager = request.POST.get('version_manager')
             newUnblocked_version.version_leader = request.POST.get('version_leader')
             newUnblocked_version.test_leader = request.POST.get('test_leader')
-            newUnblocked_version.development_team = request.POST.get('development_team')
             newUnblocked_version.version_type = request.POST.get('version_type')
             newUnblocked_version.unblocked_datetime = request.POST.get('unblocked_datetime')
             newUnblocked_version.blocked_datetime = request.POST.get('blocked_datetime')
             newUnblocked_version.unblocked_type = request.POST.get('unblocked_type')
             newUnblocked_version.unblocked_reason = request.POST.get('unblocked_reason')
+            newUnblocked_version.remark = request.POST.get('remark')
             newUnblocked_version.save()
         elif request.POST.get('options') == "delete":
             if not request.session.get('manager_islogin', None):
@@ -1826,13 +1885,13 @@ def unblockedVersion(request):
                 username = request.session['user_name']
                 id = request.POST.get('id')
                 try:
-                    getUnblocked_version_list = UnblockedVersionInfo.unblockedversion.filter(username=username, id=id)
+                    getUnblocked_version_list = NewUnblockedVersionInfo.newunblockedversion.filter(username=username, id=id)
                 except Exception as e:
                     logging.info("ERROR：来自：%s, " % e)
                     getUnblocked_version_list = None
                     message = "删除数据失败，获取不到对应的数据！"
 
-                # 删除数据
+                    # 删除数据
                 if getUnblocked_version_list:
                     for unblocked_version in getUnblocked_version_list:
                         unblocked_version.delete()
@@ -1845,10 +1904,8 @@ def unblockedVersion(request):
     #     return range(value)
 
     # 从数据库中查询当前登录用户的解封版所收集的信息
-    unblocked_versionInfo_list = UnblockedVersionInfo.unblockedversion.filter(
-        username=request.session['user_name']).order_by('-id')
+    unblocked_versionInfo_list = NewUnblockedVersionInfo.newunblockedversion.filter(username=request.session['user_name']).order_by('-id')
     return render(request, 'software/unblockedVersion.html', locals())
-
 
 def modifySuperPWD(request):
     clientIP = request.META['REMOTE_ADDR']

@@ -142,19 +142,20 @@
                 <tr>
                     <!--<th class="table_title"><div class="table_title_content">序号</div></th>-->
                     <th class="table_title"><div class="table_title_content">月份</div></th>
-                    <th class="table_title"><div class="table_title_content">领域</div></th>
-                    <th class="table_title"><div class="table_title_content">版本名称</div></th>
+                    <th class="table_title"><div class="table_title_content">团队</div></th>
+                    <th class="table_title"><div class="table_title_content">版本号</div></th>
                     <th class="table_title"><div class="table_title_content">子系统名称</div></th>
-                    <th class="table_title"><div class="table_title_content">版本需求</div></th>
-                    <th class="table_title"><div class="table_title_content">版本经理</div></th>
+                    <th class="table_title"><div class="table_title_content">版本名称</div></th>
+                    <th class="table_title"><div class="table_title_content">版本内容</div></th>
+                    <th class="table_title"><div class="table_title_content">版本编制人</div></th>
                     <th class="table_title"><div class="table_title_content">开发负责人</div></th>
                     <th class="table_title"><div class="table_title_content">测试负责人</div></th>
+                    <th class="table_title"><div class="table_title_content">所属开发组</div></th>
                     <th class="table_title"><div class="table_title_content">版本类型</div></th>
-                    <th class="table_title"><div class="table_title_content">解封开始时间</div></th>
-                    <th class="table_title"><div class="table_title_content">封版时间</div></th>
+                    <th class="table_title"><div class="table_title_content">申请解封时间</div></th>
+                    <th class="table_title"><div class="table_title_content">确认封版时间</div></th>
                     <th class="table_title"><div class="table_title_content">解封版类别</div></th>
                     <th class="table_title"><div class="table_title_content">解封版说明及根因分析</div></th>
-                    <th class="table_title"><div class="table_title_content">备注</div></th>
                     <th class="table_title"><div class="table_title_content">操作</div></th>
                 </tr>
 
@@ -181,19 +182,20 @@
                                 <option value="12">12月份</option>
                             </select>
                         </td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="营销平台领域" name='team'  required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="BROP-MOP1.79.0" name='version_name'  required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="营销渠道offer管理子系统" name='subsystem'  required></textarea></td>
-                        <td class="table_th"><textarea maxlength="1024" class="table_text" placeholder="热8直播预约功能"  name='content'  required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="卢俊凯" name='version_manager'  required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="笪伯寅" name='version_leader'  required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="徐徐" name='test_leader' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="常规版本/紧急版本/静态资源版本" name='version_type' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="2020/7/30 11:00" name='unblocked_datetime' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="2020/7/30 12:00" name='blocked_datetime' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="缺陷修复/需求变更/封版延迟/其它）" name='unblocked_type' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="2048" class="table_text" placeholder="代码评审中代码优化"  name='unblocked_reason' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="1024" class="table_text" name='remark' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='team'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_number'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='subsystem'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_name'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="512" class="table_text" name='content'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_compiler'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_leader'  required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='test_leader' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='development_team' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='version_type' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='unblocked_datetime' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='blocked_datetime' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="128" class="table_text" name='unblocked_type' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="1024" placeholder="注意：不能超出1024个字数！" class="table_text" name='unblocked_reason' required></textarea></td>
                         <td class="table_th"><button type="submit" class="btn btn-primary pull-right right" id="submit_btn">提交</button></td>
                     </form>
                 </tr>
@@ -205,18 +207,19 @@
                                 <!--<th class="table_data">{{versionInfo.pk}}</th>-->
                                 <td class="table_data">{{versionInfo.month}}</td>
                                 <td class="table_data">{{versionInfo.team}}</td>
-                                <td class="table_data">{{versionInfo.version_name}}</td>
+                                <td class="table_data">{{versionInfo.version_number}}</td>
                                 <td class="table_data">{{versionInfo.subsystem}}</td>
+                                <td class="table_data">{{versionInfo.version_name}}</td>
                                 <td class="table_data">{{versionInfo.content}}</td>
-                                <td class="table_data">{{versionInfo.version_manager}}</td>
+                                <td class="table_data">{{versionInfo.version_compiler}}</td>
                                 <td class="table_data">{{versionInfo.version_leader}}</td>
                                 <td class="table_data">{{versionInfo.test_leader}}</td>
+                                <td class="table_data">{{versionInfo.development_team}}</td>
                                 <td class="table_data">{{versionInfo.version_type}}</td>
                                 <td class="table_data">{{versionInfo.unblocked_datetime}}</td>
                                 <td class="table_data">{{versionInfo.blocked_datetime}}</td>
                                 <td class="table_data">{{versionInfo.unblocked_type}}</td>
                                 <td class="table_data">{{versionInfo.unblocked_reason}}</td>
-                                <td class="table_data">{{versionInfo.remark}}</td>
                                 <td>
                                     <form class='table_data' action="unblockedVersion" method="post">
                                         {% csrf_token %}

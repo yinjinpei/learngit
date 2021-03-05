@@ -477,3 +477,42 @@ class MyGitlabInfo(models.Model):
     class Meta:
         db_table = 'myGitlabInfo'
     myGitlab = models.Manager()
+
+class NewUnblockedVersionInfo(models.Model):
+    # 登录用户名
+    username = models.CharField(max_length=128)
+    # 月份
+    month = models.CharField(max_length=128)
+    # 领域
+    team = models.CharField(max_length=128)
+    # 版本名称
+    version_name = models.CharField(max_length=128)
+    # 子系统名称
+    subsystem = models.CharField(max_length=128)
+    # 版本需求
+    content = models.CharField(max_length=1024)
+    # 版本经理
+    version_manager =models.CharField(max_length=128)
+    # 开发负责人
+    version_leader = models.CharField(max_length=128)
+    # 测试负责人
+    test_leader = models.CharField(max_length=128)
+    # 版本类型
+    version_type = models.CharField(max_length=128)
+    # 解封开始时间
+    unblocked_datetime = models.CharField(max_length=128)
+    # 封版时间
+    blocked_datetime = models.CharField(max_length=128)
+    # 解封版类别
+    unblocked_type= models.CharField(max_length=128)
+    # 解封版说明及根因分析
+    unblocked_reason = models.CharField(max_length=2048)
+    # 备注
+    remark = models.CharField(max_length=1024)
+    # 数据是否被已弃用
+    isDelete = models.BooleanField(default=False)
+
+    class Meta:
+        db_table = 'newunblockedversionInfo'
+
+    newunblockedversion = models.Manager()
