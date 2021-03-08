@@ -10,8 +10,8 @@ class AppInfo(models.Model):
     appDir = models.CharField(max_length=100)
     remark = models.CharField(max_length=100,default=None)
     isDelete = models.BooleanField(default=False)
-class Meta():
-    db_table='appinfo'
+    class Meta():
+        db_table='appinfo'
     apps = models.Manager()
     def showname(self):
         return self.appName
@@ -140,8 +140,8 @@ class DomainInfo(models.Model):
     # regress_review = models.CharField(max_length=128, unique=True)
     # # 生产验证报告
     # verification_review = models.CharField(max_length=128, unique=True)
-class Meta:
-    db_table = 'domaininfo'
+    class Meta:
+        db_table = 'domaininfo'
 
     def __str__(self):
         return self.domain_name
