@@ -4399,6 +4399,7 @@ def countDeploymentInfo(request):
     start_time = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")
 
     try:
+        # 获取数据【非窗口期部署申请】
         getApplicantDeploymentInfo_list = ApplicantDeploymentInfo.applicantDeployment.filter(
             loginUser=request.session['user_name'], isDelete=False).order_by('-id')
     except Exception as e:
@@ -4406,6 +4407,7 @@ def countDeploymentInfo(request):
         getApplicantDeploymentInfo_list = None
 
     try:
+        # 获取数据【测试/开发自行部署登记】
         getSelfDeploymentInfo_list = SelfDeploymentInfo.selfDeployment.filter(
             loginUser=request.session['user_name'], isDelete=False).order_by('-id')
     except Exception as e:
