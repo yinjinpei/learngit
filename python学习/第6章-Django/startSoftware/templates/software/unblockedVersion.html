@@ -28,7 +28,7 @@
         font-weight: bold;
     }
 
-    .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover,#submit_btn:hover{
+    .form-group input:hover,#reset_btn:hover,#link_index:hover,#link_top:hover,#submit_btn:hover,#submit_btn2:hover{
         color:red;
         background-color: gold;
     }
@@ -43,7 +43,7 @@
         margin-left: 35%;
     }
 
-    #submit_btn{
+    #submit_btn, #submit_btn2{
         margin-right: 35%;
     }
 
@@ -86,6 +86,7 @@
 
     .table_th textarea{
         line-height: 50px
+        line-height: 0;
     }
 
     .delete_btn{
@@ -106,6 +107,10 @@
         color: #FFF;
     }
 
+    .table_td{
+        background-color: LightGreen;
+    }
+
     .table_text{
         background-color: LightGreen;
     }
@@ -119,6 +124,10 @@
 
     .table_th .right{
         margin: 5px !important;
+    }
+
+    .table_date{
+        min-width: 180px;
     }
 
 </style>
@@ -138,6 +147,37 @@
     {% if message %}
         <div class="alert alert-warning delfile_msg">{{ message }}</div>
     {% endif %}
+
+    <div style="text-align:left;">
+        <form action="unblockedVersion" method="post">
+       {% csrf_token %}
+            <h4 style="display: inline-block;font-weight: bold;">数据下载：</h4>
+            <input type="text" name="options" value="downloadFile" style="display:none;">
+            <select class="selectpicker" name="month" multiple="multiple" data-actions-box="true" data-live-search="true" required>
+                <option value="1">1月份</option>
+                <option value="2">2月份</option>
+                <option value="3">3月份</option>
+                <option value="4">4月份</option>
+                <option value="5">5月份</option>
+                <option value="6">6月份</option>
+                <option value="7">7月份</option>
+                <option value="8">8月份</option>
+                <option value="9">9月份</option>
+                <option value="10">10月份</option>
+                <option value="11">11月份</option>
+                <option value="12">12月份</option>
+            </select>
+
+            <select class="selectpicker" name="user" required>
+                <option value="one">当前用户</option>
+                <option value="all">所有用户</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary" id="submit_btn2">提交</button>
+        </form>
+    </div>
+    <br>
+
     <table border="1"  cellspacing="50" class="unblockedVersion_table">
                 <tr>
                     <!--<th class="table_title"><div class="table_title_content">序号</div></th>-->
@@ -188,45 +228,72 @@
                         <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="卢俊凯" name='version_manager'  required></textarea></td>
                         <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="笪伯寅" name='version_leader'  required></textarea></td>
                         <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="徐徐" name='test_leader' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="常规版本/紧急版本/静态资源版本" name='version_type' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="2020/7/30 11:00" name='unblocked_datetime' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="2020/7/30 12:00" name='blocked_datetime' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="128" class="table_text"  placeholder="缺陷修复/需求变更/封版延迟/其它）" name='unblocked_type' required></textarea></td>
+                        <td class="table_th table_td">
+                            <select class="select" name="version_type" required>
+                                <option value="">请选择</option>
+                                <option value="常规版本">常规版本</option>
+                                <option value="紧急版本">紧急版本</option>
+                                <option value="静态资源版本">静态资源版本</option>
+                            </select>
+                        </td>
+                        <td class="table_th table_td table_date">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" name='unblocked_datetime' placeholder="2020/7/30 11:00" required/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </td>
+                        <td class="table_th table_td table_date">
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' class="form-control" name='blocked_datetime' placeholder="2020/7/30 12:00" required/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </td>
+                        <td class="table_th table_td">
+                            <select class="select" name="unblocked_type" required>
+                                <option value="">请选择</option>
+                                <option value="缺陷修复">缺陷修复</option>
+                                <option value="需求变更">需求变更</option>
+                                <option value="封版延迟">封版延迟</option>
+                                <option value="其它">其它</option>
+                            </select>
+                        </td>
                         <td class="table_th"><textarea maxlength="2048" class="table_text" placeholder="代码评审中代码优化"  name='unblocked_reason' required></textarea></td>
-                        <td class="table_th"><textarea maxlength="1024" class="table_text" name='remark' required></textarea></td>
+                        <td class="table_th"><textarea maxlength="1024" class="table_text" name='remark'></textarea></td>
                         <td class="table_th"><button type="submit" class="btn btn-primary pull-right right" id="submit_btn">提交</button></td>
                     </form>
                 </tr>
 
                 {% for versionInfo in unblocked_versionInfo_list %}
-                    {% if versionInfo.isDelete is not none %}
-                        {% if versionInfo.username == request.session.user_name %}
-                            <tr>
-                                <!--<th class="table_data">{{versionInfo.pk}}</th>-->
-                                <td class="table_data">{{versionInfo.month}}</td>
-                                <td class="table_data">{{versionInfo.team}}</td>
-                                <td class="table_data">{{versionInfo.version_name}}</td>
-                                <td class="table_data">{{versionInfo.subsystem}}</td>
-                                <td class="table_data">{{versionInfo.content}}</td>
-                                <td class="table_data">{{versionInfo.version_manager}}</td>
-                                <td class="table_data">{{versionInfo.version_leader}}</td>
-                                <td class="table_data">{{versionInfo.test_leader}}</td>
-                                <td class="table_data">{{versionInfo.version_type}}</td>
-                                <td class="table_data">{{versionInfo.unblocked_datetime}}</td>
-                                <td class="table_data">{{versionInfo.blocked_datetime}}</td>
-                                <td class="table_data">{{versionInfo.unblocked_type}}</td>
-                                <td class="table_data">{{versionInfo.unblocked_reason}}</td>
-                                <td class="table_data">{{versionInfo.remark}}</td>
-                                <td>
-                                    <form class='table_data' action="unblockedVersion" method="post">
-                                        {% csrf_token %}
-                                        <input type="text" name="options" value="delete" style="display:none;">
-                                        <input type="text" name="id" value="{{versionInfo.id}}" style="display:none;">
-                                        <button type="submit" class="btn btn-primary delete_btn" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}">删除</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        {% endif %}
+                    {% if versionInfo.username == request.session.user_name %}
+                        <tr>
+                            <!--<th class="table_data">{{versionInfo.pk}}</th>-->
+                            <td class="table_data">{{versionInfo.month}}</td>
+                            <td class="table_data">{{versionInfo.team}}</td>
+                            <td class="table_data">{{versionInfo.version_name}}</td>
+                            <td class="table_data">{{versionInfo.subsystem}}</td>
+                            <td class="table_data">{{versionInfo.content}}</td>
+                            <td class="table_data">{{versionInfo.version_manager}}</td>
+                            <td class="table_data">{{versionInfo.version_leader}}</td>
+                            <td class="table_data">{{versionInfo.test_leader}}</td>
+                            <td class="table_data">{{versionInfo.version_type}}</td>
+                            <td class="table_data">{{versionInfo.unblocked_datetime}}</td>
+                            <td class="table_data">{{versionInfo.blocked_datetime}}</td>
+                            <td class="table_data">{{versionInfo.unblocked_type}}</td>
+                            <td class="table_data">{{versionInfo.unblocked_reason}}</td>
+                            <td class="table_data">{{versionInfo.remark}}</td>
+                            <td>
+                                <form class='table_data' action="unblockedVersion" method="post">
+                                    {% csrf_token %}
+                                    <input type="text" name="options" value="delete" style="display:none;">
+                                    <input type="text" name="id" value="{{versionInfo.id}}" style="display:none;">
+                                    <button type="submit" class="btn btn-primary delete_btn" onclick="if(confirm('确定删除？')){return true;}else{return false;}{this.form.submit();}">删除</button>
+                                </form>
+                            </td>
+                        </tr>
                     {% endif %}
                 {% endfor %}
             </table>
@@ -246,4 +313,22 @@
     <!--<br><br><br><br>-->
 
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        locale: moment.locale('zh-cn')
+    });
+});
+
+$(function () {
+    $('#datetimepicker2').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        locale: moment.locale('zh-cn')
+    });
+});
+
+
+</script>
 {% endblock %}

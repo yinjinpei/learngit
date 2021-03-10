@@ -1896,6 +1896,85 @@ def unblockedVersion(request):
                     for unblocked_version in getUnblocked_version_list:
                         unblocked_version.delete()
                         message = "删除数据成功！"
+        elif request.POST.get('options') == "downloadFile":
+            if not request.session.get('manager_islogin', None):
+                message = "您尚未登录超级用户，请先登录！！"
+            else:
+                try:
+                    userList = []
+                    monthList = []
+                    teamList = []
+                    version_nameList = []
+                    subsystemList = []
+                    contentList = []
+                    version_managerList = []
+                    version_leaderList = []
+                    test_leaderList = []
+                    version_typeList = []
+                    unblocked_datetimeList = []
+                    blocked_datetimeLIst = []
+                    unblocked_typeList = []
+                    unblocked_reasonList = []
+                    remarkList = []
+
+                    monthsList = request.POST.getlist('month')
+
+                    if request.POST.get('user') == "all":
+                        # 获取已有数据
+                        unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(isDelete=0).order_by(
+                            'username', '-id')
+                    else:
+                        unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(isDelete=0, username=
+                        request.session['user_name']).order_by('-id')
+
+                    for versionInfo in unblocked_versionInfo:
+                        if versionInfo.month in monthsList:
+                            userList.append(versionInfo.username)
+                            monthList.append(versionInfo.month)
+                            teamList.append(versionInfo.team)
+                            version_nameList.append(versionInfo.version_name)
+                            subsystemList.append(versionInfo.subsystem)
+                            contentList.append(versionInfo.content)
+                            version_managerList.append(versionInfo.version_manager)
+                            version_leaderList.append(versionInfo.version_leader)
+                            test_leaderList.append(versionInfo.test_leader)
+                            version_typeList.append(versionInfo.version_type)
+                            unblocked_datetimeList.append(versionInfo.unblocked_datetime)
+                            blocked_datetimeLIst.append(versionInfo.blocked_datetime)
+                            unblocked_typeList.append(versionInfo.unblocked_type)
+                            unblocked_reasonList.append(versionInfo.unblocked_reason)
+                            remarkList.append(versionInfo.remark)
+
+                    data = {'小组': userList, '月份': monthList, '领域': teamList, '版本名称': version_nameList,
+                            '子系统名称': subsystemList,
+                            '版本需求': contentList, '版本经理': version_managerList, '开发负责人': version_leaderList,
+                            '测试负责人': test_leaderList, '版本类型': version_typeList, '解封开始时间': unblocked_datetimeList,
+                            '封版时间': blocked_datetimeLIst, '解封版类别': unblocked_typeList,
+                            '解封版说明及根因分析': unblocked_reasonList, '备注': remarkList}
+
+                    path = 'uploads/' + 'temp' + '/'
+                    tempFileName = 'unblockedVersionInfo' + '_' + request.session[
+                        'user_name'] + '_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f") + '.xlsx'
+                    outputFileName = 'unblockedVersionInfo.xlsx'
+
+                    import pandas as pd
+                    df = pd.DataFrame(data)
+                    df.to_excel(path + tempFileName, index=False)
+
+                    try:
+                        file = open(path + tempFileName, 'rb')
+                    except:
+                        return HttpResponse('下载文件名有错，请联系管理员！  文件名：%s' % outputFileName)
+
+                    response = FileResponse(file)
+                    response['Content-Type'] = 'application/octet-stream'
+                    response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(
+                        escape_uri_path(outputFileName))
+                    return response
+
+                except Exception as e:
+                    print(e)
+                    unblocked_versionInfo = None
         else:
             message = "提交信息有误，请刷新页面重新提交！"
 
@@ -1904,8 +1983,9 @@ def unblockedVersion(request):
     #     return range(value)
 
     # 从数据库中查询当前登录用户的解封版所收集的信息
-    unblocked_versionInfo_list = NewUnblockedVersionInfo.newunblockedversion.filter(username=request.session['user_name']).order_by('-id')
+    unblocked_versionInfo_list = NewUnblockedVersionInfo.newunblockedversion.filter(username=request.session['user_name'],isDelete=0).order_by('-id')
     return render(request, 'software/unblockedVersion.html', locals())
+
 
 def modifySuperPWD(request):
     clientIP = request.META['REMOTE_ADDR']
