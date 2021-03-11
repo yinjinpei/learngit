@@ -39,6 +39,8 @@ from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
 from apscheduler.executors.pool import ThreadPoolExecutor, ProcessPoolExecutor
 # 判断 X年X月X号 是不是节假日
 from chinese_calendar import is_workday, is_holiday
+import pandas as pd
+
 
 jobstores = {
     'default': SQLAlchemyJobStore(url='sqlite:///jobs.sqlite')
@@ -4513,33 +4515,115 @@ def countDeploymentInfo(request):
                         selfDeploymentInfo.delete()
                         message = "删除数据成功！"
 
+        # 下载数据功能
         if request.POST.get('select_data') == 'select_data':
             if not request.session.get('manager_islogin', None) and request.POST.get('user') == "all":
                 message = "您尚未登录超级用户，请先登录！！"
             else:
+                startTime=request.POST.get('startTime')
+                endTime=request.POST.get('endTime')
+
+                try:
+
+                    if request.POST.get('user') == "all":
+                        # 获取数据【非窗口期部署申请】
+                        applicantDeploymentInfoList = ApplicantDeploymentInfo.applicantDeployment.filter(
+                            applicantTime__range=(startTime, endTime), isDelete=0).order_by('loginUser', '-id')
+
+                        # 获取数据【测试/开发自行部署登记】
+                        selfDeploymentInfoList = SelfDeploymentInfo.selfDeployment.filter(
+                            deploymentTime__range=(startTime, endTime), isDelete=0).order_by('loginUser', '-id')
+                    else:
+                        # 获取数据【非窗口期部署申请】
+                        applicantDeploymentInfoList = ApplicantDeploymentInfo.applicantDeployment.filter(
+                            applicantTime__range=(startTime, endTime), loginUser=request.session['user_name'],
+                            isDelete=0).order_by('-id')
+
+                        # 获取数据【测试/开发自行部署登记】
+                        selfDeploymentInfoList = SelfDeploymentInfo.selfDeployment.filter(
+                            deploymentTime__range=(startTime, endTime), loginUser=request.session['user_name'],
+                            isDelete=0).order_by('-id')
+
+                    # 【非窗口期部署申请】
+                    appLoginUserList = []
+                    appSystemNameList = []
+                    systemTypeList = []
+                    applicantList = []
+                    applicantTimeList = []
+                    reasonTypeList = []
+                    reasonList = []
+
+                    for appDeploymentInfo in applicantDeploymentInfoList:
+                        appLoginUserList.append(appDeploymentInfo.loginUser)
+                        appSystemNameList.append(appDeploymentInfo.systemName)
+                        systemTypeList.append(appDeploymentInfo.systemType)
+                        applicantList.append(appDeploymentInfo.applicant)
+                        applicantTimeList.append(appDeploymentInfo.applicantTime)
+                        reasonTypeList.append(appDeploymentInfo.reasonType)
+                        reasonList.append(appDeploymentInfo.reason)
+
+                    appDeploymentData = {
+                        '小组': appLoginUserList,
+                        '系统名称': appSystemNameList,
+                        '系统分类': systemTypeList,
+                        '申请人': applicantList,
+                        '申请时间': applicantTimeList,
+                        '原因分类': reasonTypeList,
+                        '申请原因': reasonList
+                    }
 
 
+                    # 【测试/开发自行部署登记】
+                    selfLoginUserList = []
+                    selfSystemNameList = []
+                    roleList = []
+                    deploymentPersonnelList = []
+                    deploymentTimeLIst = []
 
-                systemType = request.POST.get('systemType')
-                systemEnglishName = request.POST.get('systemEnglishName')
-                systemChineseName = request.POST.get('systemChineseName')
+                    for selfDeploymentInfo in selfDeploymentInfoList:
+                        selfLoginUserList.append(selfDeploymentInfo.loginUser)
+                        selfSystemNameList.append(selfDeploymentInfo.systemName)
+                        roleList.append(selfDeploymentInfo.role)
+                        deploymentPersonnelList.append(selfDeploymentInfo.deploymentPersonnel)
+                        deploymentTimeLIst.append(selfDeploymentInfo.deploymentTime)
 
-                # 去空格，中文逗号转英文逗号
-                systemChineseName = replaceName(systemChineseName)
-                systemEnglishName = replaceName(systemEnglishName)
+                    slefDeploymentData = {
+                        '小组': selfLoginUserList,
+                        '系统名称': selfSystemNameList,
+                        '执行人角色': roleList,
+                        '部署执行人': deploymentPersonnelList,
+                        '部署时间': deploymentTimeLIst
+                    }
 
-                systemName = systemEnglishName + '（' + systemChineseName + '）'
+                    path = 'uploads/' + 'temp' + '/'
+                    tempFileName = 'deploymentInfo' + '_' + request.session[
+                        'user_name'] + '_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f") + '.xlsx'
 
-                # 添加内容
-                if deploymentInfo.check_section(request.session['user_name']):
-                    deploymentInfo.set_section(request.session['user_name'], systemName, systemType)
-                    deploymentInfo.save()
-                    message = '添加成功！'
-                else:
-                    deploymentInfo.add_section(request.session['user_name'])
-                    deploymentInfo.set_section(request.session['user_name'], systemName, systemType)
-                    deploymentInfo.save()
-                    message = '添加成功！'
+                    outputFileName = 'deploymentInfo.xlsx'
+
+                    # 写入excel表
+                    writer = pd.ExcelWriter(path + tempFileName)
+                    df1 = pd.DataFrame(appDeploymentData)
+                    df2 = pd.DataFrame(slefDeploymentData)
+                    df1.to_excel(writer, index=False, sheet_name="application")
+                    df2.to_excel(writer, index=False, sheet_name="deployment")
+                    writer.close()
+
+                    try:
+                        file = open(path + tempFileName, 'rb')
+                    except:
+                        return HttpResponse('下载文件名有错，请联系管理员！  文件名：%s' % outputFileName)
+
+                    response = FileResponse(file)
+                    response['Content-Type'] = 'application/octet-stream'
+                    response['Content-Disposition'] = "attachment; filename*=utf-8''{}".format(
+                        escape_uri_path(outputFileName))
+                    return response
+
+                except Exception as e:
+                    print(e)
+                    unblocked_versionInfo = None
+
 
     # 获取用户下所有系统名称
     if deploymentInfo.check_section(request.session['user_name']):
