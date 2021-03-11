@@ -2001,7 +2001,6 @@ def unblockedVersion(request):
                         'user_name'] + '_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f") + '.xlsx'
                     outputFileName = 'unblockedVersionInfo.xlsx'
 
-                    import pandas as pd
                     df = pd.DataFrame(data)
                     df.to_excel(path + tempFileName, index=False)
 
