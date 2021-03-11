@@ -1919,31 +1919,73 @@ def unblockedVersion(request):
 
                     monthsList = request.POST.getlist('month')
 
+                    # if request.POST.get('user') == "all":
+                    #     # 获取已有数据
+                    #     unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(isDelete=0).order_by(
+                    #         'username', '-id')
+                    # else:
+                    #     unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(isDelete=0, username=
+                    #     request.session['user_name']).order_by('-id')
+                    #
+                    # for versionInfo in unblocked_versionInfo:
+                    #     if versionInfo.month in monthsList:
+                    #         userList.append(versionInfo.username)
+                    #         monthList.append(versionInfo.month)
+                    #         teamList.append(versionInfo.team)
+                    #         version_nameList.append(versionInfo.version_name)
+                    #         subsystemList.append(versionInfo.subsystem)
+                    #         contentList.append(versionInfo.content)
+                    #         version_managerList.append(versionInfo.version_manager)
+                    #         version_leaderList.append(versionInfo.version_leader)
+                    #         test_leaderList.append(versionInfo.test_leader)
+                    #         version_typeList.append(versionInfo.version_type)
+                    #         unblocked_datetimeList.append(versionInfo.unblocked_datetime)
+                    #         blocked_datetimeLIst.append(versionInfo.blocked_datetime)
+                    #         unblocked_typeList.append(versionInfo.unblocked_type)
+                    #         unblocked_reasonList.append(versionInfo.unblocked_reason)
+                    #         remarkList.append(versionInfo.remark)
+
+                    q1 = Q()
+                    q1.connector = 'OR'
+                    for mon in monthsList:
+                        q1.children.append(('month', mon))
+
+                    q2 = Q()
+                    q2.connector = 'OR'
+                    q2.children.append(('isDelete', 0))
+
+                    con = Q()
+                    con.add(q1, 'AND')
+                    con.add(q2, 'AND')
+
                     if request.POST.get('user') == "all":
                         # 获取已有数据
-                        unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(isDelete=0).order_by(
+                        unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(con).order_by(
                             'username', '-id')
                     else:
-                        unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(isDelete=0, username=
-                        request.session['user_name']).order_by('-id')
+                        q3 = Q()
+                        q3.connector = 'OR'
+                        q3.children.append(('username', request.session['user_name']))
+                        con.add(q3, 'AND'  )
+                        unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(con).order_by('-id')
 
                     for versionInfo in unblocked_versionInfo:
-                        if versionInfo.month in monthsList:
-                            userList.append(versionInfo.username)
-                            monthList.append(versionInfo.month)
-                            teamList.append(versionInfo.team)
-                            version_nameList.append(versionInfo.version_name)
-                            subsystemList.append(versionInfo.subsystem)
-                            contentList.append(versionInfo.content)
-                            version_managerList.append(versionInfo.version_manager)
-                            version_leaderList.append(versionInfo.version_leader)
-                            test_leaderList.append(versionInfo.test_leader)
-                            version_typeList.append(versionInfo.version_type)
-                            unblocked_datetimeList.append(versionInfo.unblocked_datetime)
-                            blocked_datetimeLIst.append(versionInfo.blocked_datetime)
-                            unblocked_typeList.append(versionInfo.unblocked_type)
-                            unblocked_reasonList.append(versionInfo.unblocked_reason)
-                            remarkList.append(versionInfo.remark)
+                        userList.append(versionInfo.username)
+                        monthList.append(versionInfo.month)
+                        teamList.append(versionInfo.team)
+                        version_nameList.append(versionInfo.version_name)
+                        subsystemList.append(versionInfo.subsystem)
+                        contentList.append(versionInfo.content)
+                        version_managerList.append(versionInfo.version_manager)
+                        version_leaderList.append(versionInfo.version_leader)
+                        test_leaderList.append(versionInfo.test_leader)
+                        version_typeList.append(versionInfo.version_type)
+                        unblocked_datetimeList.append(versionInfo.unblocked_datetime)
+                        blocked_datetimeLIst.append(versionInfo.blocked_datetime)
+                        unblocked_typeList.append(versionInfo.unblocked_type)
+                        unblocked_reasonList.append(versionInfo.unblocked_reason)
+                        remarkList.append(versionInfo.remark)
+
 
                     data = {'小组': userList, '月份': monthList, '领域': teamList, '版本名称': version_nameList,
                             '子系统名称': subsystemList,
