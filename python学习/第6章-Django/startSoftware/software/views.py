@@ -4513,6 +4513,34 @@ def countDeploymentInfo(request):
                         selfDeploymentInfo.delete()
                         message = "删除数据成功！"
 
+        if request.POST.get('select_data') == 'select_data':
+            if not request.session.get('manager_islogin', None) and request.POST.get('user') == "all":
+                message = "您尚未登录超级用户，请先登录！！"
+            else:
+
+
+
+                systemType = request.POST.get('systemType')
+                systemEnglishName = request.POST.get('systemEnglishName')
+                systemChineseName = request.POST.get('systemChineseName')
+
+                # 去空格，中文逗号转英文逗号
+                systemChineseName = replaceName(systemChineseName)
+                systemEnglishName = replaceName(systemEnglishName)
+
+                systemName = systemEnglishName + '（' + systemChineseName + '）'
+
+                # 添加内容
+                if deploymentInfo.check_section(request.session['user_name']):
+                    deploymentInfo.set_section(request.session['user_name'], systemName, systemType)
+                    deploymentInfo.save()
+                    message = '添加成功！'
+                else:
+                    deploymentInfo.add_section(request.session['user_name'])
+                    deploymentInfo.set_section(request.session['user_name'], systemName, systemType)
+                    deploymentInfo.save()
+                    message = '添加成功！'
+
     # 获取用户下所有系统名称
     if deploymentInfo.check_section(request.session['user_name']):
         allSystemName = deploymentInfo.get_keys(request.session['user_name'])
