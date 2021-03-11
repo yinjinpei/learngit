@@ -300,6 +300,34 @@
         overflow: auto;
     }
 
+    .select_data{
+        background-color: #009393;
+        border-radius: 10px;
+        padding: 15px;
+    }
+
+    .date_con{
+        display:inline-block;
+        width: 200px;
+    }
+
+    .date{
+        float:left;
+        top:11px;
+    }
+
+    .select_data_btn{
+        font-size:16px;
+        background-color: #2e6da4;
+        border-color: Aqua;
+    }
+
+    .select_data_btn:hover{
+        background-color: gold;
+        border-color: gold;
+        color: red;
+    }
+
 </style>
 {% endblock %}
 
@@ -347,6 +375,40 @@
         </form>
     </div>
     {% endif %}
+    <div class="title_con">
+        <form class='form-register' action="countDeploymentInfo" method="post">
+            {% csrf_token %}
+            <input type="text" name="system_delete" value="system_delete" style="display:none;">
+            <div class="select_data">
+                <h4 style="display: inline-block;font-weight: bold;color: #FFF;">数据下载：</h4>
+                <div class="date_con">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" name='unblocked_datetime' placeholder="2021-03-15" required/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <h4 style="display:inline-block;color: #FFF;">至</h4>
+                <div class="date_con">
+                    <div class='input-group date' id='datetimepicker2'>
+                        <input type='text' class="form-control" name='unblocked_datetime' placeholder="2021-03-19" required/>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <select class="selectpicker" name="user" required>
+                    <option value="one">当前用户</option>
+                    <option value="all">所有用户</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary select_data_btn">下载</button>
+            </div>
+        </form>
+    </div>
+
     <br><br>
 
     {% if isWorkTime == True %}
@@ -526,4 +588,20 @@
     <!--<a class="btn btn-primary pull-left" id="link_top" href="#">回到顶部</a>-->
     <!--<br><br><br><br>-->
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn')
+        });
+    });
+
+    $(function () {
+        $('#datetimepicker2').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn')
+        });
+    });
+</script>
 {% endblock %}

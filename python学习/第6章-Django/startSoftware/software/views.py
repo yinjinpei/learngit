@@ -1897,7 +1897,7 @@ def unblockedVersion(request):
                         unblocked_version.delete()
                         message = "删除数据成功！"
         elif request.POST.get('options') == "downloadFile":
-            if not request.session.get('manager_islogin', None):
+            if not request.session.get('manager_islogin', None) and request.POST.get('user') == "all":
                 message = "您尚未登录超级用户，请先登录！！"
             else:
                 try:
