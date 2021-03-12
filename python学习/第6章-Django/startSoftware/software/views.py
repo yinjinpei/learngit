@@ -4624,6 +4624,7 @@ def countDeploymentInfo(request):
                     df2 = pd.DataFrame(slefDeploymentData)
                     df1.to_excel(writer, index=False, sheet_name=u'非窗口期部署申请统计')
                     df2.to_excel(writer, index=False, sheet_name=u'测试&开发自行部署统计')
+                    writer.save()
                     writer.close()
 
                     try:
