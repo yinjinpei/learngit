@@ -1960,6 +1960,9 @@ def unblockedVersion(request):
                     con.add(q1, 'AND')
                     con.add(q2, 'AND')
 
+                    configFile = 'config/software_config/userDomainName.ini'
+                    readConfig = getConfig(configFile)
+
                     if request.POST.get('user') == "all":
                         # 获取已有数据
                         unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(con).order_by(
@@ -1972,7 +1975,11 @@ def unblockedVersion(request):
                         unblocked_versionInfo = NewUnblockedVersionInfo.newunblockedversion.filter(con).order_by('-id')
 
                     for versionInfo in unblocked_versionInfo:
-                        userList.append(versionInfo.username)
+                        try:
+                            domainName = readConfig.get_value('user', versionInfo.username)
+                        except:
+                            domainName = versionInfo.username
+                        userList.append(domainName)
                         monthList.append(versionInfo.month)
                         teamList.append(versionInfo.team)
                         version_nameList.append(versionInfo.version_name)
