@@ -4543,6 +4543,9 @@ def countDeploymentInfo(request):
                             deploymentTime__range=(startTime, endTime), loginUser=request.session['user_name'],
                             isDelete=0).order_by('-id')
 
+                    configFile = 'config/software_config/userDomainName.ini'
+                    readConfig = getConfig(configFile)
+
                     # 【非窗口期部署申请】
                     appLoginUserList = []
                     appSystemNameList = []
@@ -4553,7 +4556,11 @@ def countDeploymentInfo(request):
                     reasonList = []
 
                     for appDeploymentInfo in applicantDeploymentInfoList:
-                        appLoginUserList.append(appDeploymentInfo.loginUser)
+                        try:
+                            domainName1 = readConfig.get_value('user', appDeploymentInfo.loginUser)
+                        except:
+                            domainName1 = appDeploymentInfo.loginUser
+                        appLoginUserList.append(domainName1)
                         appSystemNameList.append(appDeploymentInfo.systemName)
                         systemTypeList.append(appDeploymentInfo.systemType)
                         applicantList.append(appDeploymentInfo.applicant)
@@ -4580,7 +4587,11 @@ def countDeploymentInfo(request):
                     deploymentTimeLIst = []
 
                     for selfDeploymentInfo in selfDeploymentInfoList:
-                        selfLoginUserList.append(selfDeploymentInfo.loginUser)
+                        try:
+                            domainName2 = readConfig.get_value('user', selfDeploymentInfo.loginUser)
+                        except:
+                            domainName2 = selfDeploymentInfo.loginUser
+                        selfLoginUserList.append(domainName2)
                         selfSystemNameList.append(selfDeploymentInfo.systemName)
                         roleList.append(selfDeploymentInfo.role)
                         deploymentPersonnelList.append(selfDeploymentInfo.deploymentPersonnel)
