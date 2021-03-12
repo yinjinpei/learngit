@@ -2006,10 +2006,10 @@ def unblockedVersion(request):
                     path = 'uploads/' + 'temp' + '/'
                     tempFileName = 'unblockedVersionInfo' + '_' + request.session[
                         'user_name'] + '_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f") + '.xlsx'
-                    outputFileName = 'unblockedVersionInfo.xlsx'
+                    outputFileName = '解封版信息.xlsx'
 
                     df = pd.DataFrame(data)
-                    df.to_excel(path + tempFileName, index=False)
+                    df.to_excel(path + tempFileName, index=False, sheet_name=u'解封版信息统计')
 
                     try:
                         file = open(path + tempFileName, 'rb')
@@ -4616,14 +4616,14 @@ def countDeploymentInfo(request):
                     tempFileName = 'deploymentInfo' + '_' + request.session[
                         'user_name'] + '_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f") + '.xlsx'
 
-                    outputFileName = 'deploymentInfo.xlsx'
+                    outputFileName = '部署窗口信息.xlsx'
 
                     # 写入excel表
                     writer = pd.ExcelWriter(path + tempFileName)
                     df1 = pd.DataFrame(appDeploymentData)
                     df2 = pd.DataFrame(slefDeploymentData)
-                    df1.to_excel(writer, index=False, sheet_name="application")
-                    df2.to_excel(writer, index=False, sheet_name="deployment")
+                    df1.to_excel(writer, index=False, sheet_name=u'非窗口期部署申请统计')
+                    df2.to_excel(writer, index=False, sheet_name=u'测试&开发自行部署统计')
                     writer.close()
 
                     try:
