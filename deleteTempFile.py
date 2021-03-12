@@ -12,14 +12,15 @@ def fileHandle(filePath):
     _deleteFileList = ''  # 用来储存将要删除的.zip文件
     fileList = os.listdir(filePath)  # 获取目录下所有文件
     _str = '.zip'
+    _str2 = '.xlsx'
 
     for filename in fileList:
-        if _str in filename:
+        if _str in filename or _str2 in filename:
             if os.path.isfile(filePath+'/'+filename):    # 如果是文件,则直接删除
                 os.remove(filePath+'/'+filename)
                 _deleteFileList += str(filename) + "\n"
             else:
-                print('这不是一个zip文件包：',filePath+'/'+filename)
+                print('这不是一个zip或xlsx文件包：',filePath+'/'+filename)
 
     print("以下文件或目录修改时间已超过10天,将删除处理:\n" + _deleteFileList)
     return _deleteFileList
