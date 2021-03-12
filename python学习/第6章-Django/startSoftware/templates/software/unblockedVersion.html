@@ -130,6 +130,24 @@
         min-width: 180px;
     }
 
+    .select_data{
+        text-align:left;
+        background-color: #009393;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 15px;
+    }
+
+    .select_data h4{
+        display: inline-block;
+        font-weight: bold;
+        color: #FFF;
+    }
+
+    .submit_btn2{
+        border-color: Aqua;
+    }
+
 </style>
 {% endblock %}
 <div class="col-md-12 col-md-offset-0" id="uploadFile_con">
@@ -148,10 +166,10 @@
         <div class="alert alert-warning delfile_msg">{{ message }}</div>
     {% endif %}
 
-    <div style="text-align:left;">
+    <div class="select_data">
         <form action="unblockedVersion" method="post">
        {% csrf_token %}
-            <h4 style="display: inline-block;font-weight: bold;">数据下载：</h4>
+            <h4>数据下载：</h4>
             <input type="text" name="options" value="downloadFile" style="display:none;">
             <select class="selectpicker" name="month" multiple="multiple" data-actions-box="true" data-live-search="true" required>
                 <option value="1">1月份</option>
@@ -173,11 +191,9 @@
                 <option value="all">所有用户</option>
             </select>
 
-            <button type="submit" class="btn btn-primary" id="submit_btn2">下载</button>
+            <button type="submit" class="btn btn-primary submit_btn2" id="submit_btn2">下载</button>
         </form>
     </div>
-    <br>
-
     <table border="1"  cellspacing="50" class="unblockedVersion_table">
                 <tr>
                     <!--<th class="table_title"><div class="table_title_content">序号</div></th>-->
