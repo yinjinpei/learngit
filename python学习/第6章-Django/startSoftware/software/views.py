@@ -2004,7 +2004,7 @@ def unblockedVersion(request):
                             '解封版说明及根因分析': unblocked_reasonList, '备注': remarkList}
 
                     path = 'uploads/' + 'temp' + '/'
-                    tempFileName = 'unblockedVersionInfo' + '_' + request.session[
+                    tempFileName = '解封版信息' + '_' + request.session[
                         'user_name'] + '_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f") + '.xlsx'
                     outputFileName = '解封版信息.xlsx'
 
@@ -4613,7 +4613,7 @@ def countDeploymentInfo(request):
                     }
 
                     path = 'uploads/' + 'temp' + '/'
-                    tempFileName = 'deploymentInfo' + '_' + request.session[
+                    tempFileName = '部署窗口信息' + '_' + request.session[
                         'user_name'] + '_' + datetime.datetime.now().strftime("%Y%m%d_%H%M%S_%f") + '.xlsx'
 
                     outputFileName = '部署窗口信息.xlsx'
